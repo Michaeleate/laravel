@@ -5,7 +5,7 @@
     <title>SAMS Jobs Website|Search Apply Join|Vijayawada|Guntur|Hyderabad|Vizag</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <meta name="keywords" content="Jobs in Vijayawada, Job Consultancy, Telecallers Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs, Vijayawada, Amaravathi, Guntur" />
+    <meta name="keywords" content="Jobs in Vijayawada, Job Consultancy, Telecallers Jobs, Free Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs, Vijayawada, Amaravathi, Guntur" />
     
     <script>
         addEventListener("load", function() {
@@ -39,7 +39,7 @@
                             <div class="col-md-3">
                                 <label style="color: #ffff;">Credits: 5000</label>
                             </div>
-                            <div class="col-md-4 sign-btn">
+                            <div class="col-md-3 sign-btn">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> Log-out</a>
@@ -53,7 +53,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/home')}}">
+                                <a class="navbar-brand" href="{{ asset('/rechome')}}">
                                     <img src="images/favicon-sams.png" alt="logo">
                                 </a>
                             </h1>
@@ -80,19 +80,19 @@
     </div>
     <ol class="breadcrumb justify-content-left">
         <li class="breadcrumb-item">
-            <a href="{{ url('/home')}}">Home</a>
+            <a href="{{ url('/rechome')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">Candidate Profile</li>
+        <li class="breadcrumb-item active">Recruiter Profile</li>
     </ol>
     <!-- banner-text -->
     <!--/process-->
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'createprofile')
+                @if (\Route::current()->getName() == 'crecprofile')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Build your profile</span></h3>
-                @elseif (\Route::current()->getName() == 'viewprofile')
+                @elseif (\Route::current()->getName() == 'vrecprofile')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Your complete profile</span></h3>
                 @endif

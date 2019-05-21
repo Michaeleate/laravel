@@ -1,4 +1,4 @@
-@extends('users.layouts.app')
+@extends('users.layouts.rapp')
 <h1>This is from Recruiters home page in blade php</h1>
 @section('search')
 <h4>
@@ -43,37 +43,48 @@
 </form>
 @endsection
 
-{{-- Build Menu for Registered Candidates --}}
+{{-- Build Menu for Registered Recruiters --}}
 @section('buildMenu')
 <ul class="navbar-nav ml-lg-auto text-center">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/home')}}">Home
+        <a class="nav-link" href="{{ url('/rechome')}}">Home
             <span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ url('/user-profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Profile
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/user-profile') }}">Create Profile</a>
-            <a class="dropdown-item" href="{{ url('/view-user-profile') }}">View Profile</a>
-            <a class="dropdown-item" href="{{ url('/edit-user-profile') }}">Modify Profile</a>
-            <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
+            <a class="dropdown-item" href="{{ url('/crecprofile') }}">Create Profile</a>
+            <a class="dropdown-item" href="{{ url('/vrecprofile') }}">View Profile</a>
+            <a class="dropdown-item" href="{{ url('/urecprofile') }}">Modify Profile</a>
+            {{--<a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a> --}}
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Search Jobs
+        Jobs
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="services.html">By Skillset</a>
-            <a class="dropdown-item" href="services.html">By Location</a>
-            <a class="dropdown-item" href="candidates_list.html" title="">By Role</a>
-            <a class="dropdown-item" href="candidates_list.html" title="">By Experience</a>
-            <a class="dropdown-item" href="candidates_single.html" title="">By Salary</a>
+            <a class="dropdown-item" href="services.html" title="Post Requirements">Post Jobs</a>
+            <a class="dropdown-item" href="services.html" title="View all posted Jobs">View Jobs</a>
+            <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
+            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
+        </div>
+    </li>
+ 
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Applications
+            <i class="fas fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="employer_list.html">Received</a>
+            <a class="dropdown-item" href="employer_list.html">Processed</a>
+            <a class="dropdown-item" href="employer_list.html">Status</a>
         </div>
     </li>
  

@@ -81,49 +81,55 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/rechome', 'RechomeController@index')->name('rechome');
 
 
-//Create Profile
+//Create Profile Candidate
 Route::get('/user-profile', 'RegUserProfController@createprofile')->name('createprofile');
-//View Profile
+//View Profile Candidate
 Route::get('/view-user-profile', 'RegUserProfController@viewprofile')->name('viewprofile');
-//Edit Profile
-//Route::get('/edit-user-profile', 'RegUserProfController@editprofile');
+//Edit Profile Candidate
 Route::get('/edit-user-profile', 'RegUserProfController@createprofile')->name('editprofile');
 
-//Edit profile visibility
+//Edit profile visibility Candidate
 Route::get('/edit-user-visible', 'RegUserProfController@editprofvisible');
 
 Auth::routes();
 Auth::routes(['verify' => true]);
 
-//Update Resume Headline
+//Update Resume Headline Candidate
 Route::post('/resumehead','HeadlineController@updatehead')->name('resumehead');
-//Upload Resume
+//Upload Resume Candidate
 Route::post('/uploadresume','UploadResumeController@uploadresume')->name('uploadresume');
-//Update Key Skills
+//Update Key Skills Candidate
 Route::post('/updatekskills','KeySkillsController@updatekskills')->name('updatekskills');
-//Update Personal Details
+//Update Personal Details Candidate
 Route::post('/updatepdet','PdetailsController@updatepdet')->name('updatepdet');
 
-//Education Details
-//Update 10th Class
+//Education Details Candidate
+//Update 10th Class Candidate
 Route::post('/updatexth','EduController@updatexth')->name('updatexth');
-//Update 12th Class
+//Update 12th Class Candidate
 Route::post('/updatexiith','EduController@updatexiith')->name('updatexiith');
-//Update graduation
+//Update graduation Candidate
 Route::post('/updategrad','EduController@updategrad')->name('updategrad');
-//Update post graduation
+//Update post graduation Candidate
 Route::post('/updatepg','EduController@updatepg')->name('updatepg');
 
-//Employment Details
-//Last Organization Details
+//Employment Details of Candidate
+//Last Organization Details of Candidate
 Route::post('/updateemp','EmpController@updateemp')->name('updateemp');
 
-//Current and Permanent Address
-//Current Address in profile
+//Current and Permanent Address of Candidate
+//Current Address in Candidate profile
 Route::post('/updatecadd','AddController@updatecadd')->name('updatecadd');
-//Permanent Address in profile
+//Permanent Address in Candidate profile
 Route::post('/updatepadd','AddController@updatepadd')->name('updatepadd');
 
-//Update Reference details
+//Update Candidate Reference details
 Route::post('/updateref1','RefController@updateref1')->name('updateref1');
 Route::post('/updateref2','RefController@updateref2')->name('updateref2');
+
+//Create Recruiter Profile
+Route::get('/crecprofile', 'RecprofController@crecprofile')->name('crecprofile');
+//View Recruiter Profile
+Route::get('/vrecprofile', 'RecprofController@vrecprofile')->name('vrecprofile');
+//Update Recruiter Profile
+Route::get('/urecprofile', 'RecprofController@urecprofile')->name('urecprofile');

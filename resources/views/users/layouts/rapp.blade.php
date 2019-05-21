@@ -67,7 +67,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/home')}}">
+                                <a class="navbar-brand" href="{{ asset('/rechome')}}">
                                     {{-- <i class="fab fa-codepen"></i> SAMS --}}
                                     <img src="images/favicon-sams.png" alt="logo">
                                 </a>
