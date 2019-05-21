@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class RedirectIfAuthenticated
 {
@@ -21,14 +22,18 @@ class RedirectIfAuthenticated
 
             //return redirect('/home');
             //Mike 21 May start
-            $authtype = Auth::user_type();
-            if($authtype=="1"){
-                return redirect('/home');
+            if (Auth::check())
+            {
+                $user = Auth::user();
+                $authtype = $user->user_type;
+                if($authtype == 1){
+                    return route('home');
+                }
+                else if($authtype == 2){
+                    return route('rechome');
+                }
+                //Mike 21 May end
             }
-            else if($authtype=="2"){
-                return redirect('/rechome');
-            }
-            //Mike 21 May end
         }
 
         return $next($request);

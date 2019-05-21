@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -33,12 +34,18 @@ class RegisterController extends Controller
     
     protected function redirectTo()
     {
-        $authtype = auth()->user()->user_type;
-        if($authtype==1){
-            return redirect('/home');
-        }
-        else if($authtype==2){
-            return redirect('/rechome');
+        if (Auth::check())
+        {
+            //$authid = Auth::id();
+            $user = Auth::user();
+            $authtype=$user->user_type;
+            if($authtype == 1){
+                return route('home');
+            }
+            else if($authtype==2){
+                return route('rechome');
+            }
+            //Mike 21 May end
         }
     }
 
