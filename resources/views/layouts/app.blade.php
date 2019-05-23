@@ -35,18 +35,21 @@
                     <div class="top-head ml-lg-auto text-center">
                         <div class="row">
                             @guest
-                                <div class="col-md-4">
-                                    <span>Welcome Guest!</span>
+                                <div class="col-md-3">
+                                    <label style="color:white;">Welcome Guest!</label>
                                 </div>
-                                <div class="col-md-6 sign-btn">
+                                <div class="col-md-5 sign-btn">
                                         <a href="{{ route('login') }}">
                                             <i class="fas fa-lock"></i> Login</a>
                                         <a href="{{ route('register') }}">
                                             <i class="far fa-user"></i> Register</a>
                                 </div>
+                                <div class="col-md-4">
+                                    <a href="{{ route('recruiter') }}" style="color:white;">Recruiters Zone</a>
+                                </div>
                             @else
                                 <div class="col-md-4">
-                                    <span>{{ Auth::user()->name }}!</span>
+                                    <label style="color:white;">{{ Auth::user()->name }}!</label>
                                 </div>
                                 <div class="col-md-6 sign-btn">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -64,8 +67,10 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="index.html">
-                                    <i class="fab fa-codepen"></i> SAMS</a>
+                                <a class="navbar-brand" href="{{ asset('/home')}}">
+                                    {{-- <i class="fab fa-codepen"></i> SAMS --}}
+                                    <img src="images/favicon-sams.png" alt="logo">
+                                </a>
                             </h1>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

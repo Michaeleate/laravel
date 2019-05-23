@@ -35,14 +35,17 @@
                     <div class="top-head ml-xl-auto ml-lg-auto text-left">
                         <div class="row">
                             @guest
-                                <div class="col-md-6">
-                                    <span>Welcome Guest!</span>
+                                <div class="col-md-3">
+                                    <label style="color: #ffff; float:right;">Welcome Guest!</label>
                                 </div>
-                                <div class="col-md-6 sign-btn">
+                                <div class="col-md-4 sign-btn">
                                         <a href="{{ route('login') }}">
                                             <i class="fas fa-lock"></i> Login</a>
                                         <a href="{{ route('register') }}">
                                             <i class="far fa-user"></i> Register</a>
+                                </div>
+                                <div class="col-md-5">
+                                    <a href="{{ route('recruiter') }}">Recruiters Zone</a>
                                 </div>
                             @else
                                 <div class="col-md-6">

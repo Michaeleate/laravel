@@ -1365,6 +1365,22 @@ ul.links_bottom_emp li {
 .emply-resume-info-sams h4 {
     font-size: 1.3em;
 }
+
+tr.tl1 td {
+    background-color: #BF8E8E;
+    text-align:center;
+    width: 40%;
+  }
+  
+  tr.tl1 td a{
+      color: black;
+  }
+  tr.tl1 td.td1 {
+    background-color: #8EBF8E;
+    text-align:center;
+    width: 40%;
+  }
+
 /*Mike Ends*/
 
 .emply-resume-info h5 {
