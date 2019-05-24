@@ -39,14 +39,19 @@
                                     <span>Welcome Guest!</span>
                                 </div>
                                 <div class="col-md-6 sign-btn">
-                                        <a href="{{ route('login') }}">
+                                        <a href="{{ route('recruiter/login') }}">
                                             <i class="fas fa-lock"></i> Login</a>
-                                        <a href="{{ route('register') }}">
+                                        <a href="{{ route('recruiter/register') }}">
                                             <i class="far fa-user"></i> Register</a>
                                 </div>
                             @else
                                 <div class="col-md-6">
-                                    <label style="color: #ffff; float:right;">{{ Auth::user()->name }}!</label>
+                                    <label style="color: #ffff; float:right;">
+                                    @if(Auth::guard('recruiter')->check())
+                                    Auth::guard('recruiter')->user()->name
+                                    @else
+                                    <script>window.location = "{{ route('recruiter') }}";</script>
+                                    @endif!</label>
                                 </div>
                                 <div class="col-md-3">
                                     <label style="color: #ffff;">Credits: 5000</label>
@@ -67,9 +72,9 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/rechome')}}">
+                                <a class="navbar-brand" href="{{ asset('/recruiter/home')}}">
                                     {{-- <i class="fab fa-codepen"></i> SAMS --}}
-                                    <img src="images/favicon-sams.png" alt="logo">
+                                    <img src="{{ url('images/favicon-sams.png') }}" alt="logo">
                                 </a>
                             </h1>
                         </div>

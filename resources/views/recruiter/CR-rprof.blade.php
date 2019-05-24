@@ -1,4 +1,4 @@
-@extends('users.layouts.rprof')
+@extends('recruiter.layouts.rprof')
 <?php 
     use \App\Http\Controllers\PostsController; 
     

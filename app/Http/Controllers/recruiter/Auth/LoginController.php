@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\recruiter\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
+use App\recruiter\modrecruiter;
 
 class LoginController extends Controller
 {
@@ -28,30 +29,18 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'home';
+
     /*
     protected function redirectTo()
     {
         if (Auth::guard('recruiter')->check()) {
-            return '/recruiter/home';
+            return redirect('/recruiter/home');
         }
         else {
-            return '/home';
+            return redirect('/home');
         }
 
-        if (Auth::check())
-            {
-                $user = Auth::user();
-                $authtype=$user->user_type;
-                
-                if($authtype == 1){
-                    return route('home');
-                }
-                else if($authtype==2){
-                    return route('rechome');
-                }
-                //Mike 21 May end
-            }
     }
     */
 
@@ -63,13 +52,35 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:recruiter')->except('logout');
+    }
+
+    public function recruiterLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        if (Auth::guard('recruiter')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
+            return redirect()->intended(url('/recruiter'));
+        }
+        return back()->withInput($request->only('email', 'remember'));
     }
 
     function authenticated(Request $request, $user)
     {
+        //This is not happening change this.
         $user->update([
             'last_login_at' => Carbon::now()->toDateTimeString(),
             'last_login_ip' => $request->ip()
         ]);
+    }
+
+    public function logout()
+    {
+        Auth::guard('recruiter')->logout();
+        return redirect('/recruiter');
     }
 }

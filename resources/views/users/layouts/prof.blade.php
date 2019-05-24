@@ -33,10 +33,10 @@
                 <header>
                     <div class="top-head xl-lg-auto ml-lg-auto text-center">
                         <div class="row top-vl">
-                            <div class="col-md-6">
-                                <label style="color: #ffff; float:right;">{{ Auth::user()->name }}!</label>
+                            <div class="col-md-4">
+                                <label style="color: #ffff; float:right; width: 200px;">{{ Auth::user()->name }}!</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label style="color: #ffff;">Credits: 5000</label>
                             </div>
                             <div class="col-md-4 sign-btn">

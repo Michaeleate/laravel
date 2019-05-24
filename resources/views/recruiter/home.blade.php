@@ -1,4 +1,4 @@
-@extends('users.layouts.rapp')
+@extends('recruiter.layouts.rapp')
 <h1>This is from Recruiters home page in blade php</h1>
 @section('search')
 <h4>
@@ -47,7 +47,7 @@
 @section('buildMenu')
 <ul class="navbar-nav ml-lg-auto text-center">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/rechome')}}">Home
+        <a class="nav-link" href="{{ route('recruiter.home')}}">Home
             <span class="sr-only">(current)</span>
         </a>
     </li>

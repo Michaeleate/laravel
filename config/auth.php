@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'recruiter' => [
+            'driver' => 'session',
+            'provider' => 'recruiters',
+        ]
     ],
 
     /*
@@ -71,6 +76,11 @@ return [
             'model' => App\User::class,
         ],
 
+        'recruiters' => [
+            'driver' => 'eloquent',
+            'model' => App\recruiter\modrecruiter::class,
+        ]
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +105,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'recruiters' => [
+            'provider' => 'recruiters',
             'table' => 'password_resets',
             'expire' => 60,
         ],

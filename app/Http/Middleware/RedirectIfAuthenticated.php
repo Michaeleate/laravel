@@ -16,26 +16,15 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next, $guard = 'web')
     {
         if (Auth::guard($guard)->check()) {
-
-            //return redirect('/home');
-            //Mike 21 May start
-            if (Auth::check())
-            {
-                $user = Auth::user();
-                $authtype = $user->user_type;
-                if($authtype == 1){
-                    return route('home');
-                }
-                else if($authtype == 2){
-                    return route('rechome');
-                }
-                //Mike 21 May end
+            if ($guard === 'recruiter') {
+                return redirect()->route('recruiter.home');
             }
+            return redirect()->route('home');
         }
-
+        
         return $next($request);
     }
 }

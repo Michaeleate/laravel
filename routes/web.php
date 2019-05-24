@@ -77,9 +77,6 @@ Route::get('/mike-rollback', function() {
 
 //Candidates Index Page
 Route::get('/home', 'HomeController@index')->name('home');
-//Recruiters Index Page
-Route::get('/rechome', 'RechomeController@index')->name('rechome');
-
 
 //Create Profile Candidate
 Route::get('/user-profile', 'RegUserProfController@createprofile')->name('createprofile');
@@ -130,9 +127,32 @@ Route::post('/updateref2','RefController@updateref2')->name('updateref2');
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
 
+//All our recruiter controllers in a sub directory called recruiter.
+Route::prefix('/recruiter')->name('recruiter.')->namespace('recruiter')->group(function(){
+//All the recruiter routes will be defined here...
+//Login Routes
+Route::get('/login','LoginController@showLoginForm')->name('login');
+//Route::post('/login','Auth\LoginController@login');
+Route::post('/login', 'Auth\LoginController@recruiterLogin')->name('login');
+
+Route::post('/logout','LoginController@logout')->name('logout');
+//Register Routes
+//below success
+Route::post('/register','Auth\RegisterController@register')->name('register');
+//Forgot Password Routes
+Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//Reset Password Routes
+Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+//Recruiters Index Page
+Route::get('/home', 'RechomeController@index')->name('home');
+//Route::view('/home', 'home')->name('home');
+
 //Create Recruiter Profile
 Route::get('/crecprofile', 'RecprofController@crecprofile')->name('crecprofile');
 //View Recruiter Profile
 Route::get('/vrecprofile', 'RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
 Route::get('/urecprofile', 'RecprofController@urecprofile')->name('urecprofile');
+});
