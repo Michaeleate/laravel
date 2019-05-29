@@ -39,28 +39,30 @@
                                     <span>Welcome Guest!</span>
                                 </div>
                                 <div class="col-md-6 sign-btn">
-                                        <a href="{{ route('recruiter/login') }}">
+                                        <a href="{{ route('rlogin') }}">
                                             <i class="fas fa-lock"></i> Login</a>
-                                        <a href="{{ route('recruiter/register') }}">
+                                        <a href="{{ route('rregister') }}">
                                             <i class="far fa-user"></i> Register</a>
                                 </div>
                             @else
                                 <div class="col-md-6">
                                     <label style="color: #ffff; float:right;">
+                             
                                     @if(Auth::guard('recruiter')->check())
-                                    Auth::guard('recruiter')->user()->name
+                                        {{ Auth::user()->name }}
                                     @else
-                                    <script>window.location = "{{ route('recruiter') }}";</script>
-                                    @endif!</label>
+                                        <script>window.location = "{{ route('/recruiter') }}" </script>
+                                    @endif
+                                    !</label>
                                 </div>
                                 <div class="col-md-3">
                                     <label style="color: #ffff;">Credits: 5000</label>
                                 </div>
                                 <div class="col-md-3 sign-btn">
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt"></i> Log-out</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
                                             @csrf
                                     </form>
                                 </div>

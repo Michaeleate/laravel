@@ -29,7 +29,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'home';
+    protected $redirectTo = 'recruiter/home';
+    protected $guard = 'recruiter';
 
     /*
     protected function redirectTo()
@@ -51,8 +52,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('guest')->except('logout');
         $this->middleware('guest:recruiter')->except('logout');
+        //$this->middleware('recruiter')->except('logout');
     }
 
     public function recruiterLogin(Request $request)
@@ -62,20 +64,38 @@ class LoginController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        if (Auth::guard('recruiter')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
-            return redirect()->intended(url('/recruiter'));
+        //if((auth()->user()->isrecruiter == 1)->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        if (Auth::guard('recruiter')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) 
+        {
+            //return redirect()->intended(route('recruiter.home'));
+            //return redirect('recruiter/home');
+            //return view('recruiter.home');
+            $message = "In LoginController inside recruiter guard if cond";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            return $this->sendLoginResponse($request);
         }
         return back()->withInput($request->only('email', 'remember'));
     }
-
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
     function authenticated(Request $request, $user)
     {
         //This is not happening change this.
-        $user->update([
-            'last_login_at' => Carbon::now()->toDateTimeString(),
-            'last_login_ip' => $request->ip()
-        ]);
+        //$user = App\recruiter\modrecruiter::update(
+        $user->update(
+            //[
+            // 'id'   => Auth::user()->id
+            //],
+            [ 
+                'last_login_at' => Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->ip()
+            ]
+         );
     }
 
     public function logout()
@@ -83,4 +103,10 @@ class LoginController extends Controller
         Auth::guard('recruiter')->logout();
         return redirect('/recruiter');
     }
+
+    protected function guard()
+    {
+        return Auth::guard('recruiter');
+    }
+    
 }

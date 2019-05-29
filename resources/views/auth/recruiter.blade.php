@@ -14,7 +14,7 @@
                 <div class="card-header">{{ __('Recruiter Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('recruiter.login') }}">
+                    <form method="POST" action="{{ route('rlogin') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -77,7 +77,7 @@
                 <div class="card-header">{{ __('Recruiter Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('recruiter.register') }}">
+                    <form method="POST" action="{{ route('rregister') }}">
                         @csrf
 
                         <div class="form-group row">

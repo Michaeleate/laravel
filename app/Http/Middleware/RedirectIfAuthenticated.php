@@ -16,15 +16,37 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
+    /*
+    Tested this.
     public function handle($request, Closure $next, $guard = 'web')
     {
         if (Auth::guard($guard)->check()) {
-            if ($guard === 'recruiter') {
+            if ($guard == 'recruiter') {
                 return redirect()->route('recruiter.home');
             }
             return redirect()->route('home');
         }
         
+        return $next($request);
+    }
+    */
+    //Test this logic
+    public function handle($request, Closure $next, $guard = null)
+    {
+        if ($guard == "recruiter" && Auth::guard($guard)->check()) {
+            $message = "In redirectifauthenticated recruiter guard";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            return redirect('/recruiter/home');
+        }
+        
+        if (Auth::guard($guard)->check()) {
+            $message = "In redirectifauthenticated second guard";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            return redirect('/home');
+        }
+
+        $message = "In redirectifauthenticated next guard";
+        echo "<script type='text/javascript'>alert('$message');</script>";
         return $next($request);
     }
 }

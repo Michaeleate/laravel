@@ -127,27 +127,15 @@ Route::post('/updateref2','RefController@updateref2')->name('updateref2');
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
 
-//All our recruiter controllers in a sub directory called recruiter.
-Route::prefix('/recruiter')->name('recruiter.')->namespace('recruiter')->group(function(){
-//All the recruiter routes will be defined here...
-//Login Routes
-Route::get('/login','LoginController@showLoginForm')->name('login');
-//Route::post('/login','Auth\LoginController@login');
-Route::post('/login', 'Auth\LoginController@recruiterLogin')->name('login');
+Route::post('rlogin','recruiter\Auth\LoginController@recruiterLogin')->name('rlogin');
+Route::post('/rregister','recruiter\Auth\RegisterController@register')->name('rregister');
 
-Route::post('/logout','LoginController@logout')->name('logout');
-//Register Routes
-//below success
-Route::post('/register','Auth\RegisterController@register')->name('register');
-//Forgot Password Routes
-Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-//Reset Password Routes
-Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+//Route::get('recruiter/routes', 'HomeController@admin')->middleware('recruiter');
+
 //Recruiters Index Page
-Route::get('/home', 'RechomeController@index')->name('home');
+Route::get('/recruiter/home', 'recruiter\RechomeController@index')->name('recruiter.home');
 //Route::view('/home', 'home')->name('home');
+Route::post('/recruiter/logout','recruiter\Auth\LoginController@logout')->name('rlogout');
 
 //Create Recruiter Profile
 Route::get('/crecprofile', 'RecprofController@crecprofile')->name('crecprofile');
@@ -155,4 +143,3 @@ Route::get('/crecprofile', 'RecprofController@crecprofile')->name('crecprofile')
 Route::get('/vrecprofile', 'RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
 Route::get('/urecprofile', 'RecprofController@urecprofile')->name('urecprofile');
-});
