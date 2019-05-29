@@ -16,11 +16,11 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <link href="{{asset('/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/zoomslider.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/style6.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/style.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/fontawesome-all.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('/') }}css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/zoomslider.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/style6.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/style.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/fontawesome-all.css" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
@@ -34,16 +34,22 @@
                     <div class="top-head xl-lg-auto ml-lg-auto text-center">
                         <div class="row top-vl">
                             <div class="col-md-6">
-                                <label style="color: #ffff; float:right;">{{ Auth::user()->name }}!</label>
+                                <label style="color: #ffff; float:right;">
+                                    {{--
+                                    @if(Auth::guard('recruiter')->check())
+                                        {{ Auth::user()->name }}
+                                    @endif
+                                    --}}
+                                </label>
                             </div>
                             <div class="col-md-3">
                                 <label style="color: #ffff;">Credits: 5000</label>
                             </div>
                             <div class="col-md-3 sign-btn">
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> Log-out</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
                                         @csrf
                                 </form>
                             </div>
@@ -54,7 +60,7 @@
                         <div class="logo">
                             <h1>
                                 <a class="navbar-brand" href="{{ asset('/rechome')}}">
-                                    <img src="images/favicon-sams.png" alt="logo">
+                                    <img src="{{ URL::asset('/images/favicon-sams.png')}}" alt="logo">
                                 </a>
                             </h1>
                         </div>
@@ -111,7 +117,7 @@
             </div>
         </div>
     </section>
-    <!--//preocess-->
+    <!--//process-->
 
     <!--footer -->
     <footer class="footer-emp bg-dark dotts py-lg-5 py-3">
@@ -264,12 +270,13 @@
     <!--//model-form-->
     <!-- js -->
     <!--/slider-->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="{{ URL::asset('/js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/modernizr-2.6.2.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/jquery.zoomslider.min.js') }}"></script>
     <!--//slider-->
     <!--search jQuery-->
-    <script src="js/classie-search.js"></script>
-    <script src="js/demo1-search.js"></script>
+    <script src="{{ URL::asset('/js/classie-search.js') }}"></script>
+    <script src="{{ URL::asset('/js/demo1-search.js') }}"></script>
     <!--//search jQuery-->
     
 
@@ -293,115 +300,9 @@
     <!-- password-script -->
     <script type="text/javascript">
         
-        var head_line = <?php echo json_encode($head_line) ?>, 
-        kskil1 = <?php echo json_encode($kskil1)?>, 
-        kskil2 = <?php echo json_encode($kskil2)?>, 
-        kskil3 = <?php echo json_encode($kskil3) ?>, 
-        fname = <?php echo json_encode($fname) ?>,
-        email = <?php echo json_encode($email) ?>,
-        mob_num = <?php echo json_encode($mob_num) ?>,
-        gender = <?php echo json_encode($gender) ?>,
-        dob = <?php echo json_encode($dob) ?>,
-        marstat = <?php echo json_encode($marstat) ?>,
-        eng_lang = <?php echo json_encode($eng_lang) ?>,
-        tel_lang = <?php echo json_encode($tel_lang) ?>,
-        hin_lang = <?php echo json_encode($hin_lang) ?>,
-        oth_lang = <?php echo json_encode($oth_lang) ?>,
-        diff_able = <?php echo json_encode($diff_able) ?>,
-        able1 = <?php echo json_encode($able1) ?>,
-        able2 = <?php echo json_encode($able2) ?>,
-        able3 = <?php echo json_encode($able3) ?>,
-        profpic = <?php echo json_encode($profpic) ?>,
-        picpath = <?php echo json_encode($picpath) ?>,
-        picname = <?php echo json_encode($picname) ?>,
-        qual1 = <?php echo json_encode($qual1) ?>,
-        board1 = <?php echo json_encode($board1) ?>,
-        colname1 = <?php echo json_encode($colname1) ?>,
-        pyear1 = <?php echo json_encode($pyear1) ?>,
-        edulang1 = <?php echo json_encode($edulang1) ?>,
-        percentage1 = <?php echo json_encode($percentage1) ?>,
-        edutime1 = <?php echo json_encode($edutime1) ?>,
-        qual2 = <?php echo json_encode($qual2) ?>,
-        board2 = <?php echo json_encode($board2) ?>,
-        colname2 = <?php echo json_encode($colname2) ?>,
-        pyear2 = <?php echo json_encode($pyear2) ?>,
-        edulang2 = <?php echo json_encode($edulang2) ?>,
-        percentage2 = <?php echo json_encode($percentage2) ?>,
-        edutime2 = <?php echo json_encode($edutime2) ?>,
-        qual3 = <?php echo json_encode($qual3) ?>,
-        course3 = <?php echo json_encode($course3) ?>,
-        spec3 = <?php echo json_encode($spec3) ?>,
-        colname3 = <?php echo json_encode($colname3) ?>,
-        district3 = <?php echo json_encode($district3) ?>,
-        cortype3 = <?php echo json_encode($cortype3) ?>,
-        pyear3 = <?php echo json_encode($pyear3) ?>,
-        edulang3 = <?php echo json_encode($edulang3) ?>,
-        percentage3 = <?php echo json_encode($percentage3) ?>,
-        edutime3 = <?php echo json_encode($edutime3) ?>,
-        qual4 = <?php echo json_encode($qual4) ?>,
-        course4 = <?php echo json_encode($course4) ?>,
-        spec4 = <?php echo json_encode($spec4) ?>,
-        colname4 = <?php echo json_encode($colname4) ?>,
-        district4 = <?php echo json_encode($district4) ?>,
-        cortype4 = <?php echo json_encode($cortype4) ?>,
-        pyear4 = <?php echo json_encode($pyear4) ?>,
-        edulang4 = <?php echo json_encode($edulang4) ?>,
-        percentage4 = <?php echo json_encode($percentage4) ?>,
-        edutime4 = <?php echo json_encode($edutime4) ?>,
-        empname = <?php echo json_encode($empname) ?>,
-        desg = <?php echo json_encode($desg) ?>,
-        startdt = <?php echo json_encode($startdt) ?>,
-        enddt = <?php echo json_encode($enddt) ?>,
-        msalt = <?php echo json_encode($msalt) ?>,
-        msall = <?php echo json_encode($msall) ?>,
-        resp = <?php echo json_encode($resp) ?>,
-        nperiod = <?php echo json_encode($nperiod) ?>,
-        emptime = <?php echo json_encode($emptime) ?>,
-        addtype1 = <?php echo json_encode($addtype1) ?>,
-        addline11 = <?php echo json_encode($addline11) ?>,
-        addline21 = <?php echo json_encode($addline21) ?>,
-        city1 = <?php echo json_encode($city1) ?>,
-        state1 = <?php echo json_encode($state1) ?>,
-        zcode1 = <?php echo json_encode($zcode1) ?>,
-        country1 = <?php echo json_encode($country1) ?>,
-        addtime1 = <?php echo json_encode($addtime1) ?>,
-        addtype2 = <?php echo json_encode($addtype2) ?>,
-        addline12 = <?php echo json_encode($addline12) ?>,
-        addline22 = <?php echo json_encode($addline22) ?>,
-        city2 = <?php echo json_encode($city2) ?>,
-        state2 = <?php echo json_encode($state2) ?>,
-        zcode2 = <?php echo json_encode($zcode2) ?>,
-        country2 = <?php echo json_encode($country2) ?>,
-        addtime2 = <?php echo json_encode($addtime2) ?>,
-        refnum1 = <?php echo json_encode($refnum1) ?>,
-        fname1 = <?php echo json_encode($fname1) ?>,
-        location1 = <?php echo json_encode($location1) ?>,
-        email1 = <?php echo json_encode($email1) ?>,
-        mobnum1 = <?php echo json_encode($mobnum1) ?>,
-        reftime1 = <?php echo json_encode($reftime1) ?>,
-        refnum2 = <?php echo json_encode($refnum2) ?>,
-        fname2 = <?php echo json_encode($fname2) ?>,
-        location2 = <?php echo json_encode($location2) ?>,
-        email2 = <?php echo json_encode($email2) ?>,
-        mobnum2 = <?php echo json_encode($mobnum2) ?>,
-        reftime2 = <?php echo json_encode($reftime2) ?>
-        ;
-
         window.onload = function() {
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
-            document.getElementById("ta1").value = head_line;
-            document.getElementById("keyskill").options[kskil1-1].selected=true;
-            document.getElementById("keyskill").options[kskil2-1].selected=true;
-            document.getElementById("keyskill").options[kskil3-1].selected=true;
-            document.getElementById("fullname").value = fname;
-            document.getElementById("email").value = email;
-            document.getElementById("mobum").value = mob_num;
-            //var gradid='';
-            document.getElementById("able22").options[able1-1].selected=true;
-            document.getElementById("able22").options[able2-1].selected=true;
-            document.getElementById("able22").options[able3-1].selected=true;
-            
         }
 
         function validatePassword() {
@@ -416,10 +317,10 @@
     </script>
     <!-- //password-script -->
     <!-- //js -->
-    <script src="js/bootstrap.js"></script>
+    <script src="{{ URL::asset('/js/bootstrap.js') }}"></script>
     <!--/ start-smoth-scrolling -->
-    <script src="js/move-top.js"></script>
-    <script src="js/easing.js"></script>
+    <script src="{{ URL::asset('/js/move-top.js') }}"></script>
+    <script src="{{ URL::asset('/js/easing.js') }}"></script>
     <script>
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event) {
@@ -445,155 +346,6 @@
                 easingType: 'easeOutQuart'
             });
 
-            //For Key Skills Options.
-            var last_valid_selection = null;
-            $('#keyskill').change(function(event) {
-
-                if ($(this).val().length > 3) {
-
-                    $(this).val(last_valid_selection);
-                } 
-                else {
-                    last_valid_selection = $(this).val();
-                }
-            });
-
-            //For Differently Abled Options.
-            var last_valid_selection1 = null;
-            $('#diffable').change(function(event) {
-
-                if ($(this).val().length > 3) {
-
-                    $(this).val(last_valid_selection1);
-                } 
-                else {
-                    last_valid_selection1 = $(this).val();
-                }
-            });
-
-            //remove the checked attributes
-            $('input[name=gender]').removeAttr('checked');
-            $('[name=marstat]').removeAttr('checked');
-            $("#english"). prop("checked", false);
-            $("#telugu"). prop("checked", false);
-            $("#hindi"). prop("checked", false);
-            $("#other"). prop("checked", false);
-            $('input[name=abled]').removeAttr('checked');
-            $('input[name=coursetype4]').removeAttr('checked');
-            
-            //Set the db values in the form
-            $('input:radio[name=gender]')[gender].checked = true;
-            $('input:radio[name=marstat]')[marstat].checked = true;
-            $('input:radio[name=abled]')[diff_able].checked = true;
-
-            //Set the db date value in the form
-            $('#dob').val(dob);
-
-            
-            if(eng_lang == 'english'){
-                $("#english").prop( "checked", true );
-            }
-
-            if(tel_lang == 'telugu'){
-                $("#telugu").prop( "checked", true );
-            }
-
-            if(hin_lang == 'hindi'){
-                $("#hindi").prop( "checked", true );
-            }
-
-            if(oth_lang == 'other'){
-                $("#other").prop( "checked", true );
-            }
-            
-            if(diff_able=='0'){
-                $("#able1").css({ display: "block" });
-                $('#able22').val([able1,able2,able3]).change(); 
-            }
-            else{
-                $('#able22').prop("selected", false); 
-            }
-
-            $("#add10modal").on('shown.bs.modal', function(){
-                $('#board1').val([board1]).change();
-                $('#passyear1').val([pyear1]).change();
-                $('#medium1').val([edulang1]).change();
-                $('#marks1').val([percentage1]).change();
-                $('#college1').val([colname1]).change();
-            });
-
-            $("#add12modal").on('shown.bs.modal', function(){
-                $('#board2').val([board2]).change();
-                $('#passyear2').val([pyear2]).change();
-                $('#medium2').val([edulang2]).change();
-                $('#marks2').val([percentage2]).change();
-                $('#college2').val([colname2]).change();
-            });
-
-            $("#addgradmodal").on('shown.bs.modal', function(){
-                $('#course3').val([course3]).change();
-                $('#college3').val([colname3]).change();
-                $('#district3').val([district3]).change();
-                $("#" + cortype3).val([cortype3]).change();
-                $('#passyear3').val([pyear3]).change();
-                $('#medium3').val([edulang3]).change();
-                $('#marks3').val([percentage3]).change(showspecs(this));
-                $("#" + gradid).val([spec3]).change();                
-            });
-
-            $("#addpgmodal").on('shown.bs.modal', function(){
-                $('#course4').val([course4]).change();
-                $('#college4').val([colname4]).change();
-                $('#district4').val([district4]).change();
-                $("#" + cortype4 + "1").val([cortype4]).change();
-                $('#passyear4').val([pyear4]).change();
-                $('#medium4').val([edulang4]).change();
-                $('#marks4').val([percentage4]).change(showspecs5(this));
-                $("#" + pgid).val([spec4]).change();                
-            });
-
-            $("#addempmodal").on('shown.bs.modal', function(){
-                $('#org5').val([empname]).change();
-                $('#role5').val([desg]).change();
-                $('#role5start').val([startdt]).change();
-                $('#role5end').val([enddt]).change();
-                $('#ta6').val([resp]).change();
-                $('#notice5').val([nperiod]).change();
-                $('#role5sall').val([msall]).change();
-                $('#role5salt').val([msalt]).change();                
-            });
-
-            $("#addcaddmodal").on('shown.bs.modal', function(){
-                $('#addline1').val([addline11]).change();
-                $('#addline2').val([addline21]).change();
-                $('#city1').val([city1]).change();
-                $('#state1').val([state1]).change();
-                $('#zcode1').val([zcode1]).change();
-                //$('#country1').val([country1]).change();
-            });
-
-            $("#addpaddmodal").on('shown.bs.modal', function(){
-                $('#addline3').val([addline12]).change();
-                $('#addline4').val([addline22]).change();
-                $('#city2').val([city2]).change();
-                $('#state2').val([state2]).change();
-                $('#zcode2').val([zcode2]).change();
-                //$('#country2').val([country2]).change();
-            });
-
-            $("#addref1modal").on('shown.bs.modal', function(){
-                $('#refname1').val([fname1]).change();
-                $('#refloc1').val([location1]).change();
-                $('#refmail1').val([email1]).change();
-                $('#refmob1').val([mobnum1]).change();
-            });
-
-            $("#addref2modal").on('shown.bs.modal', function(){
-                $('#refname2').val([fname2]).change();
-                $('#refloc2').val([location2]).change();
-                $('#refmail2').val([email2]).change();
-                $('#refmob2').val([mobnum2]).change();
-            });
         });
     </script>
     <!--// end-smoth-scrolling -->

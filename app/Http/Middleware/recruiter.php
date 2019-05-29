@@ -17,6 +17,8 @@ class recruiter
      */
     public function handle($request, Closure $next, $guard = 'recruiter')
     {
+        $message = "In middleware recruiter guard outside if";
+        echo "<script type='text/javascript'>alert('$message');</script>";
         if(Auth::guard('recruiter')){
             $message = "In middleware recruiter guard";
             echo "<script type='text/javascript'>alert('$message');</script>";

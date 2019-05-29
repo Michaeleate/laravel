@@ -1,6 +1,6 @@
 {{--Mike Begins--}}
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
     <title>SAMS Jobs Website|Search Apply Join|Vijayawada|Guntur|Hyderabad|Vizag</title>
@@ -17,18 +17,18 @@
             window.scrollTo(0, 1);
         }
     </script>
-    <link href="{{asset('/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/zoomslider.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/style6.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/style.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/css/fontawesome-all.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('/') }}css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/zoomslider.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/style6.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/style.css" rel='stylesheet' type='text/css' />
+    <link href="{{ URL::asset('/') }}css/fontawesome-all.css" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
 
 <body>
     <!-- banner-inner Background Images-->
-    <div id="demo-1" data-zs-src='["{{asset('/images/1.jpg')}}", "{{asset('/images/2.jpg')}}","{{asset('/images/3.jpg')}}", "{{asset('/images/4.jpg')}}"]' data-zs-overlay="dots">
+    <div id="demo-1" data-zs-src='["{{ URL::asset('/images/1.jpg')}}", "{{ URL::asset('/images/2.jpg')}}","{{ URL::asset('/images/3.jpg')}}", "{{ URL::asset('/images/4.jpg')}}"]' data-zs-overlay="dots">
         <div class="demo-inner-content">
             <div class="header-top">
                 <header>
@@ -39,10 +39,10 @@
                                     <span>Welcome Guest!</span>
                                 </div>
                                 <div class="col-md-6 sign-btn">
-                                        <a href="{{ route('rlogin') }}">
-                                            <i class="fas fa-lock"></i> Login</a>
-                                        <a href="{{ route('rregister') }}">
-                                            <i class="far fa-user"></i> Register</a>
+                                    <a href="{{ route('rlogin') }}">
+                                        <i class="fas fa-lock"></i> Login</a>
+                                    <a href="{{ route('rregister') }}">
+                                        <i class="far fa-user"></i> Register</a>
                                 </div>
                             @else
                                 <div class="col-md-6">
@@ -50,8 +50,9 @@
                              
                                     @if(Auth::guard('recruiter')->check())
                                         {{ Auth::user()->name }}
-                                    @else
+                                    {{--@else
                                         <script>window.location = "{{ route('/recruiter') }}" </script>
+                                    --}}
                                     @endif
                                     !</label>
                                 </div>
@@ -119,7 +120,7 @@
                             </div>
                             <div class="mask">
                                 <a href="#">
-                                    <img src="images/p1.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('images/p1.jpg') }}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -133,7 +134,7 @@
                             </div>
                             <div class="mask">
                                 <a href="#">
-                                    <img src="images/p2.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('images/p2.jpg') }}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -148,7 +149,7 @@
                             </div>
                             <div class="mask">
                                 <a href="#">
-                                    <img src="images/p3.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('images/p3.jpg') }}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -162,7 +163,7 @@
                             </div>
                             <div class="mask">
                                 <a href="#">
-                                    <img src="images/p4.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('images/p4.jpg') }}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -178,7 +179,7 @@
                             </div>
                             <div class="mask">
                                 <a href="#">
-                                    <img src="images/p4.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('images/p4.jpg') }}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -192,7 +193,7 @@
                             </div>
                             <div class="mask">
                                 <a href="#">
-                                    <img src="images/p4.jpg" class="img-fluid" alt="">
+                                    <img src="{{ url('images/p4.jpg') }}" class="img-fluid" alt="">
                                 </a>
                             </div>
                         </div>
@@ -472,7 +473,7 @@
                                         <!--//job4-->
                                     </div>
                                     <div class="col-lg-4 text-info-sec">
-                                        <img src="images/job-1.jpg" alt=" " class="img-fluid" />
+                                        <img src="{{ url('images/job-1.jpg') }}" alt=" " class="img-fluid" />
                                     </div>
 
                                 </div>
@@ -482,7 +483,7 @@
                             <div class="menu-grids mt-4">
                                 <div class="row t-in">
                                     <div class="col-lg-4 text-info-sec">
-                                        <img src="images/job-2.jpg" alt=" " class="img-fluid" />
+                                        <img src="{{ url('images/job-2.jpg') }}" alt=" " class="img-fluid" />
                                     </div>
                                     <div class="col-lg-8 text-info-sec">
                                         <!--/job1-->
@@ -771,7 +772,7 @@
                     <div class="parent-chart">
                         <div class="level lev-one top-level">
                             <div class="flow-position">
-                                <img src="images/s1.jpg" alt=" " class="img-fluid rounded-circle">
+                                <img src="{{ url('images/s1.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                 <br>
                                 <strong>Recruitment Process</strong>
                                 <br> Lorem ipsum
@@ -780,7 +781,7 @@
                         <div class="flow-chart">
                             <div class="level lev-two last-lev">
                                 <div class="flow-position">
-                                    <img src="images/s2.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s2.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>1.Job Vacancy</strong>
                                     <br> Lorem ipsum
@@ -788,7 +789,7 @@
                                 <!--
                             -->
                                 <div class="flow-position">
-                                    <img src="images/s3.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s3.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>2. Job Analysis
                                     </strong>
@@ -797,7 +798,7 @@
                                 <!--
                             -->
                                 <div class="flow-position">
-                                    <img src="images/s4.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s4.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>3. Attracting Candidates
                                     </strong>
@@ -806,7 +807,7 @@
                                 <!--
                             -->
                                 <div class="flow-position">
-                                    <img src="images/s5.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s5.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>4.Screening </strong>
                                     <br> Lorem ipsum
@@ -814,7 +815,7 @@
                                 <!--
                             -->
                                 <div class="flow-position">
-                                    <img src="images/s6.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s6.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>5.Interviewing Candidates
                                     </strong>
@@ -823,7 +824,7 @@
                                 <!--
                             -->
                                 <div class="flow-position">
-                                    <img src="images/s7.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s7.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>6.Selecting</strong>
                                     <br> Lorem ipsum
@@ -831,7 +832,7 @@
                                 <!--
                             -->
                                 <div class="flow-position">
-                                    <img src="images/s8.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/s8.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                     <br>
                                     <strong>7.Employee Evaluation
                                     </strong>
@@ -858,7 +859,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="member-img">
-                                    <img src="images/team1.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/team1.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
                                     <h4>Mark Jackman</h4>
@@ -893,7 +894,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="member-img">
-                                    <img src="images/team2.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/team2.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
                                     <h4>Janet Levine</h4>
@@ -932,7 +933,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="member-img">
-                                    <img src="images/team3.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/team3.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
                                     <h4>Rene Rickman</h4>
@@ -970,7 +971,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="member-img">
-                                    <img src="images/team4.jpg" alt=" " class="img-fluid rounded-circle">
+                                    <img src="{{ url('images/team4.jpg') }}" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
                                     <h4>Daniele Norwich</h4>
@@ -1051,7 +1052,7 @@
 
                     <div class="card-deck">
                         <div class="card">
-                            <img src="images/g1.jpg" alt="Card image cap" class="img-fluid card-img-top">
+                            <img src="{{ url('images/g1.jpg') }}" alt="Card image cap" class="img-fluid card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Would Disruption Work for Your Business?</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt ut labore et dolore .</p>
@@ -1061,7 +1062,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img src="images/g2.jpg" alt="Card image cap" class="img-fluid card-img-top">
+                            <img src="{{ url('images/g2.jpg') }}" alt="Card image cap" class="img-fluid card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">The New Mix of a Multigenerational Workforce</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt ut labore et dolore. </p>
@@ -1071,7 +1072,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img src="images/g3.jpg" alt="Card image cap" class="img-fluid card-img-top">
+                            <img src="{{ url('images/g3.jpg') }}" alt="Card image cap" class="img-fluid card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">Would Disruption Work for Your Business?</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt ut labore et dolore. </p>
@@ -1121,7 +1122,7 @@
                                 <a href="#">Click here </a>to know more about apps.</p>
                         </div>
                         <div class="col-md-5 app-img">
-                            <img src="images/mobile.png" alt=" " class="img-fluid">
+                            <img src="{{ url('images/mobile.png') }}" alt=" " class="img-fluid">
                         </div>
                     </div>
                     <!--//mobile-app -->
@@ -1147,7 +1148,7 @@
                                             <h5>Davidson</h5>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team4.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team4.jpg') }}" alt="">
                                         </div>
 
                                     </div>
@@ -1155,7 +1156,7 @@
                                 <div class="col-md-6 testi-main">
                                     <div class="testi-grids t2 row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team3.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team3.jpg') }}" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 clients-info-text">
                                             <h6>Cras rutrum</h6>
@@ -1174,7 +1175,7 @@
                                             <h5>Mercurio</h5>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team2.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team2.jpg') }}" alt="">
                                         </div>
 
                                     </div>
@@ -1182,7 +1183,7 @@
                                 <div class="col-md-6  testi-main">
                                     <div class="testi-grids t2 row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team1.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team1.jpg') }}" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 clients-info-text">
                                             <h6>Cras rutrum</h6>
@@ -1203,7 +1204,7 @@
                                             <h5>Mark Jackman</h5>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team1.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team1.jpg') }}" alt="">
                                         </div>
 
                                     </div>
@@ -1211,7 +1212,7 @@
                                 <div class="col-md-6 testi-main">
                                     <div class="testi-grids t2 row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team2.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team2.jpg') }}" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 clients-info-text">
                                             <h6>Convallis</h6>
@@ -1230,7 +1231,7 @@
                                             <h5>Mercurio</h5>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team3.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team3.jpg') }}" alt="">
                                         </div>
 
                                     </div>
@@ -1238,7 +1239,7 @@
                                 <div class="col-md-6  testi-main">
                                     <div class="testi-grids t2 row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team4.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team4.jpg') }}" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 clients-info-text">
                                             <h6>Cras rutrum</h6>
@@ -1259,7 +1260,7 @@
                                             <h5>Melissa Hoffman</h5>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team4.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team4.jpg') }}" alt="">
                                         </div>
 
                                     </div>
@@ -1267,7 +1268,7 @@
                                 <div class="col-md-6 testi-main">
                                     <div class="testi-grids t2 row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team3.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team3.jpg') }}" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 clients-info-text">
                                             <h6>Convallis</h6>
@@ -1286,7 +1287,7 @@
                                             <h5>Thomas Muller</h5>
                                         </div>
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team2.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team2.jpg') }}" alt="">
                                         </div>
 
                                     </div>
@@ -1294,7 +1295,7 @@
                                 <div class="col-md-6  testi-main">
                                     <div class="testi-grids t2 row">
                                         <div class="col-md-3 col-sm-3 col-xs-3 img-testi">
-                                            <img class="img-fluid" src="images/team1.jpg" alt="">
+                                            <img class="img-fluid" src="{{ url('images/team1.jpg') }}" alt="">
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9 clients-info-text">
                                             <h6>Felis mattis</h6>
@@ -1482,13 +1483,13 @@
     Mike Ends Commenting --}}
     <!-- js -->
     <!--/slider-->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <script src="js/jquery.zoomslider.min.js"></script>
+    <script src="{{ URL::asset('/js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/modernizr-2.6.2.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/jquery.zoomslider.min.js') }}"></script>
     <!--//slider-->
     <!--search jQuery-->
-    <script src="js/classie-search.js"></script>
-    <script src="js/demo1-search.js"></script>
+    <script src="{{ URL::asset('/js/classie-search.js') }}"></script>
+    <script src="{{ URL::asset('/js/demo1-search.js') }}"></script>
     <!--//search jQuery-->
 
     <script>
@@ -1526,18 +1527,18 @@
     <!-- //password-script -->
 
     <!-- stats -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.countup.js"></script>
+    <script src="{{ URL::asset('/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/jquery.countup.js') }}"></script>
     <script>
         $('.counter').countUp();
     </script>
     <!-- //stats -->
 
     <!-- //js -->
-    <script src="js/bootstrap.js"></script>
+    <script src="{{ URL::asset('/js/bootstrap.js') }}"></script>
     <!--/ start-smoth-scrolling -->
-    <script src="js/move-top.js"></script>
-    <script src="js/easing.js"></script>
+    <script src="{{ URL::asset('/js/move-top.js') }}"></script>
+    <script src="{{ URL::asset('/js/easing.js') }}"></script>
     <script>
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event) {

@@ -1,6 +1,6 @@
 {{--Mike Begins--}}
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
     <title>SAMS Jobs Website|Search Apply Join|Vijayawada|Guntur|Hyderabad|Vizag</title>
@@ -36,13 +36,13 @@
                         <div class="row">
                             @guest
                                 <div class="col-md-3">
-                                    <label style="color: #ffff; float:right;">Welcome Guest!</label>
+                                    <label style="color: #ffff; float:right;"> Welcome Guest!</label>
                                 </div>
                                 <div class="col-md-4 sign-btn">
-                                        <a href="{{ route('login') }}">
-                                            <i class="fas fa-lock"></i> Login</a>
-                                        <a href="{{ route('register') }}">
-                                            <i class="far fa-user"></i> Register</a>
+                                    <a href="{{ route('login') }}">
+                                        <i class="fas fa-lock"></i> Login</a>
+                                    <a href="{{ route('register') }}">
+                                        <i class="far fa-user"></i> Register</a>
                                 </div>
                                 <div class="col-md-5">
                                     <a href="{{ route('recruiter') }}">Recruiters Zone</a>

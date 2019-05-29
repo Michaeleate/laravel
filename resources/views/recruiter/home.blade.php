@@ -52,15 +52,17 @@
         </a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="{{ route('crecprofile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Profile
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/crecprofile') }}">Create Profile</a>
-            <a class="dropdown-item" href="{{ url('/vrecprofile') }}">View Profile</a>
-            <a class="dropdown-item" href="{{ url('/urecprofile') }}">Modify Profile</a>
-            {{--<a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a> --}}
+            <a class="dropdown-item" href="{{ route('crecprofile') }}">Create Profile</a>
+            <a class="dropdown-item" href="{{ route('vrecprofile') }}">View Profile</a>
+            <a class="dropdown-item" href="{{ route('urecprofile') }}">Modify Profile</a>
+            {{--
+            <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
+            --}}
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -103,4 +105,5 @@
         <a class="nav-link" href="contact.html">Contact</a>
     </li>
 </ul>
+
 @endsection

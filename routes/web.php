@@ -138,8 +138,8 @@ Route::get('/recruiter/home', 'recruiter\RechomeController@index')->name('recrui
 Route::post('/recruiter/logout','recruiter\Auth\LoginController@logout')->name('rlogout');
 
 //Create Recruiter Profile
-Route::get('/crecprofile', 'RecprofController@crecprofile')->name('crecprofile');
+Route::get('/recruiter/crecprofile', 'recruiter\RecprofController@crecprofile')->name('crecprofile');
 //View Recruiter Profile
-Route::get('/vrecprofile', 'RecprofController@vrecprofile')->name('vrecprofile');
+Route::get('/recruiter/vrecprofile', 'recruiter\RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
-Route::get('/urecprofile', 'RecprofController@urecprofile')->name('urecprofile');
+Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@urecprofile')->name('urecprofile');

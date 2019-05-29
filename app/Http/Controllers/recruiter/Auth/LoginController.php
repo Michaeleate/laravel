@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'recruiter/home';
+    //protected $redirectTo = 'recruiter/home';
     protected $guard = 'recruiter';
 
     /*
@@ -54,18 +54,30 @@ class LoginController extends Controller
     {
         //$this->middleware('guest')->except('logout');
         $this->middleware('guest:recruiter')->except('logout');
+        //$this->middleware('auth:recruiter')->except('logout');
         //$this->middleware('recruiter')->except('logout');
     }
 
     public function recruiterLogin(Request $request)
     {
+        $message = "Inside recruiterLogin of LoginController";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:8'
         ]);
 
+        $message = "email entered is ". $request->email;
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        $message = "password entered is ". $request->password;
+        echo "<script type='text/javascript'>alert('$message');</script>";
+
+        
+
         //if((auth()->user()->isrecruiter == 1)->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-        if (Auth::guard('recruiter')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) 
+        if (Auth::guard('recruiter')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember')))
+        //if (true)
         {
             //return redirect()->intended(route('recruiter.home'));
             //return redirect('recruiter/home');
@@ -83,9 +95,11 @@ class LoginController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
-    function authenticated(Request $request, $user)
+    public function authenticated(Request $request, $user)
     {
         //This is not happening change this.
+        $message = "In LoginController authenticated function";
+        echo "<script type='text/javascript'>alert('$message');</script>";
         //$user = App\recruiter\modrecruiter::update(
         $user->update(
             //[

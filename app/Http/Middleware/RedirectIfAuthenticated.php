@@ -45,8 +45,8 @@ class RedirectIfAuthenticated
             return redirect('/home');
         }
 
-        $message = "In redirectifauthenticated next guard";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        //$message = "In redirectifauthenticated next guard";
+        //echo "<script type='text/javascript'>alert('$message');</script>";
         return $next($request);
     }
 }
