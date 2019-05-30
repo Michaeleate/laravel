@@ -296,13 +296,26 @@
     </script>
     <!-- //dropdown nav -->
     
-    
-    <!-- password-script -->
+    <!-- php javascript variables -->
     <script type="text/javascript">
         
+        var fname = <?php echo json_encode($fname) ?>,
+            lname = <?php echo json_encode($lname) ?>,
+            loc = <?php echo json_encode($loc) ?>,
+            email = <?php echo json_encode($email) ?>,
+            mobnum = <?php echo json_encode($mobnum) ?>,
+            skype = <?php echo json_encode($skype) ?>,
+            picpath = <?php echo json_encode($picpath) ?>,
+            picname = <?php echo json_encode($picname) ?>
+            ;
+    
         window.onload = function() {
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
+            document.getElementById("i-fname").value = fname;
+            document.getElementById("i-lname").value = lname;
+            document.getElementById("i-loc").value = loc;
+            document.getElementById("i-mobnum").value = mobnum;
         }
 
         function validatePassword() {

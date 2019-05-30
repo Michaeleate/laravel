@@ -143,3 +143,6 @@ Route::get('/recruiter/crecprofile', 'recruiter\RecprofController@crecprofile')-
 Route::get('/recruiter/vrecprofile', 'recruiter\RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
 Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@urecprofile')->name('urecprofile');
+
+//Update initial profile data
+Route::post('/recruiter/upinfopdet', 'recruiter\RecpdetCont@upinfopdet');

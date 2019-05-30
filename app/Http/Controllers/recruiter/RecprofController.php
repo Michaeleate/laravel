@@ -16,4 +16,6 @@ class RecprofController extends Controller
             return view('recruiter.home');
         }
     }
+    
+    
 }

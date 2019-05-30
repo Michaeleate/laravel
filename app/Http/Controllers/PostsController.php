@@ -19,6 +19,7 @@ use App\modresuedu;
 use App\modresuemp;
 use App\modresuadd;
 use App\modresuref;
+use App\recruiter\modrecpdet;
 
 class PostsController extends Controller
 {
@@ -626,6 +627,23 @@ class PostsController extends Controller
         }
         else {
             return redirect()->route('login');
+        }
+    }
+
+    //Get Initial Data for Recruiter Profile
+    public static function get_initial() {
+        if (Auth::guard('recruiter')->check()) 
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+            $message = "ID is" . $authid;
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            $recprof = \App\recruiter\modrecpdet::select('fname', 'lname', 'location', 'email', 'mobnum', 'skype', 'picname','picpath')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
         }
     }
 }

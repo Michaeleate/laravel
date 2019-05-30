@@ -1,6 +1,22 @@
 @extends('recruiter.layouts.rprof')
 <?php 
-    use \App\Http\Controllers\PostsController; 
+    use \App\Http\Controllers\PostsController;
+    $fname=$lname=$loc=$email=$mobnum=$skype=$picpath=$picname='';
+
+    $recprof=PostsController::get_initial();
+    foreach($recprof as $key=>$val){
+        $fname=$val["fname"];
+        $lname=$val["lname"];
+        $loc=$val["location"];
+        $email=$val["email"];
+        $mobnum=$val["mobnum"];
+        $skype=$val["skype"];
+        $picpath=$val["picpath"];
+        $picname=$val["picname"];
+    }
+
+    $message = "fname is" . $fname;
+    echo "<script type='text/javascript'>alert('$message');</script>";
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -118,16 +134,24 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Headline Div--}}
-<div class="emply-resume-list row mb-1" id="head1" style="display:inline-block; width:100%">
+<div class="emply-resume-list row mb-1" id="i-initial" style="display:inline-block; width:100%">
     <div class="col-md-12 emply-info">
         <div class="emply-resume-info-sams">
-            <form role="form" action="{{url('/resumehead')}}" method="post">
+            <form role="form" action="{{ url('/recruiter/upinfopdet')}}" method="post">
                 @csrf
-                <h4>Resume Headline {{ session('hl') }}</h4>
-                <label>Resume Headline is the first point of contact with Recruiters, so make it striking to get noticed.</label>
-                <textarea id="ta1" class="form-control" name="headline" style="height:120px; width:100%; resize:none;" onkeyup="countChars(this,'lab1',250);"></textarea>
-                <label id="lab1" style="float:left">250 Character(s) Left</label>
-                <button type="submit" class="btn btn-primary"  style="float:right;">Save</button>
+                <h4>First, a bit about you...</h4>
+                <table>
+                <tr><td><label>What's your name?</label></td>
+                    <td><input type="text" class="form-control" placeholder="First Name" name="fname" id="i-fname" style="width:250px; height:30px;"></td></tr>
+                <tr><td><label></label></td>
+                    <td><input type="text" class="form-control" placeholder="Last Name" name="lname" id="i-lname" style="width:250px; height:30px;"></td></tr>
+                <tr><td><label>Where are you located?</label></td>
+                    <td><input type="text" class="form-control" placeholder="Vijayawada" name="loc" id="i-loc" style="width:250px; height:30px;"></td></tr>
+                <tr><td><label>Mobile Number to contact? (+91)</label></td>
+                    <td><input type="text" maxlength="10" pattern="[6789][0-9]{9}" class="form-control" id="i-mobnum" name="mobnum" style="width:250px; height:30px;"></td></tr>
+                <tr><td><label></label></td>
+                    <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
                 <div class="clearfix"> </div>
             </form>
         </div>
@@ -136,7 +160,7 @@
 
 <script>
 window.load = function(){
-    
+    /*
     function attachfocus(){
         document.getElementById("head1").style.display = "none";
         document.getElementById("attach1").style.display = "block";
@@ -144,7 +168,7 @@ window.load = function(){
         document.getElementById("person1").style.display = "none";
     }
     attachfocus();
-    
+    */
 }
 
 

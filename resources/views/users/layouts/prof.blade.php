@@ -270,7 +270,7 @@
     <!--search jQuery-->
     <script src="js/classie-search.js"></script>
     <script src="js/demo1-search.js"></script>
-    <!--//search jQuery-->
+    <!--//search jQuery--> 
     
 
     <script>
@@ -290,7 +290,7 @@
     <!-- //dropdown nav -->
     
     
-    <!-- password-script -->
+    <!-- php javascript variables -->
     <script type="text/javascript">
         
         var head_line = <?php echo json_encode($head_line) ?>, 
