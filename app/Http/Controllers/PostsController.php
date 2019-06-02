@@ -20,6 +20,8 @@ use App\modresuemp;
 use App\modresuadd;
 use App\modresuref;
 use App\recruiter\modrecpdet;
+use App\recruiter\modrecbdet;
+use App\recruiter\modrecabout;
 
 class PostsController extends Controller
 {
@@ -635,9 +637,32 @@ class PostsController extends Controller
         if (Auth::guard('recruiter')->check()) 
         {
             $authid = Auth::guard('recruiter')->user()->id;
-            $message = "ID is" . $authid;
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            //$message = "ID is" . $authid;
+            //echo "<script type='text/javascript'>alert('$message');</script>";
             $recprof = \App\recruiter\modrecpdet::select('fname', 'lname', 'location', 'email', 'mobnum', 'skype', 'picname','picpath')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+            
+            //$message = "pic name is " . $recprof['picname'];
+            //echo "<script type='text/javascript'>alert('$message');</script>";
+            /*
+            list($name11, $ext11) = explode('.', $val["picname"]);
+            $val["picpath"]=$val["picpath"]."/".$authid.".".$ext11;
+            $recprof['fullpath']=$recprof['picpath'].'/'.$recprof['picname'];
+            */
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    //Get Initial Data for Recruiter Profile
+    public static function get_bdetails() {
+        if (Auth::guard('recruiter')->check()) 
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+            $recprof = \App\recruiter\modrecbdet::select('orgname', 'weburl', 'addline1', 'addline2', 'city', 'state', 'country')
                     ->where('rec_id', '=', $authid)
                     ->get();
             return $recprof;
@@ -646,4 +671,35 @@ class PostsController extends Controller
             return view('recruiter.home');
         }
     }
+
+    //Get About you info for Recruiter Profile
+    public static function get_aboutu() {
+        if (Auth::guard('recruiter')->check()) 
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+            $recprof = \App\recruiter\modrecabout::select('profname', 'profurl', 'shortprof', 'servcity', 'servstate', 'servcountry', 'remote')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    //Get Social Links info for Recruiter Profile
+    public static function get_socio() {
+        if (Auth::guard('recruiter')->check()) 
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+            $recprof = \App\recruiter\modrecsocio::select('linkurl', 'fburl', 'tweeturl', 'instaurl', 'lang1', 'lang2', 'lang3')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
 }

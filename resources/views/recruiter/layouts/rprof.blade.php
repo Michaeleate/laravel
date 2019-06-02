@@ -35,11 +35,9 @@
                         <div class="row top-vl">
                             <div class="col-md-6">
                                 <label style="color: #ffff; float:right;">
-                                    {{--
                                     @if(Auth::guard('recruiter')->check())
-                                        {{ Auth::user()->name }}
+                                        {{ Auth::guard('recruiter')->user()->name }}
                                     @endif
-                                    --}}
                                 </label>
                             </div>
                             <div class="col-md-3">
@@ -59,7 +57,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/rechome')}}">
+                                <a class="navbar-brand" href="{{ asset('/recruiter/home')}}">
                                     <img src="{{ URL::asset('/images/favicon-sams.png')}}" alt="logo">
                                 </a>
                             </h1>
@@ -86,7 +84,7 @@
     </div>
     <ol class="breadcrumb justify-content-left">
         <li class="breadcrumb-item">
-            <a href="{{ url('/rechome')}}">Home</a>
+            <a href="{{ url('/recruiter/home')}}">Home</a>
         </li>
         <li class="breadcrumb-item active">Recruiter Profile</li>
     </ol>
@@ -216,7 +214,6 @@
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -258,10 +255,8 @@
                                 <a href="#">By clicking Register, I agree to your terms</a>
                             </p>
                         </form>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -297,7 +292,7 @@
     <!-- //dropdown nav -->
     
     <!-- php javascript variables -->
-    <script type="text/javascript">
+    <script language="Javascript" type="text/javascript">
         
         var fname = <?php echo json_encode($fname) ?>,
             lname = <?php echo json_encode($lname) ?>,
@@ -306,16 +301,161 @@
             mobnum = <?php echo json_encode($mobnum) ?>,
             skype = <?php echo json_encode($skype) ?>,
             picpath = <?php echo json_encode($picpath) ?>,
-            picname = <?php echo json_encode($picname) ?>
+            picname = <?php echo json_encode($picname) ?>,
+            seslink = <?php echo json_encode($seslink) ?>,
+            orgname = <?php echo json_encode($orgname) ?>,
+            weburl = <?php echo json_encode($weburl) ?>,
+            addline1 = <?php echo json_encode($addline1) ?>,
+            addline2 = <?php echo json_encode($addline2) ?>,
+            city = <?php echo json_encode($city) ?>,
+            state = <?php echo json_encode($state) ?>,
+            country = <?php echo json_encode($country) ?>,
+            profname = <?php echo json_encode($profname) ?>,
+            profurl = <?php echo json_encode($profurl) ?>,
+            shortprof = <?php echo json_encode($shortprof) ?>,
+            remote = <?php echo json_encode($remote) ?>,
+            servcity = <?php echo json_encode($servcity) ?>,
+            servstate = <?php echo json_encode($servstate) ?>,
+            servcountry = <?php echo json_encode($servcountry) ?>,
+            linkurl = <?php echo json_encode($linkurl) ?>,
+            fburl = <?php echo json_encode($fburl) ?>,
+            tweeturl = <?php echo json_encode($tweeturl) ?>,
+            instaurl = <?php echo json_encode($instaurl) ?>,
+            lang1 = <?php echo json_encode($lang1) ?>,
+            lang2 = <?php echo json_encode($lang2) ?>,
+            lang3 = <?php echo json_encode($lang3) ?>
             ;
     
         window.onload = function() {
+            //$message = "Inside Onload Function";
+            //alert($message);
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
             document.getElementById("i-fname").value = fname;
             document.getElementById("i-lname").value = lname;
             document.getElementById("i-loc").value = loc;
+            document.getElementById("i-email").value = email;
             document.getElementById("i-mobnum").value = mobnum;
+            document.getElementById("i-mobnum1").value = mobnum;
+            document.getElementById("i-fname1").value = fname;
+            document.getElementById("i-lname1").value = lname;
+            document.getElementById("i-orgname").value = orgname;
+            document.getElementById("i-bweburl").value = weburl;
+            document.getElementById("i-addline1").value = addline1;
+            document.getElementById("i-addline2").value = addline2;
+            document.getElementById("i-city").value = city;
+            document.getElementById("i-state").value = state;
+            document.getElementById("i-country").value = "India";
+            document.getElementById("i-skype").value = skype;
+            document.getElementById("i-mobnum2").value = mobnum;
+            document.getElementById("i-profname").value = profname;
+            document.getElementById("i-profurl").value = profurl;
+            document.getElementById("i-shortprof").value = shortprof;
+            document.getElementById("i-servcity").value = servcity;
+            document.getElementById("i-servstate").value = servstate;
+            document.getElementById("i-servcountry").value = "India";
+            document.getElementById("i-linkurl").value = linkurl;
+            document.getElementById("i-fburl").value = fburl;
+            document.getElementById("i-tweeturl").value = tweeturl;
+            document.getElementById("i-instaurl").value = instaurl;
+
+            $("#i-lang1").removeProp("selected");
+            $("#i-lang2").removeProp("selected");
+            $("#i-lang3").removeProp("selected");
+            
+            $('#i-lang1').val(lang1);
+            $('#i-lang2').val(lang2);
+            $('#i-lang3').val(lang3);
+            
+            $('input[name=remote]').removeAttr('checked');
+            if(remote == 1) {
+                $("#i-remyes").prop( "checked", true );
+            }
+            else {
+                $("#i-remno").prop( "checked", true );
+            }
+            
+            switch (seslink) {
+                case "init":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').show();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    break;
+                case "emailpass":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').show();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    break;
+                case "personal":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').show();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    break;
+                case "business":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').show();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    break;
+                case "comm":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').show();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    break;
+                case "aboutu":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').show();
+                    $('#i-pphoto').hide();
+                    break;
+                case "socio":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').show();
+                    break;
+                default:
+                    $('#i-initial').show();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+            }
         }
 
         function validatePassword() {
@@ -359,6 +499,84 @@
                 easingType: 'easeOutQuart'
             });
 
+            $('a[href="#i-emailpass"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').show();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-pphoto').hide();
+            });
+
+            $('a[href="#i-personal"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').show();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-pphoto').hide();
+            });
+
+            $('a[href="#i-business"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').show();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-pphoto').hide();
+            });
+
+            $('a[href="#i-comm"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').show();
+                $('#i-about').hide();
+                $('#i-pphoto').hide();
+            });
+
+            $('a[href="#i-about"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').show();
+                $('#i-pphoto').hide();
+            });
+
+            $('a[href="#i-socio"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-socio').show();
+                $('#i-pphoto').hide();
+            });
+
+            $('a[href="#i-pphoto"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-socio').hide();
+                $('#i-pphoto').show();
+            });
+
+            $("#i-profname").on('keyup',function(){
+                profurl=$(this).val().toLowerCase();
+                profurl=profurl.replace(" ","-");
+                profurl="http://samsjobs.in/recruiter/".concat(profurl);
+                $("#i-profurl").val(profurl);
+            });
         });
     </script>
     <!--// end-smoth-scrolling -->

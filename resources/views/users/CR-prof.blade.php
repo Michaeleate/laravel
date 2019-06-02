@@ -322,7 +322,7 @@
             <a href="#abled-link">Differently Abled</a>
         </li>
         <li>
-            <a href="#prof-link">Upload Photo</a>
+            <a href="#profpic-link">Upload Photo</a>
         </li>
     </ul>
 </div>

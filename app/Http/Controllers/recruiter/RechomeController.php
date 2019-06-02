@@ -15,7 +15,8 @@ class RechomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:recruiter');
+        //$this->middleware('auth:recruiter');
+        $this->middleware('recruiter')->except('logout');
     }
 
     /**
@@ -25,6 +26,10 @@ class RechomeController extends Controller
      */
     public function index()
     {
-        return view('recruiter.home');
+        $auth = Auth::guard('recruiter');
+        //if (Auth::guard('recruiter')->check()){
+        if ($auth->check()){
+            return view('recruiter.home');
+        }
     }
 }

@@ -1,8 +1,20 @@
 @extends('recruiter.layouts.rprof')
 <?php 
     use \App\Http\Controllers\PostsController;
-    $fname=$lname=$loc=$email=$mobnum=$skype=$picpath=$picname='';
+    use Illuminate\Routing\UrlGenerator;
+    use Illuminate\Support\Facades\Auth;
 
+    //$previousurl = url()->previous();
+    $seslink = Session::get('link');
+    $message = "Session link is " . $seslink;
+    echo "<script type='text/javascript'>alert('$message');</script>";
+
+    $fname=$lname=$loc=$email=$mobnum=$skype=$picpath=$picname='';
+    $orgname=$weburl=$addline1=$addline2=$city=$state=$country='';
+    $profname=$profurl=$shortprof=$servcity=$servstate=$servcountry=$remote='';
+    $linkurl=$fburl=$tweeturl=$instaurl=$lang1=$lang2=$lang3='';
+
+    //get recruiter personal details
     $recprof=PostsController::get_initial();
     foreach($recprof as $key=>$val){
         $fname=$val["fname"];
@@ -14,9 +26,52 @@
         $picpath=$val["picpath"];
         $picname=$val["picname"];
     }
+    //if (Auth::guard('recruiter')->check()) 
+    //{
+        $authid = Auth::guard('recruiter')->user()->id;
+    //}    
+    list($name11, $ext11) = explode('.', $picname);
+    $fullpath=$picpath."/".$authid.".".$ext11;
 
-    $message = "fname is" . $fname;
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    //get recruiter business details
+    $recprof=PostsController::get_bdetails();
+    foreach($recprof as $key=>$val){
+        $orgname=$val["orgname"];
+        $weburl=$val["weburl"];
+        $addline1=$val["addline1"];
+        $addline2=$val["addline2"];
+        $city=$val["city"];
+        $state=$val["state"];
+        $country=$val["country"];
+    }
+
+    //get recruiter About you details
+    $recprof=PostsController::get_aboutu();
+    foreach($recprof as $key=>$val){
+        $profname=$val["profname"];
+        $profurl=$val["profurl"];
+        $shortprof=$val["shortprof"];
+        $servcity=$val["servcity"];
+        $servstate=$val
+        ["servstate"];
+        $servcountry=$val["servcountry"];
+        $remote=$val["remote"];
+    }
+    $profurl="http://samsjobs.in/recruiter/".$profurl;
+
+    //get recruiter Social details
+    $recprof=PostsController::get_socio();
+    foreach($recprof as $key=>$val){
+        $linkurl=$val["linkurl"];
+        $fburl=$val["fburl"];
+        $tweeturl=$val["tweeturl"];
+        $instaurl=$val["instaurl"];
+        $lang1=$val["lang1"];
+        $lang2=$val["lang2"];
+        $lang3=$val["lang3"];
+    }
+    //$message = "fname is" . $fname;
+    //echo "<script type='text/javascript'>alert('$message');</script>";
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -89,16 +144,16 @@
     <h3 class="j-b mb-3">SAMS Account</h3>
     <ul class="list_2">
         <li>
-            <a href="#head1">E-mail & Password</a>
+            <a href="#i-emailpass">E-mail & Password</a>
         </li>
         <li>
-            <a href="#attach1">Personal</a>
+            <a href="#i-personal">Personal</a>
         </li>
         <li>
-            <a href="#attach1">Business</a>
+            <a href="#i-business">Business</a>
         </li>
         <li>
-            <a href="#attach1">Communication</a>
+            <a href="#i-comm">Communication</a>
         </li>
     </ul>
 </div>
@@ -106,13 +161,13 @@
     <h3 class="j-b mb-3">SAMS Profile</h3>
     <ul class="list_2">
         <li>
-            <a href="#key1">About You</a>
+            <a href="#i-about">About You</a>
         </li>
         <li>
-            <a href="#key1">Social & Cultural</a>
+            <a href="#i-socio">Social & Cultural</a>
         </li>
         <li>
-            <a href="#key1">Professional Photo</a>
+            <a href="#i-pphoto">Professional Photo</a>
         </li>
         <li>
             <a href="#key1">Specialized Areas</a>
@@ -141,14 +196,33 @@
                 @csrf
                 <h4>First, a bit about you...</h4>
                 <table>
-                <tr><td><label>What's your name?</label></td>
+                <tr><td style="width:230px;"><label>What's your name?</label></td>
                     <td><input type="text" class="form-control" placeholder="First Name" name="fname" id="i-fname" style="width:250px; height:30px;"></td></tr>
-                <tr><td><label></label></td>
+                <tr><td style="width:230px;"><label></label></td>
                     <td><input type="text" class="form-control" placeholder="Last Name" name="lname" id="i-lname" style="width:250px; height:30px;"></td></tr>
-                <tr><td><label>Where are you located?</label></td>
+                <tr><td style="width:230px;"><label>Where are you located?</label></td>
                     <td><input type="text" class="form-control" placeholder="Vijayawada" name="loc" id="i-loc" style="width:250px; height:30px;"></td></tr>
-                <tr><td><label>Mobile Number to contact? (+91)</label></td>
+                <tr><td style="width:230px;"><label>Mobile Number to contact? (+91)</label></td>
                     <td><input type="text" maxlength="10" pattern="[6789][0-9]{9}" class="form-control" id="i-mobnum" name="mobnum" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label></label></td>
+                    <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="emply-resume-list row mb-1" id="i-emailpass" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/upinfopdet1')}}" method="post">
+                @csrf
+                <h4>Account > E-mail</h4>
+                <table>
+                <tr><td style="width:230px;"><label>E-mail:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Valid Email ID" name="email" id="i-email" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Mobile Number (+91):</label></td>
+                    <td><input type="text" maxlength="10" pattern="[6789][0-9]{9}" class="form-control" id="i-mobnum1" name="mobnum" style="width:250px; height:30px;"></td></tr>
                 <tr><td><label></label></td>
                     <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
                 </table>
@@ -157,59 +231,252 @@
         </div>
     </div>
 </div>
+<div class="emply-resume-list row mb-1" id="i-personal" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/upinfopdet2')}}" method="post">
+                @csrf
+                <h4>Account > Personal</h4>
+                <table>
+                <tr><td style="width:230px;"><label>First Name:</label></td>
+                    <td><input type="text" class="form-control" placeholder="First Name" name="fname" id="i-fname1" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Last Name:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Last Name" name="lname" id="i-lname1" style="width:250px; height:30px;"></td></tr>
+                <tr><td><label></label></td>
+                    <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="emply-resume-list row mb-1" id="i-business" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/upinfobdet')}}" method="post">
+                @csrf
+                <h4>Account > Business</h4>
+                <table>
+                <tr><td style="width:230px;"><label>Company or Business entity:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Company Name" name="orgname" id="i-orgname" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Company website URL:</label></td>
+                    <td><input type="text" class="form-control" placeholder="www.samsjobs.in" name="bweburl" id="i-bweburl" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label><b>Address:</b></label></td>
+                    <td><label></label></td></tr>
+                <tr><td style="width:230px;"><label>Address Line 1:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Aprt no,Road Name, etc." name="addline1" id="i-addline1" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Address Line 2:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Land Mark, Area Name, etc." name="addline2" id="i-addline2" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>City:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Vijayawada" name="city" id="i-city" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>State:</label></td>
+                    <td><input type="text" class="form-control" name="state" placeholder="Andhra Pradesh" id="i-state" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Country:</label></td>
+                    <td><input type="text" class="form-control" placeholder="India" name="country" value="India" id="i-country" style="width:250px; height:30px;" readonly></td></tr>
+                <tr><td><label></label></td>
+                    <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="emply-resume-list row mb-1" id="i-comm" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/updatecom')}}" method="post">
+                @csrf
+                <h4>Account > Communication</h4>
+                <table>
+                <tr><td style="width:230px;"><label>Mobile Number (+91):</label></td>
+                    <td><input type="text" maxlength="10" pattern="[6789][0-9]{9}" class="form-control" id="i-mobnum2" name="mobnum" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Skype ID:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Last Name" name="skype" id="i-skype" style="width:250px; height:30px;"></td></tr>
+                <tr><td><label></label></td>
+                    <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="emply-resume-list row mb-1" id="i-about" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/uprecabout')}}" method="post">
+                @csrf
+                <h4>Profile > About You</h4>
+                <table>
+                <tr><td style="width:480px;">SAMS Profile name in format Firstname Lastname, i.e. (Mike Sams):</td></tr>
+                <tr><td><input type="text" class="form-control" id="i-profname" name="profname" style="width:480px; height:30px;"></td></tr>
+                <tr><td style="width:480px;">Your SAMS profile URL:</td></tr>
+                <tr><td><input type="text" class="form-control" placeholder={{ $profurl }} name="profurl" id="i-profurl" style="width:480px; height:30px;" readonly></td></tr>
+                <tr><td style="width:480px;">Short Profile (max 140 characters):</td></tr>
+                <tr><td><textarea class="form-control" placeholder="Make it catch and stylish. Max 140 characters" maxlength="140" name="shortprof" id="i-shortprof" rows="3" style="width:480px; resize: none;"></textarea></td></tr>
+                </table>
+                <h5>Servicing Area:</h5>
+                <label>This is your primary physical location.</label>
+                <table>
+                <tr><td style="width:230px;"><label>City:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Vijayawada" name="servcity" id="i-servcity" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>State:</label></td>
+                    <td><input type="text" class="form-control" name="servstate" placeholder="Andhra Pradesh" id="i-servstate" style="width:250px; height:30px;"></td></tr>
+                <tr><td style="width:230px;"><label>Country:</label></td>
+                    <td><input type="text" class="form-control" placeholder="India" name="servcountry" value="India" id="i-servcountry" style="width:250px; height:30px;" readonly></td></tr>
+                </table>
+                <table>
+                <h5>Remote Recruiter:</h5>
+                <label>You may also recruit in cities other than your physical location.</label>
+                
+                <div class="form-group" id="i-remote">
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="radio1">
+                            <input type="radio" class="form-check-input" id="i-remyes" name="remote" value=1>Yes
+                        </label>
+                    </div>
 
-<script>
-window.load = function(){
-    /*
-    function attachfocus(){
-        document.getElementById("head1").style.display = "none";
-        document.getElementById("attach1").style.display = "block";
-        document.getElementById("key1").style.display = "none";
-        document.getElementById("person1").style.display = "none";
-    }
-    attachfocus();
-    */
-}
+                    <div class="form-check-inline">
+                        <label class="form-check-label" for="radio2">
+                            <input type="radio" class="form-check-input" id="i-remno" name="remote" value=0 checked>No
+                        </label>
+                    </div>
+                </div>
+                <table>
+                <tr><td style="width:230px;"><label></label></td>
+                    <td style="width:250px;"><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="emply-resume-list row mb-1" id="i-socio" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/updatesoc')}}" method="post">
+                @csrf
+                <h4>Profile > Social Links</h4>
+                <table>
+                <tr><td style="width:180px;"><label>Your Linkedin Page URL:</label></td>
+                    <td><input type="text" class="form-control" placeholder="https://www.linkedin.com/company/sams-pvt-ltd/" name="linkurl" id="i-linkurl" style="width:300px; height:30px;"></td></tr>
+                <tr><td style="width:180px;"><label>Your Facebook Page URL:</label></td>
+                    <td><input type="text" class="form-control" placeholder="https://www.facebook.com/callforsams/" name="fburl" id="i-fburl" style="width:300px; height:30px;"></td></tr>
+                <tr><td style="width:180px;"><label>Your Twitter Page URL:</label></td>
+                    <td><input type="text" class="form-control" placeholder="https://twitter.com/callforsams" name="tweeturl" id="i-tweeturl" style="width:300px; height:30px;"></td></tr>
+                <tr><td style="width:180px;"><label>Your Instagram Page URL:</label></td>
+                    <td><input type="text" class="form-control" placeholder="https://www.instagram.com/callforsams/" name="instaurl" id="i-instaurl" style="width:300px; height:30px;"></td></tr>
+                <tr><td style="width:180px;"><label>Language 1:</label></td>
+                    <td><select class="form-control" id="i-lang1" name="lang1" style="width:300px; height:35px; line-height:10px; text-align:center;">
+                        <option value="0" selected>English</option>
+                        <option value="1">Hindi</option>
+                        <option value="2">Bengali</option>
+                        <option value="3">Marathi</option>
+                        <option value="4">Telugu</option>
+                        <option value="5">Tamil</option>
+                        <option value="6">Gujarati</option>
+                        <option value="7">Urdu</option>
+                        <option value="8">Kannada</option>
+                        <option value="9">Odia</option>
+                        <option value="10">Malayalam</option>
+                        <option value="11">Punjabi</option>
+                        <option value="12">Assamese</option>
+                        <option value="13">Maithili</option>
+                        <option value="14">Santali</option>
+                        <option value="15">Kashmiri</option>
+                        <option value="16">Nepali</option>
+                        <option value="17">Sindhi</option>
+                        <option value="18">Dogri</option>
+                        <option value="19">Konkani</option>
+                        <option value="20">Manipuri</option>
+                        <option value="21">Bodo</option>
+                        <option value="22">Sanskrit</option>
+                        <option value="23">Other</option>
+                    </select></td></tr>
+                <tr><td style="width:180px;"><label>Language 2:</label></td>
+                    <td><select class="form-control" id="i-lang2" name="lang2" style="width:300px; height:35px; line-height: 10px; text-align:center;">
+                        <option value="0">English</option>
+                        <option value="1">Hindi</option>
+                        <option value="2">Bengali</option>
+                        <option value="3">Marathi</option>
+                        <option value="4" selected>Telugu</option>
+                        <option value="5">Tamil</option>
+                        <option value="6">Gujarati</option>
+                        <option value="7">Urdu</option>
+                        <option value="8">Kannada</option>
+                        <option value="9">Odia</option>
+                        <option value="10">Malayalam</option>
+                        <option value="11">Punjabi</option>
+                        <option value="12">Assamese</option>
+                        <option value="13">Maithili</option>
+                        <option value="14">Santali</option>
+                        <option value="15">Kashmiri</option>
+                        <option value="16">Nepali</option>
+                        <option value="17">Sindhi</option>
+                        <option value="18">Dogri</option>
+                        <option value="19">Konkani</option>
+                        <option value="20">Manipuri</option>
+                        <option value="21">Bodo</option>
+                        <option value="22">Sanskrit</option>
+                        <option value="23">Other</option>
+                    </select></td></tr>
+                <tr><td style="width:180px;"><label>Language 3:</label></td>
+                    <td><select class="form-control" id="i-lang3" name="lang3" style="width:300px; height:35px; line-height: 10px; text-align:center;">
+                        <option value="0">English</option>
+                        <option value="1">Hindi</option>
+                        <option value="2">Bengali</option>
+                        <option value="3">Marathi</option>
+                        <option value="4">Telugu</option>
+                        <option value="5" selected>Tamil</option>
+                        <option value="6">Gujarati</option>
+                        <option value="7">Urdu</option>
+                        <option value="8">Kannada</option>
+                        <option value="9">Odia</option>
+                        <option value="10">Malayalam</option>
+                        <option value="11">Punjabi</option>
+                        <option value="12">Assamese</option>
+                        <option value="13">Maithili</option>
+                        <option value="14">Santali</option>
+                        <option value="15">Kashmiri</option>
+                        <option value="16">Nepali</option>
+                        <option value="17">Sindhi</option>
+                        <option value="18">Dogri</option>
+                        <option value="19">Konkani</option>
+                        <option value="20">Manipuri</option>
+                        <option value="21">Bodo</option>
+                        <option value="22">Sanskrit</option>
+                        <option value="23">Other</option>
+                    </select></td></tr>
+                <tr><td><label></label></td>
+                    <td><button type="submit" class="btn btn-primary"  style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button></td></tr>
+                </table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="emply-resume-list row mb-1" id="i-pphoto" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/uprecphoto')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <h4>Profile > Professional Photo</h4>
+                <hr  style="width:480px; align:left;">
+                @if (!($picname == null))
+                    <img src="{{url($fullpath)}}" style="border-radius:80%; width:480px; height:80%">
+                @endif
+                <label style="float:left; width:230px;">Professional Photo:</label>
+                <input class="form-control" type="file" id="i-profpic" name="profpic" style="width:480px;">
+                <table>
+                <tr><td style="width:230px;">
+                <label style="float:left; font-size:small;">Jpg or Jpeg formats only</label>
+                </td>
+                <td style="width:250px;">
+                <button type="submit" class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button>
+                </td></tr></table>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-
-</script>
-
-{{-- Mike To Disable links with css --}}
-<style type="text/css">
-    .not-active {
-    pointer-events: none;
-    cursor: default;
-    text-decoration: none;
-    color: black;
-    }
-
-/*
-    .elmback:hover,
-    .elmback:focus {
-        outline-style: none;
-        background-color: blue;
-        border-style: none;
-        -webkit-appearance: none;
-    }
-
-
-    #ta1{
-    border: none;
-    overflow: auto;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    resize: none;
-    background:none;
-    }
-
-form{
-    background: red;
-}
-
-*/
-
-
-</style>
 @endsection

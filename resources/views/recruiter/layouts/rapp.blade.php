@@ -34,25 +34,11 @@
                 <header>
                     <div class="top-head ml-xl-auto ml-lg-auto text-left">
                         <div class="row">
-                            @guest
-                                <div class="col-md-6">
-                                    <span>Welcome Guest!</span>
-                                </div>
-                                <div class="col-md-6 sign-btn">
-                                    <a href="{{ route('rlogin') }}">
-                                        <i class="fas fa-lock"></i> Login</a>
-                                    <a href="{{ route('rregister') }}">
-                                        <i class="far fa-user"></i> Register</a>
-                                </div>
-                            @else
+                            @auth("recruiter")
                                 <div class="col-md-6">
                                     <label style="color: #ffff; float:right;">
-                             
                                     @if(Auth::guard('recruiter')->check())
-                                        {{ Auth::user()->name }}
-                                    {{--@else
-                                        <script>window.location = "{{ route('/recruiter') }}" </script>
-                                    --}}
+                                        {{ Auth::guard('recruiter')->user()->name }}
                                     @endif
                                     !</label>
                                 </div>
@@ -67,7 +53,17 @@
                                             @csrf
                                     </form>
                                 </div>
-                            @endguest
+                            @else
+                                <div class="col-md-6">
+                                    <span>Welcome Guest!</span>
+                                </div>
+                                <div class="col-md-6 sign-btn">
+                                    <a href="{{ route('rlogin') }}">
+                                        <i class="fas fa-lock"></i> Login</a>
+                                    <a href="{{ route('rregister') }}">
+                                        <i class="far fa-user"></i> Register</a>
+                                </div>
+                            @endauth
                             </div>
                         </div>
                     </div>

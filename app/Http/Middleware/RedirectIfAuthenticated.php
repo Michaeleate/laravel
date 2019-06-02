@@ -33,15 +33,16 @@ class RedirectIfAuthenticated
     //Test this logic
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($guard == "recruiter" && Auth::guard($guard)->check()) {
-            $message = "In redirectifauthenticated recruiter guard";
-            echo "<script type='text/javascript'>alert('$message');</script>";
+        
+        if (Auth::guard('recruiter')->check()) {
+            //$message = "In redirectifauthenticated recruiter guard";
+            //echo "<script type='text/javascript'>alert('$message');</script>";
             return redirect('/recruiter/home');
         }
-        
+
         if (Auth::guard($guard)->check()) {
-            $message = "In redirectifauthenticated second guard";
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            //$message = "In redirectifauthenticated second guard";
+            //echo "<script type='text/javascript'>alert('$message');</script>";
             return redirect('/home');
         }
 

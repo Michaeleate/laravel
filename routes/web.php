@@ -146,3 +146,17 @@ Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@urecprofile')-
 
 //Update initial profile data
 Route::post('/recruiter/upinfopdet', 'recruiter\RecpdetCont@upinfopdet');
+//Update email and password
+Route::post('/recruiter/upinfopdet1', 'recruiter\RecpdetCont@upinfopdet1');
+//Update Personal data
+Route::post('/recruiter/upinfopdet2', 'recruiter\RecpdetCont@upinfopdet2');
+//Update Business data
+Route::post('/recruiter/upinfobdet', 'recruiter\RecpdetCont@upinfobdet');
+//Update Communication data
+Route::post('/recruiter/updatecom', 'recruiter\RecpdetCont@updatecom');
+//Update About you data
+Route::post('/recruiter/uprecabout', 'recruiter\RecpdetCont@uprecabout');
+//Update Social Links data
+Route::post('/recruiter/updatesoc', 'recruiter\RecpdetCont@updatesoc');
+//Update Professional Photo data
+Route::post('/recruiter/uprecphoto', 'recruiter\RecpdetCont@uprecphoto');

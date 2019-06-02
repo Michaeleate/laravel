@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         if ($request->is('recruiter') || $request->is('recruiter/*')) {
-            return redirect()->guest('/recruiter/login');
+            return redirect()->guest(route('recruiter'));
         }
         return redirect()->guest(route('login'));
     }
