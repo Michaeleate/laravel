@@ -160,3 +160,5 @@ Route::post('/recruiter/uprecabout', 'recruiter\RecpdetCont@uprecabout');
 Route::post('/recruiter/updatesoc', 'recruiter\RecpdetCont@updatesoc');
 //Update Professional Photo data
 Route::post('/recruiter/uprecphoto', 'recruiter\RecpdetCont@uprecphoto');
+//Update Specialized Area data
+Route::post('/recruiter/uprecsarea', 'recruiter\RecpdetCont@uprecsarea');

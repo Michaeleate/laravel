@@ -22,6 +22,7 @@ use App\modresuref;
 use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
+use App\recruiter\modrecsarea;
 
 class PostsController extends Controller
 {
@@ -702,4 +703,19 @@ class PostsController extends Controller
         }
     }
 
+    //Get Specialized areas for Recruiter Profile
+    public static function get_sarea() {
+        if (Auth::guard('recruiter')->check()) 
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+            $recprof = \App\recruiter\modrecsarea::select('sarea1', 'sarea2', 'sarea3', 'sainfo', 'sapos', 'saclients')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+ 
 }

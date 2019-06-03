@@ -11,7 +11,7 @@
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);
-
+ 
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
@@ -323,7 +323,13 @@
             instaurl = <?php echo json_encode($instaurl) ?>,
             lang1 = <?php echo json_encode($lang1) ?>,
             lang2 = <?php echo json_encode($lang2) ?>,
-            lang3 = <?php echo json_encode($lang3) ?>
+            lang3 = <?php echo json_encode($lang3) ?>,
+            sarea1 = <?php echo json_encode($sarea1) ?>,
+            sarea2 = <?php echo json_encode($sarea2) ?>,
+            sarea3 = <?php echo json_encode($sarea3) ?>,
+            sainfo = <?php echo json_encode($sainfo) ?>,
+            sapos = <?php echo json_encode($sapos) ?>,
+            saclients = <?php echo json_encode($saclients) ?>
             ;
     
         window.onload = function() {
@@ -358,6 +364,13 @@
             document.getElementById("i-fburl").value = fburl;
             document.getElementById("i-tweeturl").value = tweeturl;
             document.getElementById("i-instaurl").value = instaurl;
+            //document.getElementById("i-sarea").value = sarea;
+            document.getElementById("i-spec").options[sarea1].selected=true;
+            document.getElementById("i-spec").options[sarea2].selected=true;
+            document.getElementById("i-spec").options[sarea3].selected=true;
+            document.getElementById("i-sainfo").value = sainfo;
+            document.getElementById("i-sapos").value = sapos;
+            document.getElementById("i-saclients").value = saclients;
 
             $("#i-lang1").removeProp("selected");
             $("#i-lang2").removeProp("selected");
@@ -385,6 +398,7 @@
                     $('#i-about').hide();
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
                     break;
                 case "emailpass":
                     $('#i-initial').hide();
@@ -395,6 +409,7 @@
                     $('#i-about').hide();
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
                     break;
                 case "personal":
                     $('#i-initial').hide();
@@ -405,6 +420,7 @@
                     $('#i-about').hide();
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
                     break;
                 case "business":
                     $('#i-initial').hide();
@@ -415,6 +431,7 @@
                     $('#i-about').hide();
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
                     break;
                 case "comm":
                     $('#i-initial').hide();
@@ -425,6 +442,7 @@
                     $('#i-about').show();
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
                     break;
                 case "aboutu":
                     $('#i-initial').hide();
@@ -435,6 +453,7 @@
                     $('#i-about').hide();
                     $('#i-socio').show();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
                     break;
                 case "socio":
                     $('#i-initial').hide();
@@ -445,6 +464,17 @@
                     $('#i-about').hide();
                     $('#i-socio').hide();
                     $('#i-pphoto').show();
+                    $('#i-sarea').hide();
+                case "photo":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    $('#i-sarea').show();
                     break;
                 default:
                     $('#i-initial').show();
@@ -455,6 +485,7 @@
                     $('#i-about').hide();
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
             }
         }
 
@@ -507,6 +538,7 @@
                 $('#i-comm').hide();
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
+                $('#i-sarea').hide();
             });
 
             $('a[href="#i-personal"]').click(function(){
@@ -517,6 +549,7 @@
                 $('#i-comm').hide();
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
+                $('#i-sarea').hide();
             });
 
             $('a[href="#i-business"]').click(function(){
@@ -527,6 +560,7 @@
                 $('#i-comm').hide();
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
+                $('#i-sarea').hide();
             });
 
             $('a[href="#i-comm"]').click(function(){
@@ -537,6 +571,7 @@
                 $('#i-comm').show();
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
+                $('#i-sarea').hide();
             });
 
             $('a[href="#i-about"]').click(function(){
@@ -547,6 +582,7 @@
                 $('#i-comm').hide();
                 $('#i-about').show();
                 $('#i-pphoto').hide();
+                $('#i-sarea').hide();
             });
 
             $('a[href="#i-socio"]').click(function(){
@@ -558,6 +594,7 @@
                 $('#i-about').hide();
                 $('#i-socio').show();
                 $('#i-pphoto').hide();
+                $('#i-sarea').hide();
             });
 
             $('a[href="#i-pphoto"]').click(function(){
@@ -569,6 +606,32 @@
                 $('#i-about').hide();
                 $('#i-socio').hide();
                 $('#i-pphoto').show();
+                $('#i-sarea').hide();
+            });
+
+            $('a[href="#i-sarea"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-socio').hide();
+                $('#i-pphoto').hide();
+                $('#i-sarea').show();
+            });
+
+            //For Specialized Area Options.
+            var last_valid_selection = null;
+            $('#i-spec').change(function(event) {
+
+                if ($(this).val().length > 3) {
+
+                    $(this).val(last_valid_selection);
+                } 
+                else {
+                    last_valid_selection = $(this).val();
+                }
             });
 
             $("#i-profname").on('keyup',function(){

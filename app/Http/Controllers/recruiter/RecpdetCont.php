@@ -18,6 +18,7 @@ use \App\Http\Controllers\PostsController;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
 use App\recruiter\modrecsocio;
+use App\recruiter\modrecsarea;
 
 class RecpdetCont extends Controller
 {
@@ -182,7 +183,6 @@ class RecpdetCont extends Controller
                 $picpath=$val["picpath"];
                 $picname=$val["picname"];
             }
-//---------------------------------------------------------------
             //Process this file later
             $profpic_flag="no";
             if ($request->hasFile('profpic')){
@@ -190,7 +190,7 @@ class RecpdetCont extends Controller
                 echo "<script type='text/javascript'>alert('$message');</script>";
                 $profpic_flag="yes";
                 $file = $request->file('profpic');
-                //------------------------
+
                 $oldname = $file->getClientOriginalName();
                 $oldext  = $file->getClientOriginalExtension();
                 $oldpath = $file->getRealPath();
@@ -278,7 +278,6 @@ class RecpdetCont extends Controller
                 return redirect('/recruiter/crecprofile')
                         ->with(array('link'=>$url_info));
             }
-//---------------------------------------------------------------
         }
         else {
             return view('recruiter.home');    
@@ -480,6 +479,59 @@ class RecpdetCont extends Controller
                 'lang1'     => $lang1,
                 'lang2'     => $lang2,
                 'lang3'     => $lang3,
+               ]
+            );
+            
+            DB::commit();
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+        }
+    }
+
+    public function uprecsarea(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+
+            $sarea1=$sarea2=$sarea3=$sainfo=$sapos=$saclients='';
+            
+            $sarea=$request->input('sarea');
+            $sainfo=$request->input('sainfo');
+            $sapos=$request->input('sapos');
+            $saclients=$request->input('saclients');
+
+            $this->upsareadb($authid,$sarea,$sainfo,$sapos,$saclients);
+            
+            $url_info = 'sarea';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');    
+        }
+    }
+
+    private function upsareadb($authid,$sarea,$sainfo,$sapos,$saclients)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $head = \App\recruiter\modrecsarea::updateOrCreate(
+               [
+                'rec_id'  => $authid
+               ],
+               [ 
+                'sarea1'    => $sarea[0],
+                'sarea2'    => $sarea[1],
+                'sarea3'    => $$sarea[2],
+                'sainfo'    => $sainfo,
+                'sapos'     => $sapos,
+                'saclients' => $saclients,
                ]
             );
             

@@ -13,13 +13,14 @@
     $orgname=$weburl=$addline1=$addline2=$city=$state=$country='';
     $profname=$profurl=$shortprof=$servcity=$servstate=$servcountry=$remote='';
     $linkurl=$fburl=$tweeturl=$instaurl=$lang1=$lang2=$lang3='';
+    $sarea1=$sarea2=$sarea3=$sainfo=$sapos=$saclients='';
 
     //get recruiter personal details
     $recprof=PostsController::get_initial();
     foreach($recprof as $key=>$val){
         $fname=$val["fname"];
         $lname=$val["lname"];
-        $loc=$val["location"];
+        $loc=$val["location"]; 
         $email=$val["email"];
         $mobnum=$val["mobnum"];
         $skype=$val["skype"];
@@ -70,6 +71,18 @@
         $lang2=$val["lang2"];
         $lang3=$val["lang3"];
     }
+
+    //get recruiter Specialized Area details
+    $recprof=PostsController::get_sarea();
+    foreach($recprof as $key=>$val){
+        $sarea1=$val["sarea1"];
+        $sarea2=$val["sarea2"];
+        $sarea3=$val["sarea3"];
+        $sainfo=$val["sainfo"];
+        $sapos=$val["sapos"];
+        $saclients=$val["saclients"];
+    }
+
     //$message = "fname is" . $fname;
     //echo "<script type='text/javascript'>alert('$message');</script>";
 ?>
@@ -170,7 +183,7 @@
             <a href="#i-pphoto">Professional Photo</a>
         </li>
         <li>
-            <a href="#key1">Specialized Areas</a>
+            <a href="#i-sarea">Specialized Areas</a>
         </li>
         <li>
             <a href="#key1">Qualifications</a>
@@ -478,5 +491,52 @@
         </div>
     </div>
 </div>
+<div class="emply-resume-list row mb-1" id="i-sarea" style="display:inline-block; width:100%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ url('/recruiter/uprecsarea')}}" method="post">
+                @csrf
+                <h4>Profile > Specialized Areas</h4>
+                <hr  style="width:480px; align:left;">
+                <label style="float:left; width:480px;">Specialities:</label>
+                <select multiple class="form-control" id="i-spec" name="sarea[]" style="width:300px; height:75px; line-height: 10px; text-align:left;">
+                    <option value="1">Marketing</option>
+                    <option value="2">Data Entry Operator</option>
+                    <option value="3">Telecaller</option>
+                    <option value="4">Computer Operator</option>
+                    <option value="5">Front Office Executive</option>
+                    <option value="6">Sales</option>
+                    <option value="7">Admin</option>
+                    <option value="8">Driver</option>
+                    <option value="9">Accountant</option>
+                    <option value="10">Security</option>
+                    <option value="11">Delivery Boy</option>
+                    <option value="12">Housekeeping</option>
+                    <option value="13">Maid</option>
+                    <option value="14">Cook</option>
+                    <option value="15">Receptionist</option>
+                    <option value="16">Teacher</option>
+                    <option value="17">Office Boy</option>
+                    <option value="18">Civil Engineer</option>
+                    <option value="19">Mechanical Engineer</option>
+                    <option value="20">Software</option>
+                    <option value="21">Other</option>
+                </select>
+                <label for="i-spec" style="width:480px; font-size:small;">Mutiple select list (hold shift/ Ctrl to select upto three):</label>
+                <label style="float:left; width:480px;"><u>Describe your practice</u></label>
+                <label style="float:left; width:480px;">Your recruitment strategy or practice followed for this areas:</label>
+                <textarea class="form-control" placeholder="Max 700 characters" maxlength="700" name="sainfo" id="i-sainfo" rows="5" style="width:480px; resize: none;"></textarea>
+                <label style="float:left; width:480px;">List recruited positions relevant to this speciality areas:</label>
+                <textarea class="form-control" placeholder="Eg: Telecaller, Receptionist, Frontdesk" maxlength="200" name="sapos" id="i-sapos" rows="3" style="width:480px; resize: none;"></textarea>
+                <label style="float:left; width:480px;">List top clients you have recruited for:</label>
+                <textarea class="form-control" placeholder="Eg: IBM, Bigbasket, Metro etc." maxlength="200" name="saclients" id="i-saclients" rows="3" style="width:480px; resize: none;"></textarea>
+                <div style="width:480px;">
+                    <button type="submit" class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center;"> Save</button>
+                </div>
+                <div class="clearfix"> </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-@endsection
+@endsection 
