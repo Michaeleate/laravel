@@ -162,3 +162,16 @@ Route::post('/recruiter/updatesoc', 'recruiter\RecpdetCont@updatesoc');
 Route::post('/recruiter/uprecphoto', 'recruiter\RecpdetCont@uprecphoto');
 //Update Specialized Area data
 Route::post('/recruiter/uprecsarea', 'recruiter\RecpdetCont@uprecsarea');
+//Update Qualification 10th data
+Route::post('/recruiter/uprecxth', 'recruiter\RecpdetCont@uprecxth');
+//Update Qualification 12th data
+Route::post('/recruiter/uprecxiith', 'recruiter\RecpdetCont@uprecxiith');
+//Update Qualification grad data
+Route::post('/recruiter/uprecgrad', 'recruiter\RecpdetCont@uprecgrad');
+//Update Qualification pg data
+Route::post('/recruiter/uprecpg', 'recruiter\RecpdetCont@uprecpg');
+//Update Employment data
+Route::post('/recruiter/uprecemp', 'recruiter\RecpdetCont@uprecemp');
+//Update Reference data
+Route::post('/recruiter/uprecref1', 'recruiter\RecpdetCont@uprecref1');
+Route::post('/recruiter/uprecref2', 'recruiter\RecpdetCont@uprecref2');

@@ -19,6 +19,9 @@ use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
 use App\recruiter\modrecsocio;
 use App\recruiter\modrecsarea;
+use App\recruiter\modrecedu;
+use App\recruiter\modrecemp;
+use App\recruiter\modrecref;
 
 class RecpdetCont extends Controller
 {
@@ -543,4 +546,275 @@ class RecpdetCont extends Controller
         }
     }
 
+    public function uprecxth(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            $qual1=$board1=$pyear1=$colname1=$edulang1=$percentage1=$edutime1='';
+            $qual=$request->input('qual1');
+            $board=$request->input('board1');
+            $pyear=$request->input('passyear1');
+            $edulang=$request->input('medium1');
+            $percentage=$request->input('marks1');
+            $colname=$request->input('college1');
+            $course='';
+            $spec='';
+            $district='';
+            $cortype='';
+            
+            $this->upedudb($authid,$qual,$board,$course,$spec,$colname,$district,$cortype,$pyear,$edulang,$percentage);
+
+            $url_info = '10th';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    public function uprecxiith(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
+            $qual=$request->input('qual2');
+            $board=$request->input('board2');
+            $pyear=$request->input('passyear2');
+            $edulang=$request->input('medium2');
+            $percentage=$request->input('marks2');
+            $colname=$request->input('college2');
+            $course='';
+            $spec='';
+            $district='';
+            $cortype='';
+            
+            $this->upedudb($authid,$qual,$board,$course,$spec,$colname,$district,$cortype,$pyear,$edulang,$percentage);
+
+            $url_info = '12th';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    public function uprecgrad(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            
+            $qual=$request->input('qual3');
+            $board='';
+            $course=$request->input('course3');
+            $spec=$request->input($course);
+            $colname=$request->input('college3');
+            $district=$request->input('district3');
+            $cortype=$request->input('coursetype3');
+            $pyear=$request->input('passyear3');
+            $edulang=$request->input('medium3');
+            $percentage=$request->input('marks3');
+
+            $this->upedudb($authid,$qual,$board,$course,$spec,$colname,$district,$cortype,$pyear,$edulang,$percentage);
+
+            $url_info = 'grad';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    public function uprecpg(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            
+            $qual=$request->input('qual4');
+            $board='';
+            $course=$request->input('course4');
+            $spec=$request->input($course);
+            $colname=$request->input('college4');
+            $district=$request->input('district4');
+            $cortype=$request->input('coursetype4');
+            $pyear=$request->input('passyear4');
+            $edulang=$request->input('medium4');
+            $percentage=$request->input('marks4');
+
+            $this->upedudb($authid,$qual,$board,$course,$spec,$colname,$district,$cortype,$pyear,$edulang,$percentage);
+
+            $url_info = 'pg';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    private function upedudb($authid,$qual,$board,$course,$spec,$colname,$district,$cortype,$pyear,$edulang,$percentage)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $head = \App\recruiter\modrecedu::updateOrCreate(
+               [
+                'rec_id'    => $authid,
+                'qual'      => $qual
+               ],
+               [ 
+                'board'     => $board,
+                'course'    => $course,
+                'spec'      => $spec,
+                'colname'   => $colname,
+                'district'  => $district,
+                'cortype'   => $cortype,
+                'pyear'     => $pyear,
+                'edulang'   => $edulang,
+                'percentage' => $percentage
+               ]
+            );
+            
+            DB::commit();
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+        }
+    }
+
+    public function uprecemp(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            
+            $emp_name=$request->input('org5');
+            $desg=$request->input('role5');
+            $startdt=$request->input('role5start');
+            $enddt=$request->input('role5end');
+            $lak=$request->input('role5sall');
+            $tho=$request->input('role5salt');
+            $msal=$lak*100000+$tho*1000;
+            $resp=$request->input('resp');
+            $nperiod=$request->input('notice5');
+            
+            $this->upempdb($authid,$emp_name,$desg,$startdt,$enddt,$msal,$resp,$nperiod);
+
+            $url_info = 'emp';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    private function upempdb($authid,$emp_name,$desg,$startdt,$enddt,$msal,$resp,$nperiod)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $head = \App\recruiter\modrecemp::updateOrCreate(
+               [
+                'rec_id'    => $authid,
+                'emp_name'  => $emp_name
+               ],
+               [ 
+                'desg'      => $desg,
+                'startdt'   => $startdt,
+                'enddt'     => $enddt,
+                'msal'      => $msal,
+                'resp'      => $resp,
+                'nperiod'   => $nperiod
+               ]
+            );
+            
+            DB::commit();
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+        }
+    }
+
+    public function uprecref1(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            
+            $refnum="1";
+            $fname=$request->input('refname1');
+            $location=$request->input('refloc1');
+            $email=$request->input('refmail1');
+            $mobnum=$request->input('refmob1');
+            
+            $this->uprefdb($authid, $refnum, $fname, $location, $email, $mobnum);
+
+            $url_info = 'ref';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    public function uprecref2(Request $request){
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            
+            $refnum="2";
+            $fname=$request->input('refname2');
+            $location=$request->input('refloc2');
+            $email=$request->input('refmail2');
+            $mobnum=$request->input('refmob2');
+            
+            $this->uprefdb($authid, $refnum, $fname, $location, $email, $mobnum);
+
+            $url_info = 'ref';
+            return redirect('/recruiter/crecprofile')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    private function uprefdb($authid, $refnum, $fname, $location, $email, $mobnum)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $head = \App\recruiter\modrecref::updateOrCreate(
+               [
+                'rec_id'    => $authid,
+                'refnum'    => $refnum
+               ],
+               [ 
+                'fname'     => $fname,
+                'location'  => $location,
+                'email'     => $email,
+                'mobnum'    => $mobnum
+               ]
+            );
+            
+            DB::commit();
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+        }
+    }
 }

@@ -23,6 +23,9 @@ use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
 use App\recruiter\modrecsarea;
+use App\recruiter\modrecedu;
+use App\recruiter\modrecemp;
+use App\recruiter\modrecref;
 
 class PostsController extends Controller
 {
@@ -717,5 +720,80 @@ class PostsController extends Controller
             return view('recruiter.home');
         }
     }
- 
+
+    //Get Qualifications for Recruiter Profile
+    public static function get_recedu() {
+        if (Auth::guard('recruiter')->check())
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+
+            $recprof = \App\recruiter\modrecedu::select('qual','board','course','spec','colname', 'district','cortype','pyear','edulang','percentage','updated_at')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+            
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+
+    //Get Employment for Recruiter Profile
+    public static function get_recemp() {
+        if (Auth::guard('recruiter')->check())
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+
+            $recprof = \App\recruiter\modrecemp::select('emp_name','desg','startdt','enddt','msal', 'resp','nperiod','updated_at')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+
+            if (\Request::is('vrecprofile')) {
+                foreach($recprof as $key=>$val){
+                    switch($val["nperiod"]){
+                        case "now":
+                            $val["nperiod"]="Immediate";
+                            break;                        
+                        case "15d":
+                            $val["nperiod"]="15 days";
+                            break;                        
+                        case "1mon":
+                            $val["nperiod"]="1 Month";
+                            break;                        
+                        case "2mon":
+                            $val["nperiod"]="2 Months";
+                            break;
+                        case "3mon":
+                            $val["nperiod"]="3 Months";
+                            break;
+                        case "short":
+                            $val["nperiod"]="Serving Notice Period";
+                            break;
+                    }
+                }
+            }
+
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
+    
+    //Get Reference for Recruiter Profile
+    public static function get_recref() {
+        if (Auth::guard('recruiter')->check())
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+
+            $recprof = \App\recruiter\modrecref::select('refnum','fname','location','email','mobnum','updated_at')
+                    ->where('rec_id', '=', $authid)
+                    ->get();
+
+            return $recprof;
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
 }

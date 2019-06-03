@@ -329,12 +329,67 @@
             sarea3 = <?php echo json_encode($sarea3) ?>,
             sainfo = <?php echo json_encode($sainfo) ?>,
             sapos = <?php echo json_encode($sapos) ?>,
-            saclients = <?php echo json_encode($saclients) ?>
+            saclients = <?php echo json_encode($saclients) ?>,
+            qual1 = <?php echo json_encode($qual1) ?>,
+            board1 = <?php echo json_encode($board1) ?>,
+            colname1 = <?php echo json_encode($colname1) ?>,
+            pyear1 = <?php echo json_encode($pyear1) ?>,
+            edulang1 = <?php echo json_encode($edulang1) ?>,
+            percentage1 = <?php echo json_encode($percentage1) ?>,
+            edutime1 = <?php echo json_encode($edutime1) ?>,
+            qual2 = <?php echo json_encode($qual2) ?>,
+            board2 = <?php echo json_encode($board2) ?>,
+            colname2 = <?php echo json_encode($colname2) ?>,
+            pyear2 = <?php echo json_encode($pyear2) ?>,
+            edulang2 = <?php echo json_encode($edulang2) ?>,
+            percentage2 = <?php echo json_encode($percentage2) ?>,
+            edutime2 = <?php echo json_encode($edutime2) ?>,
+            qual3 = <?php echo json_encode($qual3) ?>,
+            course3 = <?php echo json_encode($course3) ?>,
+            spec3 = <?php echo json_encode($spec3) ?>,
+            colname3 = <?php echo json_encode($colname3) ?>,
+            district3 = <?php echo json_encode($district3) ?>,
+            cortype3 = <?php echo json_encode($cortype3) ?>,
+            pyear3 = <?php echo json_encode($pyear3) ?>,
+            edulang3 = <?php echo json_encode($edulang3) ?>,
+            percentage3 = <?php echo json_encode($percentage3) ?>,
+            edutime3 = <?php echo json_encode($edutime3) ?>,
+            qual4 = <?php echo json_encode($qual4) ?>,
+            course4 = <?php echo json_encode($course4) ?>,
+            spec4 = <?php echo json_encode($spec4) ?>,
+            colname4 = <?php echo json_encode($colname4) ?>,
+            district4 = <?php echo json_encode($district4) ?>,
+            cortype4 = <?php echo json_encode($cortype4) ?>,
+            pyear4 = <?php echo json_encode($pyear4) ?>,
+            edulang4 = <?php echo json_encode($edulang4) ?>,
+            percentage4 = <?php echo json_encode($percentage4) ?>,
+            edutime4 = <?php echo json_encode($edutime4) ?>,
+            empname = <?php echo json_encode($empname) ?>,
+            desg = <?php echo json_encode($desg) ?>,
+            startdt = <?php echo json_encode($startdt) ?>,
+            enddt = <?php echo json_encode($enddt) ?>,
+            msalt = <?php echo json_encode($msalt) ?>,
+            msall = <?php echo json_encode($msall) ?>,
+            resp = <?php echo json_encode($resp) ?>,
+            nperiod = <?php echo json_encode($nperiod) ?>,
+            emptime = <?php echo json_encode($emptime) ?>,
+            refnum1 = <?php echo json_encode($refnum1) ?>,
+            fname1 = <?php echo json_encode($fname1) ?>,
+            location1 = <?php echo json_encode($location1) ?>,
+            email1 = <?php echo json_encode($email1) ?>,
+            mobnum1 = <?php echo json_encode($mobnum1) ?>,
+            reftime1 = <?php echo json_encode($reftime1) ?>,
+            refnum2 = <?php echo json_encode($refnum2) ?>,
+            fname2 = <?php echo json_encode($fname2) ?>,
+            location2 = <?php echo json_encode($location2) ?>,
+            email2 = <?php echo json_encode($email2) ?>,
+            mobnum2 = <?php echo json_encode($mobnum2) ?>,
+            reftime2 = <?php echo json_encode($reftime2) ?>
             ;
     
         window.onload = function() {
-            $message = "Inside Onload Function";
-            alert($message);
+            //$message = "Inside Onload Function";
+            //alert($message);
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
             document.getElementById("i-fname").value = fname;
@@ -401,6 +456,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                     break;
                 case "emailpass":
                     $('#i-initial').hide();
@@ -412,6 +470,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                     break;
                 case "personal":
                     $('#i-initial').hide();
@@ -423,6 +484,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                     break;
                 case "business":
                     $('#i-initial').hide();
@@ -434,6 +498,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                     break;
                 case "comm":
                     $('#i-initial').hide();
@@ -445,6 +512,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                     break;
                 case "aboutu":
                     $('#i-initial').hide();
@@ -456,6 +526,9 @@
                     $('#i-socio').show();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                     break;
                 case "socio":
                     $('#i-initial').hide();
@@ -467,6 +540,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').show();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
                 case "photo":
                     $('#i-initial').hide();
                     $('#i-emailpass').hide();
@@ -477,6 +553,51 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').show();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
+                    break;
+                case "sarea":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
+                    $('#i-edu').show();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
+                    break;
+                case "pg":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').show();
+                    $('#i-ref').hide();
+                    break;
+                case "emp":
+                    $('#i-initial').hide();
+                    $('#i-emailpass').hide();
+                    $('#i-personal').hide();
+                    $('#i-business').hide();
+                    $('#i-comm').hide();
+                    $('#i-about').hide();
+                    $('#i-socio').hide();
+                    $('#i-pphoto').hide();
+                    $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').show();
                     break;
                 default:
                     $('#i-initial').show();
@@ -488,6 +609,9 @@
                     $('#i-socio').hide();
                     $('#i-pphoto').hide();
                     $('#i-sarea').hide();
+                    $('#i-edu').hide();
+                    $('#i-emp').hide();
+                    $('#i-ref').hide();
             }
         }
 
@@ -520,13 +644,13 @@
     <script>
         $(document).ready(function() {
             /*
-            						var defaults = {
-            							  containerID: 'toTop', // fading element id
-            							containerHoverID: 'toTopHover', // fading element hover id
-            							scrollSpeed: 1200,
-            							easingType: 'linear' 
-            						 };
-            						*/
+            var defaults = {
+                    containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear' 
+                };
+            */
 
             $().UItoTop({
                 easingType: 'easeOutQuart'
@@ -541,6 +665,9 @@
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-personal"]').click(function(){
@@ -552,6 +679,9 @@
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-business"]').click(function(){
@@ -563,6 +693,9 @@
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-comm"]').click(function(){
@@ -574,6 +707,9 @@
                 $('#i-about').hide();
                 $('#i-pphoto').hide();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-about"]').click(function(){
@@ -585,6 +721,9 @@
                 $('#i-about').show();
                 $('#i-pphoto').hide();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-socio"]').click(function(){
@@ -597,6 +736,9 @@
                 $('#i-socio').show();
                 $('#i-pphoto').hide();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-pphoto"]').click(function(){
@@ -609,6 +751,9 @@
                 $('#i-socio').hide();
                 $('#i-pphoto').show();
                 $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
             });
 
             $('a[href="#i-sarea"]').click(function(){
@@ -621,6 +766,54 @@
                 $('#i-socio').hide();
                 $('#i-pphoto').hide();
                 $('#i-sarea').show();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
+            });
+
+            $('a[href="#i-edu"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-socio').hide();
+                $('#i-pphoto').hide();
+                $('#i-sarea').hide();
+                $('#i-edu').show();
+                $('#i-emp').hide();
+                $('#i-ref').hide();
+            });
+
+            $('a[href="#i-emp"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-socio').hide();
+                $('#i-pphoto').hide();
+                $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').show();
+                $('#i-ref').hide();
+            });
+
+            $('a[href="#i-ref"]').click(function(){
+                $('#i-initial').hide();
+                $('#i-emailpass').hide();
+                $('#i-personal').hide();
+                $('#i-business').hide();
+                $('#i-comm').hide();
+                $('#i-about').hide();
+                $('#i-socio').hide();
+                $('#i-pphoto').hide();
+                $('#i-sarea').hide();
+                $('#i-edu').hide();
+                $('#i-emp').hide();
+                $('#i-ref').show();
             });
 
             //For Specialized Area Options.
@@ -641,6 +834,69 @@
                 profurl=profurl.replace(" ","-");
                 profurl="http://samsjobs.in/recruiter/".concat(profurl);
                 $("#i-profurl").val(profurl);
+            });
+
+            $("#add10modal").on('shown.bs.modal', function(){
+                $('#board1').val([board1]).change();
+                $('#passyear1').val([pyear1]).change();
+                $('#medium1').val([edulang1]).change();
+                $('#marks1').val([percentage1]).change();
+                $('#college1').val([colname1]).change();
+            });
+
+            $("#add12modal").on('shown.bs.modal', function(){
+                $('#board2').val([board2]).change();
+                $('#passyear2').val([pyear2]).change();
+                $('#medium2').val([edulang2]).change();
+                $('#marks2').val([percentage2]).change();
+                $('#college2').val([colname2]).change();
+            });
+
+            $("#addgradmodal").on('shown.bs.modal', function(){
+                $('#course3').val([course3]).change();
+                $('#college3').val([colname3]).change();
+                $('#district3').val([district3]).change();
+                $("#" + cortype3).val([cortype3]).change();
+                $('#passyear3').val([pyear3]).change();
+                $('#medium3').val([edulang3]).change();
+                $('#marks3').val([percentage3]).change(showspecs(this));
+                $("#" + gradid).val([spec3]).change();                
+            });
+
+            $("#addpgmodal").on('shown.bs.modal', function(){
+                $('#course4').val([course4]).change();
+                $('#college4').val([colname4]).change();
+                $('#district4').val([district4]).change();
+                $("#" + cortype4 + "1").val([cortype4]).change();
+                $('#passyear4').val([pyear4]).change();
+                $('#medium4').val([edulang4]).change();
+                $('#marks4').val([percentage4]).change(showspecs5(this));
+                $("#" + pgid).val([spec4]).change();                
+            });
+
+            $("#addempmodal").on('shown.bs.modal', function(){
+                $('#org5').val([empname]).change();
+                $('#role5').val([desg]).change();
+                $('#role5start').val([startdt]).change();
+                $('#role5end').val([enddt]).change();
+                $('#ta6').val([resp]).change();
+                $('#notice5').val([nperiod]).change();
+                $('#role5sall').val([msall]).change();
+                $('#role5salt').val([msalt]).change();                
+            });
+
+            $("#addref1modal").on('shown.bs.modal', function(){
+                $('#refname1').val([fname1]).change();
+                $('#refloc1').val([location1]).change();
+                $('#refmail1').val([email1]).change();
+                $('#refmob1').val([mobnum1]).change();
+            });
+
+            $("#addref2modal").on('shown.bs.modal', function(){
+                $('#refname2').val([fname2]).change();
+                $('#refloc2').val([location2]).change();
+                $('#refmail2').val([email2]).change();
+                $('#refmob2').val([mobnum2]).change();
             });
         });
     </script>

@@ -648,7 +648,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add 10th Details</h5>
+                    <h5 class="text-left mb-4">Add 10th Details</h5>
                     <form role="form" action="{{url('/updatexth')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -826,8 +826,8 @@
                             </select>
                         </div>
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -846,7 +846,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add 12th Details</h5>
+                    <h5 class="text-left mb-4">Add 12th Details</h5>
                     <form role="form" action="{{url('/updatexiith')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -1025,8 +1025,8 @@
                             </select>
                         </div>
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -1045,7 +1045,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add Graduation/ Diploma Details</h5>
+                    <h5 class="text-left mb-4">Add Graduation/ Diploma Details</h5>
                     <form role="form" action="{{url('/updategrad')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -1525,8 +1525,8 @@
                             </select>
                         </div>
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -1545,7 +1545,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add Masters/ Post Graduation Details</h5>
+                    <h5 class="text-left mb-4">Add Masters/ Post Graduation Details</h5>
                     <form role="form" action="{{url('/updatepg')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -2162,8 +2162,8 @@
                             </select>
                         </div>
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -2182,7 +2182,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add Current/ Last Employment Details</h5>
+                    <h5 class="text-left mb-4">Add Current/ Last Employment Details</h5>
                     <form role="form" action="{{url('/updateemp')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -2231,8 +2231,8 @@
                         </div>
 
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -2251,7 +2251,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add Present Address</h5>
+                    <h5 class="text-left mb-4">Add Present Address</h5>
                     <form role="form" action="{{url('/updatecadd')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -2284,8 +2284,8 @@
                         </div>
 
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -2304,7 +2304,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add Permanent Address</h5>
+                    <h5 class="text-left mb-4">Add Permanent Address</h5>
                     <form role="form" action="{{url('/updatepadd')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -2337,8 +2337,8 @@
                         </div>
 
                         <div class="form-group" style="float:right;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -2357,7 +2357,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add First Reference</h5>
+                    <h5 class="text-left mb-4">Add First Reference</h5>
                     <form role="form" action="{{url('/updateref1')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -2379,9 +2379,9 @@
                             <label style="float:right; font-size:small; width:100%">valid mobile number of 10 digits required...</label>
                         </div>
 
-                        <div class="form-group" style="float:right; display:inline;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                        <div class="form-group" style="float:right;">
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -2400,7 +2400,7 @@
             </div>
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
-                    <h5 class="text-center mb-4">Add Second Reference</h5>
+                    <h5 class="text-left mb-4">Add Second Reference</h5>
                     <form role="form" action="{{url('/updateref2')}}" method="post">
                         @csrf
                         <div class="form-group">
@@ -2422,9 +2422,9 @@
                             <label style="float:right; font-size:small; width:100%">valid mobile number of 10 digits required...</label>
                         </div>
 
-                        <div class="form-group" style="float:right; display:inline;">
-                            <button type="reset" class="btn btn-default reset mb-4">RESET</button>
-                            <button type="submit" class="btn btn-primary submit mb-4">SAVE</button>
+                        <div class="form-group" style="float:right;">
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
                 </div>
