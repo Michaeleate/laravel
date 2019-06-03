@@ -333,8 +333,8 @@
             ;
     
         window.onload = function() {
-            //$message = "Inside Onload Function";
-            //alert($message);
+            $message = "Inside Onload Function";
+            alert($message);
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
             document.getElementById("i-fname").value = fname;
@@ -364,13 +364,15 @@
             document.getElementById("i-fburl").value = fburl;
             document.getElementById("i-tweeturl").value = tweeturl;
             document.getElementById("i-instaurl").value = instaurl;
-            //document.getElementById("i-sarea").value = sarea;
-            document.getElementById("i-spec").options[sarea1].selected=true;
-            document.getElementById("i-spec").options[sarea2].selected=true;
-            document.getElementById("i-spec").options[sarea3].selected=true;
+            document.getElementById("i-spec").options[sarea1-1].selected=true;
+            document.getElementById("i-spec").options[sarea2-1].selected=true;
+            document.getElementById("i-spec").options[sarea3-1].selected=true;
             document.getElementById("i-sainfo").value = sainfo;
             document.getElementById("i-sapos").value = sapos;
             document.getElementById("i-saclients").value = saclients;
+
+            //$message = "After sarea";
+            //alert($message);
 
             $("#i-lang1").removeProp("selected");
             $("#i-lang2").removeProp("selected");

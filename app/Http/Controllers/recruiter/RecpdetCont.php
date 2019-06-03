@@ -528,7 +528,7 @@ class RecpdetCont extends Controller
                [ 
                 'sarea1'    => $sarea[0],
                 'sarea2'    => $sarea[1],
-                'sarea3'    => $$sarea[2],
+                'sarea3'    => $sarea[2],
                 'sainfo'    => $sainfo,
                 'sapos'     => $sapos,
                 'saclients' => $saclients,
