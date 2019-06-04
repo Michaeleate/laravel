@@ -411,7 +411,6 @@
             document.getElementById("i-mobnum2").value = mobnum;
             document.getElementById("i-profname").value = profname;
             document.getElementById("i-profurl").value = profurl;
-            document.getElementById("i-shortprof").value = shortprof;
             document.getElementById("i-servcity").value = servcity;
             document.getElementById("i-servstate").value = servstate;
             document.getElementById("i-servcountry").value = "India";
@@ -655,6 +654,11 @@
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
+
+            $('#v-shortprof').val([shortprof]).change();
+            $('#v-sainfo').val([sainfo]).change();
+            $('#v-sapos').val([sapos]).change();
+            $('#v-saclients').val([saclients]).change();
 
             $('a[href="#i-emailpass"]').click(function(){
                 $('#i-initial').hide();
