@@ -352,6 +352,18 @@
             });
 
             //$('#v-shortprof').val([shortprof]).change();
+            //For Specialized Area Options.
+            var last_valid_selection = null;
+            $('#i-hireloc').change(function(event) {
+
+                if ($(this).val().length > 3) {
+
+                    $(this).val(last_valid_selection);
+                } 
+                else {
+                    last_valid_selection = $(this).val();
+                }
+            });
             
     </script>
     <!--// end-smoth-scrolling -->

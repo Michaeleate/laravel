@@ -19,6 +19,7 @@ use App\modresuedu;
 use App\modresuemp;
 use App\modresuadd;
 use App\modresuref;
+use App\modjobpost;
 use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
@@ -991,6 +992,27 @@ class PostsController extends Controller
         }
         else {
             return view('recruiter.home');
+        }
+    }
+    
+    //Get Maximum Job ID for Jobs.
+    public static function get_maxjobid() {
+        if (Auth::guard('recruiter')->check())
+        {
+            $authid = Auth::guard('recruiter')->user()->id;
+
+            $maxjobid = \App\modjobpost::max('job_id');
+                    //->first();
+
+            if(!$maxjobid==null){
+                return $maxjobid;
+            }
+            else{
+                return 0;
+            }
+        }
+        else {
+            return view('recruiter');
         }
     }
 }

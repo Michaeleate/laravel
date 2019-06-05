@@ -176,5 +176,7 @@ Route::post('/recruiter/uprecemp', 'recruiter\RecpdetCont@uprecemp');
 Route::post('/recruiter/uprecref1', 'recruiter\RecpdetCont@uprecref1');
 Route::post('/recruiter/uprecref2', 'recruiter\RecpdetCont@uprecref2');
 /*------------------------------------------------------------*/
+//Job Posting by Recruiter - View
+Route::get('/postjob', 'JobsController@postjob')->name('postjob');
 //Job Posting by Recruiter
-Route::get('/postjob', 'JobsController@postjob')->name('postjob');;
+Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
