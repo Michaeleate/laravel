@@ -232,7 +232,6 @@
             <a class="dropdown-item" href="services.html" title="Post Requirements">Post Jobs</a>
             <a class="dropdown-item" href="services.html" title="View all posted Jobs">View Jobs</a>
             <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
-            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
         </div>
     </li>
  

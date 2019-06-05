@@ -142,7 +142,7 @@ Route::get('/recruiter/crecprofile', 'recruiter\RecprofController@crecprofile')-
 //View Recruiter Profile
 Route::get('/recruiter/vrecprofile', 'recruiter\RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
-Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@urecprofile')->name('urecprofile'); 
+Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@crecprofile')->name('urecprofile'); 
 
 //Update initial profile data
 Route::post('/recruiter/upinfopdet', 'recruiter\RecpdetCont@upinfopdet');
@@ -175,3 +175,6 @@ Route::post('/recruiter/uprecemp', 'recruiter\RecpdetCont@uprecemp');
 //Update Reference data
 Route::post('/recruiter/uprecref1', 'recruiter\RecpdetCont@uprecref1');
 Route::post('/recruiter/uprecref2', 'recruiter\RecpdetCont@uprecref2');
+/*------------------------------------------------------------*/
+//Job Posting by Recruiter
+Route::get('/postjob', 'JobsController@postjob')->name('postjob');;

@@ -1381,6 +1381,18 @@ tr.tl1 td {
     width: 40%;
   }
 
+  .hrred {
+    height: 2px;
+    background-color: red;
+    border: none;
+    }
+
+  .hrblue {
+    height: 2px;
+    background-color: blue;
+    border: none;
+    }
+
 /*Mike Ends*/
 
 .emply-resume-info h5 {

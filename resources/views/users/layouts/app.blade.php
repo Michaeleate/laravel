@@ -1352,6 +1352,7 @@
                     <div>
                         <script type="IN/FollowCompany" data-id="10427775" data-counter="right" data-width="100%"></script>
                     </div>
+                    <div class="g-ytsubscribe" data-channelid="UCspMS2SkiPQDM10gWcAGCtQ" data-layout="default" data-count="default"></div>
                     <div>
                         <a href="https://twitter.com/callforsams?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-show-count="true">Follow @callforsams</a>
                     </div>
@@ -1569,6 +1570,8 @@
     <!-- Twitter script -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <!-- Linkedin script -->
-    <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>    
+    <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+    <!-- Youtube script -->
+    <script src="https://apis.google.com/js/platform.js" type="text/javascript"></script>    
 </body>
 </html>
