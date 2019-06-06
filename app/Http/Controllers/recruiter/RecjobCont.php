@@ -18,6 +18,17 @@ use App\modjobpost;
 
 class RecjobCont extends Controller
 {
+    /**
+    * Create a new controller instance.
+     *
+     * @return void
+     */
+    //Authorize right users
+    public function __construct()
+    {
+        $this->middleware('recruiter')->except('logout');
+    }
+
     public function recpostjob(Request $request){
         //$message = "In upinfopdet of RecpdetCont";
         //echo "<script type='text/javascript'>alert('$message');</script>";
@@ -47,7 +58,7 @@ class RecjobCont extends Controller
             
             $jtitle=$request->input('jtitle');
             $jd=$request->input('jobdesc');
-            $qty=0;
+            $qty=1;
             $keywords=$request->input('jkey');
             $minexp=$request->input('minexp');
             $maxexp=$request->input('maxexp');
@@ -73,8 +84,8 @@ class RecjobCont extends Controller
             
             $this->updatedb($authid, $job_id, $jtitle, $jd,  $qty, $keywords, $minexp, $maxexp, $minsal, $maxsal, $hireloc, $hireloc1, $hireloc2, $hireloc3, $comhirefor, $jstatus, $valid_till, $auto_aprove, $auto_upd);
 
-            $url_info = 'posted';
-            return redirect('/postjob')
+            $url_info = 'success';
+            return redirect('/recruiter/vlastjob')
                     ->with(array('link'=>$url_info));
         }
         else {
@@ -123,4 +134,65 @@ class RecjobCont extends Controller
         }
     }
 
+    //View last posted job
+    public function vlastjob(Request $request){
+        $auth = Auth::guard('recruiter');
+        if ($auth->check()){
+            //$message = "Inside crecprofile of RecprofController";
+            //echo "<script type='text/javascript'>alert('$message');</script>";
+            return view('recruiter.RDsjob-rprof');
+        }
+        else {
+            return redirect('/recruiter');
+        }
+    }
+
+    /*
+    public function postjobsuccess(Request $request){
+        //$message = "In upinfopdet of RecpdetCont";
+        //echo "<script type='text/javascript'>alert('$message');</script>";
+        session()->forget(array('link'));
+        if (Auth::guard('recruiter')->check()){
+            $authid = Auth::guard('recruiter')->user()->id;
+            //$message = "ID is" . $authid;
+            //echo "<script type='text/javascript'>alert('$message');</script>";
+
+            $lastjobdet=PostsController::get_lastjobdet();
+            
+            foreach($lastjobdet as $key=>$val){
+                $job_id=$val["job_id"];
+                $jtitle=$val["jtitle"];
+                $jd=$val["jd"];
+                $qty=$val["qty"];
+                $keywords=$val["keywords"];
+                $minexp=$val["minexp"];
+                $maxexp=$val["maxexp"];
+                $minsal=$val["minsal"];
+                $maxsal=$val["maxsal"];
+                $hireloc1=$val["hireloc1"];
+                $hireloc2=$val["hireloc2"];
+                $hireloc3=$val["hireloc3"];
+                $comhirefor=$val["comhirefor"];
+                $jstatus=$val["jstatus"];
+                $valid_till=$val["valid_till"];
+                $auto_aprove=$val["auto_aprove"];
+                $auto_upd=$val["auto_upd"];
+                $created_at=$val["created_at"];
+                $updated_at=$val["updated_at"];
+            }
+            
+            
+            if(isset($hireloc[2])){
+                $hireloc3=$hireloc[2];
+            }
+
+            $url_info = 'success';
+            return redirect('/recruiter/postjobsuccess')
+                    ->with(array('link'=>$url_info));
+        }
+        else {
+            return view('recruiter');    
+        }
+    }
+    */
 }

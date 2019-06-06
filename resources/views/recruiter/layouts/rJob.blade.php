@@ -25,7 +25,7 @@
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color:rgba(99, 57, 116, 0.1);">
     <!-- banner-inner -->
     <div id="demo-2" class="page-content">
         <div class="dotts">
@@ -86,25 +86,22 @@
         <li class="breadcrumb-item">
             <a href="{{ url('/recruiter/home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">Post Job</li>
+        <li class="breadcrumb-item active">Last Job</li>
     </ol>
     <!-- banner-text -->
     <!--/process-->
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'crecprofile')
+                @if (\Route::current()->getName() == 'vlastjob')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Build your profile</span></h3>
-                @elseif (\Route::current()->getName() == 'vrecprofile')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Your complete profile</span></h3>
+                    <span>Job Successfully Posted</span></h3>
                 @endif
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right">
                         @yield('CreateProfileMenu')
                     </div>
-                    <div class="col-lg-8 job_info_left">
+                    <div class="col-lg-8 job_info_left" style="background-color:white; border: none !important;">
                         @yield('CreateResumeForm')
                     </div>
                     <div class="col-lg-2 job_info_last">
@@ -296,14 +293,27 @@
     <!-- php javascript variables -->
     <script language="Javascript" type="text/javascript">
         
-        //var fname = <?php echo json_encode($fname) ?>,
-        //    ;
+        var job_id = <?php echo json_encode($job_id) ?>,
+            jtitle = <?php echo json_encode($jtitle) ?>,
+            jd = <?php echo json_encode($jd) ?>,
+            qty = <?php echo json_encode($qty) ?>,
+            keywords = <?php echo json_encode($keywords) ?>,
+            minexp = <?php echo json_encode($minexp) ?>,
+            maxexp = <?php echo json_encode($maxexp) ?>,
+            minsal = <?php echo json_encode($minsal) ?>,
+            maxsal = <?php echo json_encode($maxsal) ?>,
+            hireloc1 = <?php echo json_encode($hireloc1) ?>,
+            hireloc2 = <?php echo json_encode($hireloc2) ?>,
+            hireloc3 = <?php echo json_encode($hireloc3) ?>
+        ;
     
         window.onload = function() {
             //$message = "Inside Onload Function";
             //alert($message);
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
+
+            $('#i-jobdesc').val([jd]).change();
 
             //$message = "After sarea";
             //alert($message);
@@ -351,7 +361,8 @@
                 easingType: 'easeOutQuart'
             });
 
-            //$('#v-shortprof').val([shortprof]).change();
+            //$('#i-jobdesc').val([jd]).change();
+            
             //For Specialized Area Options.
             var last_valid_selection = null;
             $('#i-hireloc').change(function(event) {

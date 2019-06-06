@@ -268,7 +268,6 @@
 @section('CreateProfileMenu')
 
 @endsection
-
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px; background-color:rgba(99, 57, 116, 0.1);">

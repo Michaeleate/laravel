@@ -12,20 +12,7 @@
     //$message = "Session link is " . $seslink;
     //echo "<script type='text/javascript'>alert('$message');</script>";
 
-    $fname=$lname=$loc=$email=$mobnum=$skype=$picpath=$picname='';
-    
-    //get recruiter personal details
-    $recprof=PostsController::get_initial();
-    foreach($recprof as $key=>$val){
-        $fname=$val["fname"];
-        $lname=$val["lname"];
-        $loc=$val["location"]; 
-        $email=$val["email"];
-        $mobnum=$val["mobnum"];
-        $skype=$val["skype"];
-        $picpath=$val["picpath"];
-        $picname=$val["picname"];
-    }
+    $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
 
     //$message = "fname is" . $fname;
     //echo "<script type='text/javascript'>alert('$message');</script>";
@@ -236,7 +223,6 @@
                         <option value="14">Kakinada</option>
                         <option value="15">Kavali</option>
                         <option value="16">Kurnool</option>
-                        <option value="17">Kurnool</option>
                         <option value="18">Machilipatnam</option>
                         <option value="19">Madanapalle</option>
                         <option value="20">Narasaraopet</option>
