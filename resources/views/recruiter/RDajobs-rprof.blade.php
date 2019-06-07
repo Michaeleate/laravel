@@ -4,18 +4,20 @@
     use Illuminate\Routing\UrlGenerator;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Carbon;
-
+    //use Illuminate\Pagination\LengthAwarePaginator;
     //$previousurl = url()->previous();
-    $seslink = Session::get('link');
+    //$seslink = Session::get('link');
     //if (\Request::is('recruiter/urecprofile') && ($seslink==null)) {
     //    $seslink='init';
     //}
 
-    $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
     
-    $lastjobdet=PostsController::get_lastjobdet();
+    $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+    $i=0;
+    /*    
+    $recalljobs=PostsController::get_recalljobs();
 
-    foreach($lastjobdet as $key=>$val){
+    foreach($recalljobs as $key=>$val){
         $job_id=$val["job_id"];
         $jtitle=$val["jtitle"];
         $jd=$val["jd"];
@@ -79,6 +81,9 @@
             $jstatus_text="Archieved";
             break;
     }
+    */
+    //$message = "Hireloc1 is" . {{$job->hireloc2}};
+    //echo "<script type='text/javascript'>alert('$message');</script>";
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -150,21 +155,32 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:200px;">
+{{ $recalljobs->links() }}
+@foreach($recalljobs as $job)
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
-            <label style="width:100%; color:blue;">{{$jtitle}}</label>
-            <label style="width:100%;">{{$comhirefor}}</label>
+            <label style="width:100%; color:blue;">{{ $job->jtitle}}</label>
+            <label style="width:100%;">{{$job->comhirefor}}</label>
             <div style="display:inline-block;">
                 <i class="fas fa-briefcase" style="display:inline;"></i>
-                <label style="width:20px; display:inline;">{{$minexp}}</label>
+                <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
                 <span style="width:10px; display:inline;"> - </span>
-                <label style="width:20px; display:inline;">{{$maxexp}} yrs</label>
+                <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
             </div>
             <div style="display:inline-block;">
                 <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
                 <i class="fas fa-map-marker-alt" style="display:inline;"></i>
-                <label style="width:160px; display:inline;">{{$hireloc1}}</label>
+                <label style="width:160px; display:inline;">
+                {{$job->hireloc1}}
+                @if(!($job->hireloc2)=='')
+                ,  {{$job->hireloc2}}
+                @endif
+
+                @if(!($job->hireloc3)=='')
+                ,  {{$job->hireloc3}}
+                @endif
+                </label>
             </div>
         </div>
         <div class="col-md-3" style="float:right;">
@@ -173,41 +189,28 @@
             --}}
             <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
         </div>
+        <div class="row col-md-12" style="display:block; float:right;">    
+            <label style="display:block; width:100%;"> </label>
+            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
+            {{--   <label style="display:block; width:100%;"> </label> --}}
+        </div>
+        <div class="row col-md-12" style="display:block; float:right;">    
+            <label style="display:block; width:100%;"> </label>
+            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
+        </div>
         <div class="row col-md-12" style="display:block; float:right;">
-            <button type="submit" class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button>
-            {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
+            <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
-        <div class="row col-md-12" style="float:right; line-height:2;">
-            <label style="display:inline-block; width:60%; background-color:rgba(99, 57, 116, 0.1); font-size:15px;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$minsal}} - {{$maxsal}}&nbsp;P.M.&emsp;&emsp;Posted {{$daystext}}</label>
-            <label style="display:inline-block; width:40%; background-color:rgba(99, 57, 116, 0.1); float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
+        {{--
+        <div class="row col-md-12" style="display:block; float:right;">
+            <div id="shareRoundIcons" style="float:right;"></div>
         </div>
+        --}}
     </div>
 </div>
-<div class="emply-resume-list row mb-1" id="i-jdmain" style="display:block; width:100%;">
-    <div class="row emply-info">
-        <div class="col-md-12">
-            <label style="width:100%;"><b><u>Job Description</u></b></label>
-            <textarea id="i-jobdesc" name="jobdesc" style="height:280px; width:100%; resize:none; border:0px;" onMouseOver="backgrey(this)" onMouseOut="normalcolor(this);" readonly></textarea>
-        </div>
-    </div>
-</div>
-<div class="emply-resume-list row mb-1" id="i-omain" style="display:block; width:100%;">
-    <div class="row emply-info">
-        <div class="col-md-12">
-            <label style="width:100%;"><b><u>Other Information</u></b></label>
-            <label style="width:20%; float:left; display:block;">Vacant Positions:</label>
-            <label style="width:80%; float:left; display:block-inline;">{{$qty}}</label>
-            <label style="width:20%; float:left; display:block;">Hiring for Locations:</label>
-            <label style="width:80%; float:left; display:block-inline;">{{$hireloc1}}, {{$hireloc2}}, {{$hireloc3}}</label>
-            <label style="width:20%; float:left; display:block;">Keywords:</label>
-            <label style="width:80%; float:left; display:block-inline;">{{$keywords}}</label>
-            <label style="width:20%; float:left; display:block;">Valid Till:</label>
-            <label style="width:80%; float:left; display:block-inline;">{{$valid_till}}</label>
-            <label style="width:20%; float:left; display:block;">Job Status:</label>
-            <label style="width:80%; float:left; display:block-inline;">{{$jstatus_text}}</label>
-        </div>
-    </div>
-</div>
+@endforeach
+{{ $recalljobs->links() }}
 @endsection
 
 @section('displayads')

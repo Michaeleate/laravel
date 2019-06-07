@@ -182,3 +182,5 @@ Route::get('/postjob', 'JobsController@postjob')->name('postjob');
 Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
 //After Jobpost successfully posted by Recruiter - View
 Route::get('/recruiter/vlastjob', 'recruiter\RecjobCont@vlastjob')->name('vlastjob');
+//View All Jobs posted by Recruiter - View
+Route::get('/recruiter/valljobs', 'recruiter\RecjobCont@valljobs')->name('valljobs');

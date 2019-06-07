@@ -229,8 +229,8 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="services.html" title="Post Requirements">Post Jobs</a>
-            <a class="dropdown-item" href="services.html" title="View all posted Jobs">View Jobs</a>
+            <a class="dropdown-item" href="{{ route('postjob') }}" title="Post Requirements">Post Jobs</a>
+            <a class="dropdown-item" href="{{ route('valljobs') }}" title="View all posted Jobs">View Jobs</a>
             <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
         </div>
     </li>

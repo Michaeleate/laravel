@@ -195,4 +195,12 @@ class RecjobCont extends Controller
         }
     }
     */
+
+    public function valljobs(){
+        $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+    
+        $recalljobs=PostsController::get_recalljobs();
+        
+        return view('recruiter.RDajobs-rprof',compact('recalljobs'));
+    }
 }

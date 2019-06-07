@@ -21,6 +21,8 @@
     <link href="{{ URL::asset('/') }}css/style6.css" rel='stylesheet' type='text/css' />
     <link href="{{ URL::asset('/') }}css/style.css" rel='stylesheet' type='text/css' />
     <link href="{{ URL::asset('/') }}css/fontawesome-all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/') }}css/jssocials.css" />
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/') }}css/jssocials-theme-flat.css" />
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
@@ -86,7 +88,13 @@
         <li class="breadcrumb-item">
             <a href="{{ url('/recruiter/home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">Last Job</li>
+        <li class="breadcrumb-item active">
+            @if (\Route::current()->getName() == 'vlastjob')
+                <a href="{{ url('/recruiter/vlastjob')}}">View last Job</a>
+            @elseif (\Route::current()->getName() == 'valljobs')
+                <a href="{{ url('/recruiter/valljobs')}}">View all jobs</a>
+            @endif
+        </li>
     </ol>
     <!-- banner-text -->
     <!--/process-->
@@ -96,6 +104,9 @@
                 @if (\Route::current()->getName() == 'vlastjob')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Job Successfully Posted</span></h3>
+                @elseif (\Route::current()->getName() == 'valljobs')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>View all active jobs</span></h3>
                 @endif
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right">
@@ -271,8 +282,7 @@
     <!--search jQuery-->
     <script src="{{ URL::asset('/js/classie-search.js') }}"></script>
     <script src="{{ URL::asset('/js/demo1-search.js') }}"></script>
-    <!--//search jQuery-->
-    
+      
 
     <script>
         $(document).ready(function() {
@@ -304,7 +314,8 @@
             maxsal = <?php echo json_encode($maxsal) ?>,
             hireloc1 = <?php echo json_encode($hireloc1) ?>,
             hireloc2 = <?php echo json_encode($hireloc2) ?>,
-            hireloc3 = <?php echo json_encode($hireloc3) ?>
+            hireloc3 = <?php echo json_encode($hireloc3) ?>,
+            sharei = <?php echo json_encode($i) ?>
         ;
     
         window.onload = function() {
@@ -315,9 +326,15 @@
 
             $('#i-jobdesc').val([jd]).change();
 
-            //$message = "After sarea";
+            //$message = "#shareRoundIcons".concat(sharei);
             //alert($message);
-
+            
+            $("#shareRoundIcons").jsSocials({
+                showLabel: false,
+                showCount: false,
+                shares: ["facebook", "twitter", "linkedin","whatsapp", "email", "pinterest"]
+            });
+            
         }
 
         function validatePassword() {
@@ -375,7 +392,13 @@
                     last_valid_selection = $(this).val();
                 }
             });
-            
+            /*
+            $("#shareRoundIcons").jsSocials({
+                showLabel: false,
+                showCount: false,
+                shares: ["facebook", "twitter", "linkedin","whatsapp", "email", "pinterest"]
+            });
+            */
     </script>
     <!--// end-smoth-scrolling -->
     <!-- Facebook script -->
@@ -388,7 +411,11 @@
     <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
     <!-- Youtube script -->
     <script src="https://apis.google.com/js/platform.js"></script>
-
+    <!--//social share links plugin-->
+    <script src="{{ URL::asset('/js/jquery.js') }}"></script>
+    <script src="{{ URL::asset('/js/jssocials.min.js') }}"></script>
+    <!--//Fontawesome script-->
+    <script src="{{ URL::asset('/js/fontawesome-all.js') }}"></script>
 </body>
 
 </html>
