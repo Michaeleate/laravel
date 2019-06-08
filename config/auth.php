@@ -50,6 +50,11 @@ return [
         'recruiter' => [
             'driver' => 'session',
             'provider' => 'recruiters',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ]
     ],
 
@@ -79,6 +84,11 @@ return [
         'recruiters' => [
             'driver' => 'eloquent',
             'model' => App\recruiter\modrecruiter::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\admin\modadmins::class,
         ]
 
         // 'users' => [
@@ -114,6 +124,11 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-    ],
 
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+    ],
 ];

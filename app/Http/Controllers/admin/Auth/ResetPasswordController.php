@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\recruiter\Auth;
+namespace App\Http\Controllers\admin\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/recruiter/home';
+    protected $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.
@@ -35,6 +35,6 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('recruiter');
+        $this->middleware('admin');
     }
 }

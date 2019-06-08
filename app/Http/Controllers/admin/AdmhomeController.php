@@ -1,22 +1,22 @@
 <?php
- 
-namespace App\Http\Controllers\recruiter;
+
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class RechomeController extends Controller
+class AdmhomeController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        //$this->middleware('auth:recruiter');
-        $this->middleware('recruiter')->except('logout');
+        //$this->middleware('auth:admin');
+        $this->middleware('admin')->except('logout');
     }
 
     /**
@@ -26,10 +26,10 @@ class RechomeController extends Controller
      */
     public function index()
     {
-        $auth = Auth::guard('recruiter');
-        //if (Auth::guard('recruiter')->check()){
+        $auth = Auth::guard('admin');
+        //if (Auth::guard('admin')->check()){
         if ($auth->check()){
-            return view('recruiter.home');
+            return view('admin.home');
         }
     }
 }

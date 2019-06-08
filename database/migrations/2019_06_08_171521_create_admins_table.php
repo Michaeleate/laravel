@@ -4,16 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRecruitersTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
-     * Run the migrations. 
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('recruiters', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyInteger('user_type', false, false)->length(1);
             $table->string('name');
@@ -22,8 +22,10 @@ class CreateRecruitersTable extends Migration
             $table->bigInteger('mob_num', false, false)->unsigned()->length(10);
             $table->timestamp('mob_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_recruiter')->default(false);
+            $table->boolean('is_sadmin')->default(false);
             $table->rememberToken();
+            $table->datetime('last_login_at')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +37,6 @@ class CreateRecruitersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recruiters');
+        Schema::dropIfExists('admins');
     }
 }

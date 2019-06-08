@@ -1,25 +1,25 @@
 <?php
 
-namespace App\recruiter;
+namespace App\admin;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class modrecruiter extends Authenticatable
+class modadmins extends Authenticatable
 {
     use Notifiable; 
 
-    protected $guard = 'recruiter';
+    protected $guard = 'admin';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_type', 'name', 'email', 'mob_num', 'password', 'is_recruiter',
+        'user_type', 'name', 'email', 'mob_num', 'password', 'is_sadmin',
     ];
 
-    protected $table = 'recruiters';
+    protected $table = 'admins';
     /**
      * The attributes that should be hidden for arrays.
      *

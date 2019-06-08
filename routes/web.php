@@ -124,6 +124,7 @@ Route::post('/updatepadd','AddController@updatepadd')->name('updatepadd');
 Route::post('/updateref1','RefController@updateref1')->name('updateref1');
 Route::post('/updateref2','RefController@updateref2')->name('updateref2');
 
+//--------------------------------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
 
@@ -188,3 +189,12 @@ Route::get('/recruiter/valljobs', 'recruiter\RecjobCont@valljobs')->name('valljo
 Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
 //View full job details with parameter job_id;
 Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
+//----------------------------------------------------
+//Admin view for registration and Login
+Route::view('/mikeadmin', 'auth.admin')->name('admin');
+//Admin Register and Login
+Route::post('alogin','admin\Auth\LoginController@recruiterLogin')->name('alogin');
+Route::post('/aregister','admin\Auth\RegisterController@register')->name('aregister');
+Route::post('/admin/logout','admin\Auth\LoginController@logout')->name('alogout');
+//Admins Index Page
+Route::get('/admin/home', 'admin\AdmhomeController@index')->name('admin.home');

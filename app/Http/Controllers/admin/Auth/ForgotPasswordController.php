@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\recruiter\Auth;
+namespace App\Http\Controllers\admin\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,6 +28,6 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('recruiter');
+        $this->middleware('admin');
     }
 }

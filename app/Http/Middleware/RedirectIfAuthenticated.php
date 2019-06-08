@@ -34,6 +34,12 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         
+        if (Auth::guard('admin')->check()) {
+            //$message = "In redirectifauthenticated admin guard";
+            //echo "<script type='text/javascript'>alert('$message');</script>";
+            return redirect('/admin/home');
+        }
+        
         if (Auth::guard('recruiter')->check()) {
             //$message = "In redirectifauthenticated recruiter guard";
             //echo "<script type='text/javascript'>alert('$message');</script>";
