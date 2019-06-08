@@ -1037,7 +1037,7 @@ class PostsController extends Controller
                     if(!(empty($val["hireloc1"]))){
                         switch($val["hireloc1"]){
                             case "30":
-                                $val["hireloc1"]="Vijayawada";
+                                $val["hireloc1"]="Vijayawada";  
                                 break;                        
                             case "11":
                                 $val["hireloc1"]="Guntur";

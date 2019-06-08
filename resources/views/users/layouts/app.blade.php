@@ -7,7 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Jobs in Vijayawada, Top Website, Telecallers Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs" />
-    
+    <!-- FB tags -->
+    <meta property="og:url" content="https://www.samsjobs.in" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jobs in Vijayawada, Guntur and Amaravathi" />
+    <meta property="og:description" content="Recruiters post vacant Jobs in Vijayawada, Guntur and Amaravathi" />
+    <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+    <meta property="fb:app_id" content="2430741300311136" />
+        
     <script>
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
