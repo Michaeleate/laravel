@@ -28,6 +28,19 @@
 </head>
 
 <body style="background-color:rgba(99, 57, 116, 0.1);">
+    
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
     <!-- banner-inner -->
     <div id="demo-2" class="page-content">
         <div class="dotts">
@@ -159,7 +172,7 @@
                     <div>
                         <a href="https://twitter.com/callforsams?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-show-count="true">Follow @callforsams</a>
                     </div>
-                    <div class="fb-page" data-href="https://www.facebook.com/callforsams/" data-tabs="" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
+                    <div class="fb-page" data-href="https://www.facebook.com/callforsams/" data-tabs="" data-width="270px" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/callforsams/" class="fb-xfbml-parse-ignore">
                             <a href="https://www.facebook.com/callforsams/">SAMS Private Limited</a>
                         </blockquote>
@@ -172,7 +185,7 @@
                         <h3>For Directions</h3>                        
                     </div>
                     <div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.406325761032!2d80.64161031423926!3d16.50557198861264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fab1df5e65e9%3A0xdf53b220547d0a89!2sSAMS+Pvt.+Ltd.!5e0!3m2!1sen!2sin!4v1557052498650!5m2!1sen!2sin" width="280" height="220" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.406325761032!2d80.64161031423926!3d16.50557198861264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fab1df5e65e9%3A0xdf53b220547d0a89!2sSAMS+Pvt.+Ltd.!5e0!3m2!1sen!2sin!4v1557052498650!5m2!1sen!2sin" width="300px" height="220" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -396,21 +409,18 @@
             */
         }
     </script>
-    <!--// end-smoth-scrolling -->
-    <!-- Facebook script -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3">
-    </script>
+    <!--end-smoth-scrolling -->
+
     <!-- Twitter script -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <!-- Linkedin script -->
     <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
     <!-- Youtube script -->
     <script src="https://apis.google.com/js/platform.js"></script>
-    <!--//social share links plugin-->
+    <!-- social share links plugin -->
     <script src="{{ URL::asset('/js/jquery.js') }}"></script>
     <script src="{{ URL::asset('/js/jssocials.min.js') }}"></script>
-    <!--//Fontawesome script-->
+    <!-- Fontawesome script -->
     <script src="{{ URL::asset('/js/fontawesome-all.js') }}"></script>
 </body>
 

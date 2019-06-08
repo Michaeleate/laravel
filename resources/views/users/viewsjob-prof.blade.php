@@ -16,71 +16,34 @@
     $lastjobdet=PostsController::get_viewsjob($jobid);
 
     if(!is_null($lastjobdet)){
-
-    foreach($lastjobdet as $key=>$val){
-        $job_id=$val["job_id"];
-        $jtitle=$val["jtitle"];
-        $jd=$val["jd"];
-        $qty=$val["qty"];
-        $keywords=$val["keywords"];
-        $minexp=$val["minexp"];
-        $maxexp=$val["maxexp"];
-        $minsal=$val["minsal"];
-        $maxsal=$val["maxsal"];
-        $hireloc1=$val["hireloc1"];
-        $hireloc2=$val["hireloc2"];
-        $hireloc3=$val["hireloc3"];
-        $comhirefor=$val["comhirefor"];
-        $jstatus=$val["jstatus"];
-        $valid_till=$val["valid_till"];
-        $auto_aprove=$val["auto_aprove"];
-        $auto_upd=$val["auto_upd"];
-        $created_at=$val["created_at"];
-        $updated_at=$val["updated_at"];
-    }
-    
-    if(!(isset($hireloc2))){
-        $hireloc2='';
-        $hireloc3='';
-    }
-
-    //Count days when the job posted
-    $daysdiff=$created_at->diffInDays(Carbon::now());
-    switch($daysdiff){
-        case 0:
-            $daystext="Today";
-            break;
-        case 1:
-            $daystext="Yesterday";
-            break;
-        default:
-            $daystext=$daysdiff . " days ago";
-    }
-
-    //Job Status text as per value
-    switch($jstatus){
-        case 0:
-            $jstatus_text="Approval Pending";
-            break;
-        case 1:
-            $jstatus_text="Active";
-            break;
-        case 2:
-            $jstatus_text="Rejected";
-            break;
-        case 3:
-            $jstatus_text="Closed";
-            break;
-        case 4:
-            $jstatus_text="Hold";
-            break;
-        case 5:
-            $jstatus_text="Expired";
-            break;
-        case 6:
-            $jstatus_text="Archieved";
-            break;
-    }
+        foreach($lastjobdet as $key=>$val){
+            $job_id=$val["job_id"];
+            $jtitle=$val["jtitle"];
+            $jd=$val["jd"];
+            $qty=$val["qty"];
+            $keywords=$val["keywords"];
+            $minexp=$val["minexp"];
+            $maxexp=$val["maxexp"];
+            $minsal=$val["minsal"];
+            $maxsal=$val["maxsal"];
+            $hireloc1=$val["hireloc1"];
+            $hireloc2=$val["hireloc2"];
+            $hireloc3=$val["hireloc3"];
+            $comhirefor=$val["comhirefor"];
+            $jstatus=$val["jstatus"];
+            $jstatus_text=$val["jstatus_text"];
+            $daystext=$val["days_text"];
+            $valid_till=$val["valid_till"];
+            $auto_aprove=$val["auto_aprove"];
+            $auto_upd=$val["auto_upd"];
+            $created_at=$val["created_at"];
+            $updated_at=$val["updated_at"];
+        }
+        
+        if(!(isset($hireloc2))){
+            $hireloc2='';
+            $hireloc3='';
+        }
     }
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
@@ -145,7 +108,7 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:200px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
             <label style="width:100%; color:blue;">{{$jtitle}}</label>
@@ -175,6 +138,12 @@
         <div class="row col-md-12" style="float:right; line-height:2;">
             <label style="display:inline-block; width:60%; background-color:rgba(99, 57, 116, 0.1); font-size:15px;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$minsal}} - {{$maxsal}}&nbsp;P.M.&emsp;&emsp;Posted {{$daystext}}</label>
             <label style="display:inline-block; width:40%; background-color:rgba(99, 57, 116, 0.1); float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
+        </div>
+        <div class="fb-share-button" 
+            data-href="https://www.samsjobs.in/pay" 
+            data-layout="button_count"
+            data-size="large"
+            data-hashtag="#samsjobs">
         </div>
     </div>
 </div>

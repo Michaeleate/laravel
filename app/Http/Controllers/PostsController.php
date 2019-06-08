@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Carbon;
 use Session;
 use Debugbar;
 use App\modresuhead;
@@ -1337,10 +1338,12 @@ class PostsController extends Controller
     public static function get_viewsjob($jobid) {
         //if (Auth::check()) {
         //    $authid = Auth::id();
-            $message = "Inside get viewsjob with job id" . $jobid;
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            //$message = "Inside get viewsjob with job id" . $jobid;
+            //echo "<script type='text/javascript'>alert('$message');</script>";
 
-            $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at')
+            $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
+            $jobdet->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
+            $jobdet = $jobdet
                     ->where('job_id', '=', $jobid)
                     ->get();
 
@@ -1637,6 +1640,59 @@ class PostsController extends Controller
                                 break;                        
                         }
                     }
+                
+                    //Count days when the job posted
+                    $ntimestamp= strtotime(Carbon::now());
+                    $valtstamp = strtotime($val['created_at']);
+                    //$daysdiff=$val['created_at']->diffInDays(Carbon::now());
+                    $cdate = date('Y-m-d', $valtstamp);
+                    $ndate = date('Y-m-d', $ntimestamp);
+                    //$daysdiff=$cdate->diffInDays($ndate);
+
+                    $cdate1 = strtotime($cdate);
+                    $ndate1 = strtotime($ndate);
+                    $secsdiff = $ndate1 - $cdate1;
+                    $daysdiff = $secsdiff / 86400;
+                    
+                    //Testing
+                    //$message = "3Days difference" . $daysdiff;
+                    //echo "<script type='text/javascript'>alert('$message');</script>";
+                    
+                    switch($daysdiff){
+                        case 0:
+                            $val["days_text"]="Today";
+                            break;
+                        case 1:
+                            $val["days_text"]="Yesterday";
+                            break;
+                        default:
+                            $val["days_text"]=$daysdiff . " days ago";
+                    }
+
+                    //Job Status text as per value
+                    switch($val['jstatus']){
+                        case 0:
+                            $val['jstatus_text']="Approval Pending";
+                            break;
+                        case 1:
+                            $val['jstatus_text']="Active";
+                            break;
+                        case 2:
+                            $val['jstatus_text']="Rejected";
+                            break;
+                        case 3:
+                            $val['jstatus_text']="Closed";
+                            break;
+                        case 4:
+                            $val['jstatus_text']="Hold";
+                            break;
+                        case 5:
+                            $val['jstatus_text']="Expired";
+                            break;
+                        case 6:
+                            $val['jstatus_text']="Archieved";
+                            break;
+                    }
                 }
             //}
             return $jobdet;
@@ -1653,19 +1709,12 @@ class PostsController extends Controller
             $authid = Auth::guard('recruiter')->user()->id;
             //$message = "User ID is" . $authid;
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            /*
-            $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at')
-                    ->where('rec_id', '=', $authid)
-                    ->orderBy('job_id','asc')
-                    ->paginate(1);
-            */
             $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
-            $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text"));
+            $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             $recalljobs = $recalljobs->where('rec_id', '=', $authid)
                     ->orderBy('job_id','asc')
                     ->paginate(3);
             
-
             if (\Request::is('recruiter/valljobs')) {
                 foreach($recalljobs as $key=>$val){
                     if(!(empty($val["hireloc1"]))){
@@ -1964,20 +2013,33 @@ class PostsController extends Controller
                         $val['hireloc3']='';
                     }
                     
-                    /*
                     //Count days when the job posted
-                    $daysdiff=$val['created_at']->diffInDays(Carbon::now());
+                    $ntimestamp= strtotime(Carbon::now());
+                    $valtstamp = strtotime($val['created_at']);
+                    //$daysdiff=$val['created_at']->diffInDays(Carbon::now());
+                    $cdate = date('Y-m-d', $valtstamp);
+                    $ndate = date('Y-m-d', $ntimestamp);
+                    //$daysdiff=$cdate->diffInDays($ndate);
+
+                    $cdate1 = strtotime($cdate);
+                    $ndate1 = strtotime($ndate);
+                    $secsdiff = $ndate1 - $cdate1;
+                    $daysdiff = $secsdiff / 86400;
+                    
+                    //Testing
+                    //$message = "3Days difference" . $daysdiff;
+                    //echo "<script type='text/javascript'>alert('$message');</script>";
+                    
                     switch($daysdiff){
                         case 0:
-                            $daystext="Today";
+                            $val["days_text"]="Today";
                             break;
                         case 1:
-                            $daystext="Yesterday";
+                            $val["days_text"]="Yesterday";
                             break;
                         default:
-                            $daystext=$daysdiff . " days ago";
+                            $val["days_text"]=$daysdiff . " days ago";
                     }
-                    */
 
                     //Job Status text as per value
                     switch($val['jstatus']){
