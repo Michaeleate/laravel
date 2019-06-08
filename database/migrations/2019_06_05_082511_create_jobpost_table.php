@@ -18,11 +18,11 @@ class CreateJobpostTable extends Migration
             $table->bigInteger('rec_id')->unsigned();
             $table->bigInteger('job_id', false, false)->unsigned()->unique();
             $table->text('jtitle')->length(100)->nullable();
-            $table->text('jd')->length(750)->nullable();
+            $table->text('jd')->length(1200)->nullable();
             $table->tinyInteger('qty')->length(4)->nullable();
             $table->text('keywords')->length(200)->nullable();
-            $table->text('minexp')->length(3)->nullable();
-            $table->text('maxexp')->length(3)->nullable();
+            $table->Integer('minexp', false, false)->unsigned()->length(6)->nullable();
+            $table->Integer('maxexp', false, false)->unsigned()->length(6)->nullable();
             $table->Integer('minsal', false, false)->unsigned()->length(6)->nullable();
             $table->Integer('maxsal', false, false)->unsigned()->length(6)->nullable();
             $table->text('hireloc1')->length(3)->nullable();

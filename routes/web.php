@@ -184,3 +184,7 @@ Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('r
 Route::get('/recruiter/vlastjob', 'recruiter\RecjobCont@vlastjob')->name('vlastjob');
 //View All Jobs posted by Recruiter - View
 Route::get('/recruiter/valljobs', 'recruiter\RecjobCont@valljobs')->name('valljobs');
+//Search jobs by keywords View
+Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
+//View full job details with parameter job_id;
+Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');

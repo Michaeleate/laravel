@@ -104,9 +104,9 @@
                 <tr><td style="width:230px;"><label></label></td>
                     <td style="width:420px;"><label style="float:right;     font-size:small;">Job title is the first thing, applicants notice, when they search for jobs.</label></td></tr>
                 <tr><td style="width:230px; vertical-align:top; text-align:right;"><label>Job Description:</label></td>
-                    <td><textarea class="form-control" placeholder="Detailed Job Description. Max 750 characters" maxlength="750" name="jobdesc" id="i-jobdesc" rows="10" style="width:420px; resize: none;" onkeyup="countChars(this,'desc-char',750);" required></textarea></td></tr>
+                    <td><textarea class="form-control" placeholder="Detailed Job Description. Max 1200 characters" maxlength="1200" name="jobdesc" id="i-jobdesc" rows="10" style="width:420px; resize: none;" onkeyup="countChars(this,'desc-char',1200);" required></textarea></td></tr>
                 <tr><td style="width:230px;"><label></label></td>
-                    <td><label id="desc-char" style="text-align:right; display:inline-block; width:420px;">750 Character(s) Left</label></td></tr>
+                    <td><label id="desc-char" style="text-align:right; display:inline-block; width:420px;">1200 Character(s) Left</label></td></tr>
                 <tr><td style="width:230px; text-align:right;"><label>Keywords:
                     </label></td>
                     <td><input type="text" class="form-control" placeholder="Ex:- telecaller, receptionist" name="jkey" id="i-jkey" style="width:420px; height:30px;" required></td></tr>

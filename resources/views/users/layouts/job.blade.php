@@ -37,9 +37,11 @@
                         <div class="row top-vl">
                             <div class="col-md-6">
                                 <label style="color: #ffff; float:right;">
-                                    @if(Auth::guard('recruiter')->check())
-                                        {{ Auth::guard('recruiter')->user()->name }}
-                                    @endif
+                                @guest
+                                    Hi Guest!
+                                @else
+                                    {{ Auth::user()->name }}!
+                                @endguest
                                 </label>
                             </div>
                             <div class="col-md-3">
@@ -59,7 +61,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/recruiter/home')}}">
+                                <a class="navbar-brand" href="{{ asset('/home')}}">
                                     <img src="{{ URL::asset('/images/favicon-sams.png')}}" alt="logo">
                                 </a>
                             </h1>
@@ -86,13 +88,11 @@
     </div>
     <ol class="breadcrumb justify-content-left">
         <li class="breadcrumb-item">
-            <a href="{{ url('/recruiter/home')}}">Home</a>
+            <a href="{{ url('/home')}}">Home</a>
         </li>
         <li class="breadcrumb-item active">
-            @if (\Route::current()->getName() == 'vlastjob')
-                <a href="{{ url('/recruiter/vlastjob')}}">View last Job</a>
-            @elseif (\Route::current()->getName() == 'valljobs')
-                <a href="{{ url('/recruiter/valljobs')}}">View all jobs</a>
+            @if (\Route::current()->getName() == 'viewjobdet')
+                <a href="{{ url('/viewjob/'.$jobid)}}">View Job</a>
             @endif
         </li>
     </ol>
@@ -101,15 +101,10 @@
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'vlastjob')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Job Successfully Posted</span></h3>
-                @elseif (\Route::current()->getName() == 'valljobs')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>View all active jobs</span></h3>
-                @endif
+                <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                <span>View - Apply</span></h3>
                 <div class="row choose-main mt-5">
-                    <div class="col-lg-2 job_info_right" style="background-color:white; border: none !important;">
+                    <div class="col-lg-2 job_info_right"> {{--style="background-color:white; border: none !important;">--}}
                         @yield('CreateProfileMenu')
                     </div>
                     <div class="col-lg-8 job_info_left" style="background-color:white; border: none !important;">

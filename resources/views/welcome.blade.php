@@ -108,7 +108,7 @@ Mike Ends --}}
     <span>Search | Apply | Join</span> -
     <span>Search | Refer | Earn</span>
 </h4>
-<p>Start and escalate in your career path.</p>
+<p>Kick start and escalate in your career path.</p>
 {{--<p>Your job search starts and ends with us.</p> --}}
 
 <form action="#" method="post" class="ban-form row">
