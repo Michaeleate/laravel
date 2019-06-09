@@ -22,7 +22,7 @@ class CreateRecruitersTable extends Migration
             $table->bigInteger('mob_num', false, false)->unsigned()->length(10);
             $table->timestamp('mob_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_recruiter')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

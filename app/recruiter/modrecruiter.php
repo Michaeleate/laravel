@@ -16,7 +16,7 @@ class modrecruiter extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_type', 'name', 'email', 'mob_num', 'password', 'is_recruiter', 'last_login_at', 'last_login_ip',
+        'user_type', 'name', 'email', 'mob_num', 'password', 'is_admin', 'admin_id', 'last_login_at', 'last_login_ip',
     ];
 
     protected $table = 'recruiters';

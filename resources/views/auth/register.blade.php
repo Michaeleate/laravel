@@ -85,7 +85,7 @@
                             --}}
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Registration Type:</label>
                             <div class="col-md-6">
-                                <select class="form-control" id="user_type" name="user_type">
+                                <select class="form-control" id="user_type" name="user_type" readonly>
                                     <option value="1" selected>Candidate</option>
                                     <option value="2">Recruiter</option>
                                 </select>

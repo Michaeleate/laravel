@@ -70,7 +70,7 @@ class RegisterController extends Controller
         //echo "User type value is " .$data['user_type'];
         if(($data['user_type']) == "Recruiter"){
             $data['user_type']=2;
-            $data['is_recruiter']=true;
+            $data['is_admin']=false;
         }
         return \App\recruiter\modrecruiter::create([
             'user_type' => $data['user_type'],
@@ -78,7 +78,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'mob_num' => $data['mob_num'],
             'password' => Hash::make($data['password']),
-            'is_recruiter' => $data['is_recruiter'],
+            'is_admin' => $data['is_admin'],
+            'admin_id' => 0,
         ]);
     }
 

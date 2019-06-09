@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use App\admin\modadmins;
+use App\recruiter\modrecruiter;
+use App\User;
 
 class RegisterController extends Controller
 {
@@ -71,6 +73,7 @@ class RegisterController extends Controller
         if(($data['user_type']) == "Admin"){
             $data['user_type']=3;
             $data['is_sadmin']=false;
+            $data['is_admin']=true;
         }
         /*
         return \App\admin\modadmins::create([
@@ -84,7 +87,7 @@ class RegisterController extends Controller
         */
         //dd("mike");
         $password=Hash::make($data['password']);
-        $user=\App\admin\modadmins::create([
+        $admin=\App\admin\modadmins::create([
             'user_type' => $data['user_type'],
             'name' => $data['name'],
             'email' => $data['email'],
@@ -93,9 +96,29 @@ class RegisterController extends Controller
             'is_sadmin' => $data['is_sadmin'],
         ]);
         
-        $message = "User details are ";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        return $user;
+        //Insert record into user table also
+        $recruiter=\App\recruiter\modrecruiter::create([
+            'user_type' => $data['user_type'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'mob_num' => $data['mob_num'],
+            'password' => $password,
+            'is_admin' => $data['is_admin'],
+            'admin_id' => $admin->id,
+        ]);
+        
+        //Insert record into users table also
+        $user=\App\User::create([
+            'user_type' => $data['user_type'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'mob_num' => $data['mob_num'],
+            'password' => $password,
+            'is_admin' => $data['is_admin'],
+            'admin_id' => $admin->id,
+        ]);
+        
+        return $admin;
     }
 
     /**
