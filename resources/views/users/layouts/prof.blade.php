@@ -40,7 +40,18 @@
                     <div class="top-head xl-lg-auto ml-lg-auto text-center">
                         <div class="row top-vl">
                             <div class="col-md-4">
-                                <label style="color: #ffff; float:right; width: 200px;">{{ Auth::user()->name }}!</label>
+                                <label style="color: #ffff; float:right; width: 200px;">
+                                @auth
+                                {{ Auth::user()->name }}
+                                @endauth
+                                @auth('recruiter')
+                                    {{ Auth::guard('recruiter')->user()->name }}
+                                @endauth
+                                @auth('admin')
+                                    {{Auth::guard('admin')->user()->name}}
+                                @endif
+                                !
+                                </label>
                             </div>
                             <div class="col-md-4">
                                 <label style="color: #ffff;">Credits: 5000</label>

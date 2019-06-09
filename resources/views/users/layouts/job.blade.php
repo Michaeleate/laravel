@@ -54,27 +54,68 @@
             <div class="header-top">
                 <header>
                     <div class="top-head xl-lg-auto ml-lg-auto text-center">
-                        <div class="row top-vl">
-                            <div class="col-md-6">
+                        <div class="row">
+                            @guest
+                                <div class="col-md-3">
+                                <label style="color: #ffff; float:right;"> Welcome Guest!</label>
+                                </div>
+                                <div class="col-md-4 sign-btn">
+                                    <a href="{{ route('login') }}">
+                                        <i class="fas fa-lock"></i> Login</a>
+                                    <a href="{{ route('register') }}">
+                                        <i class="far fa-user"></i> Register</a>
+                                </div>
+                                <div class="col-md-5">
+                                    <a href="{{ route('recruiter') }}">Recruiters Zone</a>
+                                </div>
+                            @else
+                                <div class="col-md-6">
                                 <label style="color: #ffff; float:right;">
-                                @guest
-                                    Hi Guest!
-                                @else
-                                    {{ Auth::user()->name }}!
-                                @endguest
-                                </label>
-                            </div>
-                            <div class="col-md-3">
-                                <label style="color: #ffff;">Credits: 5000</label>
-                            </div>
-                            <div class="col-md-3 sign-btn">
-                                <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt"></i> Log-out</a>
-                                <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
-                                        @csrf
-                                </form>
-                            </div>
+                                @auth
+                                    {{ Auth::user()->name }}
+                                @endauth
+                                @auth('recruiter')
+                                    {{ Auth::guard('recruiter')->user()->name }}
+                                @endauth
+                                @auth('admin')
+                                    {{Auth::guard('admin')->user()->name}}
+                                @endif
+                                !</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label style="color: #ffff;">Credits: 5000</label>
+                                </div>
+                                @auth
+                                    <div class="col-md-3 sign-btn">
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt"></i> Log-out</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                        </form>
+                                    </div>
+                                @endauth
+                                @auth('recruiter')
+                                    <div class="col-md-3 sign-btn">
+                                        <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt"></i> Log-out</a>
+                                        <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
+                                                @csrf
+                                        </form>
+                                    </div>
+                                @endauth
+                                @auth('admin')
+                                    <div class="col-md-3 sign-btn">
+                                        <a href="{{ route('alogout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt"></i> Log-out</a>
+                                        <form id="logout-form" action="{{ route('alogout') }}" method="POST">
+                                                @csrf
+                                        </form>
+                                    </div>
+                                @endauth
+                            @endguest
                         </div>
                     </div>
                     <div class="clearfix"></div>

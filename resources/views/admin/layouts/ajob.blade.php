@@ -44,10 +44,8 @@
                         <div class="row top-vl">
                             <div class="col-md-6">
                                 <label style="color: #ffff; float:right;">
-                                    @if(Auth::guard('recruiter')->check())
-                                        {{ Auth::guard('recruiter')->user()->name }}
-                                    @elseif(Auth::guard('admin')->check())
-                                        {{Auth::guard('admin')->user()->name}}
+                                    @if(Auth::guard('admin')->check())
+                                        {{ Auth::guard('admin')->user()->name }}
                                     @endif
                                 </label>
                             </div>
@@ -55,10 +53,10 @@
                                 <label style="color: #ffff;">Credits: 5000</label>
                             </div>
                             <div class="col-md-3 sign-btn">
-                                <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
+                                <a href="{{ route('alogout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> Log-out</a>
-                                <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
+                                <form id="logout-form" action="{{ route('alogout') }}" method="POST">
                                         @csrf
                                 </form>
                             </div>
@@ -68,7 +66,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/recruiter/home')}}">
+                                <a class="navbar-brand" href="{{ asset('/admin/home')}}">
                                     <img src="{{ URL::asset('/images/favicon-sams.png')}}" alt="logo">
                                 </a>
                             </h1>
@@ -95,13 +93,13 @@
     </div>
     <ol class="breadcrumb justify-content-left">
         <li class="breadcrumb-item">
-            <a href="{{ url('/recruiter/home')}}">Home</a>
+            <a href="{{ url('/admin/home')}}">Home</a>
         </li>
         <li class="breadcrumb-item active">
-            @if (\Route::current()->getName() == 'vlastjob')
-                <a href="{{ url('/recruiter/vlastjob')}}">View last Job</a>
-            @elseif (\Route::current()->getName() == 'valljobs')
-                <a href="{{ url('/recruiter/valljobs')}}">View all jobs</a>
+            @if (\Route::current()->getName() == 'admin.lastjob')
+                <a href="{{ url('/admin/lastjob')}}">View last Job</a>
+            @elseif (\Route::current()->getName() == 'admin.valljobs')
+                <a href="{{ url('/admin/valljobs')}}">View all jobs</a>
             @endif
         </li>
     </ol>
@@ -110,10 +108,10 @@
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'vlastjob')
+                @if (\Route::current()->getName() == 'admin.lastjob')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Job Successfully Posted</span></h3>
-                @elseif (\Route::current()->getName() == 'valljobs')
+                @elseif (\Route::current()->getName() == 'admin.valljobs')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>View all active jobs</span></h3>
                 @endif

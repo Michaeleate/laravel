@@ -198,3 +198,19 @@ Route::post('/aregister','admin\Auth\RegisterController@register')->name('aregis
 Route::post('/admin/logout','admin\Auth\LoginController@logout')->name('alogout');
 //Admins Index Page
 Route::get('/admin/home', 'admin\AdmhomeController@index')->name('admin.home');
+//Job Posting by Admin - View
+Route::get('/admin/postjob', 'JobsController@pjbyadm')->name('admin.postjob');
+//Job Posting by Admin
+Route::post('/admin/admpostjob', 'admin\AdmjobCont@admpostjob')->name('admin.recpostjob');
+
+//Notyet
+//Create Profile for candidate
+Route::get('/admin/cadmprofile', 'admin\AdmprofCont@cadmprofile')->name('cadmprofile');
+//View Candidate or Recruiters Profile
+Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmprofile');
+//Update Candidate or Recruiters Profile
+Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
+//After Jobpost successfully posted by Recruiter - View
+Route::get('/admin/vlastjob', 'admin\AdmjobCont@vlastjob')->name('admin.lastjob');
+//View All Jobs posted by Recruiter - View
+Route::get('/admin/valljobs', 'admin\AdmjobCont@valljobs')->name('admin.valljobs');

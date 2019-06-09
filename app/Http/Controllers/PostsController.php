@@ -29,6 +29,7 @@ use App\recruiter\modrecsarea;
 use App\recruiter\modrecedu;
 use App\recruiter\modrecemp;
 use App\recruiter\modrecref;
+use App\recruiter\modrecruiter;
 
 class PostsController extends Controller
 {
@@ -999,9 +1000,9 @@ class PostsController extends Controller
     
     //Get Maximum Job ID for Jobs.
     public static function get_maxjobid() {
-        if (Auth::guard('recruiter')->check())
+        if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
         {
-            $authid = Auth::guard('recruiter')->user()->id;
+            //$authid = Auth::guard('recruiter')->user()->id;
 
             $maxjobid = \App\modjobpost::max('job_id');
                     //->first();
@@ -1017,14 +1018,55 @@ class PostsController extends Controller
             return view('recruiter');
         }
     }
+    //mike
+    //Get Admin recruiter id by Admin id.
+    public static function get_admrecid($admid) {
+        $message = "Inside get_admrecid function with auth id " . $admid;
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        if (Auth::guard('admin')->check())
+        {
+            $message = "Inside admin guard if";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            
+            $admrecid = \App\recruiter\modrecruiter::select('id')
+            ->where('user_type', '=', 3)
+            ->where('is_admin', '=', true)
+            ->where('admin_id', '=', $admid)
+            ->first();
+
+            if(!$admrecid==null){
+                $message = "admrecid is not null " . $admrecid->id;
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return $admrecid;
+            }
+            else{
+                $message = "admrecid is null ";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                return 0;
+                
+            }
+        }
+        else {
+            return view('mikeadmin');
+        }
+    }
     
     //Get recently posted job details of recruiter.
     public static function get_lastjobdet() {
-        if (Auth::guard('recruiter')->check())
+        if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
         {
-            $authid = Auth::guard('recruiter')->user()->id;
-            //$message = "User ID is" . $authid;
-            //echo "<script type='text/javascript'>alert('$message');</script>";
+            if(Auth::guard('recruiter')->check()){
+                $authid = Auth::guard('recruiter')->user()->id;
+                //$message = "User ID is" . $authid;
+                //echo "<script type='text/javascript'>alert('$message');</script>";
+            }
+            else{
+                $authid = Auth::guard('admin')->user()->id;
+                //get recruiter id, as admin is posting as recruiter now.
+                $admrecid=0;
+                $admrecid=PostsController::get_admrecid($authid);
+                $authid=$admrecid->id;
+            }
 
             $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at')
                     ->where('rec_id', '=', $authid)
@@ -1032,7 +1074,7 @@ class PostsController extends Controller
                     ->get();
 
 
-            if (\Request::is('recruiter/vlastjob')) {
+            if (\Request::is('recruiter/vlastjob'|| 'admin/vlastjob')) {
                 foreach($jobdet as $key=>$val){
                     if(!(empty($val["hireloc1"]))){
                         switch($val["hireloc1"]){
@@ -1704,9 +1746,21 @@ class PostsController extends Controller
     
     //Get recently posted job details of recruiter.
     public static function get_recalljobs() {
-        if (Auth::guard('recruiter')->check())
+        if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
         {
-            $authid = Auth::guard('recruiter')->user()->id;
+            if(Auth::guard('recruiter')->check()){
+                $authid = Auth::guard('recruiter')->user()->id;
+                //$message = "User ID is" . $authid;
+                //echo "<script type='text/javascript'>alert('$message');</script>";
+            }
+            else{
+                $authid = Auth::guard('admin')->user()->id;
+                //get recruiter id, as admin is posting as recruiter now.
+                $admrecid=0;
+                $admrecid=PostsController::get_admrecid($authid);
+                $authid=$admrecid->id;
+            }
+
             //$message = "User ID is" . $authid;
             //echo "<script type='text/javascript'>alert('$message');</script>";
             $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
@@ -1715,7 +1769,7 @@ class PostsController extends Controller
                     ->orderBy('job_id','asc')
                     ->paginate(3);
             
-            if (\Request::is('recruiter/valljobs')) {
+            if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($recalljobs as $key=>$val){
                     if(!(empty($val["hireloc1"]))){
                         switch($val["hireloc1"]){
@@ -2076,7 +2130,7 @@ class PostsController extends Controller
     
     //Get all jobs based on search criteria.
     public static function get_jsearchall($request) {
-        if (Auth::check()) {
+        if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check()) {
             $authid = Auth::id();
             $skey=$request->input('skey');
             $sloc=$request->input('sloc');

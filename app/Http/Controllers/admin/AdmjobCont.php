@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\recruiter;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 use \App\Http\Controllers\PostsController;
 use App\modjobpost;
 
-class RecjobCont extends Controller
+class AdmjobCont extends Controller
 {
     /**
     * Create a new controller instance.
@@ -26,19 +26,21 @@ class RecjobCont extends Controller
     //Authorize right users
     public function __construct()
     {
-        $this->middleware('recruiter:admin')->except('logout');
-        $message = "In Middleware admin";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        $this->middleware('admin')->except('logout');
     }
 
-    public function recpostjob(Request $request){
+    public function admpostjob(Request $request){
         //$message = "In upinfopdet of RecpdetCont";
         //echo "<script type='text/javascript'>alert('$message');</script>";
         session()->forget(array('link'));
-        if (Auth::guard('recruiter')->check()){
-            $authid = Auth::guard('recruiter')->user()->id;
-            //$message = "ID is" . $authid;
-            //echo "<script type='text/javascript'>alert('$message');</script>";
+        if (Auth::guard('admin')->check()){
+            $authid = Auth::guard('admin')->user()->id;
+            $message = "Admin Auth ID is " . $authid;
+            echo "<script type='text/javascript'>alert('$message');</script>";
+
+            //get recruiter id, as admin is posting as recruiter now.
+            $admrecid=0;
+            $admrecid=PostsController::get_admrecid($authid);
 
             $maxjobid=PostsController::get_maxjobid();
             /*
@@ -58,6 +60,7 @@ class RecjobCont extends Controller
                 $job_id=$maxjobid+1;
             }
             
+            $authid=$admrecid->id;
             $jtitle=$request->input('jtitle');
             $jd=$request->input('jobdesc');
             $qty=1;
@@ -87,11 +90,11 @@ class RecjobCont extends Controller
             $this->updatedb($authid, $job_id, $jtitle, $jd,  $qty, $keywords, $minexp, $maxexp, $minsal, $maxsal, $hireloc, $hireloc1, $hireloc2, $hireloc3, $comhirefor, $jstatus, $valid_till, $auto_aprove, $auto_upd);
 
             $url_info = 'success';
-            return redirect('/recruiter/vlastjob')
+            return redirect('/admin/vlastjob')
                     ->with(array('link'=>$url_info));
         }
         else {
-            return view('recruiter');    
+            return view('mikeadmin');    
         }
     }
 
@@ -138,14 +141,14 @@ class RecjobCont extends Controller
 
     //View last posted job
     public function vlastjob(Request $request){
-        $auth = Auth::guard('recruiter');
+        $auth = Auth::guard('admin');
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('recruiter.RDsjob-rprof');
+            return view('admin.RDsjob-ajob');
         }
         else {
-            return redirect('/recruiter');
+            return redirect('/mikeadmin');
         }
     }
 
@@ -203,6 +206,6 @@ class RecjobCont extends Controller
     
         $recalljobs=PostsController::get_recalljobs();
         
-        return view('recruiter.RDajobs-rprof',compact('recalljobs'));
+        return view('admin.RDajobs-ajob',compact('recalljobs'));
     }
 }

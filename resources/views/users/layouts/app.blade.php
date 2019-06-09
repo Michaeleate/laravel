@@ -70,7 +70,6 @@
                                     </form>
                                 </div>
                             @endguest
-                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
