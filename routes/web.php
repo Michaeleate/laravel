@@ -193,7 +193,7 @@ Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
 //Admin view for registration and Login
 Route::view('/mikeadmin', 'auth.admin')->name('admin');
 //Admin Register and Login
-Route::post('alogin','admin\Auth\LoginController@recruiterLogin')->name('alogin');
+Route::post('alogin','admin\Auth\LoginController@adminLogin')->name('alogin');
 Route::post('/aregister','admin\Auth\RegisterController@register')->name('aregister');
 Route::post('/admin/logout','admin\Auth\LoginController@logout')->name('alogout');
 //Admins Index Page

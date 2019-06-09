@@ -72,6 +72,7 @@ class RegisterController extends Controller
             $data['user_type']=3;
             $data['is_sadmin']=false;
         }
+        /*
         return \App\admin\modadmins::create([
             'user_type' => $data['user_type'],
             'name' => $data['name'],
@@ -80,6 +81,21 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'is_sadmin' => $data['is_sadmin'],
         ]);
+        */
+        //dd("mike");
+        $password=Hash::make($data['password']);
+        $user=\App\admin\modadmins::create([
+            'user_type' => $data['user_type'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'mob_num' => $data['mob_num'],
+            'password' => $password,
+            'is_sadmin' => $data['is_sadmin'],
+        ]);
+        
+        $message = "User details are ";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        return $user;
     }
 
     /**

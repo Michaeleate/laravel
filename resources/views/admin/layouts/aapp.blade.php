@@ -53,10 +53,10 @@
                                     <label style="color: #ffff;">Credits: 5000</label>
                                 </div>
                                 <div class="col-md-3 sign-btn">
-                                    <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
+                                    <a href="{{ route('alogout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt"></i> Log-out</a>
-                                    <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
+                                    <form id="logout-form" action="{{ route('alogout') }}" method="POST">
                                             @csrf
                                     </form>
                                 </div>

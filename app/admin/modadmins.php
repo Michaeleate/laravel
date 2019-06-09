@@ -16,7 +16,14 @@ class modadmins extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_type', 'name', 'email', 'mob_num', 'password', 'is_sadmin',
+        'user_type', 
+        'name', 
+        'email', 
+        'mob_num', 
+        'password', 
+        'is_sadmin',
+        'last_login_at',
+        'last_login_ip',
     ];
 
     protected $table = 'admins';
