@@ -1,5 +1,5 @@
 @extends('recruiter.layouts.rapp')
-<h1>This is from Recruiters home page in blade php</h1>
+{{--<h1>This is from Recruiters home page in blade php</h1>--}}
 @section('search')
 <h4>
     <span>Search | Apply | Join</span> -
