@@ -17,7 +17,7 @@ class JobsController extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('recruiter.CRjob-rprof');
+            return view('recruiter.CRjob_rprof');
         }
         else {
             return redirect('/recruiter');
@@ -30,7 +30,7 @@ class JobsController extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('admin.CRjob-ajob');
+            return view('admin.CRjob_ajob');
         }
         else {
             return redirect('/mikeadmin');
@@ -60,10 +60,10 @@ class JobsController extends Controller
         if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
         //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
         //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('users.viewsjob-prof')->with('jobid', $jobid);
+            return view('users.viewsjob_prof')->with('jobid', $jobid);
         }
         else{
-            return view('users.viewsjob-prof')->with('jobid', $jobid);
+            return view('users.viewsjob_prof')->with('jobid', $jobid);
         }
     }
 
@@ -83,7 +83,7 @@ class JobsController extends Controller
                 dd("Job applied failed");
             }
             
-            //return view('users.viewsjob-prof')->with('jobid', $jobid);
+            //return view('users.viewsjob_prof')->with('jobid', $jobid);
         }
         else{
             return redirect()->route('login');

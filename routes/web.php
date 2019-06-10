@@ -207,6 +207,8 @@ Route::get('/admin/vlastjob', 'admin\AdmjobCont@vlastjob')->name('admin.lastjob'
 //View All Jobs posted by Recruiter - View
 Route::get('/admin/valljobs', 'admin\AdmjobCont@valljobs')->name('admin.valljobs');
 
+//Admin view for registration and Login
+//Route::view('/admin/postjob', 'admin\CRjob-ajob')->name('admin.CRjob-ajob');
 
 //Notyet
 //Create Profile for candidate

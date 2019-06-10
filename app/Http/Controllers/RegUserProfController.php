@@ -9,7 +9,7 @@ class RegUserProfController extends Controller
 {
     public function createprofile(){
         if (Auth::check()) {
-            return view('users.CR-prof');
+            return view('users.CR_prof');
         }
         else {
             return redirect()->route('login');
@@ -18,7 +18,7 @@ class RegUserProfController extends Controller
     
     public function viewprofile(){
         if (Auth::check()) {
-            return view('users.RD-prof');
+            return view('users.RD_prof');
         }
         else {
             return redirect()->route('login');
@@ -27,7 +27,7 @@ class RegUserProfController extends Controller
 
     public function editprofile(){
         if (Auth::check()) {
-            return view('users.MD-prof');
+            return view('users.MD_prof');
         }
         else {
             return redirect()->route('login');
@@ -36,7 +36,7 @@ class RegUserProfController extends Controller
 
     public function editprofvisible(){
         if (Auth::check()) {
-            return view('users.MD-visible');
+            return view('users.MD_visible');
         }
         else {
             return redirect()->route('login');

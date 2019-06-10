@@ -27,8 +27,8 @@ class HeadlineController extends Controller
             return redirect('user-profile')
                 ->with(array('hl'=>$stat3));
             
-            /*return view('users.CR-prof')->with(array('stat'=>'- Update Success','rt'=>'updatehead'));
-            return view('users.CR-prof');*/
+            /*return view('users.CR_prof')->with(array('stat'=>'- Update Success','rt'=>'updatehead'));
+            return view('users.CR_prof');*/
             
         }
         else {
