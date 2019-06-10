@@ -60,7 +60,9 @@ class JobsController extends Controller
         if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
         //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
         //echo "<script type='text/javascript'>alert('$message');</script>";
-
+            return view('users.viewsjob-prof')->with('jobid', $jobid);
+        }
+        else{
             return view('users.viewsjob-prof')->with('jobid', $jobid);
         }
     }
