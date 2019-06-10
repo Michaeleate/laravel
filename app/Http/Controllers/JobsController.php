@@ -79,9 +79,9 @@ class JobsController extends Controller
                 return redirect()->back()->with('link',$apply_job);
                 //dd("Job applied successfully");
             }
-            else{
-                dd("Job applied failed");
-            }
+            //else{
+                //dd("Job applied failed");
+            //}
             
             //return view('users.viewsjob_prof')->with('jobid', $jobid);
         }
