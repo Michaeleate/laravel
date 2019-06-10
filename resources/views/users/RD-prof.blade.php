@@ -292,10 +292,35 @@
         <div class="col-md-12">
             <label style="width:100%;"><h5>Qualification:</h5></label>
             <ul>
-                <li>SSC from {{$colname1}} in {{$pyear1}} with {{$percentage1}}</li>
-                <li>Under graduation from {{$colname2}} in {{$pyear2}} with {{$percentage2}}</li>
-                <li>Graduation ({{$course3}}) from {{$colname3}} in {{$pyear3}} with {{$percentage3}}</li>
-                <li>Post graduation({{$course4}}) from {{$colname4}} in {{$pyear4}} with {{$percentage4}}</li>
+                <li>
+                    SSC - 
+                    @if(!($colname1==''))
+                        from {{$colname1}} in {{$pyear1}} with {{$percentage1}}
+                    @else
+                        Not shared with us.
+                    @endif
+                </li>
+                <li>Under graduation - 
+                    @if(!($colname2==''))
+                        from {{$colname2}} in {{$pyear2}} with {{$percentage2}}</li>
+                    @else
+                        Not shared with us.
+                    @endif
+                </li>
+                <li>Graduation - 
+                    @if(!($colname3==''))
+                        ({{$course3}}) from {{$colname3}} in {{$pyear3}} with {{$percentage3}}
+                    @else
+                        Not shared with us.
+                    @endif
+                </li>
+                <li>Post graduation - 
+                    @if(!($colname4==''))
+                        ({{$course4}}) from {{$colname4}} in {{$pyear4}} with {{$percentage4}}
+                    @else
+                        Not shared with us.
+                    @endif
+                </li>
             </ul>
         </div>
     </div>
@@ -404,8 +429,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script>
 window.load = function(){

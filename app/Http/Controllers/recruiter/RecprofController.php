@@ -13,17 +13,15 @@ class RecprofController extends Controller
      *
      * @return void
      */
+    //Authorize right users
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');
-        //$this->middleware('guest:recruiter')->except('logout');
-        //$this->middleware('auth:recruiter')->except('logout');
         $this->middleware('recruiter')->except('logout');
     }
     
+    //Create Recruiter Profile
     public function crecprofile(){
         $auth = Auth::guard('recruiter');
-        //if (Auth::guard('recruiter')->check()){
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
@@ -34,5 +32,17 @@ class RecprofController extends Controller
         }
     }
     
+    //View Recruiter Profile
+    public function vrecprofile(){
+        $auth = Auth::guard('recruiter');
+        if ($auth->check()){
+            //$message = "Inside crecprofile of RecprofController";
+            //echo "<script type='text/javascript'>alert('$message');</script>";
+            return view('recruiter.RD-rprof');
+        }
+        else {
+            return view('recruiter.home');
+        }
+    }
     
 }

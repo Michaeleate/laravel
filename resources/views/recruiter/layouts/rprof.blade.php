@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Jobs in Vijayawada, Job Consultancy, Telecallers Jobs, Free Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs, Vijayawada, Amaravathi, Guntur" />
+    <!-- FB tags -->
+    <meta property="og:url" content="https://www.samsjobs.in" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jobs in Vijayawada, Guntur and Amaravathi" />
+    <meta property="og:description" content="Recruiters post vacant Jobs in Vijayawada, Guntur and Amaravathi" />
+    <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+    <meta property="fb:app_id" content="2430741300311136" />
     
     <script>
         addEventListener("load", function() {
@@ -152,6 +159,7 @@
                     <div>
                         <script type="IN/FollowCompany" data-id="10427775" data-counter="right" data-width="100%"></script>
                     </div>
+                    <div class="g-ytsubscribe" data-channelid="UCspMS2SkiPQDM10gWcAGCtQ" data-layout="default" data-count="default"></div>
                     <div>
                         <a href="https://twitter.com/callforsams?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-show-count="true">Follow @callforsams</a>
                     </div>
@@ -411,7 +419,6 @@
             document.getElementById("i-mobnum2").value = mobnum;
             document.getElementById("i-profname").value = profname;
             document.getElementById("i-profurl").value = profurl;
-            document.getElementById("i-shortprof").value = shortprof;
             document.getElementById("i-servcity").value = servcity;
             document.getElementById("i-servstate").value = servstate;
             document.getElementById("i-servcountry").value = "India";
@@ -655,6 +662,11 @@
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
+
+            $('#v-shortprof').val([shortprof]).change();
+            $('#v-sainfo').val([sainfo]).change();
+            $('#v-sapos').val([sapos]).change();
+            $('#v-saclients').val([saclients]).change();
 
             $('a[href="#i-emailpass"]').click(function(){
                 $('#i-initial').hide();
@@ -909,7 +921,8 @@
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <!-- Linkedin script -->
     <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-
+    <!-- Youtube script -->
+    <script src="https://apis.google.com/js/platform.js"></script>
 
 </body>
 

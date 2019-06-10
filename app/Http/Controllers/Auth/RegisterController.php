@@ -85,6 +85,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         echo "User type value is " .$data['user_type'];
+        if(($data['user_type']) == "Candidate"){
+            $data['user_type']=1;
+            $data['is_admin']=false;
+        }
         return User::create([
             'user_type' => $data['user_type'],
             'name' => $data['name'],

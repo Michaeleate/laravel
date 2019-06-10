@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Http\Controllers\recruiter;
 
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class RechomeController extends Controller
 {
-        /**
+     /**
      * Create a new controller instance.
      *
      * @return void

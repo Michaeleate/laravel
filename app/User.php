@@ -26,7 +26,9 @@ class User extends Authenticatable
         'mob_num', 
         'email', 
         'password', 
-        'user_type', 
+        'user_type',
+        'is_admin', 
+        'admin_id', 
         'last_login_at',
         'last_login_ip',
     ];

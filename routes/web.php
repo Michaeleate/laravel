@@ -124,6 +124,7 @@ Route::post('/updatepadd','AddController@updatepadd')->name('updatepadd');
 Route::post('/updateref1','RefController@updateref1')->name('updateref1');
 Route::post('/updateref2','RefController@updateref2')->name('updateref2');
 
+//--------------------------------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
 
@@ -142,7 +143,7 @@ Route::get('/recruiter/crecprofile', 'recruiter\RecprofController@crecprofile')-
 //View Recruiter Profile
 Route::get('/recruiter/vrecprofile', 'recruiter\RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
-Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@urecprofile')->name('urecprofile');
+Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@crecprofile')->name('urecprofile'); 
 
 //Update initial profile data
 Route::post('/recruiter/upinfopdet', 'recruiter\RecpdetCont@upinfopdet');
@@ -175,3 +176,47 @@ Route::post('/recruiter/uprecemp', 'recruiter\RecpdetCont@uprecemp');
 //Update Reference data
 Route::post('/recruiter/uprecref1', 'recruiter\RecpdetCont@uprecref1');
 Route::post('/recruiter/uprecref2', 'recruiter\RecpdetCont@uprecref2');
+/*------------------------------------------------------------*/
+//Job Posting by Recruiter - View
+Route::get('/postjob', 'JobsController@postjob')->name('postjob');
+//Job Posting by Recruiter
+Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
+//After Jobpost successfully posted by Recruiter - View
+Route::get('/recruiter/vlastjob', 'recruiter\RecjobCont@vlastjob')->name('vlastjob');
+//View All Jobs posted by Recruiter - View
+Route::get('/recruiter/valljobs', 'recruiter\RecjobCont@valljobs')->name('valljobs');
+//Search jobs by keywords View
+Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
+//View full job details with parameter job_id;
+Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
+//----------------------------------------------------
+//Admin view for registration and Login
+Route::view('/mikeadmin', 'auth.admin')->name('admin');
+//Admin Register and Login
+Route::post('alogin','admin\Auth\LoginController@adminLogin')->name('alogin');
+Route::post('/aregister','admin\Auth\RegisterController@register')->name('aregister');
+Route::post('/admin/logout','admin\Auth\LoginController@logout')->name('alogout');
+//Admins Index Page
+Route::get('/admin/home', 'admin\AdmhomeController@index')->name('admin.home');
+//Job Posting by Admin - View
+Route::get('/admin/postjob', 'JobsController@pjbyadm')->name('admin.postjob');
+//Job Posting by Admin
+Route::post('/admin/admpostjob', 'admin\AdmjobCont@admpostjob')->name('admin.recpostjob');
+//After Jobpost successfully posted by Recruiter - View
+Route::get('/admin/vlastjob', 'admin\AdmjobCont@vlastjob')->name('admin.lastjob');
+//View All Jobs posted by Recruiter - View
+Route::get('/admin/valljobs', 'admin\AdmjobCont@valljobs')->name('admin.valljobs');
+
+
+//Notyet
+//Create Profile for candidate
+Route::get('/admin/cadmprofile', 'admin\AdmprofCont@cadmprofile')->name('cadmprofile');
+//View Candidate or Recruiters Profile
+Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmprofile');
+//Update Candidate or Recruiters Profile
+Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
+
+//Apply Job by Candidate - View
+Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+//Job Posting by Recruiter
+//Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');

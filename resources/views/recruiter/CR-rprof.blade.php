@@ -6,8 +6,11 @@
 
     //$previousurl = url()->previous();
     $seslink = Session::get('link');
-    $message = "Session link is " . $seslink;
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    if (\Request::is('recruiter/urecprofile') && ($seslink==null)) {
+        $seslink='init';
+    }
+    //$message = "Session link is " . $seslink;
+    //echo "<script type='text/javascript'>alert('$message');</script>";
 
     $fname=$lname=$loc=$email=$mobnum=$skype=$picpath=$picname='';
     $orgname=$weburl=$addline1=$addline2=$city=$state=$country='';
@@ -228,10 +231,9 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="services.html" title="Post Requirements">Post Jobs</a>
-            <a class="dropdown-item" href="services.html" title="View all posted Jobs">View Jobs</a>
+            <a class="dropdown-item" href="{{ route('postjob') }}" title="Post Requirements">Post Jobs</a>
+            <a class="dropdown-item" href="{{ route('valljobs') }}" title="View all posted Jobs">View Jobs</a>
             <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
-            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
         </div>
     </li>
  

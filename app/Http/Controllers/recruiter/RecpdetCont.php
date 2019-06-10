@@ -443,7 +443,7 @@ class RecpdetCont extends Controller
 
             $linkurl=$fburl=$tweeturl=$instaurl=$lang1=$lang2=$lang3='';
             
-            $linkurl=$request->input('profname');
+            $linkurl=$request->input('linkurl');
             $fburl=$request->input('fburl');
             $tweeturl=$request->input('tweeturl');
             $instaurl=$request->input('instaurl');
