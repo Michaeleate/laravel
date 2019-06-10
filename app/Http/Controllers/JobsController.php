@@ -66,4 +66,27 @@ class JobsController extends Controller
             return view('users.viewsjob-prof')->with('jobid', $jobid);
         }
     }
+
+    //Show full job details with parameter jobid
+    public function userappjob($jobid){
+        if (Auth::check()) {
+        //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
+        //echo "<script type='text/javascript'>alert('$message');</script>";
+            $authid = Auth::id();
+            //$check_val_credit=PostsController::check_val_credit();
+            $apply_job=PostsController::user_apply_job($jobid);
+            if($apply_job == true){
+                return redirect()->back()->with('link',$apply_job);
+                //dd("Job applied successfully");
+            }
+            else{
+                dd("Job applied failed");
+            }
+            
+            //return view('users.viewsjob-prof')->with('jobid', $jobid);
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
 }

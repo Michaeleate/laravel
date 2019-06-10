@@ -202,6 +202,11 @@ Route::get('/admin/home', 'admin\AdmhomeController@index')->name('admin.home');
 Route::get('/admin/postjob', 'JobsController@pjbyadm')->name('admin.postjob');
 //Job Posting by Admin
 Route::post('/admin/admpostjob', 'admin\AdmjobCont@admpostjob')->name('admin.recpostjob');
+//After Jobpost successfully posted by Recruiter - View
+Route::get('/admin/vlastjob', 'admin\AdmjobCont@vlastjob')->name('admin.lastjob');
+//View All Jobs posted by Recruiter - View
+Route::get('/admin/valljobs', 'admin\AdmjobCont@valljobs')->name('admin.valljobs');
+
 
 //Notyet
 //Create Profile for candidate
@@ -210,7 +215,8 @@ Route::get('/admin/cadmprofile', 'admin\AdmprofCont@cadmprofile')->name('cadmpro
 Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmprofile');
 //Update Candidate or Recruiters Profile
 Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
-//After Jobpost successfully posted by Recruiter - View
-Route::get('/admin/vlastjob', 'admin\AdmjobCont@vlastjob')->name('admin.lastjob');
-//View All Jobs posted by Recruiter - View
-Route::get('/admin/valljobs', 'admin\AdmjobCont@valljobs')->name('admin.valljobs');
+
+//Apply Job by Candidate - View
+Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+//Job Posting by Recruiter
+//Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');

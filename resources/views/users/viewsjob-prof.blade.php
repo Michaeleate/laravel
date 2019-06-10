@@ -5,13 +5,14 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Carbon;
 
+    $currenturl = url()->current();
     //$previousurl = url()->previous();
     $seslink = Session::get('link');
     //if (\Request::is('recruiter/urecprofile') && ($seslink==null)) {
     //    $seslink='init';
     //}
 
-    $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd=$daystext=$jstatus_text='';
+    $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd=$daystext=$jstatus_text=$japp_status=$japp_status_text='';
     
     $lastjobdet=PostsController::get_viewsjob($jobid);
 
@@ -32,6 +33,8 @@
             $comhirefor=$val["comhirefor"];
             $jstatus=$val["jstatus"];
             $jstatus_text=$val["jstatus_text"];
+            $japp_status=$val["japp_status"];
+            $japp_status_text=$val["japp_status_text"];
             $daystext=$val["days_text"];
             $valid_till=$val["valid_till"];
             $auto_aprove=$val["auto_aprove"];
@@ -44,6 +47,10 @@
             $hireloc2='';
             $hireloc3='';
         }
+
+        //Testing
+        //$message = "jappstatus" . $japp_status;
+        //echo "<script type='text/javascript'>alert('$message');</script>";
     }
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
@@ -132,18 +139,35 @@
             <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
         </div>
         <div class="row col-md-12" style="display:block; float:right;">
-            <button type="submit" class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button>
-            {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+            @auth('web')
+                @if( $japp_status > 0)
+                    <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$japp_status_text}}</button>
+                @else
+                    <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
+                    <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                    <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
+                        @csrf
+                    </form>
+                @endif
+            @else
+                <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
+                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
+                    @csrf
+                </form>
+            @endauth
         </div>
         <div class="row col-md-12" style="float:right; line-height:2;">
             <label style="display:inline-block; width:60%; background-color:rgba(99, 57, 116, 0.1); font-size:15px;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$minsal}} - {{$maxsal}}&nbsp;P.M.&emsp;&emsp;Posted {{$daystext}}</label>
             <label style="display:inline-block; width:40%; background-color:rgba(99, 57, 116, 0.1); float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
         <div class="fb-share-button" 
-            data-href="https://www.samsjobs.in/pay" 
+            data-href="{{$currenturl}}" 
             data-layout="button_count"
             data-size="large"
-            data-hashtag="#samsjobs">
+            data-hashtag="#samsjobs,#vijayawadajobs">
         </div>
     </div>
 </div>

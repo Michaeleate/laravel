@@ -22,6 +22,7 @@ use App\modresuemp;
 use App\modresuadd;
 use App\modresuref;
 use App\modjobpost;
+use App\mod_userjobstat;
 use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
@@ -33,6 +34,7 @@ use App\recruiter\modrecruiter;
 
 class PostsController extends Controller
 {
+    protected $dbstatus, $val1, $val2;
     public static function get_head() {
         if (Auth::check())
         {
@@ -1021,13 +1023,8 @@ class PostsController extends Controller
     //mike
     //Get Admin recruiter id by Admin id.
     public static function get_admrecid($admid) {
-        $message = "Inside get_admrecid function with auth id " . $admid;
-        echo "<script type='text/javascript'>alert('$message');</script>";
         if (Auth::guard('admin')->check())
         {
-            $message = "Inside admin guard if";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-            
             $admrecid = \App\recruiter\modrecruiter::select('id')
             ->where('user_type', '=', 3)
             ->where('is_admin', '=', true)
@@ -1035,15 +1032,10 @@ class PostsController extends Controller
             ->first();
 
             if(!$admrecid==null){
-                $message = "admrecid is not null " . $admrecid->id;
-                echo "<script type='text/javascript'>alert('$message');</script>";
                 return $admrecid;
             }
             else{
-                $message = "admrecid is null ";
-                echo "<script type='text/javascript'>alert('$message');</script>";
                 return 0;
-                
             }
         }
         else {
@@ -1384,7 +1376,7 @@ class PostsController extends Controller
             //echo "<script type='text/javascript'>alert('$message');</script>";
 
             $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
-            $jobdet->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
+            $jobdet->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text, '0' as japp_status, 'no' as japp_status_text"));
             $jobdet = $jobdet
                     ->where('job_id', '=', $jobid)
                     ->get();
@@ -1680,6 +1672,51 @@ class PostsController extends Controller
                             case "32":
                                 $val["hireloc3"]="Vizianagaram";
                                 break;                        
+                        }
+                    }
+                    if (Auth::check()) {
+                            $authid = Auth::id();
+                    
+                        //check job applied status
+                        $applied_status = \App\mod_userjobstat::select('app_status')
+                                            ->where('rec_id', '=', $authid)
+                                            ->where('job_id', '=', $val['job_id'])
+                                            ->get();
+                        
+                        foreach($applied_status as $key1=>$val1){
+                            $appstat=$val1["app_status"];
+                        }
+
+                        $val['japp_status']=$appstat;
+
+                        switch($appstat){
+                            case 0:
+                                $val['japp_status_text']="Not Applied";
+                                break;
+                            case 1:
+                                $val['japp_status_text']="Applied";
+                                break;
+                            case 2:
+                                $val['japp_status_text']="Application Sent";
+                                break;
+                            case 3:
+                                $val['japp_status_text']="Shortlisted";
+                                break;
+                            case 4:
+                                $val['japp_status_text']="Not shortlisted";
+                                break;
+                            case 5:
+                                $val['japp_status_text']="Scheduled Interview";
+                                break;
+                            case 6:
+                                $val['japp_status_text']="Interview Status";
+                                break;
+                            case 6:
+                                $val['japp_status_text']="Offer Status";
+                                break;
+                            case 6:
+                                $val['japp_status_text']="Job Closed";
+                                break;
                         }
                     }
                 
@@ -2142,7 +2179,7 @@ class PostsController extends Controller
 
 
             $jsearchall = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
-            $jsearchall = $jsearchall->addselect(DB::raw("'sampletext' as jstatus_text"));
+            $jsearchall = $jsearchall->addselect(DB::raw("'sampletext' as jstatus_text, '0' as japp_status, 'no' as japp_status_text"));
             $jsearchall = $jsearchall
                     ->where('keywords', 'like', '%' . $skey . '%')
                     ->orwhere('jtitle', 'like', '%' . $skey . '%')
@@ -2495,11 +2532,114 @@ class PostsController extends Controller
                         $val['jstatus_text']="Archieved";
                         break;
                 }
+
+                //check job applied status
+                $applied_status = \App\mod_userjobstat::select('app_status')
+                    ->where('rec_id', '=', $authid)
+                    ->where('job_id', '=', $val['job_id'])
+                    ->get();
+                
+                foreach($applied_status as $key1=>$val1){
+                    $appstat=$val1["app_status"];
+                }
+
+                $val['japp_status']=$appstat;
+                
+                switch($appstat){
+                    case 0:
+                        $val['japp_status_text']="Not Applied";
+                        break;
+                    case 1:
+                        $val['japp_status_text']="Applied";
+                        break;
+                    case 2:
+                        $val['japp_status_text']="Application Sent";
+                        break;
+                    case 3:
+                        $val['japp_status_text']="Shortlisted";
+                        break;
+                    case 4:
+                        $val['japp_status_text']="Not shortlisted";
+                        break;
+                    case 5:
+                        $val['japp_status_text']="Scheduled Interview";
+                        break;
+                    case 6:
+                        $val['japp_status_text']="Interview Status";
+                        break;
+                    case 6:
+                        $val['japp_status_text']="Offer Status";
+                        break;
+                    case 6:
+                        $val['japp_status_text']="Job Closed";
+                        break;
+                }
             }
             return $jsearchall;
         }
         else {
             return redirect()->route('login');
+        }
+    }
+
+    //Update user job stat table with status applied.
+    public static function user_apply_job($jobid) {
+        if (Auth::check())
+        {
+            $authid = Auth::id();
+            $app_status=$viewed_at=$applied_at=$schedule_id=$interview_id='';
+
+            $app_status=1; //applied status
+            //following change later when in search results.
+            $viewed_at=Carbon::now()->toDateTimeString();
+            $applied_at=Carbon::now()->toDateTimeString();
+            $schedule_id=0;
+            $interview_id=0;
+            return self::dbapplyjob($authid, $jobid, $app_status, $viewed_at,$applied_at, $schedule_id, $interview_id);
+            //echo "In get_profile function- ".$head;
+            if(!($dbstatus==true)){
+                return true;    
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return redirect()->route('login');
+        }
+    }
+
+    protected static function dbapplyjob($authid, $jobid, $app_status, $viewed_at,$applied_at, $schedule_id, $interview_id)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $dbrec = \App\mod_userjobstat::updateOrCreate(
+                [
+                 'rec_id' => $authid,
+                 'job_id' => $jobid
+                ], 
+                [
+                 'app_status'   => $app_status,
+                 'viewed_at'    => $viewed_at,
+                 'applied_at'   => $applied_at,
+                 'schedule_id'  => $schedule_id,
+                 'interview_id' => $interview_id
+                ]
+            );
+            
+            DB::commit();
+            $dbstatus=true;
+            return $dbstatus;
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+            $dbstatus=false;
+            return $dbstatus;
         }
     }
 }
