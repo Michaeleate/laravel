@@ -24,7 +24,7 @@ class JobsController extends Controller
         }
     }
     
-    //Post Job by Admin
+    //Post Job by Admin 
     public function pjbyadm(Request $request){
         $auth = Auth::guard('admin');
         if ($auth->check()){
