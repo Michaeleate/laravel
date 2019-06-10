@@ -30,7 +30,7 @@ class JobsController extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('admin.CRjob_ajob');
+            return \view('admin.CRjob_ajob');
         }
         else {
             return redirect('/mikeadmin');
