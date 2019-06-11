@@ -27,6 +27,7 @@
     <link href="{{asset('/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/zoomslider.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/style6.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/w3style.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/style.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/fontawesome-all.css')}}" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
