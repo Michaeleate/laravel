@@ -95,7 +95,7 @@ class AdmjobCont extends Controller
             return redirect('/admin/vlastjob')
                     ->with(array('link'=>$url_info));
         }
-        else {
+        else { 
             return view('mikeadmin');    
         }
     }
