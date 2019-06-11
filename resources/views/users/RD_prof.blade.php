@@ -210,15 +210,22 @@
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Search Jobs
+            Jobs
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="services.html">By Skillset</a>
-            <a class="dropdown-item" href="services.html">By Location</a>
-            <a class="dropdown-item" href="candidates_list.html" title="">By Role</a>
-            <a class="dropdown-item" href="candidates_list.html" title="">By Experience</a>
-            <a class="dropdown-item" href="candidates_single.html" title="">By Salary</a>
+            <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
+            <a class="dropdown-item" href="services.html">Apply Jobs</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Status
+            <i class="fas fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="services.html">Application Status</a>
+            <a class="dropdown-item" href="services.html">Interview Schedule</a>
         </div>
     </li>
     {{--

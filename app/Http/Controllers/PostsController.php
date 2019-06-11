@@ -3038,7 +3038,7 @@ class PostsController extends Controller
             return $recalljobs;
         }
         else {
-            return view('recruiter');
+            return view('home');
         }
     }
 }
