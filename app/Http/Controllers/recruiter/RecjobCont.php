@@ -79,7 +79,9 @@ class RecjobCont extends Controller
             }
 
             $comhirefor=$request->input('hirecomp');
-            $jstatus=0;
+            //Change this later to 0, so that admin can see and approve to status 1
+            //$jstatus=0;
+            $jstatus=1;
             $valid_till=Carbon::now()->addDays(30)->toDateTimeString();
             $auto_aprove="no";
             $auto_upd="no";
