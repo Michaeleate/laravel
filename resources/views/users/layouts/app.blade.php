@@ -60,7 +60,7 @@
                                     <label style="color: #ffff; float:right;">{{ Auth::user()->name }}!</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label style="color: #ffff;">Credits: 5000</label>
+                                    <label style="color: #ffff;">Credits: xxxx</label>
                                 </div>
                                 <div class="col-md-3 sign-btn">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();

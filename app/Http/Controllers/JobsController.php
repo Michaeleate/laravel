@@ -89,4 +89,17 @@ class JobsController extends Controller
             return redirect()->route('login');
         }
     }
+
+    //Auth candidate view all jobs
+    public function uvalljobs(){
+        $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+        if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+    
+            $jsearchall=PostsController::get_alljobs();
+            return view('users.RDsearch',compact('jsearchall'));
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
 }
