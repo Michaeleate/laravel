@@ -17,62 +17,32 @@ Route::get('/', function () {
 
 //Clear configurations:
 Route::get('/mike-config-clear', function() {
-	$status = Artisan::call('config:clear');
-
-    if($status == 1){
-        return '<h1>Configurations cleared</h1>';
-    }
-    else{
-        return '<h1>Configurations not cleared</h1>';
-    }
+	Artisan::call('config:clear');
+    return 'Configurations cleared';
 });
 
 //Clear cache:
 Route::get('/mike-cache-clear', function() {
-	$status = Artisan::call('cache:clear');
-    
-    if($status == 1){
-        return '<h1>Cache cleared - </h1>';
-    }
-    else{
-        return '<h1>Cache not cleared - </h1>';
-    }
+	Artisan::call('cache:clear');
+    return '<h1>Cache cleared - </h1>';
 });
 
 //Clear configuration cache:
 Route::get('/mike-config-cache', function() {
-	$status = Artisan::call('config:Cache');
-    
-    if($status == 1){
-        return '<h1>Configurations cache cleared</h1>';
-    }
-    else{
-        return '<h1>Configurations not cache cleared</h1>';
-    }
+	Artisan::call('config:Cache');
+    return '<h1>Configurations cache cleared</h1>';
 });
 
 //Migrate Tables:
 Route::get('/mike-migrate', function() {
-	$status = Artisan::call('migrate');
-    //return '<h1>Migrations completed</h1>';
-    if($status == 1){
-        return '<h1>Migrations completed</h1>';
-    }
-    else{
-        return '<h1>Migrations not completed</h1>';
-    }
+	Artisan::call('migrate');
+    return '<h1>Migrations completed</h1>';
 });
 
 //Rollback Tables:
 Route::get('/mike-rollback', function() {
-	$status = Artisan::call('migrate:rollback');
-    
-    if($status == 1){
-        return '<h1>Rollback completed</h1>';
-    }
-    else{
-        return '<h1>Rollback not completed</h1>';
-    }
+	Artisan::call('migrate:rollback');
+    return '<h1>Rollback completed</h1>';
 });
 
 //Candidates Index Page
