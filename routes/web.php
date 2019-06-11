@@ -94,6 +94,9 @@ Route::post('/updatepadd','AddController@updatepadd')->name('updatepadd');
 Route::post('/updateref1','RefController@updateref1')->name('updateref1');
 Route::post('/updateref2','RefController@updateref2')->name('updateref2');
 
+//View All Jobs posted - View
+Route::get('/uvalljobs', 'JobsController@uvalljobs')->name('uvalljobs');
+
 //--------------------------------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
