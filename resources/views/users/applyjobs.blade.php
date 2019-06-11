@@ -17,12 +17,7 @@
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
-    /*
-    $head=PostsController::get_head();
-    foreach($head as $key=>$val){
-        $head_line=$val["head_line"];
-    }
-    */
+    $jsearchall=PostsController::get_alljobs();
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -61,7 +56,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
-            <a class="dropdown-item" href="services.html">Interview Schedule</a>
+            <a class="dropdown-item" href="#">Interview Schedule</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -167,7 +162,7 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
-{{-- Resume Precisely--}}
+{{-- Search Form--}}
 
 {{--@if($jsearchall->total()==0) --}}
 @if((isset($jsearchall)))

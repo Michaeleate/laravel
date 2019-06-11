@@ -31,7 +31,7 @@
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color:rgba(99, 57, 116, 0.1);">
     <!-- banner-inner -->
     <div id="demo-2" class="page-content">
         <div class="dotts">
@@ -99,25 +99,102 @@
         <li class="breadcrumb-item">
             <a href="{{ url('/home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">Candidate Profile</li>
+        <li class="breadcrumb-item active">Apply Jobs</li>
     </ol>
     <!-- banner-text -->
     <!--/process-->
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'createprofile')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Build your profile</span></h3>
-                @elseif (\Route::current()->getName() == 'viewprofile')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Your complete profile</span></h3>
-                @endif
+                <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                <span>Search and Apply Jobs</span></h3>
+                <form action="{{ url('/searchjobs')}}" method="get" class="ban-form row">
+                    @csrf
+                    <div class="col-md-3 banf">
+                        <input class="form-control" type="text" name="skey" placeholder="Search Job">
+                    </div>
+                    <div class="col-md-3 banf">
+                        <select class="form-control" id="i-sloc" name="sloc" style="line-height:10px;height:50px; text-align:center;">
+                            <option value="30" selected>Vijayawada</option>
+                            <option value="11">Guntur</option>
+                            <option value="24">Rajahmundry</option>
+                            <option value="1">Adoni</option>
+                            <option value="2">Amaravati</option>
+                            <option value="3">Anantapur</option>
+                            <option value="4">Bhimavaram</option>
+                            <option value="5">Chilakaluripet</option>
+                            <option value="6">Chittoor</option>
+                            <option value="7">Dharmavaram</option>
+                            <option value="8">Eluru</option>
+                            <option value="9">Gudivada</option>
+                            <option value="10">Guntakal</option>
+                            <option value="12">Hindupur</option>
+                            <option value="13">Kadapa</option>
+                            <option value="14">Kakinada</option>
+                            <option value="15">Kavali</option>
+                            <option value="16">Kurnool</option>
+                            <option value="18">Machilipatnam</option>
+                            <option value="19">Madanapalle</option>
+                            <option value="20">Narasaraopet</option>
+                            <option value="21">Nellore</option>
+                            <option value="22">Ongole</option>
+                            <option value="23">Proddatur</option>
+                            <option value="25">Srikakulam</option>
+                            <option value="26">Tadepalligudem</option>
+                            <option value="27">Tadipatri</option>
+                            <option value="28">Tenali</option>
+                            <option value="29">Tirupati</option>
+                            <option value="31">Visakhapatnam</option>
+                            <option value="32">Vizianagaram</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 banf">
+                        <select id="i-sminexp" name="sminexp" class="form-control" style="line-height:10px; height:50px; text-align:center;">
+                            <option value="" disabled selected>Minimum Exp</option>
+                            <option value="0">Fresher</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 banf">
+                        <button class="btn1" type="submit">SEARCH
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right">
                         @yield('CreateProfileMenu')
                     </div>
-                    <div class="col-lg-8 job_info_left">
+                    <div class="col-lg-8 job_info_left" style="background-color:white;">
                         @yield('CreateResumeForm')
                     </div>
                     <div class="col-lg-2 job_info_last">

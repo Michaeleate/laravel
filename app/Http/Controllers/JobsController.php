@@ -102,4 +102,16 @@ class JobsController extends Controller
             return redirect()->route('login');
         }
     }
+
+    //Auth candidate search and apply jobs
+    public function uaplyjobs(){
+        if (Auth::check() || Auth::guard('admin')->check()) {
+    
+            $jsearchall=PostsController::get_alljobs();
+            return view('users.RDsearch',compact('jsearchall'));
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
 }
