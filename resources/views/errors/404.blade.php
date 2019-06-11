@@ -1,5 +1,4 @@
-@extends('admin.layouts.aapp')
-{{--<h1>This is from Admins home page in blade php</h1>--}}
+@extends('users.layouts.app')
 @section('search')
 <h4>
     <span>Search | Apply | Join</span> -
@@ -92,50 +91,37 @@
 </form>
 @endsection
 
-{{-- Build Menu for Registered admins --}}
+{{-- Build Menu for Registered Candidates --}}
 @section('buildMenu')
 <ul class="navbar-nav ml-lg-auto text-center">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('admin.home')}}">Home
+        <a class="nav-link" href="{{ url('/home')}}">Home
             <span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ route('cadmprofile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="{{ url('/user-profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Profile
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('cadmprofile') }}">Create Candidate Profile</a>
-            <a class="dropdown-item" href="{{ route('vadmprofile') }}">View Candidate Profile</a>
-            <a class="dropdown-item" href="{{ route('uadmprofile') }}">Modify Candidate Profile</a>
-            {{--
+            <a class="dropdown-item" href="{{ url('/user-profile') }}">Create Profile</a>
+            <a class="dropdown-item" href="{{ url('/view-user-profile') }}">View Profile</a>
+            <a class="dropdown-item" href="{{ url('/edit-user-profile') }}">Modify Profile</a>
             <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
-            --}}
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Jobs
+            Search Jobs
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('admin.postjob') }}" title="Post Requirements">Post Jobs</a>
-            <a class="dropdown-item" href="{{ route('admin.valljobs') }}" title="View all posted Jobs">View Jobs</a>
-            <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
-            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
-        </div>
-    </li>
- 
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Applications
-            <i class="fas fa-angle-down"></i>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="employer_list.html">Received</a>
-            <a class="dropdown-item" href="employer_list.html">Processed</a>
-            <a class="dropdown-item" href="employer_list.html">Status</a>
+            <a class="dropdown-item" href="services.html">By Skillset</a>
+            <a class="dropdown-item" href="services.html">By Location</a>
+            <a class="dropdown-item" href="candidates_list.html" title="">By Role</a>
+            <a class="dropdown-item" href="candidates_list.html" title="">By Experience</a>
+            <a class="dropdown-item" href="candidates_single.html" title="">By Salary</a>
         </div>
     </li>
  
@@ -145,14 +131,27 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Buy Credits</a>
-            <a class="dropdown-item" href="#">Credits Statement</a>
-            <a class="dropdown-item" href="#">Invoice</a>
+            <a class="dropdown-item" href="employer_list.html">Buy Credits</a>
+            <a class="dropdown-item" href="employer_list.html">Credits Statement</a>
+            <a class="dropdown-item" href="employer_single.html">Invoice</a>
         </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="contact.html">Contact</a>
     </li>
 </ul>
+@endsection
 
+@section('content')
+<div class="w3ls-container text-center">
+    <div class="w3layouts-image text-center">
+        <img src="images/board.png" alt="" />
+        <h2 class="header-w3ls">404</h2>
+    </div>	
+    <h3 class="img-txt">Oops, you've encountered an error!</h3>
+    <p>Looks like the page you are  trying to visit doesn't exist.</p>
+    <div class="agileits-link">
+        <a href="index.html">take me home</a>
+    </div>	
+</div>
 @endsection
