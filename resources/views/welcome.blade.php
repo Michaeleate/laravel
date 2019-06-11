@@ -224,7 +224,7 @@ Mike Ends --}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
-            <a class="dropdown-item" href="services.html">Apply Jobs</a>
+            <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -233,7 +233,7 @@ Mike Ends --}}
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="services.html">Application Status</a>
+            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
             <a class="dropdown-item" href="services.html">Interview Schedule</a>
         </div>
     </li>

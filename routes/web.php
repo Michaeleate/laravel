@@ -89,35 +89,31 @@ Route::post('/updateemp','EmpController@updateemp')->name('updateemp');
 Route::post('/updatecadd','AddController@updatecadd')->name('updatecadd');
 //Permanent Address in Candidate profile
 Route::post('/updatepadd','AddController@updatepadd')->name('updatepadd');
-
 //Update Candidate Reference details
 Route::post('/updateref1','RefController@updateref1')->name('updateref1');
 Route::post('/updateref2','RefController@updateref2')->name('updateref2');
-
 //View All Jobs posted - View
 Route::get('/uvalljobs', 'JobsController@uvalljobs')->name('uvalljobs');
+//User Search and Apply Jobs - View
+Route::view('/applyjobs', 'users.applyjobs')->name('applyjobs');
+//View Jobs Status - View
+Route::view('/viewjobstatus', 'users.jobstatus')->name('jobstatus');
 
-//--------------------------------------------------------------
+//------------------------RECRUITERS AREA--------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
-
 Route::post('rlogin','recruiter\Auth\LoginController@recruiterLogin')->name('rlogin');
 Route::post('/rregister','recruiter\Auth\RegisterController@register')->name('rregister');
-
-//Route::get('recruiter/routes', 'HomeController@admin')->middleware('recruiter');
-
 //Recruiters Index Page
 Route::get('/recruiter/home', 'recruiter\RechomeController@index')->name('recruiter.home');
 //Route::view('/home', 'home')->name('home');
 Route::post('/recruiter/logout','recruiter\Auth\LoginController@logout')->name('rlogout');
-
 //Create Recruiter Profile
 Route::get('/recruiter/crecprofile', 'recruiter\RecprofController@crecprofile')->name('crecprofile');
 //View Recruiter Profile
 Route::get('/recruiter/vrecprofile', 'recruiter\RecprofController@vrecprofile')->name('vrecprofile');
 //Update Recruiter Profile
 Route::get('/recruiter/urecprofile', 'recruiter\RecprofController@crecprofile')->name('urecprofile'); 
-
 //Update initial profile data
 Route::post('/recruiter/upinfopdet', 'recruiter\RecpdetCont@upinfopdet');
 //Update email and password
@@ -149,7 +145,6 @@ Route::post('/recruiter/uprecemp', 'recruiter\RecpdetCont@uprecemp');
 //Update Reference data
 Route::post('/recruiter/uprecref1', 'recruiter\RecpdetCont@uprecref1');
 Route::post('/recruiter/uprecref2', 'recruiter\RecpdetCont@uprecref2');
-/*------------------------------------------------------------*/
 //Job Posting by Recruiter - View
 Route::get('/postjob', 'JobsController@postjob')->name('postjob');
 //Job Posting by Recruiter
@@ -162,7 +157,7 @@ Route::get('/recruiter/valljobs', 'recruiter\RecjobCont@valljobs')->name('valljo
 Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
 //View full job details with parameter job_id;
 Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
-//----------------------------------------------------
+//----------------------------ADMINS AREA-----------------------------------
 //Admin view for registration and Login
 Route::view('/mikeadmin', 'auth.admin')->name('admin');
 //Admin Register and Login
@@ -192,6 +187,6 @@ Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmpro
 Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
 
 //Apply Job by Candidate - View
-Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+//Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
 //Job Posting by Recruiter
 //Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');

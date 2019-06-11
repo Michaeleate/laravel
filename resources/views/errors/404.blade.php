@@ -118,7 +118,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
-            <a class="dropdown-item" href="services.html">Apply Jobs</a>
+            <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
         </div>
     </li>
     <li class="nav-item dropdown">

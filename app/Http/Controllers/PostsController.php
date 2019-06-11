@@ -2188,19 +2188,26 @@ class PostsController extends Controller
 
             $jsearchall = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $jsearchall = $jsearchall->addselect(DB::raw("'sampletext' as jstatus_text, '0' as japp_status, 'no' as japp_status_text"));
+            if(!($skey==null)){
             $jsearchall = $jsearchall
                     ->where('keywords', 'like', '%' . $skey . '%')
                     ->orwhere('jtitle', 'like', '%' . $skey . '%')
-                    ->orwhere('jd', 'like', '%' . $skey . '%')
+                    ->orwhere('jd', 'like', '%' . $skey . '%');
+            }
+            if(!($sloc==null)){
+            $jsearchall = $jsearchall
                     ->orwhere('hireloc1', 'like', '%' . $sloc . '%')
                     ->orwhere('hireloc2', 'like', '%' . $sloc . '%')
-                    ->orwhere('hireloc3', 'like', '%' . $sloc . '%')
-                    //->orwhere('minexp', '>=', $sminexp)
-                    //->orwhere('maxexp', '<=', $sminexp)
+                    ->orwhere('hireloc3', 'like', '%' . $sloc . '%');
+            }
+            if(!($sminexp==null)){
+            $jsearchall = $jsearchall
                     ->orwhere(function ($query) use ($sminexp) {
                         $query->where('minexp', '<=', $sminexp)
                               ->where('maxexp', '>', $sminexp);
-                    })
+                    });
+            }
+            $jsearchall = $jsearchall
                     ->orderBy('job_id','asc')
                     ->paginate(3);
             

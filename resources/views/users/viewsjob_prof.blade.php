@@ -48,6 +48,8 @@
             $hireloc3='';
         }
 
+        $tweet_text=$jtitle. " - Job in Vijayawada SAMS";
+        $waurl="https%3A%2F%2Fwww.samsjobs.in%2Fviewjob%2F".$job_id;
         //Testing
         //$message = "jappstatus" . $japp_status;
         //echo "<script type='text/javascript'>alert('$message');</script>";
@@ -80,18 +82,19 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
-            <a class="dropdown-item" href="services.html">Apply Jobs</a>
+            <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Status
             <i class="fas fa-angle-down"></i>
-    {{--
-    <li class="nav-item">
-        <a class="nav-link" href="pricing.html">Pricing</a>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
+            <a class="dropdown-item" href="#">Interview Schedule</a>
+        </div>
     </li>
-    --}}
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Credits
@@ -164,11 +167,32 @@
             <label style="display:inline-block; width:60%; background-color:rgba(99, 57, 116, 0.1); font-size:15px;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$minsal}} - {{$maxsal}}&nbsp;P.M.&emsp;&emsp;Posted {{$daystext}}</label>
             <label style="display:inline-block; width:40%; background-color:rgba(99, 57, 116, 0.1); float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
-        <div class="fb-share-button" 
-            data-href="{{$currenturl}}" 
-            data-layout="button_count"
-            data-size="large"
-            data-hashtag="#samsjobs,#vijayawadajobs">
+        <div class="row col-md-12" style="float:right; line-height:2;">
+            <div class="fb-share-button" 
+                data-href="{{$currenturl}}" 
+                data-layout="button_count"
+                data-size="large"
+                data-hashtag="#samsjobs,#vijayawadajobs"
+                style="display:inline; margin:5px;">
+            </div>
+            <div style="display:inline; margin:5px;">
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" 
+                data-size="large" 
+                data-text="{{$tweet_text}}" 
+                data-url="{{$currenturl}}" 
+                data-via="callforsams" 
+                data-hashtags="callforsams, samsjobs" 
+                data-related="callforsams" 
+                data-lang="en" 
+                data-show-count="true">Tweet</a>
+            </div>
+            <div style="display:inline; margin:10px;">
+                <script type="IN/Share" 
+                data-url="{{$currenturl}}"
+                data-counter="right"
+                data-size="large">
+                </script>
+            </div>
         </div>
     </div>
 </div>
