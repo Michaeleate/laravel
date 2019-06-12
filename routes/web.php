@@ -187,6 +187,6 @@ Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmpro
 Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
 
 //Apply Job by Candidate - View
-//Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
 //Job Posting by Recruiter
-//Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
+Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
