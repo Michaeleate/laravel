@@ -97,7 +97,7 @@ Route::get('/uvalljobs', 'JobsController@uvalljobs')->name('uvalljobs');
 //User Search and Apply Jobs - View
 Route::view('/applyjobs', 'users.applyjobs')->name('applyjobs');
 //View Jobs Status - View
-Route::view('/viewjobstatus', 'users.jobstatus')->name('jobstatus');
+Route::get('/viewjobstatus', 'JobsController@ujallapplied')->name('ujallapplied');
 //Apply Job by Candidate - View
 Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
 //------------------------RECRUITERS AREA--------------------------------------

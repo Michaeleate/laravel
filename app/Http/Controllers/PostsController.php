@@ -1020,7 +1020,7 @@ class PostsController extends Controller
             return view('recruiter');
         }
     }
-    //mike
+    
     //Get Admin recruiter id by Admin id.
     public static function get_admrecid($admid) {
         if (Auth::guard('admin')->check())
@@ -2668,7 +2668,6 @@ class PostsController extends Controller
         }
     }
 
-    
     //Get all jobs posted by all recruiters.
     public static function get_alljobs() {
         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
@@ -3047,6 +3046,391 @@ class PostsController extends Controller
                     }
                 }
             return $recalljobs;
+        }
+        else {
+            return view('home');
+        }
+    }
+
+    //mike   
+    //Get all jobs posted by all recruiters.
+    public static function get_jallapplied() {
+        if (Auth::check() || Auth::guard('admin')->check())
+        {
+            if(Auth::check()){
+                $authid = Auth::id();
+                //Testing
+                // $message = "User ID is" . $authid;
+                // echo "<script type='text/javascript'>alert('$message');</script>";
+            }
+
+            //Testing
+            $message = "User ID is" . $authid;
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            //get all jobs applied by Candidate.
+            $ujallapplied = DB::table('jobpost')
+                    ->join('userjobstat',function($join) use ($authid){
+                        $join->on('jobpost.job_id','=','userjobstat.job_id')
+                            ->where('jobpost.rec_id','=', $authid);
+                    })
+                    ->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.jd as jd',  'jobpost.qty as qty', 'jobpost.keywords as keywords', 'jobpost.minexp as minexp', 'jobpost.maxexp as maxexp', 'jobpost.minsal as minsal', 'jobpost.maxsal as maxsal', 'jobpost.hireloc1 as hireloc1', 'jobpost.hireloc2 as hireloc2', 'jobpost.hireloc3 as hireloc3', 'jobpost.comhirefor as comhirefor', 'jobpost.jstatus as jstatus', 'jobpost.valid_till as valid_till', 'jobpost.auto_aprove as auto_aprove', 'jobpost.auto_upd as auto_upd', 'jobpost.created_at as created_at', 'jobpost.updated_at as updated_at','userjobstat.app_status as app_status', 'userjobstat.viewed_at as viewed_at', 'userjobstat.applied_at as applied_at', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id');
+            $ujallapplied = $ujallapplied->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
+            //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
+            $ujallapplied = $ujallapplied->orderBy('userjobstat.job_id','desc')
+                                        ->paginate(3);
+
+            // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
+                foreach($ujallapplied as $job){
+                    if(!(empty($job->hireloc1))){
+                        switch($job->hireloc1){
+                            case "30":
+                                $job->hireloc1="Vijayawada";
+                                break;                        
+                            case "11":
+                                $job->hireloc1="Guntur";
+                                break;                        
+                            case "24":
+                                $job->hireloc1="Rajahmundry";
+                                break;                        
+                            case "1":
+                                $job->hireloc1="Adoni";
+                                break;                        
+                            case "2":
+                                $job->hireloc1="Amaravati";
+                                break;                        
+                            case "3":
+                                $job->hireloc1="Anantapur";
+                                break;                        
+                            case "4":
+                                $job->hireloc1="Bhimavaram";
+                                break;                        
+                            case "5":
+                                $job->hireloc1="Chilakaluripet";
+                                break;                        
+                            case "6":
+                                $job->hireloc1="Chittoor";
+                                break;                        
+                            case "7":
+                                $job->hireloc1="Dharmavaram";
+                                break;                        
+                            case "8":
+                                $job->hireloc1="Eluru";
+                                break;                        
+                            case "9":
+                                $job->hireloc1="Gudivada";
+                                break;                        
+                            case "10":
+                                $job->hireloc1="Guntakal";
+                                break;                        
+                            case "12":
+                                $job->hireloc1="Hindupur";
+                                break;                        
+                            case "13":
+                                $job->hireloc1="Kadapa";
+                                break;                        
+                            case "14":
+                                $job->hireloc1="Kakinada";
+                                break;                        
+                            case "15":
+                                $job->hireloc1="Kavali";
+                                break;                        
+                            case "16":
+                                $job->hireloc1="Kurnool";
+                                break;                        
+                            case "18":
+                                $job->hireloc1="Machilipatnam";
+                                break;                        
+                            case "19":
+                                $job->hireloc1="Madanepalli";
+                                break;                        
+                            case "20":
+                                $job->hireloc1="Narsaraopet";
+                                break;                        
+                            case "21":
+                                $job->hireloc1="Nellore";
+                                break;                        
+                            case "22":
+                                $job->hireloc1="Ongole";
+                                break;                        
+                            case "23":
+                                $job->hireloc1="Proddatur";
+                                break;                        
+                            case "25":
+                                $job->hireloc1="Srikakulam";
+                                break;                        
+                            case "26":
+                                $job->hireloc1="Tadepalligudem";
+                                break;                        
+                            case "27":
+                                $job->hireloc1="Tadipatri";
+                                break;                        
+                            case "28":
+                                $job->hireloc1="Tenali";
+                                break;                        
+                            case "29":
+                                $job->hireloc1="Tirupati";
+                                break;                        
+                            case "31":
+                                $job->hireloc1="Visakhapatnam";
+                                break;                        
+                            case "32":
+                                $job->hireloc1="Vizianagaram";
+                                break;                        
+                        }
+                    }
+                    if(!(empty($job->hireloc2))){
+                        switch($job->hireloc2){
+                            case "30":
+                                $job->hireloc2="Vijayawada";
+                                break;                        
+                            case "11":
+                                $job->hireloc2="Guntur";
+                                break;                        
+                            case "24":
+                                $job->hireloc2="Rajahmundry";
+                                break;                        
+                            case "1":
+                                $job->hireloc2="Adoni";
+                                break;                        
+                            case "2":
+                                $job->hireloc2="Amaravati";
+                                break;                        
+                            case "3":
+                                $job->hireloc2="Anantapur";
+                                break;                        
+                            case "4":
+                                $job->hireloc2="Bhimavaram";
+                                break;                        
+                            case "5":
+                                $job->hireloc2="Chilakaluripet";
+                                break;                        
+                            case "6":
+                                $job->hireloc2="Chittoor";
+                                break;                        
+                            case "7":
+                                $job->hireloc2="Dharmavaram";
+                                break;                        
+                            case "8":
+                                $job->hireloc2="Eluru";
+                                break;                        
+                            case "9":
+                                $job->hireloc2="Gudivada";
+                                break;                        
+                            case "10":
+                                $job->hireloc2="Guntakal";
+                                break;                        
+                            case "12":
+                                $job->hireloc2="Hindupur";
+                                break;                        
+                            case "13":
+                                $job->hireloc2="Kadapa";
+                                break;                        
+                            case "14":
+                                $job->hireloc2="Kakinada";
+                                break;                        
+                            case "15":
+                                $job->hireloc2="Kavali";
+                                break;                        
+                            case "16":
+                                $job->hireloc2="Kurnool";
+                                break;                        
+                            case "18":
+                                $job->hireloc2="Machilipatnam";
+                                break;                        
+                            case "19":
+                                $job->hireloc2="Madanepalli";
+                                break;                        
+                            case "20":
+                                $job->hireloc2="Narsaraopet";
+                                break;                        
+                            case "21":
+                                $job->hireloc2="Nellore";
+                                break;                        
+                            case "22":
+                                $job->hireloc2="Ongole";
+                                break;                        
+                            case "23":
+                                $job->hireloc2="Proddatur";
+                                break;                        
+                            case "25":
+                                $job->hireloc2="Srikakulam";
+                                break;                        
+                            case "26":
+                                $job->hireloc2="Tadepalligudem";
+                                break;                        
+                            case "27":
+                                $job->hireloc2="Tadipatri";
+                                break;                        
+                            case "28":
+                                $job->hireloc2="Tenali";
+                                break;                        
+                            case "29":
+                                $job->hireloc2="Tirupati";
+                                break;                        
+                            case "31":
+                                $job->hireloc2="Visakhapatnam";
+                                break;                        
+                            case "32":
+                                $job->hireloc2="Vizianagaram";
+                                break;                        
+                        }
+                    }
+                    if(!(empty($job->hireloc3))){
+                        switch($job->hireloc3){
+                            case "30":
+                                $job->hireloc3="Vijayawada";
+                                break;                        
+                            case "11":
+                                $job->hireloc3="Guntur";
+                                break;                        
+                            case "24":
+                                $job->hireloc3="Rajahmundry";
+                                break;                        
+                            case "1":
+                                $job->hireloc3="Adoni";
+                                break;                        
+                            case "2":
+                                $job->hireloc3="Amaravati";
+                                break;                        
+                            case "3":
+                                $job->hireloc3="Anantapur";
+                                break;                        
+                            case "4":
+                                $job->hireloc3="Bhimavaram";
+                                break;                        
+                            case "5":
+                                $job->hireloc3="Chilakaluripet";
+                                break;                        
+                            case "6":
+                                $job->hireloc3="Chittoor";
+                                break;                        
+                            case "7":
+                                $job->hireloc3="Dharmavaram";
+                                break;                        
+                            case "8":
+                                $job->hireloc3="Eluru";
+                                break;                        
+                            case "9":
+                                $job->hireloc3="Gudivada";
+                                break;                        
+                            case "10":
+                                $job->hireloc3="Guntakal";
+                                break;                        
+                            case "12":
+                                $job->hireloc3="Hindupur";
+                                break;                        
+                            case "13":
+                                $job->hireloc3="Kadapa";
+                                break;                        
+                            case "14":
+                                $job->hireloc3="Kakinada";
+                                break;                        
+                            case "15":
+                                $job->hireloc3="Kavali";
+                                break;                        
+                            case "16":
+                                $job->hireloc3="Kurnool";
+                                break;                        
+                            case "18":
+                                $job->hireloc3="Machilipatnam";
+                                break;                        
+                            case "19":
+                                $job->hireloc3="Madanepalli";
+                                break;                        
+                            case "20":
+                                $job->hireloc3="Narsaraopet";
+                                break;                        
+                            case "21":
+                                $job->hireloc3="Nellore";
+                                break;                        
+                            case "22":
+                                $job->hireloc3="Ongole";
+                                break;                        
+                            case "23":
+                                $job->hireloc3="Proddatur";
+                                break;                        
+                            case "25":
+                                $job->hireloc3="Srikakulam";
+                                break;                        
+                            case "26":
+                                $job->hireloc3="Tadepalligudem";
+                                break;                        
+                            case "27":
+                                $job->hireloc3="Tadipatri";
+                                break;                        
+                            case "28":
+                                $job->hireloc3="Tenali";
+                                break;                        
+                            case "29":
+                                $job->hireloc3="Tirupati";
+                                break;                        
+                            case "31":
+                                $job->hireloc3="Visakhapatnam";
+                                break;                        
+                            case "32":
+                                $job->hireloc3="Vizianagaram";
+                                break;                        
+                        }
+                    }
+                    if(!(isset($job->hireloc2))){
+                        $job->hireloc2 ='';
+                        $job->hireloc3 ='';
+                    }
+                    
+                    //Count days when the job posted
+                    $ntimestamp= strtotime(Carbon::now());
+                    $valtstamp = strtotime($job->created_at);
+                    //$daysdiff=$val['created_at']->diffInDays(Carbon::now());
+                    $cdate = date('Y-m-d', $valtstamp);
+                    $ndate = date('Y-m-d', $ntimestamp);
+                    //$daysdiff=$cdate->diffInDays($ndate);
+
+                    $cdate1 = strtotime($cdate);
+                    $ndate1 = strtotime($ndate);
+                    $secsdiff = $ndate1 - $cdate1;
+                    $daysdiff = $secsdiff / 86400;
+                    
+                    //Testing
+                    //$message = "3Days difference" . $daysdiff;
+                    //echo "<script type='text/javascript'>alert('$message');</script>";
+                    
+                    switch($daysdiff){
+                        case 0:
+                            $job->days_text="Today";
+                            break;
+                        case 1:
+                            $job->days_text="Yesterday";
+                            break;
+                        default:
+                            $job->days_text=$daysdiff . " days ago";
+                    }
+
+                    //Job Status text as per value
+                    switch($job->jstatus){
+                        case 0:
+                            $job->jstatus_text="Approval Pending";
+                            break;
+                        case 1:
+                            $job->jstatus_text="Active";
+                            break;
+                        case 2:
+                            $job->jstatus_text="Rejected";
+                            break;
+                        case 3:
+                            $job->jstatus_text="Closed";
+                            break;
+                        case 4:
+                            $job->jstatus_text="Hold";
+                            break;
+                        case 5:
+                            $job->jstatus_text="Expired";
+                            break;
+                        case 6:
+                            $job->jstatus_text="Archieved";
+                            break;
+                    }
+                }
+            return $ujallapplied;
         }
         else {
             return view('home');

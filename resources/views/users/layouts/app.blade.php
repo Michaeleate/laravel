@@ -1535,6 +1535,7 @@
     <script>
         $('.counter').countUp();
     </script>
+    
     <!-- //stats -->
 
     <!-- //js -->

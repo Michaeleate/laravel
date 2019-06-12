@@ -103,13 +103,27 @@ class JobsController extends Controller
             return redirect()->route('login');
         }
     }
-
+    
     //Auth candidate search and apply jobs
     public function uaplyjobs(){
         if (Auth::check() || Auth::guard('admin')->check()) {
     
             $jsearchall=PostsController::get_alljobs();
             return view('users.RDsearch',compact('jsearchall'));
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
+
+    //View application status of all jobs applied.
+    public function ujallapplied(){
+        if (Auth::check() || Auth::guard('admin')->check()) {
+            //Testing
+            $message = "In ujallapplied of JobsController";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            $jsearchall=PostsController::get_jallapplied();
+            return view('users.jobstatus',compact('jsearchall'));
         }
         else{
             return redirect()->route('login');
