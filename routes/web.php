@@ -192,3 +192,4 @@ Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-
 
 //Job Posting by Recruiter
 Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
+ 
