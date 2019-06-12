@@ -187,6 +187,8 @@ Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmpro
 //Update Candidate or Recruiters Profile
 Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
 
-//check the following link
+//Apply Job by Candidate - View
+Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+
 //Job Posting by Recruiter
 Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
