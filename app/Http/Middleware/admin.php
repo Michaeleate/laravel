@@ -26,6 +26,6 @@ class admin
         }
         
         //echo "In middleware admin outside guard";
-        return redirect('admin')->with('error','Please Login as Admin');
+        return redirect('mikeadmin')->with('error','Please Login as Admin');
     }
 }

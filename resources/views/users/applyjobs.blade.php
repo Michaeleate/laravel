@@ -178,7 +178,7 @@
 {{ $jsearchall->links() }}
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:270px;">
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
             <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
@@ -223,11 +223,9 @@
             <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
             <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
-        {{--
         <div class="row col-md-12" style="display:block; float:right;">
-            <div id="shareRoundIcons" style="float:right;"></div>
+            <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
         </div>
-        --}}
     </div>
 </div>
 </a>

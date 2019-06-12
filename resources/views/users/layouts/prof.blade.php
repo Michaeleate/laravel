@@ -106,8 +106,16 @@
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                <span>Search and Apply Jobs</span></h3>
+                @if (\Route::current()->getName() == 'applyjobs')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Search and Apply Jobs</span></h3>
+                @endif
+                @if (\Route::current()->getName() == 'uvalljobs')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>View all jobs</span></h3>
+                @endif
+                
+                @if (\Route::current()->getName() == 'applyjobs')
                 <form action="{{ url('/searchjobs')}}" method="get" class="ban-form row">
                     @csrf
                     <div class="col-md-3 banf">
@@ -190,6 +198,7 @@
                         </button>
                     </div>
                 </form>
+                @endif
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right">
                         @yield('CreateProfileMenu')

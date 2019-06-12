@@ -1005,7 +1005,7 @@ class PostsController extends Controller
         if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
         {
             //$authid = Auth::guard('recruiter')->user()->id;
-
+            //get last jobid
             $maxjobid = \App\modjobpost::max('job_id');
                     //->first();
 
@@ -1060,6 +1060,7 @@ class PostsController extends Controller
                 $authid=$admrecid->id;
             }
 
+            //get all jobs posted by the recruiter only.
             $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at')
                     ->where('rec_id', '=', $authid)
                     ->orderBy('job_id','asc')
@@ -1375,6 +1376,7 @@ class PostsController extends Controller
             //$message = "Inside get viewsjob with job id" . $jobid;
             //echo "<script type='text/javascript'>alert('$message');</script>";
 
+            //Get recently posted job by the recruiter
             $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $jobdet->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text, '0' as japp_status, 'no' as japp_status_text"));
             $jobdet = $jobdet
@@ -1514,7 +1516,7 @@ class PostsController extends Controller
                                 break;                        
                             case "8":
                                 $val["hireloc2"]="Eluru";
-                                break;                        
+                                break;
                             case "9":
                                 $val["hireloc2"]="Gudivada";
                                 break;                        
@@ -1808,6 +1810,7 @@ class PostsController extends Controller
 
             //$message = "User ID is" . $authid;
             //echo "<script type='text/javascript'>alert('$message');</script>";
+            //get all jobs posted by recruiter pagination purpose.
             $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             $recalljobs = $recalljobs->where('rec_id', '=', $authid)
@@ -2185,7 +2188,7 @@ class PostsController extends Controller
                 $sminexp=0;
             }
 
-
+            //Get all Jobs based on search
             $jsearchall = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $jsearchall = $jsearchall->addselect(DB::raw("'sampletext' as jstatus_text, '0' as japp_status, 'no' as japp_status_text"));
             if(!($skey==null)){
@@ -2610,7 +2613,7 @@ class PostsController extends Controller
         {
             $authid = Auth::id();
             $app_status=$viewed_at=$applied_at=$schedule_id=$interview_id='';
-
+            $jobid=$jobid;
             $app_status=1; //applied status
             //following change later when in search results.
             $viewed_at=Carbon::now()->toDateTimeString();
@@ -2685,6 +2688,7 @@ class PostsController extends Controller
 
             //$message = "User ID is" . $authid;
             //echo "<script type='text/javascript'>alert('$message');</script>";
+            //get all jobs posted by all recruiters.
             $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             $recalljobs = $recalljobs->where('jstatus', '=', 1)
