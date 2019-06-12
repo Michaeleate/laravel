@@ -183,7 +183,11 @@
 {{ $jsearchall->links() }}
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
+@if (\Route::current()->getName() == 'searchjobs')
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:260px;">
+@else
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:260px;">
+@endif
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
             <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
@@ -228,11 +232,23 @@
             <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
             <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
-        {{--
+        {{-- Testing purpose only this division --}}
         <div class="row col-md-12" style="display:block; float:right;">
-            <div id="shareRoundIcons" style="float:right;"></div>
+            @if(isset($job->japp_status))
+            @if( $job->japp_status > 0)
+                <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
+            @else
+                <a href="{{ route('user-apply-job',$job->job_id) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
+                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                <form id="job-apply-form" action="{{ route('user-apply-job',$job->job_id) }}" method="POST">
+                    @csrf
+                </form>
+            @endif
+            @else
+                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+            @endif
         </div>
-        --}}
     </div>
 </div>
 </a>

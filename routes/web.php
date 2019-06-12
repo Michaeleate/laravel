@@ -98,7 +98,8 @@ Route::get('/uvalljobs', 'JobsController@uvalljobs')->name('uvalljobs');
 Route::view('/applyjobs', 'users.applyjobs')->name('applyjobs');
 //View Jobs Status - View
 Route::view('/viewjobstatus', 'users.jobstatus')->name('jobstatus');
-
+//Apply Job by Candidate - View
+Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
 //------------------------RECRUITERS AREA--------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
@@ -186,7 +187,6 @@ Route::get('/admin/vadmprofile', 'admin\AdmprofCont@vadmprofile')->name('vadmpro
 //Update Candidate or Recruiters Profile
 Route::get('/admin/uadmprofile', 'admin\AdmprofCont@cadmprofile')->name('uadmprofile'); 
 
-//Apply Job by Candidate - View
-//Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+//check the following link
 //Job Posting by Recruiter
-//Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
+Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');

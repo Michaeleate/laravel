@@ -73,6 +73,7 @@ class JobsController extends Controller
         //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
         //echo "<script type='text/javascript'>alert('$message');</script>";
             $authid = Auth::id();
+            //$jobid=$jobid;
             //$check_val_credit=PostsController::check_val_credit();
             $apply_job=PostsController::user_apply_job($jobid);
             if($apply_job == true){
