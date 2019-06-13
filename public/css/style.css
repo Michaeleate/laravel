@@ -1393,6 +1393,26 @@ tr.tl1 td {
     border: none;
     }
 
+    .appstat {
+        color: white;
+        padding: 8px;
+        width: 100px;
+        height: 30px;
+        line-height: 15px;
+        text-align: center;
+        font-size: small;
+      }
+      
+    .applied {background-color: #BED0F4;}
+    .appsent {background-color: #8BA6E9;}
+    .appview {background-color: #7E96C4;}
+    .shortlist {background-color: #D7B7BC;}
+    .notshort {background-color: #F7E4E0;}
+    .scheduled {background-color: #D28140;}
+    .interviewed {background-color: #C5EADB;}
+    .offer {background-color: #DCD7D5;}
+    .closed {background-color: #495F75;}
+
 /*Mike Ends*/
 
 .emply-resume-info h5 {
