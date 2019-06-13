@@ -574,7 +574,7 @@ class PostsController extends Controller
         {
             $authid = Auth::id();
 
-            $resume = \App\modresuemp::select('emp_name','desg','startdt','enddt','msal', 'resp','nperiod','updated_at')
+            $resume = \App\modresuemp::select('emp_name','exp_months','desg','startdt','enddt','msal', 'resp','nperiod','updated_at')
                     ->where('emp_id', '=', $authid)
                     ->get();
 

@@ -11,7 +11,7 @@
     $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
     $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
     $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
-    $empname=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $empname=$expyears=$expyears1=$expmonths1=$expmonths=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
     $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
@@ -109,6 +109,7 @@
     $emp=PostsController::get_emp();
     foreach($emp as $key=>$val){
         $empname=$val["emp_name"];
+        $expmonths=$val["exp_months"];
         $desg=$val["desg"];
         $startdt=$val["startdt"];
         $enddt=$val["enddt"];
@@ -116,6 +117,21 @@
         $resp=$val["resp"];
         $nperiod=$val["nperiod"];
         $emptime=$val["updated_at"];
+    }
+
+    if($expmonths>12){
+        $expyears1=(int)floor($expmonths/12);
+        $expmonths1=$expmonths % 12;
+        $expyears=$expyears1.".".$expmonths1." Yrs";
+    }
+    else{
+        $expyears1=0;
+        if($expmonths>0){
+            $expyears=$expmonths." Months";
+        }
+        else{
+            $expyears="Fresher";
+        }
     }
 
     $msal_length=strlen($msal);
@@ -258,24 +274,24 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; background-color:rgba(99, 57, 116, 0.1);">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important; background-color:rgba(99, 57, 116, 0.1);">
     <div class="row emply-info">
         <div class="col-md-3">
-        <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:80%">
+        <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
         </div>
-        <div class="col-md-6" style="float:left;">
+        <div class="col-md-6" style="float:left; height:200px;">
             <label style="width:100%;">{{$fname}}</label>
             <label style="width:100%;">{{$desg}} in {{$empname}}</label>
             <div class="col-md-6" style="float:left;">
                 <label style="width:100%;">{{$city1}}</label>
-                <label style="width:100%;">Experience: </label>
+                <label style="width:100%;">{{$expyears}}</label>
             </div>
             <div class="col-md-6" style="float:right;">
                 <label style="width:100%;">+91 {{$mob_num}} </label>
                 <label style="width:100%;">{{$email}} </label>
             </div>
         </div>
-        <div class="col-md-3" style="float:right; background-color:rgba(99, 57, 116, 0.2);">
+        <div class="col-md-3" style="float:right; background-color:rgba(99, 57, 116, 0.2);height:115px !important;">
             <label style="width:100%;">Recruiters Search: 100</label>
             <label style="width:100%;">Jobs Applied: 100</label>
             <label style="width:100%;">Updated: {{substr($resutime, 0, 10)}}</label>

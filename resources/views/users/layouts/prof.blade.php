@@ -99,13 +99,29 @@
         <li class="breadcrumb-item">
             <a href="{{ url('/home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">Apply Jobs</li>
+        @if (\Route::current()->getName() == 'createprofile')
+            <li class="breadcrumb-item active">Create Profile</li>
+        @endif
+        @if (\Route::current()->getName() == 'viewprofile')
+            <li class="breadcrumb-item active">View Profile</li>
+        @endif
+        @if (\Route::current()->getName() == 'applyjobs')
+            <li class="breadcrumb-item active">Apply Jobs</li>
+        @endif
     </ol>
     <!-- banner-text -->
     <!--/process-->
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
+                @if (\Route::current()->getName() == 'createprofile')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Create your Profile</span></h3>
+                @endif
+                @if (\Route::current()->getName() == 'viewprofile')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Your Complete Profile</span></h3>
+                @endif
                 @if (\Route::current()->getName() == 'applyjobs')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Search and Apply Jobs</span></h3>
@@ -454,6 +470,8 @@
         percentage4 = <?php echo json_encode($percentage4) ?>,
         edutime4 = <?php echo json_encode($edutime4) ?>,
         empname = <?php echo json_encode($empname) ?>,
+        expyears1 = <?php echo json_encode($expyears1) ?>,
+        expmonths1 = <?php echo json_encode($expmonths1) ?>,
         desg = <?php echo json_encode($desg) ?>,
         startdt = <?php echo json_encode($startdt) ?>,
         enddt = <?php echo json_encode($enddt) ?>,
@@ -659,6 +677,8 @@
 
             $("#addempmodal").on('shown.bs.modal', function(){
                 $('#org5').val([empname]).change();
+                $('#yearsexp5').val([expyears1]).change();
+                $('#monthsexp5').val([expmonths1]).change();
                 $('#role5').val([desg]).change();
                 $('#role5start').val([startdt]).change();
                 $('#role5end').val([enddt]).change();

@@ -22,6 +22,24 @@ class EmpController extends Controller
             session()->forget(array('hl','ares','uk','up','aed10','aed12','aedgrad','aedpg','aem','aca','apa','ar1','ar2'));
             
             $emp_name=$request->input('org5');
+            
+            if(null !== ($request->input('yearsexp5'))){
+                if(null == ($request->input('monthsexp5'))){
+                    $exp_months=$request->input('yearsexp5') * 12;
+                }
+                else{
+                    $exp_months=($request->input('yearsexp5') * 12) + $request->input('monthsexp5');
+                }
+            }
+            else{
+                if(null == ($request->input('monthsexp5'))){
+                    $exp_months=0;
+                }
+                else{
+                    $exp_months=$request->input('monthsexp5');
+                }
+            }
+            
             $desg=$request->input('role5');
             $startdt=$request->input('role5start');
             $enddt=$request->input('role5end');
@@ -31,7 +49,7 @@ class EmpController extends Controller
             $resp=$request->input('resp');
             $nperiod=$request->input('notice5');
             
-            $this->updatedb($authid,$emp_name,$desg,$startdt,$enddt,$msal,$resp,$nperiod);
+            $this->updatedb($authid,$emp_name,$exp_months,$desg,$startdt,$enddt,$msal,$resp,$nperiod);
 
             $stat3="- Saved";
             return redirect('user-profile')
@@ -43,7 +61,7 @@ class EmpController extends Controller
         }
     }
 
-    private function updatedb($authid,$emp_name,$desg,$startdt,$enddt,$msal,$resp,$nperiod)
+    private function updatedb($authid,$emp_name,$exp_months,$desg,$startdt,$enddt,$msal,$resp,$nperiod)
     {
         try{
             DB::beginTransaction();
@@ -57,6 +75,7 @@ class EmpController extends Controller
                 'emp_name'  => $emp_name
                ],
                [ 
+                'exp_months'    => $exp_months,
                 'desg'      => $desg,
                 'startdt'   => $startdt,
                 'enddt'     => $enddt,

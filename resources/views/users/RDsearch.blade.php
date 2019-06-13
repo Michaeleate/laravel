@@ -11,7 +11,7 @@
     $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
     $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
     $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
-    $empname=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $empname=$expyears1=$expmonths=$expmonths1=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
     $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';

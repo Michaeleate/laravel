@@ -9,6 +9,7 @@ class modresuemp extends Model
     protected $fillable = [
         'emp_id',
         'emp_name',
+        'exp_months',
         'desg',
         'startdt',
         'enddt',
