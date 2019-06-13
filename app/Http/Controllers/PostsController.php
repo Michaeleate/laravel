@@ -3065,8 +3065,8 @@ class PostsController extends Controller
             }
 
             //Testing
-            $message = "User ID is" . $authid;
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            // $message = "User ID is" . $authid;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
             //get all jobs applied by Candidate.
             $ujallapplied = DB::table('jobpost')
                     ->join('userjobstat',function($join) use ($authid){

@@ -175,7 +175,7 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">No Search results. Refine your search.</label>
+            <label style="width:100%; color:blue;">No results. Please apply.</label>
         </div>
     </div>
 </div>
@@ -228,21 +228,69 @@
             <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
             <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
-        {{-- Testing purpose only this division --}}
-        <div class="row col-md-12" style="display:block; float:right;">
-            @if(isset($job->japp_status))
-            @if( $job->japp_status > 0)
-                <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
-            @else
-                <a href="{{ route('user-apply-job',$job->job_id) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
-                {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
-                <form id="job-apply-form" action="{{ route('user-apply-job',$job->job_id) }}" method="POST">
-                    @csrf
-                </form>
-            @endif
+        <div class="row col-md-12" style="display:block; float:left;">
+            @if(isset($job->app_status))
+            {{-- <span class="appstat applied">Applied</span> --}}
+            @if( $job->app_status > 0)
+                @switch($job->app_status)
+                    @case ("1")
+                        <span class="appstat applied">Applied</span>
+                        @break
+                    @case ("2")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        @break
+                    @case ("3")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        @break
+                    @case ("4")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        @break
+                    @case ("5")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat notshort">Not shortlisted</span>
+                        @break
+                    @case ("6")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        <span class="appstat scheduled">Scheduled Interview</span>
+                        @break
+                    @case ("7")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        <span class="appstat scheduled">Scheduled Interview</span>
+                        <span class="appstat interviewed">Interviewed</span>
+                        <span class="appstat offer">Interviewed</span>
+                        @break
+                    @case ("8")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        <span class="appstat scheduled">Scheduled Interview</span>
+                        <span class="appstat interviewed">Interviewed</span>
+                        <span class="appstat offer">Offered</span>
+                        @break
+                    @default
+                        Not Applicable
+                @endswitch
+                @if( $job->app_status == 9)
+                     <span class="appstat closed">Closed</span>
+                @endif
             @else
                 <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+            @endif
             @endif
         </div>
     </div>

@@ -120,8 +120,8 @@ class JobsController extends Controller
     public function ujallapplied(){
         if (Auth::check() || Auth::guard('admin')->check()) {
             //Testing
-            $message = "In ujallapplied of JobsController";
-            echo "<script type='text/javascript'>alert('$message');</script>";
+            // $message = "In ujallapplied of JobsController";
+            // echo "<script type='text/javascript'>alert('$message');</script>";
             $jsearchall=PostsController::get_jallapplied();
             return view('users.jobstatus',compact('jsearchall'));
         }
