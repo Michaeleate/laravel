@@ -3051,8 +3051,7 @@ class PostsController extends Controller
             return view('home');
         }
     }
-
-    //mike   
+       
     //Get all jobs posted by all recruiters.
     public static function get_jallapplied() {
         if (Auth::check() || Auth::guard('admin')->check())
@@ -3429,6 +3428,48 @@ class PostsController extends Controller
                             $job->jstatus_text="Archieved";
                             break;
                     }
+                }
+            return $ujallapplied;
+        }
+        else {
+            return view('home');
+        }
+    }
+    //Mike
+    //Get all job applications applied by users.
+    public static function get_recgetjapp() {
+        if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+        {
+            $authid=0; //initializing auth id
+            if(Auth::guard('recruiter')->check()){
+                $authid = Auth::guard('recruiter')->user()->id;
+            }
+
+            //Testing
+            // $message = "User ID is" . $authid;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            //get all jobs applied by Candidate.
+            $recgetjapp = DB::table('jobpost')
+                    ->join('userjobstat',function($join) use ($authid){
+                        $join->on('jobpost.job_id','=','userjobstat.job_id')
+                            ->where('jobpost.rec_id','=', $authid);
+                    })
+                    ->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.jd as jd',  'jobpost.qty as qty', 'jobpost.keywords as keywords', 'jobpost.minexp as minexp', 'jobpost.maxexp as maxexp', 'jobpost.minsal as minsal', 'jobpost.maxsal as maxsal', 'jobpost.hireloc1 as hireloc1', 'jobpost.hireloc2 as hireloc2', 'jobpost.hireloc3 as hireloc3', 'jobpost.comhirefor as comhirefor', 'jobpost.jstatus as jstatus', 'jobpost.valid_till as valid_till', 'jobpost.auto_aprove as auto_aprove', 'jobpost.auto_upd as auto_upd', 'jobpost.created_at as created_at', 'jobpost.updated_at as updated_at','userjobstat.app_status as app_status', 'userjobstat.viewed_at as viewed_at', 'userjobstat.applied_at as applied_at', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id');
+            $ujallapplied = $ujallapplied->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
+            //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
+            $ujallapplied = $ujallapplied->orderBy('userjobstat.job_id','desc')
+                                        ->paginate(3);
+
+            // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
+                foreach($ujallapplied as $job){
+                    if(!(empty($job->hireloc1))){
+                        switch($job->hireloc1){
+                            case "32":
+                                $job->hireloc1="Vizianagaram";
+                                break;                        
+                        }
+                    }
+                    
                 }
             return $ujallapplied;
         }

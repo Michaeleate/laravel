@@ -27,8 +27,9 @@ class RecjobCont extends Controller
     public function __construct()
     {
         $this->middleware('recruiter:admin')->except('logout');
-        $message = "In Middleware admin";
-        echo "<script type='text/javascript'>alert('$message');</script>";
+        // Testing
+        // $message = "In Middleware admin";
+        // echo "<script type='text/javascript'>alert('$message');</script>";
     }
 
     public function recpostjob(Request $request){
@@ -206,5 +207,14 @@ class RecjobCont extends Controller
         $recalljobs=PostsController::get_recalljobs();
         
         return view('recruiter.RDajobs_rprof',compact('recalljobs'));
+    }
+
+    //View all Job applications received by recruiter
+    public function recgetjapp(){
+        $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+    
+        $recalljapps=PostsController::get_recgetjapp();
+        
+        return view('recruiter.getajapps_rprof',compact('recalljapps'));
     }
 }
