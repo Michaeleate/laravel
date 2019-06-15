@@ -11,7 +11,7 @@
     $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
     $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
     $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
-    $empname=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $empname=$expyears1=$expmonths1=$expmonths=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
     $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
@@ -110,6 +110,7 @@
     $emp=PostsController::get_emp();
     foreach($emp as $key=>$val){
         $empname=$val["emp_name"];
+        $expmonths=$val["exp_months"];
         $desg=$val["desg"];
         $startdt=$val["startdt"];
         $enddt=$val["enddt"];
@@ -117,6 +118,14 @@
         $resp=$val["resp"];
         $nperiod=$val["nperiod"];
         $emptime=$val["updated_at"];
+    }
+
+    if($expmonths>12){
+        $expyears1=(int)floor($expmonths/12);
+        $expmonths1=$expmonths % 12;
+    }
+    else{
+        $expyears1=0;
     }
 
     $msal_length=strlen($msal);
@@ -2192,6 +2201,11 @@
                     <h5 class="text-left mb-4">Add Current/ Last Employment Details</h5>
                     <form role="form" action="{{url('/updateemp')}}" method="post">
                         @csrf
+                        <div class="form-group" style="display:block;">
+                            <label class="mb-2" style="color:blue;">Total No. of Experience: (Fresher - leave blank)</label>
+                            <input type="number" class="form-control" id="yearsexp5" name="yearsexp5" min="0" max="60" placeholder="Years">
+                            <input type="number" class="form-control" id="monthsexp5" name="monthsexp5" min="0" max="12" placeholder="Months">
+                        </div>
                         <div class="form-group">
                             <label class="mb-2" style="color:blue;">Organization Name:</label>
                             <input type="text" class="form-control" id="org5" name="org5" placeholder="Your Employer Name">

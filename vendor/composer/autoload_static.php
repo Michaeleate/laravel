@@ -471,6 +471,7 @@ class ComposerStaticInit20c8620d19608fe429b313854e02d7f1
         'App\\Resume' => __DIR__ . '/../..' . '/app/Resume.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\admin\\modadmins' => __DIR__ . '/../..' . '/app/admin/modadmins.php',
+        'App\\mod_userjobstat' => __DIR__ . '/../..' . '/app/mod_userjobstat.php',
         'App\\modjobpost' => __DIR__ . '/../..' . '/app/modjobpost.php',
         'App\\modresuadd' => __DIR__ . '/../..' . '/app/modresuadd.php',
         'App\\modresuedu' => __DIR__ . '/../..' . '/app/modresuedu.php',

@@ -147,24 +147,34 @@
                 @if( $japp_status > 0)
                     <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$japp_status_text}}</button>
                 @else
+                    @if(Auth::check())
                     <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
                     <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
                     {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                     <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                         @csrf
                     </form>
+                    @endif
                 @endif
             @else
+                @if(Auth::check())
                 <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
                 <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
                 {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                 <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                     @csrf
                 </form>
+                @endif
             @endauth
         </div>
         <div class="row col-md-12" style="float:right; line-height:2;">
-            <label style="display:inline-block; width:60%; background-color:rgba(99, 57, 116, 0.1); font-size:15px;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$minsal}} - {{$maxsal}}&nbsp;P.M.&emsp;&emsp;Posted {{$daystext}}</label>
+            <label style="display:inline-block; width:60%; background-color:rgba(99, 57, 116, 0.1); font-size:15px;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
+            @if($minsal>0)
+            {{$minsal}} - {{$maxsal}}&nbsp;P.M.&emsp;&emsp;
+            @else
+            Not Disclosed&emsp;&emsp;
+            @endif
+            Posted {{$daystext}}</label>
             <label style="display:inline-block; width:40%; background-color:rgba(99, 57, 116, 0.1); float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
         <div class="row col-md-12" style="float:right; line-height:2;">

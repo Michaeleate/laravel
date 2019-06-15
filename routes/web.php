@@ -154,10 +154,15 @@ Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('r
 Route::get('/recruiter/vlastjob', 'recruiter\RecjobCont@vlastjob')->name('vlastjob');
 //View All Jobs posted by Recruiter - View
 Route::get('/recruiter/valljobs', 'recruiter\RecjobCont@valljobs')->name('valljobs');
+//View All Job applications received by Recruiter - View
+Route::get('/recruiter/recgetjapp', 'recruiter\RecjobCont@recgetjapp')->name('recgetjapp');
+
 //Search jobs by keywords View
 Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
 //View full job details with parameter job_id;
 Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
+//View User profile by recruiter
+Route::get('/viewuserprof/{userid}', 'JobsController@viewuserprof')->name('viewuserprof');
 //----------------------------ADMINS AREA-----------------------------------
 //Admin view for registration and Login
 Route::view('/mikeadmin', 'auth.admin')->name('admin');

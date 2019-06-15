@@ -233,62 +233,63 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
-{{ $recalljobs->links() }}
-@foreach($recalljobs as $job)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
+@if($recalljapps->total()==0)
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
-        <div class="col-md-9" style="float:left;">
-            <label style="width:100%; color:blue;">{{ $job->jtitle}}</label>
-            <label style="width:100%;">{{$job->comhirefor}}</label>
-            <div style="display:inline-block;">
-                <i class="fas fa-briefcase" style="display:inline;"></i>
-                <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
-                <span style="width:10px; display:inline;"> - </span>
-                <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
-            </div>
-            <div style="display:inline-block;">
-                <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
-                <i class="fas fa-map-marker-alt" style="display:inline;"></i>
-                <label style="width:160px; display:inline;">
-                {{$job->hireloc1}}
-                @if(!($job->hireloc2)=='')
-                ,  {{$job->hireloc2}}
-                @endif
-
-                @if(!($job->hireloc3)=='')
-                ,  {{$job->hireloc3}}
-                @endif
-                </label>
-            </div>
+        <div class="col-md-12" style="float:left;">
+            <label style="width:100%; color:blue;">You haven't applied to any jobs yet.</label>
+            <label style="width:100%; color:blue;">View and Search Link</label>
         </div>
-        <div class="col-md-3" style="float:right;">
-            {{--
-            <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
-            --}}
-            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
-            <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
-            {{--   <label style="display:block; width:100%;"> </label> --}}
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
-            <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">
-            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
-            <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
-        </div>
-        {{--
-        <div class="row col-md-12" style="display:block; float:right;">
-            <div id="shareRoundIcons" style="float:right;"></div>
-        </div>
-        --}}
     </div>
 </div>
+@else
+{{ $recalljapps->links() }}
+@foreach($recalljapps as $job)
+{{-----------------------}}
+<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:240px !important;">
+    <div class="row emply-info">
+        <div class="col-md-3">
+            <img src="{{url($job->picpath)}}" style="border-radius:80%; width:100px; height:100px;margin-left:10px;">
+            <a href="{{ route('viewuserprof', $job->userid)}}" target="_blank" style="color:black; cursor: pointer;">
+                <button class="btn btn-primary" style="width:130px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Complete Profile</button>
+            </a>
+            <a href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;">
+                <button class="btn btn-primary" style="width:130px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job Details</button>
+            </a>
+        </div>
+        <div class="col-md-9" style="float:left; height:200px; font-size:small;border-left-style: solid; border-width: 1px; border-color: rgba(99, 57, 116, 0.1)">
+            <label style="width:100%; color:blue; font-size:medium !important"><b>{{$job->name}}</b></label>
+            @if(!($job->expyears_text=="Fresher"))
+                <label style="width:100%;">working as {{$job->desg}} in {{$job->emp_name}}</label>
+            @endif
+            <div class="col-md-7" style="float:left;">
+                <label style="width:100%;">Exp: {{$job->expyears_text}}</label>
+                @if(!($job->expyears_text=="Fresher"))
+                    <label style="width:100%;">Sal: Rs. {{$job->msal}} P.A</label>
+                    <label style="width:100%;">Current Role: {{$job->desg}}</label>
+                    <label style="width:100%;">Current Company: {{$job->emp_name}}.</label>
+                @endif
+            </div>
+            <div class="col-md-5" style="float:right;">
+                <label style="width:100%;">Qual: {{$job->qual}}</label>
+                <label style="width:100%;">Col:  {{$job->colname}}</label>
+                <label style="width:100%;">Year: {{$job->pyear}}</label>
+                <label style="width:100%;">Type: {{$job->cortype}}</label>
+            </div>
+            <label style="width:100%;">Applied for {{$job->jtitle}} in {{$job->comhirefor}}</label>
+            {{-- Enable only for premium recruiters
+            <div class="col-md-6" style="float:right;">
+                <label style="width:100%;">+91 {{$mob_num}} </label>
+                <label style="width:100%;">{{$email}} </label>
+            </div> --}}
+        </div>
+    </div>
+</div>
+{{-- ------------------- --}}
+
 @endforeach
-{{ $recalljobs->links() }}
+{{ $recalljapps->links() }}
+@endif
 @endsection
 
 @section('displayads')
@@ -296,29 +297,4 @@
 
 <script language="Javascript" type="text/javascript">
 /*Function for counting characters for textarea */
-function countChars(obj,elid,talen){
-    var maxLength = talen;
-    var strLength = obj.value.length;
-    var charRemain = (maxLength - strLength);
-    var charOver = (strLength - maxLength);
-    
-    if(charRemain < 0){
-        document.getElementById(elid).innerHTML = '<label style="justify:right; width:100%; color: red;">Please remove '+charOver+' characters</label>';
-    }else{
-        document.getElementById(elid).innerHTML = '<label style="justify:right; width:100%; color: green;">'+charRemain+' character(s) left';
-    }
-}
-
-//Change the textarea color
-function backgrey(obj){
-    //alert("mike");
-    //document.getElementById("i-jobdesc").style.backgroundcolor = "red";
-    $("#i-jobdesc").css( "background", "#f8f9fa" );
-}
-//Change the textarea color back to normal
-function normalcolor(obj){
-    //alert("mike");
-    //document.getElementById("i-jobdesc").style.backgroundcolor = "red";
-    $("#i-jobdesc").css( "background", "white" );
-}
 </script>

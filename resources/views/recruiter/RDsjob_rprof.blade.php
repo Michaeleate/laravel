@@ -120,7 +120,7 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="employer_list.html">Received</a>
+            <a class="dropdown-item" href="{{ route('recgetjapp') }}">Received</a>
             <a class="dropdown-item" href="employer_list.html">Processed</a>
             <a class="dropdown-item" href="employer_list.html">Status</a>
         </div>

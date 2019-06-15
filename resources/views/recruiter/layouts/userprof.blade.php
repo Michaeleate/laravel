@@ -28,13 +28,11 @@
     <link href="{{ URL::asset('/') }}css/style6.css" rel='stylesheet' type='text/css' />
     <link href="{{ URL::asset('/') }}css/style.css" rel='stylesheet' type='text/css' />
     <link href="{{ URL::asset('/') }}css/fontawesome-all.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/') }}css/jssocials.css" />
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/') }}css/jssocials-theme-flat.css" />
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
 
-<body style="background-color:rgba(99, 57, 116, 0.1);">
+<body>
     <!-- banner-inner -->
     <div id="demo-2" class="page-content">
         <div class="dotts">
@@ -46,8 +44,6 @@
                                 <label style="color: #ffff; float:right;">
                                     @if(Auth::guard('recruiter')->check())
                                         {{ Auth::guard('recruiter')->user()->name }}
-                                    @elseif(Auth::guard('admin')->check())
-                                        {{Auth::guard('admin')->user()->name}}
                                     @endif
                                 </label>
                             </div>
@@ -97,36 +93,22 @@
         <li class="breadcrumb-item">
             <a href="{{ url('/recruiter/home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">
-            @if (\Route::current()->getName() == 'vlastjob')
-                <a href="{{ url('/recruiter/vlastjob')}}">View last Job</a>
-            @elseif (\Route::current()->getName() == 'valljobs')
-                <a href="{{ url('/recruiter/valljobs')}}">View all jobs</a>
-            @elseif (\Route::current()->getName() == 'recgetjapp')
-                <a href="{{ url('/recruiter/valljobs')}}">Applications Received</a>
-            @endif
-        </li>
+        <li class="breadcrumb-item active">Applicant Profile</li>
     </ol>
     <!-- banner-text -->
     <!--/process-->
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'vlastjob')
+                @if (\Route::current()->getName() == 'viewuserprof')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Job Successfully Posted</span></h3>
-                @elseif (\Route::current()->getName() == 'valljobs')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>View all active jobs</span></h3>
-                @elseif (\Route::current()->getName() == 'recgetjapp')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>View all applications received</span></h3>
+                    <span>Applicants complete profile</span></h3>
                 @endif
                 <div class="row choose-main mt-5">
-                    <div class="col-lg-2 job_info_right" style="background-color:white; border: none !important;">
+                    <div class="col-lg-2 job_info_right">
                         @yield('CreateProfileMenu')
                     </div>
-                    <div class="col-lg-8 job_info_left" style="background-color:white; border: none !important;">
+                    <div class="col-lg-8 job_info_left">
                         @yield('CreateResumeForm')
                     </div>
                     <div class="col-lg-2 job_info_last">
@@ -183,7 +165,6 @@
                             <a href="https://www.facebook.com/callforsams/">SAMS Private Limited</a>
                         </blockquote>
                     </div>
-                    
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-lg-3 footer-grid">
@@ -296,7 +277,7 @@
     <!--search jQuery-->
     <script src="{{ URL::asset('/js/classie-search.js') }}"></script>
     <script src="{{ URL::asset('/js/demo1-search.js') }}"></script>
-      
+    <!--//search jQuery-->
 
     <script>
         $(document).ready(function() {
@@ -317,47 +298,104 @@
     <!-- php javascript variables -->
     <script language="Javascript" type="text/javascript">
         
-        var job_id = <?php echo json_encode($job_id) ?>,
-            jtitle = <?php echo json_encode($jtitle) ?>,
-            jd = <?php echo json_encode($jd) ?>,
-            qty = <?php echo json_encode($qty) ?>,
-            keywords = <?php echo json_encode($keywords) ?>,
-            minexp = <?php echo json_encode($minexp) ?>,
-            maxexp = <?php echo json_encode($maxexp) ?>,
-            minsal = <?php echo json_encode($minsal) ?>,
-            maxsal = <?php echo json_encode($maxsal) ?>,
-            hireloc1 = <?php echo json_encode($hireloc1) ?>,
-            hireloc2 = <?php echo json_encode($hireloc2) ?>,
-            hireloc3 = <?php echo json_encode($hireloc3) ?>
+        var head_line = <?php echo json_encode($head_line) ?>, 
+        kskil1 = <?php echo json_encode($kskil1)?>, 
+        kskil2 = <?php echo json_encode($kskil2)?>, 
+        kskil3 = <?php echo json_encode($kskil3) ?>, 
+        fname = <?php echo json_encode($fname) ?>,
+        email = <?php echo json_encode($email) ?>,
+        mob_num = <?php echo json_encode($mob_num) ?>,
+        gender = <?php echo json_encode($gender) ?>,
+        dob = <?php echo json_encode($dob) ?>,
+        marstat = <?php echo json_encode($marstat) ?>,
+        eng_lang = <?php echo json_encode($eng_lang) ?>,
+        tel_lang = <?php echo json_encode($tel_lang) ?>,
+        hin_lang = <?php echo json_encode($hin_lang) ?>,
+        oth_lang = <?php echo json_encode($oth_lang) ?>,
+        diff_able = <?php echo json_encode($diff_able) ?>,
+        able1 = <?php echo json_encode($able1) ?>,
+        able2 = <?php echo json_encode($able2) ?>,
+        able3 = <?php echo json_encode($able3) ?>,
+        profpic = <?php echo json_encode($profpic) ?>,
+        picpath = <?php echo json_encode($picpath) ?>,
+        picname = <?php echo json_encode($picname) ?>,
+        qual1 = <?php echo json_encode($qual1) ?>,
+        board1 = <?php echo json_encode($board1) ?>,
+        colname1 = <?php echo json_encode($colname1) ?>,
+        pyear1 = <?php echo json_encode($pyear1) ?>,
+        edulang1 = <?php echo json_encode($edulang1) ?>,
+        percentage1 = <?php echo json_encode($percentage1) ?>,
+        edutime1 = <?php echo json_encode($edutime1) ?>,
+        qual2 = <?php echo json_encode($qual2) ?>,
+        board2 = <?php echo json_encode($board2) ?>,
+        colname2 = <?php echo json_encode($colname2) ?>,
+        pyear2 = <?php echo json_encode($pyear2) ?>,
+        edulang2 = <?php echo json_encode($edulang2) ?>,
+        percentage2 = <?php echo json_encode($percentage2) ?>,
+        edutime2 = <?php echo json_encode($edutime2) ?>,
+        qual3 = <?php echo json_encode($qual3) ?>,
+        course3 = <?php echo json_encode($course3) ?>,
+        spec3 = <?php echo json_encode($spec3) ?>,
+        colname3 = <?php echo json_encode($colname3) ?>,
+        district3 = <?php echo json_encode($district3) ?>,
+        cortype3 = <?php echo json_encode($cortype3) ?>,
+        pyear3 = <?php echo json_encode($pyear3) ?>,
+        edulang3 = <?php echo json_encode($edulang3) ?>,
+        percentage3 = <?php echo json_encode($percentage3) ?>,
+        edutime3 = <?php echo json_encode($edutime3) ?>,
+        qual4 = <?php echo json_encode($qual4) ?>,
+        course4 = <?php echo json_encode($course4) ?>,
+        spec4 = <?php echo json_encode($spec4) ?>,
+        colname4 = <?php echo json_encode($colname4) ?>,
+        district4 = <?php echo json_encode($district4) ?>,
+        cortype4 = <?php echo json_encode($cortype4) ?>,
+        pyear4 = <?php echo json_encode($pyear4) ?>,
+        edulang4 = <?php echo json_encode($edulang4) ?>,
+        percentage4 = <?php echo json_encode($percentage4) ?>,
+        edutime4 = <?php echo json_encode($edutime4) ?>,
+        empname = <?php echo json_encode($empname) ?>,
+        expyears1 = <?php echo json_encode($expyears1) ?>,
+        expmonths1 = <?php echo json_encode($expmonths1) ?>,
+        desg = <?php echo json_encode($desg) ?>,
+        startdt = <?php echo json_encode($startdt) ?>,
+        enddt = <?php echo json_encode($enddt) ?>,
+        msalt = <?php echo json_encode($msalt) ?>,
+        msall = <?php echo json_encode($msall) ?>,
+        resp = <?php echo json_encode($resp) ?>,
+        nperiod = <?php echo json_encode($nperiod) ?>,
+        emptime = <?php echo json_encode($emptime) ?>,
+        addtype1 = <?php echo json_encode($addtype1) ?>,
+        addline11 = <?php echo json_encode($addline11) ?>,
+        addline21 = <?php echo json_encode($addline21) ?>,
+        city1 = <?php echo json_encode($city1) ?>,
+        state1 = <?php echo json_encode($state1) ?>,
+        zcode1 = <?php echo json_encode($zcode1) ?>,
+        country1 = <?php echo json_encode($country1) ?>,
+        addtime1 = <?php echo json_encode($addtime1) ?>,
+        addtype2 = <?php echo json_encode($addtype2) ?>,
+        addline12 = <?php echo json_encode($addline12) ?>,
+        addline22 = <?php echo json_encode($addline22) ?>,
+        city2 = <?php echo json_encode($city2) ?>,
+        state2 = <?php echo json_encode($state2) ?>,
+        zcode2 = <?php echo json_encode($zcode2) ?>,
+        country2 = <?php echo json_encode($country2) ?>,
+        addtime2 = <?php echo json_encode($addtime2) ?>,
+        refnum1 = <?php echo json_encode($refnum1) ?>,
+        fname1 = <?php echo json_encode($fname1) ?>,
+        location1 = <?php echo json_encode($location1) ?>,
+        email1 = <?php echo json_encode($email1) ?>,
+        mobnum1 = <?php echo json_encode($mobnum1) ?>,
+        reftime1 = <?php echo json_encode($reftime1) ?>,
+        refnum2 = <?php echo json_encode($refnum2) ?>,
+        fname2 = <?php echo json_encode($fname2) ?>,
+        location2 = <?php echo json_encode($location2) ?>,
+        email2 = <?php echo json_encode($email2) ?>,
+        mobnum2 = <?php echo json_encode($mobnum2) ?>,
+        reftime2 = <?php echo json_encode($reftime2) ?>
         ;
-    
+            
         window.onload = function() {
-            //$message = "Inside Onload Function";
-            //alert($message);
-            document.getElementById("password1").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-
-            $('#i-jobdesc').val([jd]).change();
-
-            //$message = "#shareRoundIcons".concat(sharei);
-            //alert($message);
-            
-            $("#shareRoundIcons").jsSocials({
-                showLabel: false,
-                showCount: false,
-                shares: ["facebook", "twitter", "linkedin","whatsapp", "email", "pinterest"]
-            });
-            
-        }
-
-        function validatePassword() {
-            var pass2 = document.getElementById("password2").value;
-            var pass1 = document.getElementById("password1").value;
-            if (pass1 != pass2)
-                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-            else
-                document.getElementById("password2").setCustomValidity('');
-            //empty string means no validation error
+            document.getElementById("ta1").value = head_line;
         }
     </script>
     <!-- //password-script -->
@@ -391,29 +429,8 @@
                 easingType: 'easeOutQuart'
             });
 
-            //$('#i-jobdesc').val([jd]).change();
             
-            //For Specialized Area Options.
-            var last_valid_selection = null;
-            $('#i-hireloc').change(function(event) {
-
-                if ($(this).val().length > 3) {
-
-                    $(this).val(last_valid_selection);
-                } 
-                else {
-                    last_valid_selection = $(this).val();
-                }
-            });
-            
-            /*
-            $("#shareRoundIcons").jsSocials({
-                showLabel: false,
-                showCount: false,
-                shares: ["facebook", "twitter", "linkedin","whatsapp", "email", "pinterest"]
-            });
-            */
-        }
+        });
     </script>
     <!--// end-smoth-scrolling -->
     <!-- Facebook script -->
@@ -426,11 +443,7 @@
     <script src="https://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
     <!-- Youtube script -->
     <script src="https://apis.google.com/js/platform.js"></script>
-    <!--//social share links plugin-->
-    <script src="{{ URL::asset('/js/jquery.js') }}"></script>
-    <script src="{{ URL::asset('/js/jssocials.min.js') }}"></script>
-    <!--//Fontawesome script-->
-    <script src="{{ URL::asset('/js/fontawesome-all.js') }}"></script>
+
 </body>
 
 </html>

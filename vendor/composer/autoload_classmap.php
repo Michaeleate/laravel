@@ -64,6 +64,7 @@ return array(
     'App\\Resume' => $baseDir . '/app/Resume.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\admin\\modadmins' => $baseDir . '/app/admin/modadmins.php',
+    'App\\mod_userjobstat' => $baseDir . '/app/mod_userjobstat.php',
     'App\\modjobpost' => $baseDir . '/app/modjobpost.php',
     'App\\modresuadd' => $baseDir . '/app/modresuadd.php',
     'App\\modresuedu' => $baseDir . '/app/modresuedu.php',
