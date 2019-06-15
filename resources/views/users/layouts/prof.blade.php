@@ -219,7 +219,7 @@
                     <div class="col-lg-2 job_info_right">
                         @yield('CreateProfileMenu')
                     </div>
-                    <div class="col-lg-8 job_info_left" style="background-color:white;">
+                    <div class="col-lg-8 job_info_left" style="background-color:white !important;">
                         @yield('CreateResumeForm')
                     </div>
                     <div class="col-lg-2 job_info_last">

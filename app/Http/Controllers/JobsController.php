@@ -67,6 +67,33 @@ class JobsController extends Controller
         }
     }
 
+    //Get complete user profile for recruiter
+    public function viewuserprof($userid){
+        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+        //Testing
+        //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
+        //echo "<script type='text/javascript'>alert('$message');</script>";
+            $head=PostsController::get_head($userid);
+            $resume=PostsController::get_resume($userid);
+            $keyskills=PostsController::get_kskill($userid);
+            $perdetails=PostsController::get_pdet($userid);
+            $edu=PostsController::get_edu1($userid);
+            $emp=PostsController::get_emp($userid);
+            $adds=PostsController::get_add($userid);
+            $refs=PostsController::get_ref($userid);
+
+            // foreach($head as $headprof){
+            // $message = "head_line in Jobs Controller" . $headprof->head_line;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            // }
+            
+            return view('recruiter.viewuserprof',compact('head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+        }
+        else{
+            return redirect()->route('recruiter');
+        }
+    }
+
     //Show full job details with parameter jobid
     public function userappjob($jobid){
         if (Auth::check()) {

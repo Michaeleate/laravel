@@ -394,10 +394,8 @@
             mobnum2 = <?php echo json_encode($mobnum2) ?>,
             reftime2 = <?php echo json_encode($reftime2) ?>
             ;
-    
+
         window.onload = function() {
-            //$message = "Inside Onload Function";
-            //alert($message);
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
             document.getElementById("i-fname").value = fname;
@@ -432,9 +430,6 @@
             document.getElementById("i-sainfo").value = sainfo;
             document.getElementById("i-sapos").value = sapos;
             document.getElementById("i-saclients").value = saclients;
-
-            //$message = "After sarea";
-            //alert($message);
 
             $("#i-lang1").removeProp("selected");
             $("#i-lang2").removeProp("selected");

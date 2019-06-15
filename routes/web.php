@@ -161,6 +161,8 @@ Route::get('/recruiter/recgetjapp', 'recruiter\RecjobCont@recgetjapp')->name('re
 Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
 //View full job details with parameter job_id;
 Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
+//View User profile by recruiter
+Route::get('/viewuserprof/{userid}', 'JobsController@viewuserprof')->name('viewuserprof');
 //----------------------------ADMINS AREA-----------------------------------
 //Admin view for registration and Login
 Route::view('/mikeadmin', 'auth.admin')->name('admin');
