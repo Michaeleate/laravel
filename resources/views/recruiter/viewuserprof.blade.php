@@ -2,7 +2,7 @@
 <?php 
     use \App\Http\Controllers\PostsController; 
     
-    $head_line=$user_id='';
+    $head_line=$user_id=$jobid=$appstat='';
     $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
     $resutime=NULL;
     $fname=$mob_num=$gender=$dob=$marstat=$eng_lang=$tel_lang=$hin_lang=$oth_lang=$diff_able=$able1=$able2=$able3=$profpic=$picpath=$picname=NULL;
@@ -16,6 +16,9 @@
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
+
+    $jobid=$others["jobid"];
+    $appstat=$others["appstat"];
 
     foreach($head as $prof){
         $head_line=$prof->head_line;
@@ -264,7 +267,7 @@
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
 
-<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:220px !important;">
     <div class="row emply-info">
         <div class="col-md-3">
         <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
@@ -287,6 +290,45 @@
             <label style="width:100%;">Recruiters Search: 100</label>
             <label style="width:100%;">Jobs Applied: 100</label>
             <label style="width:100%;">Updated: {{substr($resutime, 0, 10)}}</label>
+            @if($appstat < 4)
+                @if(Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+                    <a href="{{ route('shortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" onclick="event.preventDefault(); document.getElementById('shortlist_form').submit();">
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:block;margin:5px; background-color:#A9DFBF; border-color:#A9DFBF; color:black;" id="i-shortlist" name="shortlist">Shortlist</button></a>
+                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                    <form id="shortlist_form" action="{{ route('shortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
+                        @csrf
+                    </form>
+
+                    <a href="{{ route('notshortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" onclick="event.preventDefault(); document.getElementById('notshortlist_form').submit();">
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; margin:5px; display:block; background-color:#E67E7E; border-color:#E67E7E;color:black;" id="i-notshortlist" name="notshortlist">Dont Shortlist</button></a>
+                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                    <form id="notshortlist_form" action="{{ route('notshortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
+                        @csrf
+                    </form>
+                @endif
+            @else
+                @if($appstat == 4)
+                @if(Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:block;margin:5px; background-color:#7DCEA0; border-color:#7DCEA0; color:white; cursor:not-allowed;" id="i-shortlisted" name="shortlisted" readonly>Shortlisted</button>
+
+                    <a href="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" onclick="event.preventDefault(); document.getElementById('schedule_interview-form').submit();">
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;" id="i-schedule" name="schedule">Schedule Interview</button></a>
+                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                    <form id="schedule_interview-form" action="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
+                        @csrf
+                    </form>
+                @endif
+                @elseif($appstat == 5)
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; margin:5px; display:block; background-color:#D98880; border-color:#D98880;color:black; cursor:not-allowed;" id="i-notshortlisted" name="notshortlisted">Not Shortlisted</button>
+                    
+                    <a href="{{ route('shortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" onclick="event.preventDefault(); document.getElementById('shortlist_form').submit();">
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:block;margin:5px; background-color:#A9DFBF; border-color:#A9DFBF; color:black;" id="i-shortlist" name="shortlist">Please shortlist</button></a>
+                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                    <form id="shortlist_form" action="{{ route('shortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
+                        @csrf
+                    </form>
+                @endif  
+            @endif
         </div>
     </div>
 </div>
