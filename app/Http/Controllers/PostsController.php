@@ -3714,257 +3714,48 @@ class PostsController extends Controller
         }
     }
 
-    // Mike
-    // Get all job applications applied by users.
-    // public static function get_userprofdet($userid) {
-    //      if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
-    //      {
-
-    //         return $getuserjapp;
-    //         return view('recruiter.viewuserprof',compact('userprof'));
-    //      }
-    //      else {
-    //         return view('recruiter');
-    //      }
-    // }
-
-
-    //Mike
-    //Get all job applications applied by users.
-    // public static function get_userprofdet($userid) {
-    //     if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
-    //     {
-
-    //         //Testing
-    //         // $message = "User ID is" . $authid;
-    //         // echo "<script type='text/javascript'>alert('$message');</script>";
+    // Get only application status.
+    public static function get_appstatus($userid,$jobid) {
+         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+         {
+            $authid=$userid;
             
-    //         $getuserprof = DB::table('users')
-    //             ->join('resuhead',function($join) use ($userid){
-    //                     $join->on('resuhead.head_id','=','users.id')
-    //                         ->where('resuhead.head_id','=', $userid);
-    //             })
-    //             ->join('resukskil',function($join){
-    //                     $join->on('resukskil.kskil_id','=', $userid);
-    //             })
-    //             ->join('resupdet',function($join){
-    //                     $join->on('resupdet.pdet_id','=', $userid);
-    //             })
-    //             ->join('resuemp',function($join){
-    //                     $join->on($userid,'=','resuemp.emp_id');
-    //             })
-    //             ->join('resuedu',function($join){
-    //                     $join->on($userid,'=','resuedu.edu_id');
-    //             })
-    //             ->join('resuadd',function($join){
-    //                     $join->on($userid,'=','resuadd.add_id');
-    //             })
-    //             ->join('resuref',function($join){
-    //                     $join->on($userid,'=','resuref.ref_id');
-    //             })
-    //             ->select('users.*', 'resuhead.*', 'resukskil.*', 'resupdet.*', 'resuedu.*', 'resuemp.*', 'resuadd.*', 'resref.*');
+            //Initializing
+            $appstat=0;
+            //check job applied status
+            $app_status = \App\mod_userjobstat::select('app_status')
+                            ->where('rec_id', '=', $authid)
+                            ->where('job_id', '=', $jobid)
+                            ->get();
+            
+            foreach($app_status as $key=>$val){
+                $appstat=$val["app_status"];
+            }
+            
+            return $appstat;
+         }
+         else {
+            return view('recruiter');
+         }
+    }
 
-    //         $getuserprof = $getuserprof->addselect(DB::raw("'8.2 Yrs' as expyears_text"));
-    //         //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
-    //         $getuserprof = $getuserprof->get();
-
-    //         // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
-    //             foreach($getuserjapp as $job){
-    //                 if($job->profpic == 1){
-    //                     list($name11, $ext11) = explode('.', $job->picname);
-    //                     $job->picpath=$job->picpath."/".$job->userid.".".$ext11;
-    //                 }
-    //                 //converting months to years and then to text
-    //                 if($job->exp_months>12){
-    //                     $expyears1=(int)floor($job->exp_months/12);
-    //                     $expmonths1=$job->exp_months % 12;
-    //                     $job->expyears_text=$expyears1.".".$expmonths1." Yrs";
-    //                 }
-    //                 else{
-    //                     $expyears1=0;
-    //                     if($job->exp_months>0){
-    //                         $job->expyears_text=$job->exp_months." Months";
-    //                     }
-    //                     else{
-    //                         $job->expyears_text="Fresher";
-    //                     }
-    //                 }
-
-    //                 if($job->cortype=="full"){
-    //                     $job->cortype="Full Time";
-    //                 }
-    //                 else if($job->cortype=="part"){
-    //                     $job->cortype="Part Time";
-    //                 }
-    //                 else{
-    //                     $job->cortype="Distance";
-    //                 }
-
-    //                 //Course to Text
-    //                 if ($job->qual=="ssc"){
-    //                     $qual_text="SSC";
-    //                 }
-    //                 else if($job->qual=="inter"){
-    //                     $qual_text="Intermediate";
-    //                 }
-    //                 else if($job->qual=="grad"){
-    //                     switch ($job->course){
-    //                         case "0":
-    //                             $qual_text1="B.A";
-    //                             break;
-    //                         case "1":
-    //                             $qual_text1="B.Arch";
-    //                             break;
-    //                         case "2":
-    //                             $qual_text1="B.B.A/B.M.S";
-    //                             break;
-    //                         case "3":
-    //                             $qual_text1="B.Com";
-    //                             break;
-    //                         case "4":
-    //                             $qual_text1="B.Des.";
-    //                             break;
-    //                         case "5":
-    //                             $qual_text1="B.Ed";
-    //                             break;
-    //                         case "6":
-    //                             $qual_text1="B.EI.Ed";
-    //                             break;
-    //                         case "7":
-    //                             $qual_text1="B.P.Ed";
-    //                             break;
-    //                         case "8":
-    //                             $qual_text1="B.Pharma";
-    //                             break;
-    //                         case "9":
-    //                             $qual_text1="B.Sc";
-    //                             break;
-    //                         case "10":
-    //                             $qual_text1="B.Tech/B.E.";
-    //                             break;
-    //                         case "11":
-    //                             $qual_text1="B.U.M.S";
-    //                             break;
-    //                         case "12":
-    //                             $qual_text1="BAMS";
-    //                             break;
-    //                         case "13":
-    //                             $qual_text1="BCA";
-    //                             break;
-    //                         case "14":
-    //                             $qual_text1="BDS";
-    //                             break;
-    //                         case "15":
-    //                             $qual_text1="BFA";
-    //                             break;
-    //                         case "16":
-    //                             $qual_text1="BHM";
-    //                             break;
-    //                         case "17":
-    //                             $qual_text1="BHMS";
-    //                             break;
-    //                         case "18":
-    //                             $qual_text1="BVSC";
-    //                             break;
-    //                         case "19":
-    //                             $qual_text1="Diploma";
-    //                             break;
-    //                         case "20":
-    //                             $qual_text1="LLB";
-    //                             break;
-    //                         case "21":
-    //                             $qual_text1="MBBS";
-    //                             break;
-    //                         case "22":
-    //                             $qual_text1="Other";
-    //                             break;
-    //                     }
-    //                     $qual_text=$qual_text1;
-    //                 }
-    //                 else if($job->qual=="pg"){
-    //                     switch ($job->course){
-    //                         case "1":
-    //                             $qual_text1="CA";
-    //                             break;
-    //                         case "2":
-    //                             $qual_text1="CS";
-    //                             break;
-    //                         case "3":
-    //                             $qual_text1="DM";
-    //                             break;
-    //                         case "4":
-    //                             $qual_text1="ICWA (CMA)";
-    //                             break;
-    //                         case "5":
-    //                             $qual_text1="Integrated PG";
-    //                             break;
-    //                         case "6":
-    //                             $qual_text1="LLM";
-    //                             break;
-    //                         case "7":
-    //                             $qual_text1="M.A";
-    //                             break;
-    //                         case "8":
-    //                             $qual_text1="M.Arch";
-    //                             break;
-    //                         case "9":
-    //                             $qual_text1="M.Ch";
-    //                             break;
-    //                         case "10":
-    //                             $qual_text1="M.Com";
-    //                             break;
-    //                         case "11":
-    //                             $qual_text1="M.Des.";
-    //                             break;
-    //                         case "12":
-    //                             $qual_text1="M.Ed";
-    //                             break;
-    //                         case "13":
-    //                             $qual_text1="M.Pharma";
-    //                             break;
-    //                         case "14":
-    //                             $qual_text1="MS/ M.Sc(Science)";
-    //                             break;
-    //                         case "15":
-    //                             $qual_text1="M.Tech";
-    //                             break;
-    //                         case "16":
-    //                             $qual_text1="MBA/PGDM";
-    //                             break;
-    //                         case "17":
-    //                             $qual_text1="MCA";
-    //                             break;
-    //                         case "18":
-    //                             $qual_text1="MCM";
-    //                             break;
-    //                         case "19":
-    //                             $qual_text1="MDS";
-    //                             break;
-    //                         case "20":
-    //                             $qual_text1="MFA";
-    //                             break;
-    //                         case "21":
-    //                             $qual_text1="Medical-MS/MD";
-    //                             break;
-    //                         case "22":
-    //                             $qual_text1="MVSC";
-    //                             break;
-    //                         case "23":
-    //                             $qual_text1="PG Diploma";
-    //                             break;
-    //                         case "24":
-    //                             $qual_text1="Other";
-    //                             break;
-    //                     }
-    //                     $qual_text=$qual_text1;
-    //                 }
-    //                 $job->qual=$qual_text;
-    //             }    
-    //             // }
-    //         return $getuserjapp;
-    //     }
-    //     else {
-    //         return view('recruiter');
-    //     }
-    // }
+    // Update all application status.
+    public static function upd_appstatus($userid,$jobid,$appstat) {
+         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+         {
+            $authid=$userid;
+            $app_status=$appstat;
+            //check job applied status
+            $app_status = DB::table('userjobstat')
+                            ->where('rec_id', '=', $authid)
+                            ->where('job_id', '=', $jobid)
+                            ->limit(1)
+                            ->update(['app_status'=>$app_status]);
+            
+            return true;
+         }
+         else {
+            return view('recruiter');
+         }
+    }
 }

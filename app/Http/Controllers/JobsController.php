@@ -68,11 +68,10 @@ class JobsController extends Controller
     }
 
     //Get complete user profile for recruiter
-    public function viewuserprof($userid){
+    public function viewuserprof($userid,$jobid=null){
         if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
         //Testing
-        //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
-        //echo "<script type='text/javascript'>alert('$message');</script>";
+        
             $head=PostsController::get_head($userid);
             $resume=PostsController::get_resume($userid);
             $keyskills=PostsController::get_kskill($userid);
@@ -81,13 +80,79 @@ class JobsController extends Controller
             $emp=PostsController::get_emp($userid);
             $adds=PostsController::get_add($userid);
             $refs=PostsController::get_ref($userid);
+            $appstat=PostsController::get_appstatus($userid,$jobid);
+            $jobid=(int)($jobid);
+            $appstat=(int)($appstat);
+            
+            $others=array('jobid'=>$jobid,'appstat'=>$appstat);
+            
+            return view('recruiter.viewuserprof',compact('others','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+        }
+        else{
+            return redirect()->route('recruiter');
+        }
+    }
 
+    //Schedule interview for recruiter or admin
+    public function schinterview($userid,$jobid1=null){
+        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+        //Testing
+        $message = "In viewjobdet of JobsController with Jobid" . $jobid;
+        echo "<script type='text/javascript'>alert('$message');</script>";
+            $head=PostsController::get_head($userid);
+            $resume=PostsController::get_resume($userid);
+            $keyskills=PostsController::get_kskill($userid);
+            $perdetails=PostsController::get_pdet($userid);
+            $edu=PostsController::get_edu1($userid);
+            $emp=PostsController::get_emp($userid);
+            $adds=PostsController::get_add($userid);
+            $refs=PostsController::get_ref($userid);
+            $jobid=$jobid1;
             // foreach($head as $headprof){
             // $message = "head_line in Jobs Controller" . $headprof->head_line;
             // echo "<script type='text/javascript'>alert('$message');</script>";
             // }
             
-            return view('recruiter.viewuserprof',compact('head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+            return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+        }
+        else{
+            return redirect()->route('recruiter');
+        }
+    }
+
+    //Updated applied status by recruiter or admin
+    public function shortlist($userid,$jobid=null){
+        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+        //Testing
+        // $message = "In viewjobdet of JobsController with Jobid" . $jobid;
+        // echo "<script type='text/javascript'>alert('$message');</script>";
+            // $shortlisted=PostsController::get_shortlist($userid,$jobid);
+            $appstat=4;
+            $shortlisted=PostsController::upd_appstatus($userid,$jobid,$appstat);
+
+            if($shortlisted==true){
+                return back();
+            }
+            // return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+        }
+        else{
+            return redirect()->route('recruiter');
+        }
+    }
+
+    //Shortlist for interview by recruiter or admin
+    public function notshortlist($userid,$jobid=null){
+        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+        //Testing
+        // $message = "In viewjobdet of JobsController with Jobid" . $jobid;
+        // echo "<script type='text/javascript'>alert('$message');</script>";
+            $appstat=5;
+            $notshortlist=PostsController::upd_appstatus($userid,$jobid,$appstat);
+
+            if($notshortlist==true){
+                return back();
+            }
+            // return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
         }
         else{
             return redirect()->route('recruiter');

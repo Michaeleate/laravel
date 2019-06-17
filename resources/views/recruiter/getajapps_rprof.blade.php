@@ -250,7 +250,7 @@
     <div class="row emply-info">
         <div class="col-md-3">
             <img src="{{url($job->picpath)}}" style="border-radius:80%; width:100px; height:100px;margin-left:10px;">
-            <a href="{{ route('viewuserprof', $job->userid)}}" target="_blank" style="color:black; cursor: pointer;">
+            <a href="{{ route('viewuserprof', ['userid'=>$job->userid, 'jobid'=>$job->job_id])}}" target="_blank" style="color:black; cursor: pointer;">
                 <button class="btn btn-primary" style="width:130px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Complete Profile</button>
             </a>
             <a href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;">
