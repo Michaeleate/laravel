@@ -111,8 +111,39 @@
         <div class="container">
             <div class="inner-sec py-lg-5  py-3">
                 <h3 class="tittle text-center mb-lg-4 mb-3">
-                    <span>Our Mission</span>Popular Categories</h3>
-                <div class="row populor_category_grids mt-5">
+                    <span>Hot Jobs</span>Popular Categories</h3>
+                <div class="row mt-3 justify-content-center">
+                    <div class="col-md-3 category_grid">
+                        <div class="view view4 view-tenth">
+                            <div class="category_text_box">
+                                <i class="fas fa-desktop"></i>
+                                <h3>Software </h3>
+                                <p>(8 open flow-positions)</p>
+                            </div>
+                            <div class="mask">
+                                <a href="#">
+                                    <img src="images/p4.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 category_grid">
+                        <div class="view view5 view-tenth">
+                            <div class="category_text_box">
+                                <i class="fas fa-building"></i>
+                                <h3>Construction </h3>
+                                <p>(6 open flow-positions)</p>
+                            </div>
+                            <div class="mask">
+                                <a href="#">
+                                    <img src="images/p4.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="row populor_category_grids mt-3">
                     <div class="col-md-3 category_grid">
                         <div class="view view-tenth">
                             <div class="category_text_box">
@@ -173,10 +204,10 @@
                 </div>
                 <div class="row mt-3 justify-content-center">
                     <div class="col-md-3 category_grid">
-                        <div class="view view4 view-tenth">
+                        <div class="view view6 view-tenth">
                             <div class="category_text_box">
-                                <i class="fas fa-users"></i>
-                                <h3>Home Science </h3>
+                                <i class="fas fa-desktop"></i>
+                                <h3>Software </h3>
                                 <p>(8 open flow-positions)</p>
                             </div>
                             <div class="mask">
@@ -187,9 +218,9 @@
                         </div>
                     </div>
                     <div class="col-md-3 category_grid">
-                        <div class="view view5 view-tenth">
+                        <div class="view view7 view-tenth">
                             <div class="category_text_box">
-                                <i class="fas fa-users"></i>
+                                <i class="fas fa-building"></i>
                                 <h3>Construction </h3>
                                 <p>(6 open flow-positions)</p>
                             </div>
@@ -211,19 +242,19 @@
         <div class="container">
             <div class="inner-sec py-lg-5  py-3">
                 <h3 class="tittle text-center mb-lg-4 mb-3">
-                    <span>Some Info</span>Latest Job flow-positions</h3>
+                    <span>Open Requirements</span>Latest Vacant Job Positions</h3>
                 <div class="tabs mt-5">
                     <ul class="nav nav-pills my-4" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Featured Jobs</a>
+                            <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false" hidden>Featured Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Recent Jobs</a>
+                            <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Recent Jobs</a>
                         </li>
 
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="menu-grids mt-4">
                                 <div class="row t-in">
                                     <div class="col-lg-8 text-info-sec">
@@ -481,7 +512,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        {{-- Mike keep your loop of recent jobs here --}}
+                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div class="menu-grids mt-4">
                                 <div class="row t-in">
                                     <div class="col-lg-4 text-info-sec">
@@ -489,34 +521,76 @@
                                     </div>
                                     <div class="col-lg-8 text-info-sec">
                                         <!--/job1-->
-
+                                        {{ $alljobs->links() }}
+                                        @foreach($alljobs as $job)
+                                        <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
                                         <div class="job-post-main row">
                                             <div class="col-md-9 job-post-info text-left">
-                                                <div class="job-post-icon">
-                                                    <i class="fas fa-briefcase"></i>
+                                                <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
+                                                <label style="width:100%;">{{$job->comhirefor}}</label>
+                                                <div style="display:inline-block;">
+                                                    <i class="fas fa-briefcase" style="display:inline;"></i>
+                                                    <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
+                                                    <span style="width:10px; display:inline;"> - </span>
+                                                    <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
                                                 </div>
-                                                <div class="job-single-sec">
-                                                    <h4>
-                                                        <a href="#">Developer for Site Maintenance </a>
-                                                    </h4>
-                                                    <p class="my-2">Company nName gose here</p>
-                                                    <ul class="job-list-info d-flex">
-                                                        <li>
-                                                            <i class="fas fa-briefcase"></i> Comera</li>
-                                                        <li>
-                                                            <i class="fas fa-map-marker-alt"></i> California</li>
-                                                        <li>
-                                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                                    </ul>
+                                                <div style="display:inline-block;">
+                                                    <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
+                                                    <i class="fas fa-map-marker-alt" style="display:inline;"></i>
+                                                    <label style="width:160px; display:inline;">
+                                                    {{$job->hireloc1}}
+                                                    @if(!($job->hireloc2)=='')
+                                                    ,  {{$job->hireloc2}}
+                                                    @endif
+
+                                                    @if(!($job->hireloc3)=='')
+                                                    ,  {{$job->hireloc3}}
+                                                    @endif
+                                                    </label>
                                                 </div>
-                                                <div class="clearfix"></div>
                                             </div>
-                                            <div class="col-md-3 job-single-time text-right">
-                                                <span class="job-time">
-                                                    <i class="far fa-heart"></i> Part Time</span>
-                                                <a href="#" class="aply-btn ">Appy Now</a>
+                                            <div class="col-md-3" style="float:right;">
+                                                {{--
+                                                <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
+                                                --}}
+                                                <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
+                                            </div>
+                                            <div class="row col-md-12" style="display:block; float:right;">    
+                                                <label style="display:block; width:100%;"> </label>
+                                                <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
+                                                {{--   <label style="display:block; width:100%;"> </label> --}}
+                                            </div>
+                                            <div class="row col-md-12" style="display:block; float:right;">    
+                                                <label style="display:block; width:100%;"> </label>
+                                                <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
+                                            </div>
+                                            <div class="row col-md-12" style="display:block; float:right;">
+                                                <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
+                                                <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
+                                            </div>
+                                            {{-- Testing purpose only this division --}}
+                                            <div class="row col-md-12" style="display:block; float:right;">
+                                                @if(isset($job->japp_status))
+                                                @if( $job->japp_status > 0)
+                                                    <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
+                                                @else
+                                                    <a href="{{ route('user-apply-job',$job->job_id) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
+                                                    <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                                                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                                                    <form id="job-apply-form" action="{{ route('user-apply-job',$job->job_id) }}" method="POST">
+                                                        @csrf
+                                                    </form>
+                                                @endif
+                                                @else
+                                                    <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+                                                @endif
                                             </div>
                                         </div>
+                                        </a>
+                                        @endforeach
+                                        {{ $alljobs->links() }}
+                                    </div>
+{{--                                         
                                         <!--//job1-->
                                         <!--/job2-->
 
@@ -733,7 +807,7 @@
                                                 <a href="#" class="aply-btn ">Appy Now</a>
                                             </div>
                                         </div>
-                                        <!--//job4-->
+                                        <!--//job4--> --}}
                                     </div>
                                 </div>
                             </div>
@@ -751,11 +825,11 @@
             <div class="inner-sec py-lg-5  py-3">
                 <div class="mid-info text-center pt-3">
                     <h3 class="tittle text-center cen mb-lg-5 mb-3">
-                        <span>Some Info</span>Make a Difference with Your Online Resume!</h3>
+                        <span>First Impression</span>Make a Difference with Your Online Resume!</h3>
                     <p></p>
                     <div class="resume">
                         <a href="#" data-toggle="modal" data-target="#exampleModalCenter2">
-                            <i class="far fa-user"></i> Create Acccount</a>
+                            <i class="far fa-user"></i> Create Resume</a>
                     </div>
                 </div>
 
@@ -768,7 +842,7 @@
         <div class="container">
             <div class="inner-sec py-lg-5  py-3">
                 <h3 class="tittle text-center mb-lg-5 mb-3">
-                    <span>Some Info</span>Selection Process</h3>
+                    {{-- <span>Some Info</span>--}}Our Selection Process</h3>
 
                 <div class="mid-info text-center mt-5">
                     <div class="parent-chart">
@@ -777,7 +851,7 @@
                                 <img src="images/s1.jpg" alt=" " class="img-fluid rounded-circle">
                                 <br>
                                 <strong>Recruitment Process</strong>
-                                <br> Lorem ipsum
+                                <br> Track complete action
                             </div>
                         </div>
                         <div class="flow-chart">
@@ -785,8 +859,8 @@
                                 <div class="flow-position">
                                     <img src="images/s2.jpg" alt=" " class="img-fluid rounded-circle">
                                     <br>
-                                    <strong>1.Job Vacancy</strong>
-                                    <br> Lorem ipsum
+                                    <strong>1. Job Vacancy</strong>
+                                    <br> Recruiters post their open requirements
                                 </div>
                                 <!--
                             -->
@@ -795,50 +869,50 @@
                                     <br>
                                     <strong>2. Job Analysis
                                     </strong>
-                                    <br> Lorem ipsum
+                                    <br> SAMS checks the details published and approve.
                                 </div>
                                 <!--
                             -->
                                 <div class="flow-position">
                                     <img src="images/s4.jpg" alt=" " class="img-fluid rounded-circle">
                                     <br>
-                                    <strong>3. Attracting Candidates
+                                    <strong>3. Search Jobs
                                     </strong>
-                                    <br> Lorem ipsum
+                                    <br> Job seekers search jobs and apply.
                                 </div>
                                 <!--
                             -->
                                 <div class="flow-position">
                                     <img src="images/s5.jpg" alt=" " class="img-fluid rounded-circle">
                                     <br>
-                                    <strong>4.Screening </strong>
-                                    <br> Lorem ipsum
+                                    <strong>4. Schedule </strong>
+                                    <br> Recruiters checks profiles and schedule interview
                                 </div>
                                 <!--
                             -->
                                 <div class="flow-position">
                                     <img src="images/s6.jpg" alt=" " class="img-fluid rounded-circle">
                                     <br>
-                                    <strong>5.Interviewing Candidates
+                                    <strong>5. Interview
                                     </strong>
-                                    <br> Lorem ipsum
+                                    <br> Recruiters interview candidates and take decisions.
                                 </div>
                                 <!--
                             -->
                                 <div class="flow-position">
                                     <img src="images/s7.jpg" alt=" " class="img-fluid rounded-circle">
                                     <br>
-                                    <strong>6.Selecting</strong>
-                                    <br> Lorem ipsum
+                                    <strong>6. Selecting</strong>
+                                    <br> After all rounds of interview, recruiters offer job.
                                 </div>
                                 <!--
                             -->
                                 <div class="flow-position">
                                     <img src="images/s8.jpg" alt=" " class="img-fluid rounded-circle">
                                     <br>
-                                    <strong>7.Employee Evaluation
+                                    <strong>7. Background Verification
                                     </strong>
-                                    <br> Lorem ipsum
+                                    <br> Recruiters verify through references provided.
                                 </div>
                             </div>
 
@@ -855,7 +929,7 @@
         <div class="container">
             <div class="inner-sec py-lg-4 py-md-4 py-3">
                 <h3 class="tittle text-center mb-lg-5 mb-3">
-                    <span>Some Info</span>Featured Candidates</h3>
+                    <span>Stand out of the crowd</span>Featured Candidates</h3>
                 <div class="row mt-5">
                     <div class="col-lg-3 member-main text-center">
                         <div class="card">
@@ -864,9 +938,9 @@
                                     <img src="images/team1.jpg" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
-                                    <h4>Mark Jackman</h4>
+                                    <h4>Rahul</h4>
 
-                                    <p class="my-4"> Aenean orci erat, placerat id pulvinar nec, tincidunt vel eros.</p>
+                                    <p class="my-4"> 14+ years of experience in SAP Security.</p>
                                     <div class="mt-3 team-social text-center">
 
                                         <ul class="social-icons text-center">
@@ -899,10 +973,9 @@
                                     <img src="images/team2.jpg" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
-                                    <h4>Janet Levine</h4>
+                                    <h4>Sarayu Eate</h4>
 
-                                    <p class="my-4">Aenean orci erat, placerat id pulvinar nec, tincidunt vel eros..
-
+                                    <p class="my-4">12+ years of Bio experience, a women enterpreneur.
                                     </p>
                                     <div class="mt-3 team-social text-center">
 
@@ -938,9 +1011,9 @@
                                     <img src="images/team3.jpg" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
-                                    <h4>Rene Rickman</h4>
+                                    <h4>Mourish Raj</h4>
 
-                                    <p class="my-4">Aenean orci erat, placerat id pulvinar nec, tincidunt vel eros..
+                                    <p class="my-4">Fresher, completed project on cloud computing.
 
                                     </p>
                                     <div class="mt-3 team-social text-center">
@@ -976,8 +1049,8 @@
                                     <img src="images/team4.jpg" alt=" " class="img-fluid rounded-circle">
                                 </div>
                                 <div class="member-info text-center py-lg-4 py-2">
-                                    <h4>Daniele Norwich</h4>
-                                    <p class="my-4">Aenean orci erat, placerat id pulvinar nec, tincidunt vel eros..
+                                    <h4>Manvitha K</h4>
+                                    <p class="my-4">Fresher, 2019, looking for software jobs.
                                     </p>
                                     <div class="mt-3 team-social text-center">
 
@@ -1015,7 +1088,7 @@
         <div class="container">
             <div class="inner-sec py-lg-5  py-3">
                 <h3 class="tittle cen text-center mb-lg-5 mb-3">
-                    <span>Some Info</span> Our Stats</h3>
+                    <span>Stats</span> So far...</h3>
                 <div class="stats row mt-5">
                     <div class="col-md-3 stats_left counter_grid text-center">
 
@@ -1025,7 +1098,7 @@
                     <div class="col-md-3 stats_left counter_grid1 text-center">
 
                         <p class="counter">105</p>
-                        <h4>Jobs Filled</h4>
+                        <h4>Recruiters</h4>
                     </div>
                     <div class="col-md-3 stats_left counter_grid2 text-center">
 
@@ -1035,7 +1108,7 @@
                     <div class="col-md-3 stats_left counter_grid3 text-center">
 
                         <p class="counter">945</p>
-                        <h4>Members</h4>
+                        <h4>Candidates</h4>
                     </div>
 
                 </div>
@@ -1098,10 +1171,10 @@
                     <div class="row">
                         <div class="col-md-7 app-info">
                             <h3 class="header">Download &amp; Enjoy</h3>
-                            <p class="para_vl">Nam arcu mauris, tincidunt sed convallis non, egestas ut lacus. Cras sapien urna, malesuada ut varius consequat, hendrerit nisl. Aliquam vestibulum, odio non ullamcorper malesuada.</p>
+                            <p class="para_vl">We are in the process of developing SAMS Jobs and SAMS Services on both android and ios. Stay tuned.</p>
                             <ul class="app-devices mt-5">
                                 <li>
-                                    <a href="#" title="">
+                                    <a title="">
                                         <i class="fab fa-apple"></i>
                                         <span class="app-con">App Store
                                             <span class="avail">Available now on the </span>
@@ -1110,7 +1183,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" title="">
+                                    <a title="">
                                         <i class="fab fa-google-play"></i>
 
                                         <span class="app-con">Google Play
@@ -1121,7 +1194,7 @@
                             </ul>
                             <div class="clearfix"></div>
                             <p class="para_vl">
-                                <a href="#">Click here </a>to know more about apps.</p>
+                                <a>Click here </a>Under Development.</p>
                         </div>
                         <div class="col-md-5 app-img">
                             <img src="images/mobile.png" alt=" " class="img-fluid">

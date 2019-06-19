@@ -229,17 +229,23 @@
             <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
         </div>
         <div class="row col-md-12" style="display:block; float:right;">
-            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
-            <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
+            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
+            @if($job->minsal>0)
+                {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
+            @else
+                Not Disclosed&emsp;&emsp;
+            @endif
+            </label>
+            <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;Job Applied: 99999</label>
         </div>
         {{-- Testing purpose only this division --}}
         <div class="row col-md-12" style="display:block; float:right;">
             @if(isset($job->japp_status))
             @if( $job->japp_status > 0)
-                <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
+                <button class="btn" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
             @else
                 <a href="{{ route('user-apply-job',$job->job_id) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                <button class="btn btn-primary" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
                 {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                 <form id="job-apply-form" action="{{ route('user-apply-job',$job->job_id) }}" method="POST">
                     @csrf

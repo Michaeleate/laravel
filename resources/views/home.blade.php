@@ -1,4 +1,4 @@
-@extends('users.layouts.app')
+@extends('users.layouts.happ')
 @section('search')
 <h4>
     <span>Search | Apply | Join</span> -

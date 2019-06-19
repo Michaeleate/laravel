@@ -225,7 +225,13 @@
             <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
         </div>
         <div class="row col-md-12" style="display:block; float:right;">
-            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
+            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
+            @if($job->minsal>0)
+                {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
+            @else
+                Not Disclosed&emsp;&emsp;
+            @endif
+            </label>
             <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
         <div class="row col-md-12" style="display:block; float:left;">
