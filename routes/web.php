@@ -46,6 +46,7 @@ Route::get('/mike-rollback', function() {
 });
 
 //Candidates Index Page
+//Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Create Profile Candidate

@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+
+        $alljobs=PostsController::get_alljobs_forguest();
+        // return view('users.RDsearch',compact('jsearchall'));
+        return view('home',compact('alljobs'));
+        //return view('home');
     }
 }

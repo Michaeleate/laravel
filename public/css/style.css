@@ -373,6 +373,14 @@ h3.tittle {
     background: #76daff;
 }
 
+.view6 {
+    background: #D7B7BC;
+}
+
+.view7 {
+    background: #D28140;
+}
+
 .view .mask,
 .view .content {
     position: absolute;

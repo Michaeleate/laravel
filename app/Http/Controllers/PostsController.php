@@ -3133,6 +3133,370 @@ class PostsController extends Controller
             return view('home');
         }
     }
+
+    //Get all jobs posted by all recruiters for guest for homepage.
+    public static function get_alljobs_forguest() {
+        
+        $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+
+        $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
+        $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
+        $recalljobs = $recalljobs->where('jstatus', '=', 1)
+                ->orderBy('job_id','desc')
+                ->paginate(3);
+        
+        foreach($recalljobs as $key=>$val){
+            if(!(empty($val["hireloc1"]))){
+                switch($val["hireloc1"]){
+                    case "30":
+                        $val["hireloc1"]="Vijayawada";
+                        break;                        
+                    case "11":
+                        $val["hireloc1"]="Guntur";
+                        break;                        
+                    case "24":
+                        $val["hireloc1"]="Rajahmundry";
+                        break;                        
+                    case "1":
+                        $val["hireloc1"]="Adoni";
+                        break;                        
+                    case "2":
+                        $val["hireloc1"]="Amaravati";
+                        break;                        
+                    case "3":
+                        $val["hireloc1"]="Anantapur";
+                        break;                        
+                    case "4":
+                        $val["hireloc1"]="Bhimavaram";
+                        break;                        
+                    case "5":
+                        $val["hireloc1"]="Chilakaluripet";
+                        break;                        
+                    case "6":
+                        $val["hireloc1"]="Chittoor";
+                        break;                        
+                    case "7":
+                        $val["hireloc1"]="Dharmavaram";
+                        break;                        
+                    case "8":
+                        $val["hireloc1"]="Eluru";
+                        break;                        
+                    case "9":
+                        $val["hireloc1"]="Gudivada";
+                        break;                        
+                    case "10":
+                        $val["hireloc1"]="Guntakal";
+                        break;                        
+                    case "12":
+                        $val["hireloc1"]="Hindupur";
+                        break;                        
+                    case "13":
+                        $val["hireloc1"]="Kadapa";
+                        break;                        
+                    case "14":
+                        $val["hireloc1"]="Kakinada";
+                        break;                        
+                    case "15":
+                        $val["hireloc1"]="Kavali";
+                        break;                        
+                    case "16":
+                        $val["hireloc1"]="Kurnool";
+                        break;                        
+                    case "18":
+                        $val["hireloc1"]="Machilipatnam";
+                        break;                        
+                    case "19":
+                        $val["hireloc1"]="Madanepalli";
+                        break;                        
+                    case "20":
+                        $val["hireloc1"]="Narsaraopet";
+                        break;                        
+                    case "21":
+                        $val["hireloc1"]="Nellore";
+                        break;                        
+                    case "22":
+                        $val["hireloc1"]="Ongole";
+                        break;                        
+                    case "23":
+                        $val["hireloc1"]="Proddatur";
+                        break;                        
+                    case "25":
+                        $val["hireloc1"]="Srikakulam";
+                        break;                        
+                    case "26":
+                        $val["hireloc1"]="Tadepalligudem";
+                        break;                        
+                    case "27":
+                        $val["hireloc1"]="Tadipatri";
+                        break;                        
+                    case "28":
+                        $val["hireloc1"]="Tenali";
+                        break;                        
+                    case "29":
+                        $val["hireloc1"]="Tirupati";
+                        break;                        
+                    case "31":
+                        $val["hireloc1"]="Visakhapatnam";
+                        break;                        
+                    case "32":
+                        $val["hireloc1"]="Vizianagaram";
+                        break;                        
+                }
+            }
+            if(!(empty($val["hireloc2"]))){
+                switch($val["hireloc2"]){
+                    case "30":
+                        $val["hireloc2"]="Vijayawada";
+                        break;                        
+                    case "11":
+                        $val["hireloc2"]="Guntur";
+                        break;                        
+                    case "24":
+                        $val["hireloc2"]="Rajahmundry";
+                        break;                        
+                    case "1":
+                        $val["hireloc2"]="Adoni";
+                        break;                        
+                    case "2":
+                        $val["hireloc2"]="Amaravati";
+                        break;                        
+                    case "3":
+                        $val["hireloc2"]="Anantapur";
+                        break;                        
+                    case "4":
+                        $val["hireloc2"]="Bhimavaram";
+                        break;                        
+                    case "5":
+                        $val["hireloc2"]="Chilakaluripet";
+                        break;                        
+                    case "6":
+                        $val["hireloc2"]="Chittoor";
+                        break;                        
+                    case "7":
+                        $val["hireloc2"]="Dharmavaram";
+                        break;                        
+                    case "8":
+                        $val["hireloc2"]="Eluru";
+                        break;                        
+                    case "9":
+                        $val["hireloc2"]="Gudivada";
+                        break;                        
+                    case "10":
+                        $val["hireloc2"]="Guntakal";
+                        break;                        
+                    case "12":
+                        $val["hireloc2"]="Hindupur";
+                        break;                        
+                    case "13":
+                        $val["hireloc2"]="Kadapa";
+                        break;                        
+                    case "14":
+                        $val["hireloc2"]="Kakinada";
+                        break;                        
+                    case "15":
+                        $val["hireloc2"]="Kavali";
+                        break;                        
+                    case "16":
+                        $val["hireloc2"]="Kurnool";
+                        break;                        
+                    case "18":
+                        $val["hireloc2"]="Machilipatnam";
+                        break;                        
+                    case "19":
+                        $val["hireloc2"]="Madanepalli";
+                        break;                        
+                    case "20":
+                        $val["hireloc2"]="Narsaraopet";
+                        break;                        
+                    case "21":
+                        $val["hireloc2"]="Nellore";
+                        break;                        
+                    case "22":
+                        $val["hireloc2"]="Ongole";
+                        break;                        
+                    case "23":
+                        $val["hireloc2"]="Proddatur";
+                        break;                        
+                    case "25":
+                        $val["hireloc2"]="Srikakulam";
+                        break;                        
+                    case "26":
+                        $val["hireloc2"]="Tadepalligudem";
+                        break;                        
+                    case "27":
+                        $val["hireloc2"]="Tadipatri";
+                        break;                        
+                    case "28":
+                        $val["hireloc2"]="Tenali";
+                        break;                        
+                    case "29":
+                        $val["hireloc2"]="Tirupati";
+                        break;                        
+                    case "31":
+                        $val["hireloc2"]="Visakhapatnam";
+                        break;                        
+                    case "32":
+                        $val["hireloc2"]="Vizianagaram";
+                        break;                        
+                }
+            }
+            if(!(empty($val["hireloc3"]))){
+                switch($val["hireloc3"]){
+                    case "30":
+                        $val["hireloc3"]="Vijayawada";
+                        break;                        
+                    case "11":
+                        $val["hireloc3"]="Guntur";
+                        break;                        
+                    case "24":
+                        $val["hireloc3"]="Rajahmundry";
+                        break;                        
+                    case "1":
+                        $val["hireloc3"]="Adoni";
+                        break;                        
+                    case "2":
+                        $val["hireloc3"]="Amaravati";
+                        break;                        
+                    case "3":
+                        $val["hireloc3"]="Anantapur";
+                        break;                        
+                    case "4":
+                        $val["hireloc3"]="Bhimavaram";
+                        break;                        
+                    case "5":
+                        $val["hireloc3"]="Chilakaluripet";
+                        break;                        
+                    case "6":
+                        $val["hireloc3"]="Chittoor";
+                        break;                        
+                    case "7":
+                        $val["hireloc3"]="Dharmavaram";
+                        break;                        
+                    case "8":
+                        $val["hireloc3"]="Eluru";
+                        break;                        
+                    case "9":
+                        $val["hireloc3"]="Gudivada";
+                        break;                        
+                    case "10":
+                        $val["hireloc3"]="Guntakal";
+                        break;                        
+                    case "12":
+                        $val["hireloc3"]="Hindupur";
+                        break;                        
+                    case "13":
+                        $val["hireloc3"]="Kadapa";
+                        break;                        
+                    case "14":
+                        $val["hireloc3"]="Kakinada";
+                        break;                        
+                    case "15":
+                        $val["hireloc3"]="Kavali";
+                        break;                        
+                    case "16":
+                        $val["hireloc3"]="Kurnool";
+                        break;                        
+                    case "18":
+                        $val["hireloc3"]="Machilipatnam";
+                        break;                        
+                    case "19":
+                        $val["hireloc3"]="Madanepalli";
+                        break;                        
+                    case "20":
+                        $val["hireloc3"]="Narsaraopet";
+                        break;                        
+                    case "21":
+                        $val["hireloc3"]="Nellore";
+                        break;                        
+                    case "22":
+                        $val["hireloc3"]="Ongole";
+                        break;                        
+                    case "23":
+                        $val["hireloc3"]="Proddatur";
+                        break;                        
+                    case "25":
+                        $val["hireloc3"]="Srikakulam";
+                        break;                        
+                    case "26":
+                        $val["hireloc3"]="Tadepalligudem";
+                        break;                        
+                    case "27":
+                        $val["hireloc3"]="Tadipatri";
+                        break;                        
+                    case "28":
+                        $val["hireloc3"]="Tenali";
+                        break;                        
+                    case "29":
+                        $val["hireloc3"]="Tirupati";
+                        break;                        
+                    case "31":
+                        $val["hireloc3"]="Visakhapatnam";
+                        break;                        
+                    case "32":
+                        $val["hireloc3"]="Vizianagaram";
+                        break;                        
+                }
+            }
+            if(!(isset($val['hireloc2']))){
+                $val['hireloc2']='';
+                $val['hireloc3']='';
+            }
+            
+            //Count days when the job posted
+            $ntimestamp= strtotime(Carbon::now());
+            $valtstamp = strtotime($val['created_at']);
+            //$daysdiff=$val['created_at']->diffInDays(Carbon::now());
+            $cdate = date('Y-m-d', $valtstamp);
+            $ndate = date('Y-m-d', $ntimestamp);
+            //$daysdiff=$cdate->diffInDays($ndate);
+
+            $cdate1 = strtotime($cdate);
+            $ndate1 = strtotime($ndate);
+            $secsdiff = $ndate1 - $cdate1;
+            $daysdiff = $secsdiff / 86400;
+            
+            //Testing
+            //$message = "3Days difference" . $daysdiff;
+            //echo "<script type='text/javascript'>alert('$message');</script>";
+            
+            switch($daysdiff){
+                case 0:
+                    $val["days_text"]="Today";
+                    break;
+                case 1:
+                    $val["days_text"]="Yesterday";
+                    break;
+                default:
+                    $val["days_text"]=$daysdiff . " days ago";
+            }
+
+            //Job Status text as per value
+            switch($val['jstatus']){
+                case 0:
+                    $val['jstatus_text']="Approval Pending";
+                    break;
+                case 1:
+                    $val['jstatus_text']="Active";
+                    break;
+                case 2:
+                    $val['jstatus_text']="Rejected";
+                    break;
+                case 3:
+                    $val['jstatus_text']="Closed";
+                    break;
+                case 4:
+                    $val['jstatus_text']="Hold";
+                    break;
+                case 5:
+                    $val['jstatus_text']="Expired";
+                    break;
+                case 6:
+                    $val['jstatus_text']="Archieved";
+                    break;
+            }
+        }
+        return $recalljobs;
+    }
        
     //Get all jobs posted by all recruiters.
     public static function get_jallapplied() {
