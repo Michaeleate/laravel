@@ -23,6 +23,7 @@ use App\modresuadd;
 use App\modresuref;
 use App\modjobpost;
 use App\mod_userjobstat;
+use App\mod_schedule;
 use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
@@ -2708,6 +2709,44 @@ class PostsController extends Controller
         }
     }
 
+    public static function upd_schedule($userid, $jobid, $schid, $starttime, $endtime, $schedule_at, $schedule_byuser, $schedule_byrec, $schedule_stat, $schmsg, $interview_type, $interview_round, $interview_stat, $interview_msg, $approve)
+    {
+        try{
+            DB::beginTransaction();
+            //updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $dbrec = \App\mod_schedule::updateOrCreate(
+                [
+                 'rec_id' => $userid,
+                 'job_id' => $jobid,
+                 'sch_id' => $schid,
+                ], 
+                [
+                 'schedule_start'   => $starttime,
+                 'schedule_end'     => $endtime,
+                 'schedule_at'      => $schedule_at,
+                 'schedule_byuser'  => $schedule_byuser,
+                 'schedule_byrec'   => $schedule_byrec,
+                 'schedule_stat'    => $schedule_stat,
+                 'schedule_msg'     => $schmsg,
+                 'interview_type'   => $interview_type,
+                 'interview_round'  => $interview_round,
+                 'interview_stat'   => $interview_stat,
+                 'interview_msg'    => $interview_msg,
+                 'approve'          => $approve
+                ]
+            );
+            
+            DB::commit();
+            return $dbrec;
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+        }
+    }
+
     //Get all jobs posted by all recruiters.
     public static function get_alljobs() {
         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
@@ -3756,6 +3795,47 @@ class PostsController extends Controller
          }
          else {
             return view('recruiter');
+         }
+    }
+    
+    //Get Maximum Sch ID for Jobs.
+    public static function get_maxschid() {
+        if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+        {
+            //$authid = Auth::guard('recruiter')->user()->id;
+            //get last jobid
+            $maxschid=null;
+            $maxschid = \App\mod_schedule::max('sch_id');
+                    //->first();
+
+            if(!$maxschid==null){
+                return $maxschid;
+            }
+            else{
+                return 0;
+            }
+        }
+        else {
+            return back();
+        }
+    }
+    
+    // Update Schedule ID.
+    public static function upd_scheduleid($userid,$jobid,$schid) {
+         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+         {
+            $authid=$userid;
+            //check job applied status
+            $app_status = DB::table('userjobstat')
+                            ->where('rec_id', '=', $authid)
+                            ->where('job_id', '=', $jobid)
+                            ->limit(1)
+                            ->update(['schedule_id'=>$schid]);
+            
+            return true;
+         }
+         else {
+            return back();
          }
     }
 }

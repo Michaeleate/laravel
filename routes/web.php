@@ -163,12 +163,12 @@ Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
 Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
 //View User profile by recruiter
 Route::get('/viewuserprof/{userid}/{jobid}', 'JobsController@viewuserprof')->name('viewuserprof');
-//Schedule Interview by recruiter
-Route::get('/schinterview/{userid}/{jobid}', 'JobsController@schinterview')->name('schinterview');
 //Shortlisted for interview by recruiter
 Route::post('/shortlist/{userid}/{jobid}', 'JobsController@shortlist')->name('shortlist');
 //Not shortlisted for next round by recruiter
 Route::post('/notshortlist/{userid}/{jobid}', 'JobsController@notshortlist')->name('notshortlist');
+//Schedule Interview by recruiter
+Route::post('/schinterview/{userid}/{jobid}', 'JobsController@schinterview')->name('schinterview');
 //----------------------------ADMINS AREA-----------------------------------
 //Admin view for registration and Login
 Route::view('/mikeadmin', 'auth.admin')->name('admin');

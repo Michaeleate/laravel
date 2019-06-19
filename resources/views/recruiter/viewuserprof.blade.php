@@ -16,6 +16,7 @@
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
+    $jtitle=$jd=$qty=$minexp=$maxexp=$comhirefor=$days_text='';
 
     $jobid=$others["jobid"];
     $appstat=$others["appstat"];
@@ -200,6 +201,15 @@
         $i=$i+1;
     }
 
+    foreach($jobdet as $job){
+        $jtitle=$job->jtitle;
+        $jd=$job->jd;
+        $qty=$job->qty;
+        $minexp=$job->minexp;
+        $maxexp=$job->maxexp;
+        $comhirefor=$job->comhirefor;
+        $days_text=$job->days_text;
+    }    
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -310,13 +320,17 @@
                 @if($appstat == 4)
                 @if(Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
                     <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:block;margin:5px; background-color:#7DCEA0; border-color:#7DCEA0; color:white; cursor:not-allowed;" id="i-shortlisted" name="shortlisted" readonly>Shortlisted</button>
-
-                    <a href="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" onclick="event.preventDefault(); document.getElementById('schedule_interview-form').submit();">
+                    {{-- Testing this --}}
+                    <a href="#" data-toggle="modal" data-target="#addschedule">
                     <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;" id="i-schedule" name="schedule">Schedule Interview</button></a>
-                    {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
-                    <form id="schedule_interview-form" action="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
+                    
+                    {{--
+                    <a href="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" onclick="event.preventDefault(); document.getElementById('schedule_form').submit();">
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;" id="i-schedule" name="schedule">Schedule Interview</button></a>
+                    <form id="schedule_form" action="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
                         @csrf
                     </form>
+                    --}}
                 @endif
                 @elseif($appstat == 5)
                     <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; margin:5px; display:block; background-color:#D98880; border-color:#D98880;color:black; cursor:not-allowed;" id="i-notshortlisted" name="notshortlisted">Not Shortlisted</button>
@@ -337,7 +351,7 @@
     <div class="row emply-info">
         <div class="col-md-12">
             <label style="width:100%;"><h5>Experience Summary:</h5></label>
-            <textarea id="ta1" name="headline" style="height:120px; width:100%; resize:none; border:0px" readonly></textarea>
+            <textarea id="ta1" name="headline" style="height:120px; width:100%; resize:none; border:0px; cursor:not-allowed;" readonly></textarea>
         </div>
     </div>
 </div>
@@ -484,4 +498,444 @@
         </div>
     </div>
 </div>
+<!--/Add Schedule for interview Modal-->
+<div class="modal fade" id="addschedule" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login px-4 mx-auto mw-100">
+                    <h5 class="text-left mb-4">Add Schedule for Interview</h5>
+                    <form role="form" action="{{ route('schinterview', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="post">
+                        @csrf
+                        <div class="form-group" style="display:block;">
+                            <label class="mb-2" style="color:blue;">{{$jtitle}}</label>
+                            <label style="display:block; width:100%; font-size:15px;">&emsp;&emsp;{{substr($job->jd,0,105)}}...</label>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline;">Experience: </label>
+                            <label class="mb-2">{{$minexp}} - {{$maxexp}} Yrs</label>
+                            <label style="display:block-inline;">&emsp;&emsp;Posted: </label>
+                            <label style="display:block-inline;">&emsp;{{$days_text}}...</label>
+                            <label class="mb-2" style="display:block-inline;">Hiring For:</label>
+                            <label style="display:block-inline;">&emsp;{{$comhirefor}}</label>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="party" class="mb-2"><u>Schedule Interview:</u></label>
+                            <div class="nativeDateTimePicker">
+                                <label for="party" class="mb-2" style="width:90px"> Start Time:</label>
+                                <input type="datetime-local" id="party" name="starttime">
+                                <span class="validity"></span>
+                            </div>
+                            <p class="fallbackLabel">Start Time:</p>
+                            <div class="fallbackDateTimePicker">
+                                <div>
+                                <span>
+                                    <label for="day">Day:</label>
+                                    <select id="day" name="day">
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="month">Month:</label>
+                                    <select id="month" name="month">
+                                        <option selected>January</option>
+                                        <option>February</option>
+                                        <option>March</option>
+                                        <option>April</option>
+                                        <option>May</option>
+                                        <option>June</option>
+                                        <option>July</option>
+                                        <option>August</option>
+                                        <option>September</option>
+                                        <option>October</option>
+                                        <option>November</option>
+                                        <option>December</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="year">Year:</label>
+                                    <select id="year" name="year" disabled>
+                                    </select>
+                                </span>
+                                </div>
+                                <div>
+                                <span>
+                                    <label for="hour">Hour:</label>
+                                    <select id="hour" name="hour">
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="minute">Minute:</label>
+                                    <select id="minute" name="minute">
+                                    </select>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline; width:90px;">Duration: </label>
+                                <select id="i-duration" name="duration" style="width:230px; height:32px;">
+                                    <option value="1">1 Hour</option>
+                                    <option value="2">2 Hours</option>
+                                    <option value="3">3 Hours</option>
+                                    <option value="4">4 Hours</option>
+                                    <option value="5">5 Hours</option>
+                                </select>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline; width:90px;">Interview Type: </label>
+                                <select id="i-intertype" name="intertype" style="width:230px; height:32px;" readonly>
+                                    <option value="1" selected>Face to Face</option>
+                                    <option value="2">Telephonic</option>
+                                    <option value="3">Skype</option>
+                                    <option value="4">Other</option>
+                                </select>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline; width:90px;">Interview Round: </label>
+                                <select id="i-round" name="round" style="width:230px; height:32px;">
+                                    <option value="1">Initial</option>
+                                    <option value="2" selected>Technical</option>
+                                    <option value="3">Manager</option>
+                                    <option value="4">HR</option>
+                                    <option value="5">Other</option>
+                                </select>
+                        </div>
+                        {{-- <div class="form-group">
+                            <div class="nativeDateTimePicker1">
+                                <label for="party1" class="mb-2" style="width:90px;">End Time:</label>
+                                <input type="datetime-local" id="party1" name="endtime">
+                                <span class="validity"></span>
+                            </div>
+                            <p class="fallbackLabel1" style="display:none;">End Time:</p>
+                            <div class="fallbackDateTimePicker1" style="display:none;">
+                                <div>
+                                <span>
+                                    <label for="day1">Day:</label>
+                                    <select id="day1" name="day1">
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="month1">Month:</label>
+                                    <select id="month1" name="month1">
+                                        <option selected>January</option>
+                                        <option>February</option>
+                                        <option>March</option>
+                                        <option>April</option>
+                                        <option>May</option>
+                                        <option>June</option>
+                                        <option>July</option>
+                                        <option>August</option>
+                                        <option>September</option>
+                                        <option>October</option>
+                                        <option>November</option>
+                                        <option>December</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="year1">Year:</label>
+                                    <select id="year1" name="year1" disabled>
+                                    </select>
+                                </span>
+                                </div>
+                                <div>
+                                <span>
+                                    <label for="hour1">Hour:</label>
+                                    <select id="hour1" name="hour1">
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="minute1">Minute:</label>
+                                    <select id="minute1" name="minute1">
+                                    </select>
+                                </span>
+                                </div>
+                            </div>
+                        </div>         --}}
+                        <div class="form-group" style="float:left;">
+                            <label style="width:90px; display:block-inline">Message</label>
+                            <input type="text" id="i-message" name="schedule_msg" style="width:230px;">
+                        </div>
+
+                        <div class="form-group" style="float:right;">
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <script language="javascript" type="text/javascript"> --}}
+<script>
+    // define variables
+    //alert('In the script');
+    var nativePicker = document.querySelector('.nativeDateTimePicker');
+    var fallbackPicker = document.querySelector('.fallbackDateTimePicker');
+    var fallbackLabel = document.querySelector('.fallbackLabel');
+
+    var nativePicker1 = document.querySelector('.nativeDateTimePicker1');
+    var fallbackPicker1 = document.querySelector('.fallbackDateTimePicker1');
+    var fallbackLabel1 = document.querySelector('.fallbackLabel1');
+
+    var yearSelect = document.querySelector('#year');
+    var monthSelect = document.querySelector('#month');
+    var daySelect = document.querySelector('#day');
+    var hourSelect = document.querySelector('#hour');
+    var minuteSelect = document.querySelector('#minute');
+
+    var yearSelect1 = document.querySelector('#year1');
+    var monthSelect1 = document.querySelector('#month1');
+    var daySelect1 = document.querySelector('#day1');
+    var hourSelect1 = document.querySelector('#hour1');
+    var minuteSelect1 = document.querySelector('#minute1');
+
+    // hide fallback initially
+    fallbackPicker.style.display = 'none';
+    fallbackLabel.style.display = 'none';
+
+    fallbackPicker1.style.display = 'none';
+    fallbackLabel1.style.display = 'none';
+
+    // test whether a new datetime-local input falls back to a text input or not
+    var test = document.createElement('input');
+    test.type = 'datetime-local';
+    // if it does, run the code inside the if() {} block
+    if(test.type === 'text') {
+        // hide the native picker and show the fallback
+        nativePicker.style.display = 'none';
+        fallbackPicker.style.display = 'block';
+        fallbackLabel.style.display = 'block';
+        
+        nativePicker1.style.display = 'none';
+        fallbackPicker1.style.display = 'block';
+        fallbackLabel1.style.display = 'block';
+        
+        //alert('test type is text');
+        // populate the days and years dynamically
+        // (the months are always the same, therefore hardcoded)
+        populateDays(monthSelect.value);
+        populateYears();
+        populateHours();
+        populateMinutes();
+        
+        populateDays1(monthSelect1.value);
+        populateYears1();
+        populateHours1();
+        populateMinutes1();
+    }
+    else {
+        //alert('test type is datetime-local');
+    }
+
+    function populateDays(month) {
+        // delete the current set of <option> elements out of the
+        // day <select>, ready for the next set to be injected
+        while(daySelect.firstChild){
+            daySelect.removeChild(daySelect.firstChild);
+        }
+
+        // Create variable to hold new number of days to inject
+        var dayNum;
+
+        // 31 or 30 days?
+        if(month === 'January' | month === 'March' | month === 'May' | month === 'July' | month === 'August' | month === 'October' | month === 'December') {
+            dayNum = 31;
+        } else if(month === 'April' | month === 'June' | month === 'September' | month === 'November') {
+            dayNum = 30;
+        } else {
+        // If month is February, calculate whether it is a leap year or not
+            var year = yearSelect.value;
+            var isLeap = new Date(year, 1, 29).getMonth() == 1;
+            isLeap ? dayNum = 29 : dayNum = 28;
+        }
+
+        // inject the right number of new <option> elements into the day <select>
+        for(i = 1; i <= dayNum; i++) {
+            var option = document.createElement('option');
+            option.textContent = i;
+            daySelect.appendChild(option);
+        }
+
+        // if previous day has already been set, set daySelect's value
+        // to that day, to avoid the day jumping back to 1 when you
+        // change the year
+        if(previousDay) {
+            daySelect.value = previousDay;
+
+            // If the previous day was set to a high number, say 31, and then
+            // you chose a month with less total days in it (e.g. February),
+            // this part of the code ensures that the highest day available
+            // is selected, rather than showing a blank daySelect
+            if(daySelect.value === "") {
+            daySelect.value = previousDay - 1;
+            }
+
+            if(daySelect.value === "") {
+            daySelect.value = previousDay - 2;
+            }
+
+            if(daySelect.value === "") {
+            daySelect.value = previousDay - 3;
+            }
+        }
+    }
+
+    function populateDays1(month1) {
+        // delete the current set of <option> elements out of the
+        // day <select>, ready for the next set to be injected
+        while(daySelect1.firstChild){
+            daySelect1.removeChild(daySelect1.firstChild);
+        }
+
+        // Create variable to hold new number of days to inject
+        var dayNum1;
+
+        // 31 or 30 days?
+        if(month1 === 'January' | month1 === 'March' | month1 === 'May' | month1 === 'July' | month1 === 'August' | month1 === 'October' | month1 === 'December') {
+            dayNum1 = 31;
+        } else if(month1 === 'April' | month1 === 'June' | month1 === 'September' | month1 === 'November') {
+            dayNum1 = 30;
+        } else {
+        // If month is February, calculate whether it is a leap year or not
+            var year1 = yearSelect1.value;
+            var isLeap = new Date(year1, 1, 29).getMonth() == 1;
+            isLeap ? dayNum1 = 29 : dayNum1 = 28;
+        }    
+
+        // inject the right number of new <option> elements into the day <select>
+        for(i = 1; i <= dayNum1; i++) {
+            var option = document.createElement('option');
+            option.textContent = i;
+            daySelect1.appendChild(option);
+        }
+
+        // if previous day has already been set, set daySelect's value
+        // to that day, to avoid the day jumping back to 1 when you
+        // change the year
+        if(previousDay1) {
+            daySelect1.value = previousDay1;
+
+            // If the previous day was set to a high number, say 31, and then
+            // you chose a month with less total days in it (e.g. February),
+            // this part of the code ensures that the highest day available
+            // is selected, rather than showing a blank daySelect
+            if(daySelect1.value === "") {
+                daySelect1.value = previousDay1 - 1;
+            }
+
+            if(daySelect1.value === "") {
+                daySelect1.value = previousDay1 - 2;
+            }
+
+            if(daySelect1.value === "") {
+                daySelect1.value = previousDay1 - 3;
+            }
+        }
+    }
+
+    function populateYears() {
+        // get this year as a number
+        var date = new Date();
+        var year = date.getFullYear();
+
+        // Make this year, and the 100 years before it available in the year <select>
+        for(var i = 0; i <= 100; i++) {
+            var option = document.createElement('option');
+            option.textContent = year-i;
+            yearSelect.appendChild(option);
+        }
+    }
+
+    function populateYears1() {
+        // get this year as a number
+        var date1 = new Date();
+        var year1 = date1.getFullYear();
+
+        // Make this year, and the 100 years before it available in the year <select>
+        for(var i = 0; i <= 100; i++) {
+            var option = document.createElement('option');
+            option.textContent = year1-i;
+            yearSelect1.appendChild(option);
+        }
+    }
+
+    function populateHours() {
+        // populate the hours <select> with the 24 hours of the day
+        for(var i = 0; i <= 23; i++) {
+            var option = document.createElement('option');
+            option.textContent = (i < 10) ? ("0" + i) : i;
+            hourSelect.appendChild(option);
+        }
+    }
+
+    function populateHours1() {
+        // populate the hours <select> with the 24 hours of the day
+        for(var i = 0; i <= 23; i++) {
+            var option = document.createElement('option');
+            option.textContent = (i < 10) ? ("0" + i) : i;
+            hourSelect1.appendChild(option);
+        }
+    }
+
+    function populateMinutes() {
+        // populate the minutes <select> with the 60 hours of each minute
+        for(var i = 0; i <= 59; i++) {
+            var option = document.createElement('option');
+            option.textContent = (i < 10) ? ("0" + i) : i;
+            minuteSelect.appendChild(option);
+        }
+    }
+
+    function populateMinutes1() {
+        // populate the minutes <select> with the 60 hours of each minute
+        for(var i = 0; i <= 59; i++) {
+            var option = document.createElement('option');
+            option.textContent = (i < 10) ? ("0" + i) : i;
+            minuteSelect1.appendChild(option);
+        }
+    }
+
+    // when the month or year <select> values are changed, rerun populateDays()
+    // in case the change affected the number of available days
+    yearSelect.onchange = function() {
+        populateDays(monthSelect.value);
+    }
+
+    // when the month or year <select> values are changed, rerun populateDays()
+    // in case the change affected the number of available days
+    yearSelect1.onchange = function() {
+        populateDays1(monthSelect1.value);
+    }
+
+    monthSelect.onchange = function() {
+        populateDays(monthSelect.value);
+    }
+
+    monthSelect1.onchange = function() {
+        populateDays1(monthSelect1.value);
+    }
+
+    //preserve day selection
+    var previousDay, previousDay1;
+
+    // update what day has been set to previously
+    // see end of populateDays() for usage
+    daySelect.onchange = function() {
+        previousDay = daySelect.value;
+    }
+
+    // update what day has been set to previously
+    // see end of populateDays() for usage
+    daySelect1.onchange = function() {
+        previousDay1 = daySelect1.value;
+    }
+</script>
 @endsection
