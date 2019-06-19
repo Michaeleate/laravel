@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Carbon;
+use DateTime;
+use DateInterval;
 
 class JobsController extends Controller
 {
@@ -23,8 +25,8 @@ class JobsController extends Controller
             return redirect('/recruiter');
         }
     }
-    
-    //Post Job by Admin 
+
+    //Post Job by Admin
     public function pjbyadm(Request $request){
         $auth = Auth::guard('admin');
         if ($auth->check()){
@@ -36,7 +38,7 @@ class JobsController extends Controller
             return redirect('/mikeadmin');
         }
     }
-    
+
     //Search results are shown here
     public function searchjobs(Request $request){
         //$message = "Inside searchjobs of RecprofController - Before If";
@@ -45,9 +47,9 @@ class JobsController extends Controller
             //return view('users.RDsearch');
 
             $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
-    
+
             $jsearchall=PostsController::get_jsearchall($request);
-        
+
             return view('users.RDsearch',compact('jsearchall'));
         }
         else {
@@ -71,7 +73,7 @@ class JobsController extends Controller
     public function viewuserprof($userid,$jobid=null){
         if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
         //Testing
-        
+
             $head=PostsController::get_head($userid);
             $resume=PostsController::get_resume($userid);
             $keyskills=PostsController::get_kskill($userid);
@@ -81,12 +83,13 @@ class JobsController extends Controller
             $adds=PostsController::get_add($userid);
             $refs=PostsController::get_ref($userid);
             $appstat=PostsController::get_appstatus($userid,$jobid);
+            $jobdet=PostsController::get_viewsjob($jobid);
             $jobid=(int)($jobid);
             $appstat=(int)($appstat);
-            
+
             $others=array('jobid'=>$jobid,'appstat'=>$appstat);
-            
-            return view('recruiter.viewuserprof',compact('others','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+
+            return view('recruiter.viewuserprof',compact('others','head','resume','keyskills','perdetails','edu','emp','adds','refs','jobdet'));
         }
         else{
             return redirect()->route('recruiter');
@@ -94,29 +97,48 @@ class JobsController extends Controller
     }
 
     //Schedule interview for recruiter or admin
-    public function schinterview($userid,$jobid1=null){
-        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
-        //Testing
-        $message = "In viewjobdet of JobsController with Jobid" . $jobid;
-        echo "<script type='text/javascript'>alert('$message');</script>";
-            $head=PostsController::get_head($userid);
-            $resume=PostsController::get_resume($userid);
-            $keyskills=PostsController::get_kskill($userid);
-            $perdetails=PostsController::get_pdet($userid);
-            $edu=PostsController::get_edu1($userid);
-            $emp=PostsController::get_emp($userid);
-            $adds=PostsController::get_add($userid);
-            $refs=PostsController::get_ref($userid);
-            $jobid=$jobid1;
-            // foreach($head as $headprof){
-            // $message = "head_line in Jobs Controller" . $headprof->head_line;
+    public function schinterview(Request $request, $userid,$jobid=null){
+        if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+            //Testing
+            // $message = "In viewjobdet of JobsController with Jobid" . $jobid;
             // echo "<script type='text/javascript'>alert('$message');</script>";
-            // }
+            $schid=PostsController::get_maxschid();
+            if(isset($schid)){
+                $schid=$schid + 1;
+            }
+            $starttime=$request->input('starttime'); //schedule start time
+            $duration=$request->input('duration');
             
-            return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
+            $starttime1=new DateTime($starttime);
+            $starttime1->add(new DateInterval('PT1H'));
+            $endtime=$starttime1; //schedule end time
+            $schedule_at=Carbon::now()->toDateTimeString();
+            $schedule_byuser=$schedule_byrec=null;
+            
+            if(Auth::check()){
+                $schedule_byuser=Auth::id();
+            }
+            else if(Auth::guard('recruiter')->check()){
+                $schedule_byrec=Auth::guard('recruiter')->user()->id;
+            }
+
+            $schedule_stat=1;   //Initial schedule
+            $schmsg=$request->input('schedule_msg');
+            $interview_type=$request->input('intertype'); //Face to Face Interview
+            $interview_round=$request->input('round'); //Initial
+            $interview_stat=null;
+            $interview_msg=null;
+            $approve=1;         //Admin need to approve change to 0 in production
+
+            $schedule=PostsController::upd_schedule($userid, $jobid, $schid, $starttime, $endtime, $schedule_at, $schedule_byuser, $schedule_byrec, $schedule_stat, $schmsg, $interview_type, $interview_round, $interview_stat, $interview_msg, $approve);
+
+            $scheduleid=PostsController::upd_scheduleid($userid, $jobid, $schid);
+
+            dd("Successfully inserted");
+            // return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
         }
         else{
-            return redirect()->route('recruiter');
+            return back();
         }
     }
 
@@ -136,7 +158,7 @@ class JobsController extends Controller
             // return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
         }
         else{
-            return redirect()->route('recruiter');
+            return back();
         }
     }
 
@@ -155,7 +177,7 @@ class JobsController extends Controller
             // return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
         }
         else{
-            return redirect()->route('recruiter');
+            return back();
         }
     }
 
@@ -175,7 +197,7 @@ class JobsController extends Controller
             //else{
                 //dd("Job applied failed");
             //}
-            
+
             //return view('users.viewsjob_prof')->with('jobid', $jobid);
         }
         else{
@@ -187,7 +209,7 @@ class JobsController extends Controller
     public function uvalljobs(){
         $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
         if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
-    
+
             $jsearchall=PostsController::get_alljobs();
             return view('users.RDsearch',compact('jsearchall'));
         }
@@ -195,11 +217,11 @@ class JobsController extends Controller
             return redirect()->route('login');
         }
     }
-    
+
     //Auth candidate search and apply jobs
     public function uaplyjobs(){
         if (Auth::check() || Auth::guard('admin')->check()) {
-    
+
             $jsearchall=PostsController::get_alljobs();
             return view('users.RDsearch',compact('jsearchall'));
         }
