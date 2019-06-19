@@ -1751,21 +1751,24 @@ class PostsController extends Controller
                                 $val['japp_status_text']="Application Sent";
                                 break;
                             case 3:
-                                $val['japp_status_text']="Shortlisted";
+                                $val['japp_status_text']="Application Viewed";
                                 break;
                             case 4:
-                                $val['japp_status_text']="Not shortlisted";
+                                $val['japp_status_text']="Shortlisted";
                                 break;
                             case 5:
+                                $val['japp_status_text']="Not shortlisted";
+                                break;
+                            case 6:
                                 $val['japp_status_text']="Scheduled Interview";
                                 break;
-                            case 6:
-                                $val['japp_status_text']="Interview Status";
+                            case 7:
+                                $val['japp_status_text']="Interviewed";
                                 break;
-                            case 6:
+                            case 8:
                                 $val['japp_status_text']="Offer Status";
                                 break;
-                            case 6:
+                            case 9:
                                 $val['japp_status_text']="Job Closed";
                                 break;
                         }
@@ -3821,7 +3824,7 @@ class PostsController extends Controller
     }
     
     // Update Schedule ID.
-    public static function upd_scheduleid($userid,$jobid,$schid) {
+    public static function upd_scheduleid($userid,$jobid,$schid,$appstat) {
          if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
          {
             $authid=$userid;
