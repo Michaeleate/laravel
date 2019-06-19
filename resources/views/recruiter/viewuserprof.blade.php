@@ -341,6 +341,8 @@
                     <form id="shortlist_form" action="{{ route('shortlist', ['userid'=>$user_id, 'jobid'=>$jobid]) }}" method="POST">
                         @csrf
                     </form>
+                @elseif($appstat == 6)
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; margin:5px; display:block; background-color:#7DCEA0; border-color:#7DCEA0; color:black; cursor:not-allowed; font-size:15px;" id="i-scheduled" name="scheduled">Scheduled Interview</button>
                 @endif  
             @endif
         </div>

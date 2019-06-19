@@ -1404,15 +1404,42 @@ tr.tl1 td {
         font-size: small;
       }
       
-    .applied {background-color: #BED0F4;}
-    .appsent {background-color: #8BA6E9;}
-    .appview {background-color: #7E96C4;}
-    .shortlist {background-color: #D7B7BC;}
-    .notshort {background-color: #F7E4E0;}
-    .scheduled {background-color: #D28140;}
-    .interviewed {background-color: #C5EADB;}
-    .offer {background-color: #DCD7D5;}
-    .closed {background-color: #495F75;}
+    .applied {
+        background-color: #BED0F4;
+        border-color: #BED0F4;
+    }
+    .appsent {
+        background-color: #8BA6E9;
+        border-color: #8BA6E9;
+    }
+    .appview {
+        background-color: #7E96C4;
+        border-color: #7E96C4;
+    }
+    .shortlist {
+        background-color: #D7B7BC;
+        border-color: #D7B7BC;
+    }
+    .notshort {
+        background-color: #F7E4E0;
+        border-color: #F7E4E0;
+    }
+    .scheduled {
+        background-color: #D28140;
+        border-color: #D28140;
+    }
+    .interviewed {
+        background-color: #C5EADB;
+        border-color: #C5EADB;
+    }
+    .offer {
+        background-color: #DCD7D5;
+        border-color: #DCD7D5;
+    }
+    .closed {
+        background-color: #495F75;
+        border-color: #495F75;
+    }
 
 /*Mike Ends*/
 

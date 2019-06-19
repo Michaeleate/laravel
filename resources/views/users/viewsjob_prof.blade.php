@@ -145,11 +145,11 @@
         <div class="row col-md-12" style="display:block; float:right;">
             @auth('web')
                 @if( $japp_status > 0)
-                    <button class="btn" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$japp_status_text}}</button>
+                    <button class="btn" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$japp_status_text}}</button>
                 @else
                     @if(Auth::check())
                     <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                    <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
                     {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                     <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                         @csrf
@@ -159,7 +159,7 @@
             @else
                 @if(Auth::check())
                 <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
                 {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                 <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                     @csrf

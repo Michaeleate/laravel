@@ -132,7 +132,11 @@ class JobsController extends Controller
 
             $schedule=PostsController::upd_schedule($userid, $jobid, $schid, $starttime, $endtime, $schedule_at, $schedule_byuser, $schedule_byrec, $schedule_stat, $schmsg, $interview_type, $interview_round, $interview_stat, $interview_msg, $approve);
 
-            $scheduleid=PostsController::upd_scheduleid($userid, $jobid, $schid);
+            $appstat=PostsController::get_appstatus($userid,$jobid);
+            if($appstat == 4 || $appstat == 6){  //If status is shortlist only
+                $appstat=6; //Schedule Interview
+                $scheduleid=PostsController::upd_scheduleid($userid, $jobid, $schid, $appstat);
+            }
 
             dd("Successfully inserted");
             // return view('recruiter.viewuserprof',compact('jobid','head','resume','keyskills','perdetails','edu','emp','adds','refs'));
