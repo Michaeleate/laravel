@@ -28,12 +28,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = '/home';
+    protected $redirectTo = '/home';
     
-    protected function redirectTo()
-    {
-        return redirect()->intended('/home');
-    }
+    // protected function redirectTo()
+    // {
+    //     return redirect()->intended('/home');
+    // }
 
     /*
         if (Auth::check())
