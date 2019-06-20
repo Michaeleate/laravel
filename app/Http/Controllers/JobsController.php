@@ -222,6 +222,15 @@ class JobsController extends Controller
         }
     }
 
+    //Guest check all the recent jobs on homepage.
+    // public function gvalljobs(){
+    //     $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
+
+    //         $jsearchall=PostsController::get_alljobs_forguest();
+    //         // return view('users.RDsearch',compact('jsearchall'));
+    //         return view('home',compact('jsearchall'));
+    // }
+
     //Auth candidate search and apply jobs
     public function uaplyjobs(){
         if (Auth::check() || Auth::guard('admin')->check()) {
