@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('users.layouts.basic')
 
-@section('content')
+@section('CreateResumeForm')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
