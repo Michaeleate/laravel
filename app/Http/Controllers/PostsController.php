@@ -4361,4 +4361,33 @@ class PostsController extends Controller
             return 1000;
         }
     }
+    
+    //Get Total number of valid credits.
+    public static function get_allcredits() {
+        if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check()){
+            $userid=$recid=null;
+
+            if(Auth::check()){
+                $userid=Auth::id();    
+                
+                $total_credits = DB::table('credits')
+                            ->where('user_id', '=', $userid)
+                            ->where('status', '=', 1)
+                            ->sum('credits');
+            }
+            else{
+                $recid=Auth::guard('recruiter')->user()->id;
+                
+                $total_credits = DB::table('credits')
+                            ->where('rec_id', '=', $recid)
+                            ->where('status', '=', 1)
+                            ->sum('credits');
+            }
+
+            return $total_credits;
+        }
+        else {
+            return back();
+        }
+    }
 }
