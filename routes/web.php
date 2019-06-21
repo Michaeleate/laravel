@@ -101,6 +101,16 @@ Route::view('/applyjobs', 'users.applyjobs')->name('applyjobs');
 Route::get('/viewjobstatus', 'JobsController@ujallapplied')->name('ujallapplied');
 //Apply Job by Candidate - View
 Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+//Buy Credits - View
+Route::get('/buycredits', 'payController@buycredits')->name('buycredits');
+//Payment gateway to buy Credits by candidate.
+Route::post('/payment', 'payController@payment')->name('payment');
+//If response from PayU Payment gateway is success.
+Route::post('/payment_success', 'payController@spayment')->name('payment_success');
+//If response from PayU Payment gateway is failed.
+Route::post('/payment_failure', 'payController@fpayment')->name('payment_failure');
+//If response from PayU Payment gateway is cancelled.
+Route::post('/payment_cancel', 'payController@cpayment')->name('payment_cancel');
 //------------------------RECRUITERS AREA--------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');

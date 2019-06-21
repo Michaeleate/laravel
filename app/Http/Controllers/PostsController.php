@@ -24,6 +24,8 @@ use App\modresuref;
 use App\modjobpost;
 use App\mod_userjobstat;
 use App\mod_schedule;
+use App\mod_transact;
+use App\mod_credits;
 use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
@@ -4207,5 +4209,156 @@ class PostsController extends Controller
          else {
             return back();
          }
+    }
+    
+    //Update Transaction Table before going to payment gateway.
+    public static function upd_itransact($intrans_id, $extrans_id, $trans_type, $trans_amnt, $prod_id, $prod_info, $trans_with, $trans_validto, $trans_stat, $trans_msg) {
+         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+         {
+            $userid=$recid=null;
+
+            if(Auth::check()){
+                $userid=Auth::id();    
+            }
+            else{
+                $recid=Auth::guard('recruiter')->user()->id;
+            }
+            
+            //Update transact table
+            return self::dbitransact($intrans_id, $extrans_id, $trans_type, $trans_amnt, $prod_id, $prod_info, $trans_with, $trans_validto, $trans_stat, $trans_msg, $userid, $recid);
+            //echo "In get_profile function- ".$head;
+            if(!($dbstatus==true)){
+                return true;    
+            }
+            else{
+                return false;
+            }
+         }
+         else {
+            return back();
+         }
+    }
+
+    public static function dbitransact($intrans_id, $extrans_id, $trans_type, $trans_amnt, $prod_id, $prod_info, $trans_with, $trans_validto, $trans_stat, $trans_msg, $userid, $recid)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $dbrec = \App\mod_transact::updateOrCreate(
+                [
+                 'intrans_id' => $intrans_id,
+                 'extrans_id' => $extrans_id
+                ], 
+                [
+                 'trans_type'   => $trans_type,
+                 'trans_amnt'   => $trans_amnt,
+                 'prod_id'      => $prod_id,
+                 'prod_info'    => $prod_info,
+                 'trans_with'   => $trans_with,
+                 'trans_validto' => $trans_validto,
+                 'trans_stat'   => $trans_stat,
+                 'trans_msg'    => $trans_msg,
+                 'trans_byuser' => $userid,
+                 'trans_byrec'  => $recid
+                ]
+            );
+            
+            DB::commit();
+            $dbstatus=true;
+            return $dbstatus;
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+            $dbstatus=false;
+            return $dbstatus;
+        }
+    }
+
+    public static function upd_stransact($intrans_id, $trans_stat, $trans_msg)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $dbrec = DB::table('transact')
+                        ->where('intrans_id', '=', $intrans_id)
+                        ->limit(1)
+                        ->update(['trans_stat'=>$trans_stat, 'trans_msg'=>$trans_msg]);
+            
+            DB::commit();
+            $dbstatus=true;
+            return $dbstatus;
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+            $dbstatus=false;
+            return $dbstatus;
+        }
+    }
+
+    //Get Maximum internal Transaction ID for transactions.
+    public static function get_maxintransid() {
+        $intrans_id = \App\mod_transact::max('intrans_id');
+                //->first();
+
+        if(!$intrans_id==null){
+            return $intrans_id;
+        }
+        else{
+            return 1000;
+        }
+    }
+
+    public static function upd_credit($user_id, $rec_id, $credit_id, $intrans_id, $credits, $credit_type, $status)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $dbrec = \App\mod_credits::updateOrCreate(
+                [
+                 'credit_id'  => $credit_id,
+                 'intrans_id' => $intrans_id
+                ], 
+                [
+                 'user_id'      => $user_id,
+                 'rec_id'       => $rec_id,
+                 'credits'      => $credits,
+                 'credit_type'  => $credit_type,
+                 'status'       => $status
+                ]
+            );
+            
+            DB::commit();
+            $dbstatus=true;
+            return $dbstatus;
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+            $dbstatus=false;
+            return $dbstatus;
+        }
+    }
+    
+    //Get Maximum credit ID for transactions.
+    public static function get_maxcreditid() {
+        $credit_id = \App\mod_credits::max('credit_id');
+
+        if(!$credit_id==null){
+            return $credit_id;
+        }
+        else{
+            return 1000;
+        }
     }
 }

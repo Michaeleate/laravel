@@ -108,6 +108,9 @@
         @if (\Route::current()->getName() == 'applyjobs')
             <li class="breadcrumb-item active">Apply Jobs</li>
         @endif
+        @if (\Route::current()->getName() == 'buycredits')
+            <li class="breadcrumb-item active">Buy Credits</li>
+        @endif
     </ol>
     <!-- banner-text -->
     <!--/process-->
@@ -129,6 +132,10 @@
                 @if (\Route::current()->getName() == 'uvalljobs')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>View all jobs</span></h3>
+                @endif
+                @if (\Route::current()->getName() == 'buycredits')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Buy Credits</span></h3>
                 @endif
                 
                 @if (\Route::current()->getName() == 'applyjobs')
