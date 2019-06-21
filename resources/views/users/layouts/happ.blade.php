@@ -1,4 +1,7 @@
-{{--Mike Begins--}}
+<?php
+    use \App\Http\Controllers\PostsController;
+    $total_credits=PostsController::get_allcredits();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +63,7 @@
                                     <label style="color: #ffff; float:right;">{{ Auth::user()->name }}!</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label style="color: #ffff;">Credits: xxxx</label>
+                                    <label style="color: #ffff;">Credits: {{$total_credits}}</label>
                                 </div>
                                 <div class="col-md-3 sign-btn">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -1,3 +1,7 @@
+<?php
+    use \App\Http\Controllers\PostsController;
+    $total_credits=PostsController::get_allcredits();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,7 +87,7 @@
                                 !</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label style="color: #ffff;">Credits: 5000</label>
+                                    <label style="color: #ffff;">Credits: {{$total_credits}}</label>
                                 </div>
                                 @auth
                                     <div class="col-md-3 sign-btn">

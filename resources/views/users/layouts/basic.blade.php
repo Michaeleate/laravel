@@ -1,7 +1,3 @@
-<?php
-    use \App\Http\Controllers\PostsController;
-    $total_credits=PostsController::get_allcredits();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,34 +5,33 @@
     <title>SAMS Jobs Website|Search Apply Join|Vijayawada|Guntur|Hyderabad|Vizag</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <meta name="keywords" content="Jobs in Vijayawada, Job Consultancy, Telecallers Jobs, Free Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs, Vijayawada, Amaravathi, Guntur" />
+    <meta name="keywords" content="Jobs in Vijayawada, Job Consultancy, Telecallers Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs, Vijayawada, Amaravathi, Guntur" />
     <!-- FB tags -->
     <meta property="og:url" content="https://www.samsjobs.in" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Jobs in Vijayawada, Guntur and Amaravathi" />
     <meta property="og:description" content="Recruiters post vacant Jobs in Vijayawada, Guntur and Amaravathi" />
     <meta property="og:image" content="https://www.samsjobs.in/images/fb_og_image.jpg" />
-    <meta property="fb:app_id" content="2430741300311136" />
-    
+    <meta property="fb:app_id" content="2430741300311136" />    
     <script>
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);
- 
+
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
     </script>
-    <link href="{{ URL::asset('/') }}css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="{{ URL::asset('/') }}css/zoomslider.css" rel='stylesheet' type='text/css' />
-    <link href="{{ URL::asset('/') }}css/style6.css" rel='stylesheet' type='text/css' />
-    <link href="{{ URL::asset('/') }}css/style.css" rel='stylesheet' type='text/css' />
-    <link href="{{ URL::asset('/') }}css/fontawesome-all.css" rel="stylesheet">
+    <link href="{{asset('/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/zoomslider.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/style6.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/style.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/fontawesome-all.css')}}" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color:rgba(99, 57, 116, 0.1);">
     <!-- banner-inner -->
     <div id="demo-2" class="page-content">
         <div class="dotts">
@@ -44,21 +39,28 @@
                 <header>
                     <div class="top-head xl-lg-auto ml-lg-auto text-center">
                         <div class="row top-vl">
-                            <div class="col-md-6">
-                                <label style="color: #ffff; float:right;">
-                                    @if(Auth::guard('recruiter')->check())
-                                        {{ Auth::guard('recruiter')->user()->name }}
-                                    @endif
+                            <div class="col-md-4">
+                                <label style="color: #ffff; float:right; width: 200px;">
+                                @auth
+                                {{ Auth::user()->name }}
+                                @endauth
+                                @auth('recruiter')
+                                    {{ Auth::guard('recruiter')->user()->name }}
+                                @endauth
+                                @auth('admin')
+                                    {{Auth::guard('admin')->user()->name}}
+                                @endif
+                                !
                                 </label>
                             </div>
-                            <div class="col-md-3">
-                                <label style="color: #ffff;">Credits: {{$total_credits}}</label>
+                            <div class="col-md-4">
+                                <label style="color: #ffff;">Credits: Free</label>
                             </div>
-                            <div class="col-md-3 sign-btn">
-                                <a href="{{ route('rlogout') }}" onclick="event.preventDefault();
+                            <div class="col-md-4 sign-btn">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> Log-out</a>
-                                <form id="logout-form" action="{{ route('rlogout') }}" method="POST">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                 </form>
                             </div>
@@ -68,8 +70,8 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="{{ asset('/recruiter/home')}}">
-                                    <img src="{{ URL::asset('/images/favicon-sams.png')}}" alt="logo">
+                                <a class="navbar-brand" href="{{ asset('/home')}}">
+                                    <img src="images/favicon-sams.png" alt="logo">
                                 </a>
                             </h1>
                         </div>
@@ -95,35 +97,32 @@
     </div>
     <ol class="breadcrumb justify-content-left">
         <li class="breadcrumb-item">
-            <a href="{{ url('/recruiter/home')}}">Home</a>
+            <a href="{{ url('/home')}}">Home</a>
         </li>
-        <li class="breadcrumb-item active">Applicant Profile</li>
+        <li class="breadcrumb-item active">E-mail Verification</li>
     </ol>
     <!-- banner-text -->
     <!--/process-->
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-                @if (\Route::current()->getName() == 'viewuserprof')
-                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Applicants complete profile</span></h3>
-                @endif
+                <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>E-mail Verification</span></h3>
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right">
                         @yield('CreateProfileMenu')
                     </div>
-                    <div class="col-lg-8 job_info_left">
+                    <div class="col-lg-8 job_info_left" style="background-color:white !important;">
                         @yield('CreateResumeForm')
                     </div>
                     <div class="col-lg-2 job_info_last">
                         @yield('displayads')
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
-    <!--//process-->
+    <!--//preocess-->
 
     <!--footer -->
     <footer class="footer-emp bg-dark dotts py-lg-5 py-3">
@@ -146,7 +145,8 @@
                         <p>Dr No: 36-11/140, Opp. RR Chicken Centre, Jammi chettu center, Moghalrajpuram, Vijayawada - 520 010.</p>
                         <div class="phone">
                             <h4>Contact :</h4>
-                            <p>Phone : +91 866 2492350</p>
+                            {{--<p>Phone : +91 866 2492350</p>--}}
+                            <p>Phone : +91 96184 43240</p>
                             <p>Email :
                                 <a href="mailto:callforsams@gmail.com">callforsams@gmail.com</a>
                             </p>
@@ -223,6 +223,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -264,8 +265,10 @@
                                 <a href="#">By clicking Register, I agree to your terms</a>
                             </p>
                         </form>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -274,14 +277,14 @@
     <!--//model-form-->
     <!-- js -->
     <!--/slider-->
-    <script src="{{ URL::asset('/js/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ URL::asset('/js/modernizr-2.6.2.min.js') }}"></script>
-    <script src="{{ URL::asset('/js/jquery.zoomslider.min.js') }}"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
     <!--//slider-->
     <!--search jQuery-->
-    <script src="{{ URL::asset('/js/classie-search.js') }}"></script>
-    <script src="{{ URL::asset('/js/demo1-search.js') }}"></script>
-    <!--//search jQuery-->
+    <script src="js/classie-search.js"></script>
+    <script src="js/demo1-search.js"></script>
+    <!--//search jQuery--> 
+    
 
     <script>
         $(document).ready(function() {
@@ -299,115 +302,33 @@
     </script>
     <!-- //dropdown nav -->
     
+    
     <!-- php javascript variables -->
-    <script language="Javascript" type="text/javascript">
+    <script type="text/javascript">
         
-        var head_line = <?php echo json_encode($head_line) ?>, 
-        kskil1 = <?php echo json_encode($kskil1)?>, 
-        kskil2 = <?php echo json_encode($kskil2)?>, 
-        kskil3 = <?php echo json_encode($kskil3) ?>, 
-        fname = <?php echo json_encode($fname) ?>,
-        email = <?php echo json_encode($email) ?>,
-        mob_num = <?php echo json_encode($mob_num) ?>,
-        gender = <?php echo json_encode($gender) ?>,
-        dob = <?php echo json_encode($dob) ?>,
-        marstat = <?php echo json_encode($marstat) ?>,
-        eng_lang = <?php echo json_encode($eng_lang) ?>,
-        tel_lang = <?php echo json_encode($tel_lang) ?>,
-        hin_lang = <?php echo json_encode($hin_lang) ?>,
-        oth_lang = <?php echo json_encode($oth_lang) ?>,
-        diff_able = <?php echo json_encode($diff_able) ?>,
-        able1 = <?php echo json_encode($able1) ?>,
-        able2 = <?php echo json_encode($able2) ?>,
-        able3 = <?php echo json_encode($able3) ?>,
-        profpic = <?php echo json_encode($profpic) ?>,
-        picpath = <?php echo json_encode($picpath) ?>,
-        picname = <?php echo json_encode($picname) ?>,
-        qual1 = <?php echo json_encode($qual1) ?>,
-        board1 = <?php echo json_encode($board1) ?>,
-        colname1 = <?php echo json_encode($colname1) ?>,
-        pyear1 = <?php echo json_encode($pyear1) ?>,
-        edulang1 = <?php echo json_encode($edulang1) ?>,
-        percentage1 = <?php echo json_encode($percentage1) ?>,
-        edutime1 = <?php echo json_encode($edutime1) ?>,
-        qual2 = <?php echo json_encode($qual2) ?>,
-        board2 = <?php echo json_encode($board2) ?>,
-        colname2 = <?php echo json_encode($colname2) ?>,
-        pyear2 = <?php echo json_encode($pyear2) ?>,
-        edulang2 = <?php echo json_encode($edulang2) ?>,
-        percentage2 = <?php echo json_encode($percentage2) ?>,
-        edutime2 = <?php echo json_encode($edutime2) ?>,
-        qual3 = <?php echo json_encode($qual3) ?>,
-        course3 = <?php echo json_encode($course3) ?>,
-        spec3 = <?php echo json_encode($spec3) ?>,
-        colname3 = <?php echo json_encode($colname3) ?>,
-        district3 = <?php echo json_encode($district3) ?>,
-        cortype3 = <?php echo json_encode($cortype3) ?>,
-        pyear3 = <?php echo json_encode($pyear3) ?>,
-        edulang3 = <?php echo json_encode($edulang3) ?>,
-        percentage3 = <?php echo json_encode($percentage3) ?>,
-        edutime3 = <?php echo json_encode($edutime3) ?>,
-        qual4 = <?php echo json_encode($qual4) ?>,
-        course4 = <?php echo json_encode($course4) ?>,
-        spec4 = <?php echo json_encode($spec4) ?>,
-        colname4 = <?php echo json_encode($colname4) ?>,
-        district4 = <?php echo json_encode($district4) ?>,
-        cortype4 = <?php echo json_encode($cortype4) ?>,
-        pyear4 = <?php echo json_encode($pyear4) ?>,
-        edulang4 = <?php echo json_encode($edulang4) ?>,
-        percentage4 = <?php echo json_encode($percentage4) ?>,
-        edutime4 = <?php echo json_encode($edutime4) ?>,
-        empname = <?php echo json_encode($empname) ?>,
-        expyears1 = <?php echo json_encode($expyears1) ?>,
-        expmonths1 = <?php echo json_encode($expmonths1) ?>,
-        desg = <?php echo json_encode($desg) ?>,
-        startdt = <?php echo json_encode($startdt) ?>,
-        enddt = <?php echo json_encode($enddt) ?>,
-        msalt = <?php echo json_encode($msalt) ?>,
-        msall = <?php echo json_encode($msall) ?>,
-        resp = <?php echo json_encode($resp) ?>,
-        nperiod = <?php echo json_encode($nperiod) ?>,
-        emptime = <?php echo json_encode($emptime) ?>,
-        addtype1 = <?php echo json_encode($addtype1) ?>,
-        addline11 = <?php echo json_encode($addline11) ?>,
-        addline21 = <?php echo json_encode($addline21) ?>,
-        city1 = <?php echo json_encode($city1) ?>,
-        state1 = <?php echo json_encode($state1) ?>,
-        zcode1 = <?php echo json_encode($zcode1) ?>,
-        country1 = <?php echo json_encode($country1) ?>,
-        addtime1 = <?php echo json_encode($addtime1) ?>,
-        addtype2 = <?php echo json_encode($addtype2) ?>,
-        addline12 = <?php echo json_encode($addline12) ?>,
-        addline22 = <?php echo json_encode($addline22) ?>,
-        city2 = <?php echo json_encode($city2) ?>,
-        state2 = <?php echo json_encode($state2) ?>,
-        zcode2 = <?php echo json_encode($zcode2) ?>,
-        country2 = <?php echo json_encode($country2) ?>,
-        addtime2 = <?php echo json_encode($addtime2) ?>,
-        refnum1 = <?php echo json_encode($refnum1) ?>,
-        fname1 = <?php echo json_encode($fname1) ?>,
-        location1 = <?php echo json_encode($location1) ?>,
-        email1 = <?php echo json_encode($email1) ?>,
-        mobnum1 = <?php echo json_encode($mobnum1) ?>,
-        reftime1 = <?php echo json_encode($reftime1) ?>,
-        refnum2 = <?php echo json_encode($refnum2) ?>,
-        fname2 = <?php echo json_encode($fname2) ?>,
-        location2 = <?php echo json_encode($location2) ?>,
-        email2 = <?php echo json_encode($email2) ?>,
-        mobnum2 = <?php echo json_encode($mobnum2) ?>,
-        reftime2 = <?php echo json_encode($reftime2) ?>
-        ;
-            
+        //var head_line = <?php //echo json_encode($head_line) ?>;
+
         window.onload = function() {
-            document.getElementById("ta1").value = head_line;
+            document.getElementById("password1").onchange = validatePassword;
+            document.getElementById("password2").onchange = validatePassword;
+        }
+
+        function validatePassword() {
+            var pass2 = document.getElementById("password2").value;
+            var pass1 = document.getElementById("password1").value;
+            if (pass1 != pass2)
+                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+            else
+                document.getElementById("password2").setCustomValidity('');
+            //empty string means no validation error
         }
     </script>
     <!-- //password-script -->
     <!-- //js -->
-    <script src="{{ URL::asset('/js/bootstrap.js') }}"></script>
+    <script src="js/bootstrap.js"></script>
     <!--/ start-smoth-scrolling -->
-    <script src="{{ URL::asset('/js/move-top.js') }}"></script>
-    <script src="{{ URL::asset('/js/easing.js') }}"></script>
+    <script src="js/move-top.js"></script>
+    <script src="js/easing.js"></script>
     <script>
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event) {
@@ -432,8 +353,6 @@
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
-
-            
         });
     </script>
     <!--// end-smoth-scrolling -->
