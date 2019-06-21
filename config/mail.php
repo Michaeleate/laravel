@@ -57,7 +57,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'callforsams@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'ursams.hr@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'SAMS Jobs'),
     ],
 
@@ -85,9 +85,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', "callforsams@gmail.com"),
+    'username' => env('MAIL_USERNAME', "ursams.hr@gmail.com"),
 
-    'password' => env('MAIL_PASSWORD', "Mike19*1"),
+    'password' => env('MAIL_PASSWORD', "Sams!234"),
 
     /*
     |--------------------------------------------------------------------------

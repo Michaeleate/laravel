@@ -111,6 +111,12 @@ Route::post('/payment_success', 'payController@spayment')->name('payment_success
 Route::post('/payment_failure', 'payController@fpayment')->name('payment_failure');
 //If response from PayU Payment gateway is cancelled.
 Route::post('/payment_cancel', 'payController@cpayment')->name('payment_cancel');
+//Send basic mail
+Route::get('/sendbmail','mailController@basic_email')->name('sendmail');
+//Send html mail
+Route::get('/sendhmail','MailController@html_email')->name('htmlmail');
+//Send mail with attachment
+Route::get('/sendamail','MailController@attachment_email')->name('attachmail');
 //------------------------RECRUITERS AREA--------------------------------------
 //Recruiter register and Login
 Route::view('/recruiter', 'auth.recruiter')->name('recruiter');
