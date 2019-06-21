@@ -37,22 +37,22 @@ class RedirectIfAuthenticated
         if (Auth::guard('admin')->check()) {
             //$message = "In redirectifauthenticated admin guard";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            // return redirect('/admin/home');
-            return redirect()->intended('/admin/home');
+             return redirect('/admin/home');
+            //return redirect()->intended('/admin/home');
         }
         
         if (Auth::guard('recruiter')->check()) {
             //$message = "In redirectifauthenticated recruiter guard";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            // return redirect('/recruiter/home');
-            return redirect()->intended('/recruiter/home');
+            return redirect('/recruiter/home');
+            //return redirect()->intended('/recruiter/home');
         }
 
         if (Auth::guard($guard)->check()) {
             //$message = "In redirectifauthenticated second guard";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            //return redirect('/home');
-            return redirect()->intended('/home');
+            return redirect('/home');
+            //return redirect()->intended('/home');
         }
 
         //$message = "In redirectifauthenticated next guard";
