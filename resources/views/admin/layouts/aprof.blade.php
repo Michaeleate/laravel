@@ -13,7 +13,13 @@
     <meta property="og:description" content="Recruiters post vacant Jobs in Vijayawada, Guntur and Amaravathi" />
     <meta property="og:image" content="https://www.samsjobs.in/images/fb_og_image.jpg" />
     <meta property="fb:app_id" content="2430741300311136" />
-    
+    <!-- Favicon tags -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/images/icons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/images/icons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/images/icons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('/images/icons/site.webmanifest')}}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <script>
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
