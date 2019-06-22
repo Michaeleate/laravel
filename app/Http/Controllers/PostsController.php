@@ -4384,6 +4384,10 @@ class PostsController extends Controller
                             ->sum('credits');
             }
 
+            if(!(isset($total_credits))){
+                $total_credits=0;
+            }
+
             return $total_credits;
         }
         else {
