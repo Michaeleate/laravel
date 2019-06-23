@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Session;
-use \App\Http\Controllers\PostsController;
-use \App\Http\Controllers\mailController;
 
 class RegisterController extends Controller
 {
@@ -91,28 +89,12 @@ class RegisterController extends Controller
             $data['user_type']=1;
             $data['is_admin']=false;
         }
-        $user = \App\User::create([
-        //return User::create([
+        return User::create([
             'user_type' => $data['user_type'],
             'name' => $data['name'],
             'email' => $data['email'],
             'mob_num' => $data['mob_num'],
             'password' => Hash::make($data['password']),
         ]);
-
-        //Add free 200 credits for new registrations.
-        $max_creditid=PostsController::get_maxcreditid();
-        $credit_id=$max_creditid + 1;
-        $max_intransid=PostsController::get_maxintransid();
-        $intrans_id=$max_intransid + 1;
-        $user_id=$user->id;
-        $rec_id=null;
-        $credits=200;
-        $credit_type=2;	//Free
-        $status=1;		//Valid
-        $credits=PostsController::upd_credit($user_id, $rec_id, $credit_id, $intrans_id, $credits, $credit_type, $status);
-        
-        $mail=mailController::attachment_email($user);
-        return $user;
     }
 }

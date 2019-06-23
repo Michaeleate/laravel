@@ -236,9 +236,6 @@
                         <option value="29">Tirupati</option>
                         <option value="31">Visakhapatnam</option>
                         <option value="32">Vizianagaram</option>
-                        <option value="34">Bangalore</option>
-                        <option value="35">Chennai</option>
-                        <option value="36">Other</option>
                     </select>
                     </div>
                     </td></tr>

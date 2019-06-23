@@ -183,7 +183,7 @@
         </div>
         <div class="form-check-inline">
             <label class="form-check-label" style="display:block; width:100%;">
-                <input type="checkbox" class="form-check-input" id="i-loc4" name="n-hireloc[]" value="36">Other
+                <input type="checkbox" class="form-check-input" id="i-loc4" name="n-hireloc[]" value="24">Other
             </label>
         </div>
     </div>

@@ -34,16 +34,15 @@ class mailController extends Controller
      }
      
      //Send mail with attachment.
-     public static function attachment_email($user) {
-        $data = array('name'=>$user->name, 'email'=>$user->email);
-        Mail::send('users.mail', $data, function($message) use ($data) {
-           $message->to($data['email'], 'SAMS Jobs')->subject
-              ('Introduction mail from SAMS Jobs');
-           //$message->attach('https://www.samsjobs.in/images/add200.jpg');
-           //$message->attach('http://localhost/laravel/public/images/add200.jpg');
-           $message->embed('http://localhost/laravel/public/images/add200.jpg');
-           //$message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
-           $message->from('callforsams@gmail.com','SAMS Jobs');
+     public function attachment_email() {
+        $data = array('name'=>"Virat Gandhi");
+        Mail::send('mail', $data, function($message) {
+           $message->to('abc@gmail.com', 'Tutorials Point')->subject
+              ('Laravel Testing Mail with Attachment');
+           $message->attach('C:\laravel-master\laravel\public\uploads\image.png');
+           $message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
+           $message->from('xyz@gmail.com','Virat Gandhi');
         });
+        echo "Email Sent with attachment. Check your inbox.";
      }
 }
