@@ -45,6 +45,10 @@
             <option value="29">Tirupati</option>
             <option value="31">Visakhapatnam</option>
             <option value="32">Vizianagaram</option>
+            <option value="33">Hyderabad</option>
+            <option value="34">Bangalore</option>
+            <option value="35">Chennai</option>
+            <option value="36">Other</option>
         </select>
     </div>
     <div class="col-md-3 banf">
@@ -155,10 +159,21 @@
         <img src="images/board.png" alt="" />
         <h2 class="header-w3ls">404</h2>
     </div>	
-    <h3 class="img-txt">Oops, you've encountered an error!</h3>
+    <h3 class="img-txt">Oops, looks like a broken link!</h3>
     <p>Looks like the page you are  trying to visit doesn't exist.</p>
     <div class="agileits-link">
-        <a href="index.html">take me home</a>
+        @auth
+            <a href="/home">Take me home</a>
+        @endauth
+        @auth('recruiter')
+            <a href="/recruiter/home">Take me home</a>
+        @endauth
+        @auth('admin')
+            <a href="/admin/home">Take me home</a>
+        @endauth
+        @guest
+            <a href="/admin/home">Take me home</a>
+        @endguest
     </div>	
 </div>
 @endsection
