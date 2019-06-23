@@ -90,12 +90,15 @@ $hash = hash("sha512", $retHashSeq);
     <div class="row emply-info">
         <div class="col-md-12" style="margin-left:20%;">
             @if ($hash != $posted_hash)
-                <label>"Invalid Transaction. Please try again";</label>
+                <label>"Transaction. Cancelled";</label><br />
+                <label>Try again by clicking the link below.</label><br />
+                <a href="{{ url('/buycredits') }}">Buy Credits</a>
             @else
                 <label>Thank You. Your order status is {{ $status }}.</label><br />
                 <label>Error: {{$errormsg}}</label><br />
                 <label>Your Transaction ID for this transaction is {{ $txnid }}.</label><br />
                 <label>You may try making the payment by clicking the link below.</label><br />
+                <a href="{{ url('/buycredits') }}">Buy Credits</a>
             @endif
         </div>
     </div>
