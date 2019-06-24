@@ -84,61 +84,28 @@
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
 
-{{--@if($userrec->total()==0) --}}
-@if((isset($userrec)))
-@if($userrec->total()==0)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
-    <div class="row emply-info">
-        <div class="col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">No Search results. Refine your search.</label>
+<div class="emply-resume-list row mb-1" id="regmain" style="display:inline-block; width:70%">
+    <div class="col-md-12 emply-info">
+        <div class="emply-resume-info-sams">
+            <form role="form" action="{{ route('admin.registerrec') }}" method="post">
+                @csrf
+                <h4>Register Recruiter</h4>
+                <div class="form-group">
+                    <label class="mb-2">Name:</label>
+                    <input type="text" class="form-control" id="i-fname" name="fname" autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">E-mail: </label>
+                    <input type="text" class="form-control" id="i-email" name="email">
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">Mobile Num: </label>
+                    <input id="imobnum" type="tel" class="form-control" name="mobnum" required autocomplete="tel">
+                </div>
+                <button type="submit" class="btn btn-primary"  style="float:right;">Register</button>
+                <div class="clearfix"> </div>
+            </form>
         </div>
     </div>
 </div>
-@else
-{{ $userrec->links() }}
-@foreach($userrec as $user)
-
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:440px;">
-    <div class="row emply-info">
-        <div class="col-md-9" style="float:left;">
-            <label style="width:100%; color:blue !important;">{{ $user->name}}</label>
-            <label style="width:100%;">User Type: 
-            @if($user->user_type==1)
-            Candidate
-            @elseif($user->user_type==2)
-            Recruiter
-            @elseif($user->user_type==3)
-            Admin
-            @endif
-            </label>
-            <label style="width:100%;">User Email: {{$user->email}}</label>
-            <label style="width:100%;">Email Verified: {{$user->email_verified_at}}</label>
-            <label style="width:100%;">Mobile Num: {{$user->mob_num}}</label>
-            <label style="width:55%;">Mobile Verified: 
-            @if(!isset($user->mob_verified_at))
-                <a href="{{ route('admin.mob_verified', $user)}}">
-                <button class="btn btn-primary" style="width:160px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Verify Mobile Number</button></a>
-            @else
-            {{$user->mob_verified_at}}
-            @endif
-            </label>
-            <label style="width:100%;">Admin Id: {{$user->admin_id}}</label>
-            <label style="width:100%;">Is Admin: 
-            @if($user->is_admin==1)
-            Yes
-            @else
-            No
-            @endif
-            </label>
-            <label style="width:100%;">Created at: {{$user->created_at}}</label>
-            <label style="width:100%;">Updated at: {{$user->updated_at}}</label>
-            <a href="{{ route('admin.viewuser', $user)}}" target="_blank">
-                <button class="btn btn-primary" style="width:160px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block;">View Complete Details</button></a>
-        </div>
-    </div>
-</div>
-@endforeach
-{{ $userrec->links() }}
-@endif
-@endif
 @endsection

@@ -102,12 +102,11 @@
             <a href="{{ url('/admin/home')}}">Home</a>
         </li>
         <li class="breadcrumb-item active">
-            <a href="{{ url('/admin/lastjob')}}">Registered Candidates</a>
-            {{-- @if (\Route::current()->getName() == 'admin.lastjob')
-                <a href="{{ url('/admin/lastjob')}}">View last Job</a>
-            @elseif (\Route::current()->getName() == 'admin.valljobs')
-                <a href="{{ url('/admin/valljobs')}}">View all jobs</a>
-            @endif --}}
+            @if (\Route::current()->getName() == 'admin.ctoday')
+                <a href="{{ url('/admin/lastjob')}}">Registered Candidates</a>
+            @elseif (\Route::current()->getName() == 'admin.rregister')
+                <a href="{{ url('/admin/valljobs')}}">Register Recruiter</a>
+            @endif
         </li>
     </ol>
     <!-- banner-text -->
@@ -115,15 +114,13 @@
     <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
-            <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-            <span>Registered candidates today</span></h3>
-                {{-- @if (\Route::current()->getName() == 'admin.lastjob')
+                @if (\Route::current()->getName() == 'admin.ctoday')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Job Successfully Posted</span></h3>
-                @elseif (\Route::current()->getName() == 'admin.valljobs')
+                    <span>Registered candidates today</span></h3>
+                @elseif (\Route::current()->getName() == 'admin.rregister')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>View all active jobs</span></h3>
-                @endif --}}
+                    <span>Recruiter Registration</span></h3>
+                @endif
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right" style="background-color:white; border: none !important;">
                         @yield('CreateProfileMenu')

@@ -216,17 +216,26 @@ Route::get('/admin/vadmprofile', 'admin\AdmController@vadmprofile')->name('vadmp
 Route::get('/admin/uadmprofile', 'admin\AdmController@cadmprofile')->name('uadmprofile'); 
 //Update Candidate or Recruiters Profile
 Route::get('/admin/ctoday', 'admin\AdmController@ctoday')->name('admin.ctoday'); 
-//Apply Job by Candidate - View
-// Route::post('/admin/viewuser/{user}', 'admin\AdmController@viewuser')->name('admin.viewuser');
 
 //Verify User Mobile Number
 Route::get('/admin/mob_verified/{userid}', 'admin\AdmController@mob_verified')->name('admin.mob_verified');
 //View complete User Details View
 Route::view('/admin/viewuser/{user}', 'admin.viewuser')->name('admin.viewuser');
+//View Recruiter Registration View
+Route::view('/admin/rregister', 'admin.rregister')->name('admin.rregister');
+//Register Recruiter Post Method  admin.registerrec
+Route::post('/admin/registerrec', 'admin\AdmController@registerrec')->name('admin.registerrec');
+//Update Candidate or Recruiters Profile
+Route::get('/admin/rtoday', 'admin\AdmController@rtoday')->name('admin.rtoday'); 
+//Verify User Mobile Number
+Route::get('/admin/mob_rverified/{userid}', 'admin\AdmController@mob_rverified')->name('admin.mob_rverified');
+//Job Posting by Admin - View
+Route::get('/admin/rpostjob/{recid}', 'JobsController@pjbyadm')->name('admin.rpostjob');
+//Job Posting by Admin
+//Route::post('/admin/admpostjob', 'admin\AdmjobCont@admpostjob')->name('admin.recpostjob');
 
 //Apply Job by Candidate - View
 Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
-
 //Job Posting by Recruiter
 Route::post('/recruiter/recpostjob', 'recruiter\RecjobCont@recpostjob')->name('recpostjob');
  
