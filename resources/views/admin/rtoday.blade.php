@@ -116,7 +116,7 @@
             <label style="width:100%;">Mobile Num: {{$user->mob_num}}</label>
             <label style="width:55%;">Mobile Verified: 
             @if(!isset($user->mob_verified_at))
-                <a href="{{ route('admin.mob_verified', $user)}}">
+                <a href="{{ route('admin.mob_rverified', $user)}}">
                 <button class="btn btn-primary" style="width:160px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Verify Mobile Number</button></a>
             @else
             {{$user->mob_verified_at}}

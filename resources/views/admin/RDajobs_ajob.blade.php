@@ -134,13 +134,13 @@
  
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Candidates
+            Functions
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Registered Today</a>
-            <a class="dropdown-item" href="#">Not Used</a>
-            <a class="dropdown-item" href="#">Not Used</a>
+            <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Candidates Today</a>
+            <a class="dropdown-item" href="{{ route('admin.rtoday') }}">Recruiters Today</a>
+            <a class="dropdown-item" href="{{ route('admin.rregister') }}">Register Recruiter</a>
         </div>
     </li>
     <li class="nav-item">
