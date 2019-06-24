@@ -117,7 +117,7 @@ class RegisterController extends Controller
         $rec_id=null;
         $credit_id=$maxcredit_id + 1;
         $intrans_id=$maxintrans_id + 1;
-        $credits=200;	//Introduction free credits
+        $credits=8;	    //Introduction free credits worth Rs.200;
         $credit_type=2;	//Free
         $status=1;		//Valid
         $add_credits=PostsController::upd_credit($user_id, $rec_id, $credit_id, $intrans_id, $credits, $credit_type, $status);

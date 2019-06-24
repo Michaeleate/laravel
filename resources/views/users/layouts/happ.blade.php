@@ -539,9 +539,16 @@
                                                 <label style="width:100%;">{{$job->comhirefor}}</label>
                                                 <div style="display:inline-block;">
                                                     <i class="fas fa-briefcase" style="display:inline;"></i>
-                                                    <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
+                                                    {{-- <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
                                                     <span style="width:10px; display:inline;"> - </span>
-                                                    <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
+                                                    <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label> --}}
+                                                    @if($job->maxexp==0)
+                                                        <label style="width:50px; display:inline;">Fresher</label>
+                                                    @else
+                                                        <label style="width:20px; display:inline;">{{$job->minexp}}</label>
+                                                        <span style="width:10px; display:inline;"> - </span>
+                                                        <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
+                                                    @endif
                                                 </div>
                                                 <div style="display:inline-block;">
                                                     <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
@@ -574,7 +581,13 @@
                                                 <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
                                             </div>
                                             <div class="row col-md-12" style="display:block; float:right;">
-                                                <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;{{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;</label>
+                                                <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
+                                                @if($job->minsal>0)
+                                                    {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
+                                                @else
+                                                    Not Disclosed&emsp;&emsp;
+                                                @endif
+                                                </label>
                                                 <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
                                             </div>
                                             {{-- Testing purpose only this division --}}

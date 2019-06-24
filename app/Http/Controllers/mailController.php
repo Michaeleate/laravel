@@ -51,7 +51,7 @@ class mailController extends Controller
            $message->to($data['email'], 'SAMS Jobs')->subject
               ('Introduction Mail from SAMS Jobs');
            //$message->attach('C:\laravel-master\laravel\public\uploads\image.png');
-           $message->embed('http://localhost/laravel/public/images/add200.jpg');
+           $message->embed('https://www.samsjobs.in/images/add200.jpg');
            //$message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
            $message->from('ursams.hr@gmail.com','SAMS Jobs');
         });

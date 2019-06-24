@@ -1207,6 +1207,18 @@ class PostsController extends Controller
                             case "32":
                                 $val["hireloc1"]="Vizianagaram";
                                 break;                        
+                            case "33":
+                                $val["hireloc1"]="Hyderabad";
+                                break;                        
+                            case "34":
+                                $val["hireloc1"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc1"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc1"]="Others";
+                                break;                        
                         }
                     }
                     if(!(empty($val["hireloc2"]))){
@@ -1303,6 +1315,18 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc2"]="Vizianagaram";
+                                break;
+                            case "33":
+                                $val["hireloc2"]="Hyderabad";
+                                break;                        
+                            case "34":
+                                $val["hireloc2"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc2"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc2"]="Others";
                                 break;                        
                         }
                     }
@@ -1400,6 +1424,18 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc3"]="Vizianagaram";
+                                break;
+                            case "33":
+                                $val["hireloc3"]="Hyderabad";
+                                break;                        
+                            case "34":
+                                $val["hireloc3"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc3"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc3"]="Others";
                                 break;                        
                         }
                     }
@@ -1522,7 +1558,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc1"]="Vizianagaram";
+                                break;
+                            case "33":
+                                $val["hireloc1"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc1"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc1"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc1"]="Others";
+                                break; 
                         }
                     }
                     if(!(empty($val["hireloc2"]))){
@@ -1619,7 +1667,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc2"]="Vizianagaram";
+                                break; 
+                            case "33":
+                                $val["hireloc2"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc2"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc2"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc2"]="Others";
+                                break;
                         }
                     }
                     if(!(empty($val["hireloc3"]))){
@@ -1716,7 +1776,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc3"]="Vizianagaram";
+                                break;        
+                            case "33":
+                                $val["hireloc3"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc3"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc3"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc3"]="Others";
+                                break;                
                         }
                     }
                     if (Auth::check()) {
@@ -1959,7 +2031,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc1"]="Vizianagaram";
+                                break; 
+                            case "33":
+                                $val["hireloc1"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc1"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc1"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc1"]="Others";
+                                break;                
                         }
                     }
                     if(!(empty($val["hireloc2"]))){
@@ -2056,7 +2140,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc2"]="Vizianagaram";
+                                break;
+                                case "33":
+                                $val["hireloc2"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc2"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc2"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc2"]="Others";
+                                break;                  
                         }
                     }
                     if(!(empty($val["hireloc3"]))){
@@ -2153,7 +2249,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc3"]="Vizianagaram";
+                                break; 
+                                case "33":
+                                $val["hireloc3"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc3"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc3"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc3"]="Others";
+                                break;                
                         }
                     }
                     if(!(isset($val['hireloc2']))){
@@ -2355,7 +2463,19 @@ class PostsController extends Controller
                             break;                        
                         case "32":
                             $val["hireloc1"]="Vizianagaram";
+                            break; 
+                        case "33":
+                            $val["hireloc1"]="Hyderabad";
                             break;                        
+                        case "34":
+                            $val["hireloc1"]="Bangalore";
+                            break;                        
+                        case "35":
+                            $val["hireloc1"]="Chennai";
+                            break;                        
+                        case "36":
+                            $val["hireloc1"]="Others";
+                            break;            
                     }
                 }
                 if(!(empty($val["hireloc2"]))){
@@ -2452,6 +2572,18 @@ class PostsController extends Controller
                             break;                        
                         case "32":
                             $val["hireloc2"]="Vizianagaram";
+                            break;
+                        case "33":
+                            $val["hireloc2"]="Hyderabad";
+                            break;                        
+                        case "34":
+                            $val["hireloc2"]="Bangalore";
+                            break;                        
+                        case "35":
+                            $val["hireloc2"]="Chennai";
+                            break;                        
+                        case "36":
+                            $val["hireloc2"]="Others";
                             break;                        
                     }
                 }
@@ -2549,7 +2681,19 @@ class PostsController extends Controller
                             break;                        
                         case "32":
                             $val["hireloc3"]="Vizianagaram";
+                            break; 
+                        case "33":
+                            $val["hireloc3"]="Hyderabad";
                             break;                        
+                        case "34":
+                            $val["hireloc3"]="Bangalore";
+                            break;                        
+                        case "35":
+                            $val["hireloc3"]="Chennai";
+                            break;                        
+                        case "36":
+                            $val["hireloc3"]="Others";
+                            break;                
                     }
                 }
                 if(!(isset($val['hireloc2']))){
@@ -2669,6 +2813,22 @@ class PostsController extends Controller
             $applied_at=Carbon::now()->toDateTimeString();
             $schedule_id=0;
             $interview_id=0;
+
+            //Decrease 100 credits from total credits.
+            //get max credit id
+            $maxcredit_id=PostsController::get_maxcreditid();
+            //get max intrans id
+            $maxintrans_id=PostsController::get_maxintransid();
+            //Fill credits table values
+            $user_id=$authid;
+            $rec_id=null;
+            $credit_id=$maxcredit_id + 1;
+            $intrans_id=$maxintrans_id + 1;
+            $credits=-4;	//Decrease 4 credits for one job apply
+            $credit_type=1;	//Cash
+            $status=3;		//Used
+            $sub_credits=PostsController::upd_credit($user_id, $rec_id, $credit_id, $intrans_id, $credits, $credit_type, $status);
+
             return self::dbapplyjob($authid, $jobid, $app_status, $viewed_at,$applied_at, $schedule_id, $interview_id);
             //echo "In get_profile function- ".$head;
             if(!($dbstatus==true)){
@@ -2877,7 +3037,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc1"]="Vizianagaram";
+                                break;
+                            case "33":
+                                $val["hireloc1"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc1"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc1"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc1"]="Others";
+                                break;                    
                         }
                     }
                     if(!(empty($val["hireloc2"]))){
@@ -2975,6 +3147,18 @@ class PostsController extends Controller
                             case "32":
                                 $val["hireloc2"]="Vizianagaram";
                                 break;                        
+                            case "33":
+                                $val["hireloc2"]="Hyderabad";
+                                break;                        
+                            case "34":
+                                $val["hireloc2"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc2"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc2"]="Others";
+                                break;
                         }
                     }
                     if(!(empty($val["hireloc3"]))){
@@ -3071,7 +3255,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $val["hireloc3"]="Vizianagaram";
+                                break;        
+                            case "33":
+                                $val["hireloc3"]="Hyderabad";
                                 break;                        
+                            case "34":
+                                $val["hireloc3"]="Bangalore";
+                                break;                        
+                            case "35":
+                                $val["hireloc3"]="Chennai";
+                                break;                        
+                            case "36":
+                                $val["hireloc3"]="Others";
+                                break;                
                         }
                     }
                     if(!(isset($val['hireloc2']))){
@@ -3245,7 +3441,19 @@ class PostsController extends Controller
                         break;                        
                     case "32":
                         $val["hireloc1"]="Vizianagaram";
+                        break;                
+                    case "33":
+                        $val["hireloc1"]="Hyderabad";
                         break;                        
+                    case "34":
+                        $val["hireloc1"]="Bangalore";
+                        break;                        
+                    case "35":
+                        $val["hireloc1"]="Chennai";
+                        break;                        
+                    case "36":
+                        $val["hireloc1"]="Others";
+                        break;        
                 }
             }
             if(!(empty($val["hireloc2"]))){
@@ -3342,7 +3550,19 @@ class PostsController extends Controller
                         break;                        
                     case "32":
                         $val["hireloc2"]="Vizianagaram";
+                        break; 
+                    case "33":
+                        $val["hireloc2"]="Hyderabad";
                         break;                        
+                    case "34":
+                        $val["hireloc2"]="Bangalore";
+                        break;                        
+                    case "35":
+                        $val["hireloc2"]="Chennai";
+                        break;                        
+                    case "36":
+                        $val["hireloc2"]="Others";
+                        break;
                 }
             }
             if(!(empty($val["hireloc3"]))){
@@ -3439,7 +3659,19 @@ class PostsController extends Controller
                         break;                        
                     case "32":
                         $val["hireloc3"]="Vizianagaram";
+                        break; 
+                    case "33":
+                        $val["hireloc3"]="Hyderabad";
                         break;                        
+                    case "34":
+                        $val["hireloc3"]="Bangalore";
+                        break;                        
+                    case "35":
+                        $val["hireloc3"]="Chennai";
+                        break;                        
+                    case "36":
+                        $val["hireloc3"]="Others";
+                        break;                
                 }
             }
             if(!(isset($val['hireloc2']))){
@@ -3625,6 +3857,18 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $job->hireloc1="Vizianagaram";
+                                break;
+                            case "33":
+                                $job->hireloc1="Hyderabad";
+                                break;                        
+                            case "34":
+                                $job->hireloc1="Bangalore";
+                                break;                        
+                            case "35":
+                                $job->hireloc1="Chennai";
+                                break;                        
+                            case "36":
+                                $job->hireloc1="Others";
                                 break;                        
                         }
                     }
@@ -3722,6 +3966,18 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $job->hireloc2="Vizianagaram";
+                                break;
+                            case "33":
+                                $job->hireloc2="Hyderabad";
+                                break;                        
+                            case "34":
+                                $job->hireloc2="Bangalore";
+                                break;                        
+                            case "35":
+                                $job->hireloc2="Chennai";
+                                break;                        
+                            case "36":
+                                $job->hireloc2="Others";
                                 break;                        
                         }
                     }
@@ -3819,7 +4075,19 @@ class PostsController extends Controller
                                 break;                        
                             case "32":
                                 $job->hireloc3="Vizianagaram";
+                                break;        
+                            case "33":
+                                $job->hireloc3="Hyderabad";
                                 break;                        
+                            case "34":
+                                $job->hireloc3="Bangalore";
+                                break;                        
+                            case "35":
+                                $job->hireloc3="Chennai";
+                                break;                        
+                            case "36":
+                                $job->hireloc3="Others";
+                                break;                
                         }
                     }
                     if(!(isset($job->hireloc2))){
@@ -4377,10 +4645,17 @@ class PostsController extends Controller
             if(Auth::check()){
                 $userid=Auth::id();    
                 
+                // $total_credits = DB::table('credits')
+                //             ->where('user_id', '=', $userid)
+                //             ->where('status', '=', 1)
+                //             ->sum('credits');
                 $total_credits = DB::table('credits')
-                            ->where('user_id', '=', $userid)
-                            ->where('status', '=', 1)
-                            ->sum('credits');
+                            ->where('user_id', '=', $userid);
+                $total_credits=$total_credits->where(function ($query) {
+                    $query->where('status', '=', 1)     //valid or active credits
+                          ->orwhere('status', '=', 3);  //used credits
+                });
+                $total_credits=$total_credits->sum('credits');
             }
             else{
                 $recid=Auth::guard('recruiter')->user()->id;

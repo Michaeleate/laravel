@@ -126,9 +126,16 @@
             <label style="width:100%;">{{$comhirefor}}</label>
             <div style="display:inline-block;">
                 <i class="fas fa-briefcase" style="display:inline;"></i>
-                <label style="width:20px; display:inline;">{{$minexp}}</label>
+                {{-- <label style="width:20px; display:inline;">{{$minexp}}</label>
                 <span style="width:10px; display:inline;"> - </span>
-                <label style="width:20px; display:inline;">{{$maxexp}} yrs</label>
+                <label style="width:20px; display:inline;">{{$maxexp}} yrs</label> --}}
+                @if($maxexp==0)
+                    <label style="width:50px; display:inline;">Fresher</label>
+                @else
+                    <label style="width:20px; display:inline;">{{$minexp}}</label>
+                    <span style="width:10px; display:inline;"> - </span>
+                    <label style="width:20px; display:inline;">{{$maxexp}} yrs</label>
+                @endif
             </div>
             <div style="display:inline-block;">
                 <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>

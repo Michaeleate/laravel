@@ -190,9 +190,16 @@
             <label style="width:100%;">{{$job->comhirefor}}</label>
             <div style="display:inline-block;">
                 <i class="fas fa-briefcase" style="display:inline;"></i>
-                <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
+                {{-- <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
                 <span style="width:10px; display:inline;"> - </span>
-                <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
+                <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label> --}}
+                @if($job->maxexp==0)
+                    <label style="width:50px; display:inline;">Fresher</label>
+                @else
+                    <label style="width:20px; display:inline;">{{$job->minexp}}</label>
+                    <span style="width:10px; display:inline;"> - </span>
+                    <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
+                @endif
             </div>
             <div style="display:inline-block;">
                 <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>

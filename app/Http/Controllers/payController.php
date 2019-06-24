@@ -148,19 +148,19 @@ class payController extends Controller
 
                 switch($packname){
                     case "basic":
-                        $credits=200;
+                        $credits=8;
                         break;
                     case "economy":
-                        $credits=600;
+                        $credits=24;
                         break;
                     case "silver":
-                        $credits=1200;
+                        $credits=48;
                         break;
                     case "gold":
-                        $credits=1800;
+                        $credits=72;
                         break;
                     case "platinum":
-                        $credits=2500;
+                        $credits=100;
                         break;
                 }
 
