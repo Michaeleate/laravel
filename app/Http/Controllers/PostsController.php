@@ -4305,8 +4305,15 @@ class PostsController extends Controller
 
     //Get Maximum internal Transaction ID for transactions.
     public static function get_maxintransid() {
-        $intrans_id = \App\mod_transact::max('intrans_id');
-                //->first();
+        $intrans_id1 = \App\mod_transact::max('intrans_id');
+        $intrans_id2 = \App\mod_credits::max('intrans_id');
+
+        if($intrans_id2 >= $intrans_id1){
+            $intrans_id = $intrans_id2;
+        }
+        else {
+            $intrans_id = $intrans_id1;
+        }
 
         if(!$intrans_id==null){
             return $intrans_id;

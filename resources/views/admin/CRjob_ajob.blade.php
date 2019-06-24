@@ -66,13 +66,13 @@
  
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Credits
+            Candidates
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Buy Credits</a>
-            <a class="dropdown-item" href="#">Credits Statement</a>
-            <a class="dropdown-item" href="#">Invoice</a>
+            <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Registered Today</a>
+            <a class="dropdown-item" href="#">Not Used</a>
+            <a class="dropdown-item" href="#">Not Used</a>
         </div>
     </li>
     <li class="nav-item">

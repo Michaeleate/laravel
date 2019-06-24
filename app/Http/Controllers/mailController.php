@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class mailController extends Controller
 {
@@ -44,5 +42,19 @@ class mailController extends Controller
            $message->from('xyz@gmail.com','Virat Gandhi');
         });
         echo "Email Sent with attachment. Check your inbox.";
+     }
+     
+     //Send 200 Credits introduction mail.
+     public static function add200_email($user) {
+        $data = array('name'=>$user->name,'email'=>$user->email);
+        Mail::send('users.mail200', $data, function($message) use ($data) {
+           $message->to($data['email'], 'SAMS Jobs')->subject
+              ('Introduction Mail from SAMS Jobs');
+           //$message->attach('C:\laravel-master\laravel\public\uploads\image.png');
+           $message->embed('http://localhost/laravel/public/images/add200.jpg');
+           //$message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
+           $message->from('ursams.hr@gmail.com','SAMS Jobs');
+        });
+      //   echo "Email Sent with attachment. Check your inbox.";
      }
 }

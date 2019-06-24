@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\mailController;
+use DateTime;
+use DateInterval;
 use Session;
+use App\User;
 
 class RegisterController extends Controller
 {
@@ -89,12 +98,33 @@ class RegisterController extends Controller
             $data['user_type']=1;
             $data['is_admin']=false;
         }
-        return User::create([
+        // return User::create([
+            $user = \App\User::create([
             'user_type' => $data['user_type'],
             'name' => $data['name'],
             'email' => $data['email'],
             'mob_num' => $data['mob_num'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        //get max credit id
+        $maxcredit_id=PostsController::get_maxcreditid();
+        //get max intrans id
+        $maxintrans_id=PostsController::get_maxintransid();
+
+        //Fill credits table values
+        $user_id=$user->id;
+        $rec_id=null;
+        $credit_id=$maxcredit_id + 1;
+        $intrans_id=$maxintrans_id + 1;
+        $credits=200;	//Introduction free credits
+        $credit_type=2;	//Free
+        $status=1;		//Valid
+        $add_credits=PostsController::upd_credit($user_id, $rec_id, $credit_id, $intrans_id, $credits, $credit_type, $status);
+
+        //send introduction mail
+        $addcredit_email=mailController::add200_email($user);
+
+        return $user;
     }
 }
