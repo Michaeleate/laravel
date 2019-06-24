@@ -156,7 +156,8 @@
                 @else
                     @if(Auth::check())
                     <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;" onMouseOver="this.innerHTML='-4 credits'"
+                    onMouseOut="this.innerHTML='Apply'" >Apply</button></a>
                     {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                     <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                         @csrf
@@ -166,7 +167,8 @@
             @else
                 @if(Auth::check())
                 <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
+                <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;" onMouseOver="this.innerHTML='-4 credits'"
+                onMouseOut="this.innerHTML='Apply'" >Apply</button></a>
                 {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
                 <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                     @csrf

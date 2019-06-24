@@ -1,4 +1,4 @@
-Hi <h1>{{ $name }}</h1>,
+<p>Hi <h1>{{ $name }}</h1>,</p>
 <img src="{{ $message->embed("https://www.samsjobs.in/images/add200.jpg") }}">
 <p>-SAMS Jobs.</p>
 <a href="https://www.samsjobs.in">www.samsjobs.in</a><br />
