@@ -520,7 +520,12 @@
                         </div>
                         <div class="form-group" style="display:block;">
                             <label style="display:block-inline;">Experience: </label>
-                            <label class="mb-2">{{$minexp}} - {{$maxexp}} Yrs</label>
+                            {{-- <label class="mb-2">{{$minexp}} - {{$maxexp}} Yrs</label> --}}
+                            @if($maxexp==0)
+                                <label class="mb-2">Fresher</label>
+                            @else
+                                <label class="mb-2">{{$minexp}} - {{$maxexp}} Yrs</label>
+                            @endif
                             <label style="display:block-inline;">&emsp;&emsp;Posted: </label>
                             <label style="display:block-inline;">&emsp;{{$days_text}}...</label>
                             <label class="mb-2" style="display:block-inline;">Hiring For:</label>

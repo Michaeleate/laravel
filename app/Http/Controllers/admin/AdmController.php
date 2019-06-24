@@ -35,7 +35,7 @@ class AdmController extends Controller
             //get all registered users today
             $userrec = \App\User::select('id', 'user_type', 'name',  'email', 'email_verified_at', 'mob_num', 'mob_verified_at', 'admin_id', 'is_admin','created_at', 'updated_at')
             //$userrec = $userrec->where('updated_at', '=', Carbon::today())
-                    ->orderBy('id','asc')
+                    ->orderBy('id','desc')
                     ->paginate(10);
 
             return view('admin.ctoday',compact('userrec'));
@@ -50,7 +50,7 @@ class AdmController extends Controller
             //get all registered users today
             $userrec = \App\recruiter\modrecruiter::select('id', 'user_type', 'name',  'email', 'email_verified_at', 'mob_num', 'mob_verified_at', 'admin_id', 'is_admin','created_at', 'updated_at')
             //$userrec = $userrec->where('updated_at', '=', Carbon::today())
-                    ->orderBy('id','asc')
+                    ->orderBy('id','desc')
                     ->paginate(10);
 
             return view('admin.rtoday',compact('userrec'));
@@ -93,7 +93,7 @@ class AdmController extends Controller
             //get all registered users today
             $userrec = \App\User::select('id', 'user_type', 'name',  'email', 'email_verified_at', 'mob_num', 'mob_verified_at', 'admin_id', 'is_admin','created_at', 'updated_at')
             //$userrec = $userrec->where('updated_at', '=', Carbon::today())
-                    ->orderBy('id','asc')
+                    ->orderBy('id','desc')
                     ->paginate(10);
 
             return view('admin.ctoday',compact('userrec'));
@@ -121,5 +121,4 @@ class AdmController extends Controller
             return view('admin.ctoday',compact('userrec'));
         }
     }
-
 }

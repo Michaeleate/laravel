@@ -125,7 +125,7 @@
                         <label>Basic</label>
                     </td>
                     <td>
-                        <label>200</label>
+                        <label>8</label>
                     </td>
                     <td>
                         <label><i class="fas fa-rupee-sign"></i>&nbsp;200</label>
@@ -142,7 +142,7 @@
                         <label>Economy</label>
                     </td>
                     <td>
-                        <label>600</label>
+                        <label>24</label>
                     </td>
                     <td>
                         <label><i class="fas fa-rupee-sign"></i>&nbsp;500</label>
@@ -159,7 +159,7 @@
                         <label>Silver</label>
                     </td>
                     <td>
-                        <label>1200</label>
+                        <label>48</label>
                     </td>
                     <td>
                         <label><i class="fas fa-rupee-sign"></i>&nbsp;1000</label>
@@ -176,7 +176,7 @@
                         <label>Gold</label>
                     </td>
                     <td>
-                        <label>1800</label>
+                        <label>72</label>
                     </td>
                     <td>
                         <label><i class="fas fa-rupee-sign"></i>&nbsp;1500</label>
@@ -193,7 +193,7 @@
                         <label>Platinum</label>
                     </td>
                     <td>
-                        <label>2500</label>
+                        <label>100</label>
                     </td>
                     <td>
                         <label><i class="fas fa-rupee-sign"></i>&nbsp;2000</label>
@@ -210,7 +210,7 @@
                         <label>Free</label>
                     </td>
                     <td>
-                        <label>200</label>
+                        <label>8</label>
                     </td>
                     <td>
                         <label>Free</label>
@@ -227,7 +227,7 @@
                         <label>Old</label>
                     </td>
                     <td>
-                        <label>800</label>
+                        <label>32</label>
                     </td>
                     <td>
                         <label>Paid</label>
