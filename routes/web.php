@@ -103,6 +103,7 @@ Route::get('/viewjobstatus', 'JobsController@ujallapplied')->name('ujallapplied'
 Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
 //Buy Credits - View
 Route::get('/buycredits', 'payController@buycredits')->name('buycredits');
+Route::view('/buyview', 'users.buycredits_prof')->name('buyview');
 //Payment gateway to buy Credits by candidate.
 Route::post('/payment', 'payController@payment')->name('payment');
 //If response from PayU Payment gateway is success.

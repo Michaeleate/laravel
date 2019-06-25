@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\payController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\MessageBag;
 use Session;
 use Debugbar;
+use Redirect;
 use App\modresuhead;
 use App\modresuload;
 use App\modresukskil;
@@ -1933,7 +1937,7 @@ class PostsController extends Controller
             $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             $recalljobs = $recalljobs->where('rec_id', '=', $authid)
                     ->orderBy('job_id','asc')
-                    ->paginate(3);
+                    ->paginate(10);
             
             if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($recalljobs as $key=>$val){
@@ -2366,7 +2370,7 @@ class PostsController extends Controller
             }
             $jsearchall = $jsearchall
                     ->orderBy('job_id','asc')
-                    ->paginate(3);
+                    ->paginate(10);
             
             foreach($jsearchall as $key=>$val){
                 if(!(empty($val["hireloc1"]))){
@@ -2805,6 +2809,19 @@ class PostsController extends Controller
         if (Auth::check())
         {
             $authid = Auth::id();
+            //Check valid total credits
+            // $total_credits = 0;   //Initializing variable
+            // $total_credits = PostsController::get_allcredits();
+            
+            // $message = "Total Credits are" . $total_credits;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            
+            // if(($total_credits - 4) < 0){
+            //     // $request = new \Illuminate\Http\Request();
+            //     // payController::buycredits($request);
+            //     return view('users.buycredits_prof');
+            // }
+            
             $app_status=$viewed_at=$applied_at=$schedule_id=$interview_id='';
             $jobid=$jobid;
             $app_status=1; //applied status
@@ -2813,8 +2830,8 @@ class PostsController extends Controller
             $applied_at=Carbon::now()->toDateTimeString();
             $schedule_id=0;
             $interview_id=0;
-
-            //Decrease 100 credits from total credits.
+            
+            //Decrease 4 credits from total credits.
             //get max credit id
             $maxcredit_id=PostsController::get_maxcreditid();
             //get max intrans id
@@ -2831,6 +2848,7 @@ class PostsController extends Controller
 
             return self::dbapplyjob($authid, $jobid, $app_status, $viewed_at,$applied_at, $schedule_id, $interview_id);
             //echo "In get_profile function- ".$head;
+            
             if(!($dbstatus==true)){
                 return true;    
             }
@@ -2939,7 +2957,7 @@ class PostsController extends Controller
             $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             $recalljobs = $recalljobs->where('jstatus', '=', 1)
                     ->orderBy('job_id','desc')
-                    ->paginate(3);
+                    ->paginate(10);
             
             // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($recalljobs as $key=>$val){
@@ -3344,7 +3362,7 @@ class PostsController extends Controller
         $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
         $recalljobs = $recalljobs->where('jstatus', '=', 1)
                 ->orderBy('job_id','desc')
-                ->paginate(3);
+                ->paginate(10);
         
         foreach($recalljobs as $key=>$val){
             if(!(empty($val["hireloc1"]))){
@@ -3759,7 +3777,7 @@ class PostsController extends Controller
             $ujallapplied = $ujallapplied->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
             $ujallapplied = $ujallapplied->orderBy('userjobstat.job_id','desc')
-                                        ->paginate(3);
+                                        ->paginate(10);
 
             // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($ujallapplied as $job){
@@ -4191,7 +4209,7 @@ class PostsController extends Controller
             $getuserjapp = $getuserjapp->addselect(DB::raw("'8.2 Yrs' as expyears_text"));
             //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
             $getuserjapp = $getuserjapp->orderBy('userjobstat.job_id','desc')
-                                        ->paginate(3);
+                                        ->paginate(10);
 
             // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($getuserjapp as $job){
