@@ -1110,11 +1110,11 @@ class PostsController extends Controller
             //get all jobs posted by the recruiter only.
             $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at')
                     ->where('rec_id', '=', $authid)
-                    ->orderBy('job_id','asc')
+                    ->orderBy('job_id','desc')
                     ->get();
 
 
-            if (\Request::is('recruiter/vlastjob'|| 'admin/vlastjob')) {
+            // if (\Request::is('recruiter/vlastjob'|| 'admin/vlastjob')) {
                 foreach($jobdet as $key=>$val){
                     if(!(empty($val["hireloc1"]))){
                         switch($val["hireloc1"]){
@@ -1444,7 +1444,7 @@ class PostsController extends Controller
                         }
                     }
                 }
-            }
+            // }
             return $jobdet;
         }
         else {
@@ -1936,10 +1936,10 @@ class PostsController extends Controller
             $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             $recalljobs = $recalljobs->where('rec_id', '=', $authid)
-                    ->orderBy('job_id','asc')
+                    ->orderBy('job_id','desc')
                     ->paginate(10);
             
-            if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
+            // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($recalljobs as $key=>$val){
                     if(!(empty($val["hireloc1"]))){
                         switch($val["hireloc1"]){
@@ -2326,7 +2326,7 @@ class PostsController extends Controller
                             break;
                     }
                 }
-            }
+            // }
             return $recalljobs;
         }
         else {
@@ -2369,7 +2369,7 @@ class PostsController extends Controller
                     });
             }
             $jsearchall = $jsearchall
-                    ->orderBy('job_id','asc')
+                    ->orderBy('job_id','desc')
                     ->paginate(10);
             
             foreach($jsearchall as $key=>$val){
