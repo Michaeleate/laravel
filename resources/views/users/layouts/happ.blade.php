@@ -578,7 +578,7 @@
                                             </div>
                                             <div class="row col-md-12" style="display:block; float:right;">    
                                                 <label style="display:block; width:100%;"> </label>
-                                                <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
+                                                <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,85)}}...</label>
                                             </div>
                                             <div class="row col-md-12" style="display:block; float:right;">
                                                 <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
