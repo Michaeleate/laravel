@@ -14,12 +14,14 @@ use DateInterval;
 class payController extends Controller
 {
     //Buy Credits by Authorized Candidate
-    public function buycredits(Request $request){
+    public static function buycredits(Request $request){
         if (Auth::check()){
+            //dd('Inside buycredits of paycontroller');
             //Testing
             //$message = "Inside buycredits of payController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
             return view('users.buycredits_prof');
+            //return redirect()->route('buyview');
         }
         else {
             return back();

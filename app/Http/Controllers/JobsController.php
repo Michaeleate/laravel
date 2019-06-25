@@ -184,7 +184,7 @@ class JobsController extends Controller
             return back();
         }
     }
-
+    //mike
     //Show full job details with parameter jobid
     public function userappjob($jobid){
         if (Auth::check()) {
@@ -192,17 +192,21 @@ class JobsController extends Controller
         //echo "<script type='text/javascript'>alert('$message');</script>";
             $authid = Auth::id();
             //$jobid=$jobid;
-            //$check_val_credit=PostsController::check_val_credit();
+            
+            $total_credits = 0;   //Initializing variable
+            $total_credits = PostsController::get_allcredits();
+            
+            // $message = "Total Credits are" . $total_credits;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            
+            if(($total_credits - 4) < 0){
+                return view('users.buycredits_prof');
+            }
+            
             $apply_job=PostsController::user_apply_job($jobid);
             if($apply_job == true){
                 return redirect()->back()->with('link',$apply_job);
-                //dd("Job applied successfully");
             }
-            //else{
-                //dd("Job applied failed");
-            //}
-
-            //return view('users.viewsjob_prof')->with('jobid', $jobid);
         }
         else{
             return redirect()->route('login');
@@ -222,14 +226,6 @@ class JobsController extends Controller
         }
     }
 
-    //Guest check all the recent jobs on homepage.
-    // public function gvalljobs(){
-    //     $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
-
-    //         $jsearchall=PostsController::get_alljobs_forguest();
-    //         // return view('users.RDsearch',compact('jsearchall'));
-    //         return view('home',compact('jsearchall'));
-    // }
 
     //Auth candidate search and apply jobs
     public function uaplyjobs(){
