@@ -2958,6 +2958,7 @@ class PostsController extends Controller
             $recalljobs = $recalljobs->where('jstatus', '=', 1)
                     ->orderBy('job_id','desc')
                     ->paginate(10);
+                    
             
             // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($recalljobs as $key=>$val){
