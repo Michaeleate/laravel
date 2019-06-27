@@ -47,8 +47,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('admin.postjob') }}" title="Post Requirements">Post Jobs</a>
             <a class="dropdown-item" href="{{ route('admin.valljobs') }}" title="View all posted Jobs">View Jobs</a>
-            <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
-            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
+            <a class="dropdown-item" href="#" title="Update posted jobs">Update Jobs</a>
+            <a class="dropdown-item" href="#" title="Archieve Jobs">Archive Jobs</a>
         </div>
     </li>
  
@@ -58,9 +58,9 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="employer_list.html">Received</a>
-            <a class="dropdown-item" href="employer_list.html">Processed</a>
-            <a class="dropdown-item" href="employer_list.html">Status</a>
+            <a class="dropdown-item" href="{{ route('admin.capplied') }}">Applied</a>
+            <a class="dropdown-item" href="#">Processed</a>
+            <a class="dropdown-item" href="#">Status</a>
         </div>
     </li>
  
@@ -73,10 +73,11 @@
             <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Candidates Today</a>
             <a class="dropdown-item" href="{{ route('admin.rtoday') }}">Recruiters Today</a>
             <a class="dropdown-item" href="{{ route('admin.rregister') }}">Register Recruiter</a>
+            <a class="dropdown-item" href="{{ route('admin.capplied') }}">Candidates Applied</a>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#">Contact</a>
     </li>
 </ul>
 @endsection

@@ -152,6 +152,7 @@
             <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Candidates Today</a>
             <a class="dropdown-item" href="{{ route('admin.rtoday') }}">Recruiters Today</a>
             <a class="dropdown-item" href="{{ route('admin.rregister') }}">Register Recruiter</a>
+            <a class="dropdown-item" href="{{ route('admin.capplied') }}">Candidates Applied</a>
         </div>
     </li>
     <li class="nav-item">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
+use \App\Http\Controllers\PostsController;
 use DateTime;
 use DateInterval;
 use App\User;
@@ -119,6 +120,16 @@ class AdmController extends Controller
             ]);
 
             return view('admin.ctoday',compact('userrec'));
+        }
+    }
+
+    //Candidates who applied for jobs
+    public static function capplied(Request $request){
+        if(Auth::guard('admin')->check()){
+            //$authid = Auth::guard('admin')->user()->id;
+            
+            $jsearchall=PostsController::get_jallapplied();
+            return view('admin.jobstatus',compact('jsearchall'));
         }
     }
 }

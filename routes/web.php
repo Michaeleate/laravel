@@ -217,7 +217,8 @@ Route::get('/admin/vadmprofile', 'admin\AdmController@vadmprofile')->name('vadmp
 Route::get('/admin/uadmprofile', 'admin\AdmController@cadmprofile')->name('uadmprofile'); 
 //Update Candidate or Recruiters Profile
 Route::get('/admin/ctoday', 'admin\AdmController@ctoday')->name('admin.ctoday'); 
-
+//Check candidates who applied
+Route::get('/admin/capplied', 'admin\AdmController@capplied')->name('admin.capplied'); 
 //Verify User Mobile Number
 Route::get('/admin/mob_verified/{userid}', 'admin\AdmController@mob_verified')->name('admin.mob_verified');
 //View complete User Details View

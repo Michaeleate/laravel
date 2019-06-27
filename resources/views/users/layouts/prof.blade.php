@@ -1,6 +1,14 @@
 <?php
     use \App\Http\Controllers\PostsController;
-    $total_credits=PostsController::get_allcredits();
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+    if(!(Auth::guard('admin')->check())){
+        $total_credits=PostsController::get_allcredits();
+    }
+    else{
+        $total_credits=5000;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

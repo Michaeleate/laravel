@@ -1,147 +1,78 @@
-@extends('admin.layouts.aJob')
+@extends('admin.layouts.auser')
 <?php 
-    use \App\Http\Controllers\PostsController;
-    use Illuminate\Routing\UrlGenerator;
-    use Illuminate\Support\Facades\Auth;
-    use Illuminate\Support\Carbon;
-    //use Illuminate\Pagination\LengthAwarePaginator;
-    //$previousurl = url()->previous();
-    //$seslink = Session::get('link');
-    //if (\Request::is('recruiter/urecprofile') && ($seslink==null)) {
-    //    $seslink='init';
-    //}
-
+    use \App\Http\Controllers\PostsController; 
     
-    $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
-    $i=0;
-    /*    
-    $recalljobs=PostsController::get_recalljobs();
+    $head_line=$oldresu='';
+    $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
+    $resutime=NULL;
+    $fname=$email=$mob_num=$gender=$dob=$marstat=$eng_lang=$tel_lang=$hin_lang=$oth_lang=$diff_able=$able1=$able2=$able3=$profpic=$picpath=$picname=NULL;
+    $picload="Uploaded - ";
+    $qual1=$board1=$pyear1=$colname1=$edulang1=$percentage1=$edutime1='';
+    $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
+    $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
+    $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
+    $empname=$expyears1=$expmonths1=$expmonths=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
+    $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
+    $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
+    $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
-    foreach($recalljobs as $key=>$val){
-        $job_id=$val["job_id"];
-        $jtitle=$val["jtitle"];
-        $jd=$val["jd"];
-        $qty=$val["qty"];
-        $keywords=$val["keywords"];
-        $minexp=$val["minexp"];
-        $maxexp=$val["maxexp"];
-        $minsal=$val["minsal"];
-        $maxsal=$val["maxsal"];
-        $hireloc1=$val["hireloc1"];
-        $hireloc2=$val["hireloc2"];
-        $hireloc3=$val["hireloc3"];
-        $comhirefor=$val["comhirefor"];
-        $jstatus=$val["jstatus"];
-        $valid_till=$val["valid_till"];
-        $auto_aprove=$val["auto_aprove"];
-        $auto_upd=$val["auto_upd"];
-        $created_at=$val["created_at"];
-        $updated_at=$val["updated_at"];
-    }
-    
-    if(!(isset($hireloc2))){
-        $hireloc2='';
-        $hireloc3='';
-    }
-
-    //Count days when the job posted
-    $daysdiff=$created_at->diffInDays(Carbon::now());
-    switch($daysdiff){
-        case 0:
-            $daystext="Today";
-            break;
-        case 1:
-            $daystext="Yesterday";
-            break;
-        default:
-            $daystext=$daysdiff . " days ago";
-    }
-
-    //Job Status text as per value
-    switch($jstatus){
-        case 0:
-            $jstatus_text="Approval Pending";
-            break;
-        case 1:
-            $jstatus_text="Active";
-            break;
-        case 2:
-            $jstatus_text="Rejected";
-            break;
-        case 3:
-            $jstatus_text="Closed";
-            break;
-        case 4:
-            $jstatus_text="Hold";
-            break;
-        case 5:
-            $jstatus_text="Expired";
-            break;
-        case 6:
-            $jstatus_text="Archieved";
-            break;
+    /*
+    $head=PostsController::get_head();
+    foreach($head as $key=>$val){
+        $head_line=$val["head_line"];
     }
     */
-    //$message = "Hireloc1 is" . {{$job->hireloc2}};
-    //echo "<script type='text/javascript'>alert('$message');</script>";
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
 <ul class="navbar-nav ml-lg-auto text-center">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('admin.home')}}">Home
+        <a class="nav-link" href="{{ url('/home')}}">Home
             <span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ route('cadmprofile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="{{ url('/user-profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Profile
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('cadmprofile') }}">Create Candidate Profile</a>
-            <a class="dropdown-item" href="{{ route('vadmprofile') }}">View Candidate Profile</a>
-            <a class="dropdown-item" href="{{ route('uadmprofile') }}">Modify Candidate Profile</a>
-            {{--
+            <a class="dropdown-item" href="{{ url('/user-profile') }}">Create Profile</a>
+            <a class="dropdown-item" href="{{ url('/view-user-profile') }}">View Profile</a>
+            <a class="dropdown-item" href="{{ url('/edit-user-profile') }}">Modify Profile</a>
             <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
-            --}}
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Jobs
+            Jobs
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('admin.postjob') }}" title="Post Requirements">Post Jobs</a>
-            <a class="dropdown-item" href="{{ route('admin.valljobs') }}" title="View all posted Jobs">View Jobs</a>
-            <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
-            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
+            <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
+            <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
         </div>
     </li>
- 
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Applications
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Status
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="employer_list.html">Received</a>
-            <a class="dropdown-item" href="employer_list.html">Processed</a>
-            <a class="dropdown-item" href="employer_list.html">Status</a>
+            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
+            <a class="dropdown-item" href="services.html">Interview Schedule</a>
         </div>
     </li>
- 
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Functions
+            Credits
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Candidates Today</a>
-            <a class="dropdown-item" href="{{ route('admin.rtoday') }}">Recruiters Today</a>
-            <a class="dropdown-item" href="{{ route('admin.rregister') }}">Register Recruiter</a>
-            <a class="dropdown-item" href="{{ route('admin.capplied') }}">Candidates Applied</a>
+            <a class="dropdown-item" href="{{ url('/buycredits') }}">Buy Credits</a>
+            <a class="dropdown-item" href="employer_list.html">Credits Statement</a>
+            <a class="dropdown-item" href="employer_single.html">Invoice</a>
         </div>
     </li>
     <li class="nav-item">
@@ -152,6 +83,7 @@
 
 {{-- Build Sub Menu for Create Profile for Registered Candidates --}}
 @section('CreateProfileMenu')
+{{--Filters to be applied on search results --}}
 <div class="col_3 permit my-4">
     <h3 class="j-b mb-3">Filters</h3>
     <label style="display:block; width:100%;">Freshness</label>
@@ -235,22 +167,26 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
-@if($recalljobs->total()==0)
+{{-- Resume Precisely--}}
+
+{{--@if($jsearchall->total()==0) --}}
+@if((isset($jsearchall)))
+@if($jsearchall->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">You haven't posted any jobs yet.</label>
+            <label style="width:100%; color:blue;">No results. Please apply.</label>
         </div>
     </div>
 </div>
 @else
-{{ $recalljobs->links() }}
-@foreach($recalljobs as $job)
-<a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;">
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
+{{ $jsearchall->links() }}
+@foreach($jsearchall as $job)
+<a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:260px;">
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
-            <label style="width:100%; color:blue;">{{ $job->jtitle}}</label>
+            <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
             <label style="width:100%;">{{$job->comhirefor}}</label>
             <div style="display:inline-block;">
                 <i class="fas fa-briefcase" style="display:inline;"></i>
@@ -293,7 +229,7 @@
         </div>
         <div class="row col-md-12" style="display:block; float:right;">    
             <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
+            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,85)}}...</label>
         </div>
         <div class="row col-md-12" style="display:block; float:right;">
             <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
@@ -305,47 +241,76 @@
             </label>
             <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
-        {{--
-        <div class="row col-md-12" style="display:block; float:right;">
-            <div id="shareRoundIcons" style="float:right;"></div>
+        <div class="row col-md-12" style="display:block; float:left;">
+            @if(isset($job->app_status))
+            {{-- <span class="appstat applied">Applied</span> --}}
+            @if( $job->app_status > 0)
+                @switch($job->app_status)
+                    @case ("1")
+                        <span class="appstat applied">Applied</span>
+                        @break
+                    @case ("2")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        @break
+                    @case ("3")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        @break
+                    @case ("4")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        @break
+                    @case ("5")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat notshort">Not shortlisted</span>
+                        @break
+                    @case ("6")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        <span class="appstat scheduled">Scheduled Interview</span>
+                        @break
+                    @case ("7")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        <span class="appstat scheduled">Scheduled Interview</span>
+                        <span class="appstat interviewed">Interviewed</span>
+                        <span class="appstat offer">Interviewed</span>
+                        @break
+                    @case ("8")
+                        <span class="appstat applied">Applied</span>
+                        <span class="appstat appsent">Application Sent</span>
+                        <span class="appstat appview">Application Viewed</span>
+                        <span class="appstat shortlist">Shortlisted</span>
+                        <span class="appstat scheduled">Scheduled Interview</span>
+                        <span class="appstat interviewed">Interviewed</span>
+                        <span class="appstat offer">Offered</span>
+                        @break
+                    @default
+                        Not Applicable
+                @endswitch
+                @if( $job->app_status == 9)
+                     <span class="appstat closed">Closed</span>
+                @endif
+            @else
+                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+            @endif
+            @endif
         </div>
-        --}}
     </div>
 </div>
 </a>
 @endforeach
-{{ $recalljobs->links() }}
+{{ $jsearchall->links() }}
+@endif
 @endif
 @endsection
-
-@section('displayads')
-@endsection
-
-<script language="Javascript" type="text/javascript">
-/*Function for counting characters for textarea */
-function countChars(obj,elid,talen){
-    var maxLength = talen;
-    var strLength = obj.value.length;
-    var charRemain = (maxLength - strLength);
-    var charOver = (strLength - maxLength);
-    
-    if(charRemain < 0){
-        document.getElementById(elid).innerHTML = '<label style="justify:right; width:100%; color: red;">Please remove '+charOver+' characters</label>';
-    }else{
-        document.getElementById(elid).innerHTML = '<label style="justify:right; width:100%; color: green;">'+charRemain+' character(s) left';
-    }
-}
-
-//Change the textarea color
-function backgrey(obj){
-    //alert("mike");
-    //document.getElementById("i-jobdesc").style.backgroundcolor = "red";
-    $("#i-jobdesc").css( "background", "#f8f9fa" );
-}
-//Change the textarea color back to normal
-function normalcolor(obj){
-    //alert("mike");
-    //document.getElementById("i-jobdesc").style.backgroundcolor = "red";
-    $("#i-jobdesc").css( "background", "white" );
-}
-</script>
