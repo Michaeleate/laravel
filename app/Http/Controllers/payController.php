@@ -80,9 +80,9 @@ class payController extends Controller
             $firstname=Auth::user()->name;
             $email=Auth::user()->email;
             $phone=Auth::user()->mob_num;
-            $surl = 'http://localhost/laravel/public/payment_success';
-            $furl = 'http://localhost/laravel/public/payment_failure';
-            $curl = 'http://localhost/laravel/public/payment_cancel';
+            $surl = 'https://www.samsjobs.in/payment_success';
+            $furl = 'https://www.samsjobs.in/payment_failure';
+            $curl = 'https://www.samsjobs.in/payment_cancel';
             $service_provider = 'payu_paisa';
             $merchant_key = "R886JwQS";
             
