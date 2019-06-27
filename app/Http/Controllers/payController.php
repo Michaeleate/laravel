@@ -13,7 +13,7 @@ use DateInterval;
 
 class payController extends Controller
 {
-    //Buy Credits by Authorized Candidate
+    //Buy Credits by Authorized Candidate.
     public static function buycredits(Request $request){
         if (Auth::check()){
             //dd('Inside buycredits of paycontroller');
