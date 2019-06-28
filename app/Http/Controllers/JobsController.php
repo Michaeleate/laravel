@@ -252,4 +252,19 @@ class JobsController extends Controller
             return redirect()->route('login');
         }
     }
+
+    //Users check schedule for their applications.
+    public function checkschd(){
+        if (Auth::check() || Auth::guard('admin')->check()) {
+            //Testing
+            // $message = "In ujallapplied of JobsController";
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            $jobschd=PostsController::get_jobschedule();
+
+            return view('users.jobschd',compact('jobschd'));
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
 }

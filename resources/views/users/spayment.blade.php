@@ -39,7 +39,7 @@ $hash = hash("sha512", $retHashSeq);
             <a class="dropdown-item" href="{{ url('/user-profile') }}">Create Profile</a>
             <a class="dropdown-item" href="{{ url('/view-user-profile') }}">View Profile</a>
             <a class="dropdown-item" href="{{ url('/edit-user-profile') }}">Modify Profile</a>
-            <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
+            {{-- <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a> --}}
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -59,7 +59,7 @@ $hash = hash("sha512", $retHashSeq);
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
-            <a class="dropdown-item" href="services.html">Interview Schedule</a>
+            <a class="dropdown-item" href="{{ url('/checkschd') }}">Interview Schedule</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -69,12 +69,12 @@ $hash = hash("sha512", $retHashSeq);
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/buycredits') }}">Buy Credits</a>
-            <a class="dropdown-item" href="employer_list.html">Credits Statement</a>
-            <a class="dropdown-item" href="employer_single.html">Invoice</a>
+            <a class="dropdown-item" href="#">Credits Statement</a>
+            <a class="dropdown-item" href="#">Invoice</a>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#">Contact</a>
     </li>
 </ul>
 @endsection

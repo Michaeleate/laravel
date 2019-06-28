@@ -101,6 +101,11 @@ Route::view('/applyjobs', 'users.applyjobs')->name('applyjobs');
 Route::get('/viewjobstatus', 'JobsController@ujallapplied')->name('ujallapplied');
 //Apply Job by Candidate - View
 Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');
+//Candidate check schedule
+Route::get('/checkschd', 'JobsController@checkschd')->name('checkschd');
+//Candidate reschedule
+Route::get('/creschd', 'JobsController@creschd')->name('creschd');
+
 //Buy Credits - View
 Route::get('/buycredits', 'payController@buycredits')->name('buycredits');
 Route::view('/buyview', 'users.buycredits_prof')->name('buyview');

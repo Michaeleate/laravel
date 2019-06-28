@@ -28,55 +28,63 @@
 @section('buildMenu')
 <ul class="navbar-nav ml-lg-auto text-center">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/home')}}">Home
+        <a class="nav-link" href="{{ route('admin.home')}}">Home
             <span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ url('/user-profile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="{{ route('cadmprofile') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Profile
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/user-profile') }}">Create Profile</a>
-            <a class="dropdown-item" href="{{ url('/view-user-profile') }}">View Profile</a>
-            <a class="dropdown-item" href="{{ url('/edit-user-profile') }}">Modify Profile</a>
+            <a class="dropdown-item" href="{{ route('cadmprofile') }}">Create Candidate Profile</a>
+            <a class="dropdown-item" href="{{ route('vadmprofile') }}">View Candidate Profile</a>
+            <a class="dropdown-item" href="{{ route('uadmprofile') }}">Modify Candidate Profile</a>
+            {{--
             <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
+            --}}
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Jobs
+        Jobs
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
-            <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
+            <a class="dropdown-item" href="{{ route('admin.postjob') }}" title="Post Requirements">Post Jobs</a>
+            <a class="dropdown-item" href="{{ route('admin.valljobs') }}" title="View all posted Jobs">View Jobs</a>
+            <a class="dropdown-item" href="#" title="Update posted jobs">Update Jobs</a>
+            <a class="dropdown-item" href="#" title="Archieve Jobs">Archive Jobs</a>
         </div>
     </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Status
-            <i class="fas fa-angle-down"></i>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
-            <a class="dropdown-item" href="services.html">Interview Schedule</a>
-        </div>
-    </li>
+ 
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Credits
+            Applications
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/buycredits') }}">Buy Credits</a>
-            <a class="dropdown-item" href="employer_list.html">Credits Statement</a>
-            <a class="dropdown-item" href="employer_single.html">Invoice</a>
+            <a class="dropdown-item" href="#">Received</a>
+            <a class="dropdown-item" href="#">Processed</a>
+            <a class="dropdown-item" href="#">Status</a>
+        </div>
+    </li>
+ 
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Functions
+            <i class="fas fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('admin.ctoday') }}">Candidates Today</a>
+            <a class="dropdown-item" href="{{ route('admin.rtoday') }}">Recruiters Today</a>
+            <a class="dropdown-item" href="{{ route('admin.rregister') }}">Register Recruiter</a>
+            <a class="dropdown-item" href="{{ route('admin.capplied') }}">Candidates Applied</a>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#">Contact</a>
     </li>
 </ul>
 @endsection

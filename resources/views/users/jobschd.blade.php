@@ -11,11 +11,13 @@
     $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
     $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
     $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
-    $empname=$expyears1=$expmonths=$expmonths1=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $empname=$expyears1=$expmonths1=$expmonths=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
     $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
+
+
 
     /*
     $head=PostsController::get_head();
@@ -84,7 +86,7 @@
 {{-- Build Sub Menu for Create Profile for Registered Candidates --}}
 @section('CreateProfileMenu')
 {{--Filters to be applied on search results --}}
-<div class="col_3 permit my-4">
+{{-- <div class="col_3 permit my-4">
     <h3 class="j-b mb-3">Filters</h3>
     <label style="display:block; width:100%;">Freshness</label>
     <select class="form-control" id="i-fresh" name="fresh" style="line-height:10px; text-align:center; width:140px; height:30px; font-size:small;">
@@ -97,7 +99,7 @@
     </select>
 </div>
 {{--Locations Filter --}}
-<div class="col_3 permit my-4">
+{{-- <div class="col_3 permit my-4">
     <label style="display:block; width:100%;">Locations</label>
     <div class="form-group" id="i-locmain">
         <div class="form-check-inline">
@@ -123,7 +125,7 @@
     </div>
 </div>
 {{--Salary Filter --}}
-<div class="col_3 permit my-4">
+{{-- <div class="col_3 permit my-4">
     <label style="display:block; width:100%;">Monthly Salary</label>
     <div class="form-group" id="i-salmain">
         <div class="form-check-inline" style="float:left; display:block; width:100%;">
@@ -162,111 +164,136 @@
             </label>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
 
-{{--@if($jsearchall->total()==0) --}}
-@if((isset($jsearchall)))
-@if($jsearchall->total()==0)
+{{--@if($jobschd->total()==0) --}}
+@if((isset($jobschd)))
+@if($jobschd->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">No Search results. Refine your search.</label>
+            <label style="width:100%; color:blue;">Interviews not scheduled yet. Please complete all the fields in your profile.</label>
         </div>
     </div>
 </div>
 @else
-{{ $jsearchall->links() }}
-@foreach($jsearchall as $job)
-<a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-@if (\Route::current()->getName() == 'searchjobs')
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px;">
-@else
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px;">
-@endif
+{{ $jobschd->links() }}
+@foreach($jobschd as $job)
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:210px;">
     <div class="row emply-info">
-        <div class="col-md-9" style="float:left;">
-            <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
-            <label style="width:100%;">{{$job->comhirefor}}</label>
-            <div style="display:inline-block;">
-                <i class="fas fa-briefcase" style="display:inline;"></i>
-                {{-- <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
-                <span style="width:10px; display:inline;"> - </span>
-                <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label> --}}
-                @if($job->maxexp==0)
-                    <label style="width:50px; display:inline;">Fresher</label>
-                @else
-                    <label style="width:20px; display:inline;">{{$job->minexp}}</label>
-                    <span style="width:10px; display:inline;"> - </span>
-                    <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
-                @endif
+        <div class="row col-md-12" style="display:block-inline;">
+            <div class="col-md-6" style="display:block-inline; float:left;">    
+                <label style="display:block-inline;float:left; width:120px;">Schedule Start:  </label>
+                <label style="display:block-inline; float:left;">&emsp;{{$job->schedule_start}}</label>
             </div>
-            <div style="display:inline-block;">
-                <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
-                <i class="fas fa-map-marker-alt" style="display:inline;"></i>
-                <label style="width:160px; display:inline;">
-                {{$job->hireloc1}}
-                @if(!($job->hireloc2)=='')
-                ,  {{$job->hireloc2}}
-                @endif
-
-                @if(!($job->hireloc3)=='')
-                ,  {{$job->hireloc3}}
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline;float:left; width:130px;">Schedule End:  </label>
+                <label style="display:block-inline; float:left;">&emsp;{{$job->schedule_end}}</label>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline;float:left; width:120px;">Scheduled At:  </label>
+                <label style="display:block-inline; float:left;">&emsp;{{$job->schedule_at}}</label>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline; float:left; width:130px;">Scheduled by:  </label>
+                <label style="display:block-inline; float:left;">&emsp;
+                @if(!($job->schedule_byuser == null))
+                    {{Auth::user()->name}}
+                @else
+                    @php
+                        $recname=PostsController::get_recname($job->schedule_byrec);
+                        foreach($recname as $key=>$val){
+                            $recruiter=$val["name"];
+                        }
+                        echo $recruiter;
+                    @endphp
                 @endif
                 </label>
             </div>
-        </div>
-        <div class="col-md-3" style="float:right;">
-            {{--
-            <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
-            --}}
-            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
-            <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
-            {{--   <label style="display:block; width:100%;"> </label> --}}
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
-            <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,80)}}...</label>
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">
-            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
-            @if($job->minsal>0)
-                {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
-            @else
-                Not Disclosed&emsp;&emsp;
-            @endif
-            </label>
-            <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;Job Applied: 99999</label>
-        </div>
-        {{-- Testing purpose only this division --}}
-        <div class="row col-md-12" style="display:block; float:right;">
-            @if(isset($job->japp_status))
-            @if( $job->japp_status > 0)
-                <button class="btn" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
-            @else
-                <a href="{{ route('user-apply-job',$job->job_id) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
-                {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
-                <form id="job-apply-form" action="{{ route('user-apply-job',$job->job_id) }}" method="POST">
-                    @csrf
-                </form>
-            @endif
-            @else
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
-            @endif
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline; float:left; width:120px;">Schedule Status:  </label>
+                <label style="display:block-inline; float:left;">&emsp;
+                @switch($job->schedule_stat)
+                    @case (1)
+                        Scheduled
+                        @break
+                    @case (2)
+                        Accepted
+                        @break
+                    @case (3)
+                        Rescheduled
+                        @break
+                    @case (4)
+                        Not Accepted
+                        @break
+                    @default
+                        NA
+                @endswitch
+                </label>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline;float:left; width:130px;">Scheduled Message:  </label>
+                <label style="display:block-inline; float:left;">&emsp;{{$job->schedule_msg}}</label>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline;float:left; width:120px;">Interview Type:  </label>
+                <label style="display:block-inline; float:left;">&emsp;
+                @switch($job->interview_type)
+                    @case (1)
+                        Face to Face
+                        @break
+                    @case (2)
+                        Telephonic
+                        @break
+                    @case (3)
+                        Video Call
+                        @break
+                    @default
+                        NA
+                @endswitch
+                </label>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <label style="display:block-inline; float:left; width:130px;">Interview Round:  </label>
+                <label style="display:block-inline; float:left;">&emsp;
+                @switch($job->interview_round)
+                    @case (1)
+                        Initial
+                        @break
+                    @case (2)
+                        Technical
+                        @break
+                    @case (3)
+                        Manager
+                        @break
+                    @case (4)
+                        HR
+                        @break
+                    @default
+                        NA
+                @endswitch
+                </label>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:right;">
+                <a href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="float:right;">
+                    <button class="btn btn-primary" style="width:120px; height:30px; float:right; line-height: 15px; text-align:center;">View Job</button>
+                </a>
+            </div>
+            <div class="col-md-6" style="display:block-inline; float:left;">
+                <a href="{{ route('creschd', $job->sch_id)}}" target="_blank" style="float:left;">
+                    <button class="btn btn-primary" style="width:120px; height:30px; float:left; line-height: 15px; text-align:center;">Reschedule</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-</a>
 @endforeach
-{{ $jsearchall->links() }}
+{{ $jobschd->links() }}
 @endif
 @endif
 @endsection

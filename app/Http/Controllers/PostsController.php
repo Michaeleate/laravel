@@ -4705,4 +4705,42 @@ class PostsController extends Controller
             return back();
         }
     }
+    
+    //Get candidates all schedules for thier applications.
+    public static function get_jobschedule() {
+        if (Auth::check() || Auth::guard('admin')->check()){
+            $userid=null;
+
+            if(Auth::check()){
+                $userid=Auth::id();    
+                
+                $jobschedule = \App\mod_schedule::select('job_id', 'sch_id', 'schedule_start', 'schedule_end', 'schedule_at', 'schedule_byuser', 'schedule_byrec', 'schedule_stat', 'schedule_msg', 'interview_type', 'interview_round', 'interview_stat', 'interview_msg', 'approve')
+                            ->where('rec_id', '=', $userid)
+                            ->orderBy('sch_id','desc')
+                            ->paginate(10);
+
+            }
+
+            return $jobschedule;
+        }
+        else {
+            return back();
+        }
+    }
+    
+    //Get Recruiter name, by recruiter id.
+    public static function get_recname($recid) {
+        if (Auth::check() || Auth::guard('admin')->check()){
+            $userid=null;
+            
+            $recname = \App\recruiter\modrecruiter::select('name')
+                    ->where('id', '=', $recid)
+                    ->get();
+
+            return $recname;
+        }
+        else {
+            return back();
+        }
+    }
 }
