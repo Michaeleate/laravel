@@ -4,8 +4,8 @@ $merchant_key = "R886JwQS";
 $salt = "VBQQ0cwAj1";
 // Merchant Key and Salt as provided by Payu.
 
-$payu_base_url = "https://sandboxsecure.payu.in";		// For Sandbox Mode
-//$payu_base_url = "https://secure.payu.in";			// For Production Mode
+//$payu_base_url = "https://sandboxsecure.payu.in";		// For Sandbox Mode
+$payu_base_url = "https://secure.payu.in";			// For Production Mode
 
 $action = '';
 $formError = 0;
