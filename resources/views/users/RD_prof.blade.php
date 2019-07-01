@@ -232,16 +232,18 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
             <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
+            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
+            <a class="dropdown-item" href="{{ url('/checkschd') }}">Interview Schedule</a>
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Status
+            Services
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
-            <a class="dropdown-item" href="{{ url('/checkschd') }}">Interview Schedule</a>
+            <a class="dropdown-item" href="{{ url('/resume_service') }}">Resume Writing</a>
+            <a class="dropdown-item" href="{{ url('/int_prep') }}">Interview Preparation</a>
         </div>
     </li>
     <li class="nav-item dropdown">

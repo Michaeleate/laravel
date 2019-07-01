@@ -127,11 +127,23 @@
         @if (\Route::current()->getName() == 'applyjobs')
             <li class="breadcrumb-item active">Apply Jobs</li>
         @endif
+        @if (\Route::current()->getName() == 'uvalljobs')
+            <li class="breadcrumb-item active">View All Jobs</li>
+        @endif
+        @if (\Route::current()->getName() == 'ujallapplied')
+            <li class="breadcrumb-item active">View Job Status</li>
+        @endif
         @if (\Route::current()->getName() == 'buycredits')
+            <li class="breadcrumb-item active">Buy Credits</li>
+        @endif
+        @if (\Route::current()->getName() == 'buyview')
             <li class="breadcrumb-item active">Buy Credits</li>
         @endif
         @if (\Route::current()->getName() == 'checkschd')
             <li class="breadcrumb-item active">Check Schedule</li>
+        @endif
+        @if (\Route::current()->getName() == 'reswrite')
+            <li class="breadcrumb-item active">Resume Services</li>
         @endif
     </ol>
     <!-- banner-text -->
@@ -155,13 +167,25 @@
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>View all jobs</span></h3>
                 @endif
+                @if (\Route::current()->getName() == 'ujallapplied')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>View Status of all Jobs applied</span></h3>
+                @endif
                 @if (\Route::current()->getName() == 'buycredits')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Buy Credits</span></h3>
+                @endif
+                @if (\Route::current()->getName() == 'buyview')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Buy Credits</span></h3>
                 @endif
                 @if (\Route::current()->getName() == 'checkschd')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Check Schedule</span></h3>
+                @endif
+                @if (\Route::current()->getName() == 'reswrite')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Resume Services</span></h3>
                 @endif
                 
                 @if (\Route::current()->getName() == 'applyjobs')
@@ -604,6 +628,26 @@
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
+
+            //Correct label when refresh for resume service.
+            switch($("#i-level").val()){
+                case "1": 
+                    document.getElementById('i-ctext').innerHTML = '<br />30 Credits';
+                    $("#i-ctext").val().change();
+                    break;
+                case "2": 
+                    document.getElementById('i-ctext').innerHTML = '<br />45 Credits';
+                    $("#i-ctext").val().change();
+                    break;
+                case "3": 
+                    document.getElementById('i-ctext').innerHTML = '<br />60 Credits';
+                    $("#i-ctext").val().change();
+                    break;
+                case "4": 
+                    document.getElementById('i-ctext').innerHTML = '<br />80 Credits';
+                    $("#i-ctext").val().change();
+                    break;
+            }
 
             //For Key Skills Options.
             var last_valid_selection = null;

@@ -184,7 +184,7 @@ class JobsController extends Controller
             return back();
         }
     }
-    //mike
+    
     //Show full job details with parameter jobid
     public function userappjob($jobid){
         if (Auth::check()) {
@@ -262,6 +262,74 @@ class JobsController extends Controller
             $jobschd=PostsController::get_jobschedule();
 
             return view('users.jobschd',compact('jobschd'));
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
+
+    //Resume Writing Services.
+    public function reswrite(){
+        if (Auth::check()|| Auth::guard('recruiter')->check() || Auth::guard('admin')->check()) {
+            //Testing
+            // $message = "In ujallapplied of JobsController";
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            // $jobschd=PostsController::get_jobschedule();
+
+            return view('users.resservice');
+        }
+        else{
+            return redirect()->route('login');
+        }
+    }
+
+    //mike
+    //Show full job details with parameter jobid
+    public static function service_resume(Request $request){
+        if (Auth::check()|| Auth::guard('recruiter')->check() || Auth::guard('admin')->check()) {
+        //$message = "In viewjobdet of JobsController with Jobid" . $jobid;
+        //echo "<script type='text/javascript'>alert('$message');</script>";
+            $authid = Auth::id();
+            //$jobid=$jobid;
+            session()->forget(array('ecredit_msg'));
+            $error_msg=null;
+
+            $total_credits = 0;   //Initializing variable
+            $total_credits = PostsController::get_allcredits();
+            
+            $level=$request->input('level');
+            switch($level){
+                case "1":
+                    if(($total_credits - 30) < 0){
+                        $error_msg="No enough credits, please recharge.";
+                        return redirect('buyview')->with('ecredit_msg', $error_msg);
+                    }
+                    break;        
+                case "2":
+                    if(($total_credits - 45) < 0){
+                        $error_msg="No enough credits, please recharge.";
+                        return redirect('buyview')->with('ecredit_msg', $error_msg);
+                    }
+                    break;        
+                case "3":
+                    if(($total_credits - 60) < 0){
+                        $error_msg="No enough credits, please recharge.";
+                        return redirect('buyview')->with('ecredit_msg', $error_msg);
+                    }
+                    break;        
+                case "4":
+                    if(($total_credits - 80) < 0){
+                        $error_msg="No enough credits, please recharge.";
+                        return redirect('buyview')->with('ecredit_msg', $error_msg);
+                    }
+                    break;        
+            }
+            
+            $upd_service=PostsController::user_apply_service($level);
+            if($upd_service == true){
+                //return redirect()->back()->with('link',$apply_job);
+                return view('users.servconf');
+            }
         }
         else{
             return redirect()->route('login');

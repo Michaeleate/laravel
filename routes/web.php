@@ -105,6 +105,11 @@ Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-
 Route::get('/checkschd', 'JobsController@checkschd')->name('checkschd');
 //Candidate reschedule
 Route::get('/creschd', 'JobsController@creschd')->name('creschd');
+//Resume writing service
+Route::get('/resume_service', 'JobsController@reswrite')->name('reswrite');
+Route::post('/service_resume', 'JobsController@service_resume')->name('service_resume');
+//Interview Preparation Service
+Route::get('/int_prep', 'JobsController@intprep')->name('intprep');
 
 //Buy Credits - View
 Route::get('/buycredits', 'payController@buycredits')->name('buycredits');

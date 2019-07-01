@@ -54,16 +54,18 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/uvalljobs') }}">View all jobs</a>
             <a class="dropdown-item" href="{{ url('/applyjobs') }}">Apply Jobs</a>
+            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
+            <a class="dropdown-item" href="{{ url('/checkschd') }}">Interview Schedule</a>
         </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Status
+            Services
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
-            <a class="dropdown-item" href="{{ url('/checkschd') }}">Interview Schedule</a>
+            <a class="dropdown-item" href="{{ url('/resume_service') }}">Resume Writing</a>
+            <a class="dropdown-item" href="{{ url('/int_prep') }}">Interview Preparation</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -285,9 +287,11 @@
                 </a>
             </div>
             <div class="col-md-6" style="display:block-inline; float:left;">
-                <a href="{{ route('creschd', $job->sch_id)}}" target="_blank" style="float:left;">
+                {{-- <a href="{{ route('creschd', $job->sch_id)}}" target="_blank" style="float:left;">
                     <button class="btn btn-primary" style="width:120px; height:30px; float:left; line-height: 15px; text-align:center;">Reschedule</button>
-                </a>
+                </a> --}}
+                <a href="#" data-toggle="modal" data-target="#addschedule">
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;" id="i-schedule" name="schedule">Reschedule</button></a>
             </div>
         </div>
     </div>
@@ -296,4 +300,132 @@
 {{ $jobschd->links() }}
 @endif
 @endif
+<!--/Add Schedule for interview Modal-->
+<div class="modal fade" id="addschedule" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login px-4 mx-auto mw-100">
+                    <h5 class="text-left mb-4">Re-schedule for Interview</h5>
+                    <form role="form" action="{{ route('creschd', ['userid'=>$job->schedule_byuser, 'sch_id'=>$job->sch_id]) }}" method="post">
+                        @csrf
+                        {{-- <div class="form-group" style="display:block;">
+                            <label class="mb-2" style="color:blue;">{{$jtitle}}</label>
+                            <label style="display:block; width:100%; font-size:15px;">&emsp;&emsp;{{substr($job->jd,0,105)}}...</label>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline;">Experience: </label>
+                            {{-- <label class="mb-2">{{$minexp}} - {{$maxexp}} Yrs</label> --}}
+                            {{-- @if($maxexp==0)
+                                <label class="mb-2">Fresher</label>
+                            @else
+                                <label class="mb-2">{{$minexp}} - {{$maxexp}} Yrs</label>
+                            @endif
+                            <label style="display:block-inline;">&emsp;&emsp;Posted: </label>
+                            <label style="display:block-inline;">&emsp;{{$days_text}}...</label>
+                            <label class="mb-2" style="display:block-inline;">Hiring For:</label>
+                            <label style="display:block-inline;">&emsp;{{$comhirefor}}</label>
+                        </div>
+                        <hr> --}}
+                        <div class="form-group">
+                            <label for="party" class="mb-2"><u>Reschedule Interview:</u></label>
+                            <div class="nativeDateTimePicker">
+                                <label for="party" class="mb-2" style="width:90px"> Start Time:</label>
+                                <input type="datetime-local" id="party" name="starttime">
+                                <span class="validity"></span>
+                            </div>
+                            <p class="fallbackLabel">Start Time:</p>
+                            <div class="fallbackDateTimePicker">
+                                <div>
+                                <span>
+                                    <label for="day">Day:</label>
+                                    <select id="day" name="day">
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="month">Month:</label>
+                                    <select id="month" name="month">
+                                        <option selected>January</option>
+                                        <option>February</option>
+                                        <option>March</option>
+                                        <option>April</option>
+                                        <option>May</option>
+                                        <option>June</option>
+                                        <option>July</option>
+                                        <option>August</option>
+                                        <option>September</option>
+                                        <option>October</option>
+                                        <option>November</option>
+                                        <option>December</option>
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="year">Year:</label>
+                                    <select id="year" name="year" disabled>
+                                    </select>
+                                </span>
+                                </div>
+                                <div>
+                                <span>
+                                    <label for="hour">Hour:</label>
+                                    <select id="hour" name="hour">
+                                    </select>
+                                </span>
+                                <span>
+                                    <label for="minute">Minute:</label>
+                                    <select id="minute" name="minute">
+                                    </select>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline; width:90px;">Duration: </label>
+                                <select id="i-duration" name="duration" style="width:230px; height:32px;">
+                                    <option value="1">1 Hour</option>
+                                    <option value="2">2 Hours</option>
+                                    <option value="3">3 Hours</option>
+                                    <option value="4">4 Hours</option>
+                                    <option value="5">5 Hours</option>
+                                </select>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline; width:90px;">Interview Type: </label>
+                                <select id="i-intertype" name="intertype" style="width:230px; height:32px;" readonly>
+                                    <option value="1" selected>Face to Face</option>
+                                    <option value="2">Telephonic</option>
+                                    <option value="3">Skype</option>
+                                    <option value="4">Other</option>
+                                </select>
+                        </div>
+                        <div class="form-group" style="display:block;">
+                            <label style="display:block-inline; width:90px;">Interview Round: </label>
+                                <select id="i-round" name="round" style="width:230px; height:32px;">
+                                    <option value="1">Initial</option>
+                                    <option value="2" selected>Technical</option>
+                                    <option value="3">Manager</option>
+                                    <option value="4">HR</option>
+                                    <option value="5">Other</option>
+                                </select>
+                        </div>
+                        <div class="form-group" style="float:left;">
+                            <label style="width:90px; display:block-inline">Message</label>
+                            <input type="text" id="i-message" name="schedule_msg" style="width:230px;">
+                        </div>
+
+                        <div class="form-group" style="float:right;">
+                            <button type="reset" class="btn btn-default" style="width:100px; height:30px; line-height: 15px; text-align:center;">RESET</button>
+                            <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

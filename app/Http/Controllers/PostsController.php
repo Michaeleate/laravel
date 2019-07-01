@@ -30,6 +30,7 @@ use App\mod_userjobstat;
 use App\mod_schedule;
 use App\mod_transact;
 use App\mod_credits;
+use App\mod_services;
 use App\recruiter\modrecpdet;
 use App\recruiter\modrecbdet;
 use App\recruiter\modrecabout;
@@ -4666,6 +4667,18 @@ class PostsController extends Controller
         }
     }
     
+    //Get Maximum Service ID for services.
+    public static function get_maxservid() {
+        $serv_id = \App\mod_services::max('serv_id');
+
+        if(!$serv_id==null){
+            return $serv_id;
+        }
+        else{
+            return 1000;
+        }
+    }
+    
     //Get Total number of valid credits.
     public static function get_allcredits() {
         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check()){
@@ -4741,6 +4754,111 @@ class PostsController extends Controller
         }
         else {
             return back();
+        }
+    }
+
+
+    //Update Service Table with service details.
+    public static function user_apply_service($level) {
+        if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
+        {
+            $user_id=$rec_id=$serv_id=$serv_type=$credit_id=$serv_startdt=$serv_enddt=$servstat=$servmsg=null;
+            $curr_timestamp=Carbon::now()->toDateTimeString();
+
+            if(Auth::check()){
+                $user_id = Auth::id();
+            }
+            elseif(Auth::guard('recruiter')->check()){
+                $rec_id = Auth::guard('recruiter')->user()->id;
+            }
+            
+            //get max serv id
+            $maxserv_id=PostsController::get_maxservid();
+            //get max credit id
+            $maxcredit_id=PostsController::get_maxcreditid();
+            //get max intrans id
+            $maxintrans_id=PostsController::get_maxintransid();
+
+            //Fill credits table values
+            $credit_id=$maxcredit_id + 1;
+            $intrans_id=$maxintrans_id + 1;
+            $serv_startdt=$curr_timestamp;
+            //$serv_enddt=strtotime('+10 days', $curr_timestamp);
+            $serv_enddt=Carbon::now()->addDays(10)->toDateTimeString();
+
+            switch($level){
+                case "1":
+                    $credits = -30; //Decrease 30 credits for Fresher resume
+                    break;
+                case "2":
+                    $credits = -45; //Decrease 45 credits for Mid resume
+                    break;
+                case "3":
+                    $credits = -60; //Decrease 60 credits for Senior resume
+                    break;
+                case "4":
+                    $credits = -80; //Decrease 80 credits for Executive resume
+                    break;
+            }
+
+            $credit_type=1;	//Cash
+            $status=3;		//Used
+            
+            $sub_credits=PostsController::upd_credit($user_id, $rec_id, $credit_id, $intrans_id, $credits, $credit_type, $status);
+
+            $serv_id = $maxserv_id + 1;
+            $serv_type = $level;
+            $servstat = 1;      //Initiated Resume Service
+            $servmsg = "Initiated";
+
+            return self::dbapplyserv($user_id, $rec_id, $serv_id, $serv_type,$credit_id, $serv_startdt, $serv_enddt, $servstat, $servmsg);
+            //echo "In get_profile function- ".$head;
+            
+            if(!($dbstatus==true)){
+                return true;    
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return redirect()->route('login');
+        }
+    }
+
+    protected static function dbapplyserv($user_id, $rec_id, $serv_id, $serv_type,$credit_id, $serv_startdt, $serv_enddt, $servstat, $servmsg)
+    {
+        try{
+            DB::beginTransaction();
+            
+            #updateorCreate
+            // If there's a record update.
+            // If no matching model exists, create one.
+            $dbrec = \App\mod_services::updateOrCreate(
+                [
+                 'user_id'  => $user_id,
+                 'rec_id'   => $rec_id,
+                 'serv_id'  => $serv_id
+                ], 
+                [
+                 'serv_type'    => $serv_type,
+                 'credit_id'    => $credit_id,
+                 'serv_startdt' => $serv_startdt,
+                 'serv_enddt'   => $serv_enddt,
+                 'servstat'     => $servstat,
+                 'servmsg'      => $servmsg
+                ]
+            );
+            
+            DB::commit();
+            $dbstatus=true;
+            return $dbstatus;
+        }
+        catch(Exception $e){
+            // Something went wrong so rollback.
+            DB::rollback();
+            $dbstatus=false;
+            return $dbstatus;
         }
     }
 }

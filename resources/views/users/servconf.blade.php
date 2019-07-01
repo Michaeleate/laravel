@@ -1,25 +1,30 @@
-@extends('users.layouts.pay')
-<?php 
-$status=$_POST["status"];
-$errormsg=$_POST["error_Message"];
-$firstname=$_POST["firstname"];
-$amount=$_POST["amount"];
-$txnid=$_POST["txnid"];
-$posted_hash=$_POST["hash"];
-$key=$_POST["key"];
-$productinfo=$_POST["productinfo"];
-$email=$_POST["email"];
+@extends('users.layouts.prof')
+<?php
+    use \App\Http\Controllers\PostsController;
 
-if (isset($_POST["additionalCharges"])) {
-    $additionalCharges=$_POST["additionalCharges"];
-    $retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
-} 
-else {
-    $retHashSeq = $salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
-}
+    $head_line=$oldresu='';
+    $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
+    $resutime=NULL;
+    $fname=$email=$mob_num=$gender=$dob=$marstat=$eng_lang=$tel_lang=$hin_lang=$oth_lang=$diff_able=$able1=$able2=$able3=$profpic=$picpath=$picname=NULL;
+    $picload="Uploaded - ";
+    $qual1=$board1=$pyear1=$colname1=$edulang1=$percentage1=$edutime1='';
+    $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
+    $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
+    $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
+    $empname=$expyears1=$expmonths1=$expmonths=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
+    $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
+    $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
+    $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
-$hash = hash("sha512", $retHashSeq);
 
+
+    /*
+    $head=PostsController::get_head();
+    foreach($head as $key=>$val){
+        $head_line=$val["head_line"];
+    }
+    */
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -82,34 +87,24 @@ $hash = hash("sha512", $retHashSeq);
 
 {{-- Build Sub Menu for Create Profile for Registered Candidates --}}
 @section('CreateProfileMenu')
-{{--Can have left menu afterwards --}}
+
 @endsection
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:700px !important;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:520px;">
     <div class="row emply-info">
-        <div class="col-md-12" style="margin-left:20%;">
-            @if ($hash != $posted_hash)
-                <label>"Transaction Cancelled. Please try again";</label><br />
-                <a href="{{ url('/buycredits') }}"><button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Try Again</button></a>
-            @else
-                <label>Thank You. Your order status is {{ $status }}.</label><br />
-                <label>Error: {{$errormsg}}</label><br />
-                <label>Your Transaction ID: {{ $txnid }}.</label><br />
-                <label>You may try making the payment by clicking the link below.</label><br />
-                <a href="{{ url('/buycredits') }}">
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Try Again</button></a>
-            @endif
+        <div class="row col-md-12" style="display:block-inline;">
+            <label>Resume Service Successfully registered</label>
         </div>
     </div>
 </div>
-
-<script>
-window.load = function(){
-    //document.getElementById("head1").value = head_line;
-}
-</script>
+@endsection
+@section('displayads')
 
 @endsection
+
+<script language="Javascript" type="text/javascript">
+
+</script>

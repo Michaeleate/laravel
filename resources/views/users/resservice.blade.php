@@ -1,7 +1,7 @@
 @extends('users.layouts.prof')
-<?php 
-    use \App\Http\Controllers\PostsController; 
-    
+<?php
+    use \App\Http\Controllers\PostsController;
+
     $head_line=$oldresu='';
     $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
     $resutime=NULL;
@@ -11,11 +11,13 @@
     $qual2=$board2=$pyear2=$colname2=$edulang2=$percentage2=$edutime2='';
     $qual3=$course3=$spec3=$colname3=$district3=$cortype3=$pyear3=$edulang3=$percentage3=$edutime3='';
     $qual4=$course4=$spec4=$colname4=$district4=$cortype4=$pyear4=$edulang4=$percentage4=$edutime4='';
-    $empname=$expyears1=$expmonths=$expmonths1=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
+    $empname=$expyears1=$expmonths1=$expmonths=$desg=$startdt=$enddt=$msal=$resp=$nperiod=$emptime=$msalt=$msall='';
     $addtype1=$addline11=$addline21=$city1=$state1=$zcode1=$country1=$addtime1='';
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
+
+
 
     /*
     $head=PostsController::get_head();
@@ -86,7 +88,7 @@
 {{-- Build Sub Menu for Create Profile for Registered Candidates --}}
 @section('CreateProfileMenu')
 {{--Filters to be applied on search results --}}
-<div class="col_3 permit my-4">
+{{-- <div class="col_3 permit my-4">
     <h3 class="j-b mb-3">Filters</h3>
     <label style="display:block; width:100%;">Freshness</label>
     <select class="form-control" id="i-fresh" name="fresh" style="line-height:10px; text-align:center; width:140px; height:30px; font-size:small;">
@@ -99,7 +101,7 @@
     </select>
 </div>
 {{--Locations Filter --}}
-<div class="col_3 permit my-4">
+{{-- <div class="col_3 permit my-4">
     <label style="display:block; width:100%;">Locations</label>
     <div class="form-group" id="i-locmain">
         <div class="form-check-inline">
@@ -125,7 +127,7 @@
     </div>
 </div>
 {{--Salary Filter --}}
-<div class="col_3 permit my-4">
+{{-- <div class="col_3 permit my-4">
     <label style="display:block; width:100%;">Monthly Salary</label>
     <div class="form-group" id="i-salmain">
         <div class="form-check-inline" style="float:left; display:block; width:100%;">
@@ -164,111 +166,157 @@
             </label>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-
-{{--@if($jsearchall->total()==0) --}}
-@if((isset($jsearchall)))
-@if($jsearchall->total()==0)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:520px;">
     <div class="row emply-info">
-        <div class="col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">No Search results. Refine your search.</label>
-        </div>
-    </div>
-</div>
-@else
-{{ $jsearchall->links() }}
-@foreach($jsearchall as $job)
-<a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-@if (\Route::current()->getName() == 'searchjobs')
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px;">
-@else
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px;">
-@endif
-    <div class="row emply-info">
-        <div class="col-md-9" style="float:left;">
-            <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
-            <label style="width:100%;">{{$job->comhirefor}}</label>
-            <div style="display:inline-block;">
-                <i class="fas fa-briefcase" style="display:inline;"></i>
-                {{-- <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
-                <span style="width:10px; display:inline;"> - </span>
-                <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label> --}}
-                @if($job->maxexp==0)
-                    <label style="width:50px; display:inline;">Fresher</label>
-                @else
-                    <label style="width:20px; display:inline;">{{$job->minexp}}</label>
-                    <span style="width:10px; display:inline;"> - </span>
-                    <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
-                @endif
+        <div class="row col-md-12" style="display:block-inline;">
+            <div class="col-md-3" id="i-fresh" onMouseOver="backgrey(this);" onMouseOut="normalcolor(this);" style="display:block-inline; float:left;">
+                <label name="fresh" style="height:100px; text-align:center; vertical-align:middle; border-style:solid; border-width:2px; border-color:lightblue; background-color:lightblue;"><br />Fresher<br />(Exp: 0-2 Years)</label>
+                <label>
+                <b>Showcase your</b>
+                    <ul>
+                        <li>Education</li>
+                        <li>Academic Achievements</li>
+                        <li>Projects/Internship</li>
+                        <li>Extra-Curricular Activities</li>
+                    </ul>
+                <label>
             </div>
-            <div style="display:inline-block;">
-                <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
-                <i class="fas fa-map-marker-alt" style="display:inline;"></i>
-                <label style="width:160px; display:inline;">
-                {{$job->hireloc1}}
-                @if(!($job->hireloc2)=='')
-                ,  {{$job->hireloc2}}
-                @endif
-
-                @if(!($job->hireloc3)=='')
-                ,  {{$job->hireloc3}}
-                @endif
-                </label>
+            <div class="col-md-3" id="i-mid" style="display:block-inline; float:left;" onMouseOver="backgrey1(this);" onMouseOut="normalcolor1(this);">
+                <label name="mid" style="height:100px; text-align:center; vertical-align:middle; border-style:solid; border-width:2px; border-color:lightblue; background-color:lightblue;"><br />Mid<br />(Exp: 2-5 Years)</label>
+                <label>
+                <b>Get focus in the crowd with</b>
+                    <ul>
+                        <li>Education</li>
+                        <li>Professional Skills</li>
+                        <li>Key Achievements</li>
+                        <li>Areas of exposure</li>
+                    </ul>
+                <label>
+            </div>
+            <div class="col-md-3" id="i-senior" style="display:block-inline; float:left;" onMouseOver="backgrey2(this);" onMouseOut="normalcolor2(this);">
+                <label name="senior" style="height:100px; text-align:center; vertical-align:middle; border-style:solid; border-width:2px; border-color:lightblue; background-color:lightblue;"><br />Senior<br />(Exp: 5-8 Years)</label>
+                <label>
+                <b>Target for specific jobs with</b>
+                    <ul>
+                        <li>Managerial Skills</li>
+                        <li>Management Skills</li>
+                        <li>Key Achievements</li>
+                        <li>Professional Skills</li>
+                    </ul>
+                <label>
+            </div>
+            <div class="col-md-3" id="i-exec" style="display:block-inline; float:left;" onMouseOver="backgrey3(this);" onMouseOut="normalcolor3(this);">
+                <label name="exec" style="height:100px; text-align:center; vertical-align:middle; border-style:solid; border-width:2px; border-color:lightblue; background-color:lightblue;"><br />Executive<br />(Exp: Over 8 Years)</label>
+                <label>
+                <b>Highlight your resume with</b>
+                    <ul>
+                        <li>Leadership qualities</li>
+                        <li>Work History</li>
+                        <li>Key Competence</li>
+                        <li>Accomplishments & Accolades</li>
+                    </ul>
+                <label>
             </div>
         </div>
-        <div class="col-md-3" style="float:right;">
-            {{--
-            <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
-            --}}
-            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
-            <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
-            {{--   <label style="display:block; width:100%;"> </label> --}}
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
-            <label style="display:block; width:100%;"> </label>
-            <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,80)}}...</label>
-        </div>
-        <div class="row col-md-12" style="display:block; float:right;">
-            <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
-            @if($job->minsal>0)
-                {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
-            @else
-                Not Disclosed&emsp;&emsp;
-            @endif
+        <div class="row col-md-12" style="display:block-inline; width:100%; margin-left: 15px;">
+            <label><b>Benefits of buying resume services from SAMS</b><br />
+            <ul>
+                <li>Impress recruiters with professionally written resume</li>
+                <li>Stand out of the crowd as a right candidate</li>
+                <li>Highlight skills valued by recruiters</li>
+                <li>Include keywords searched by recruiters</li>
+                <li>Error free resume</li>
+                <li>Free Cover letter included worth Rs. 250/-</li>
+                <li>5-8 working days.</li>
+            </ul>
             </label>
-            <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;Job Applied: 99999</label>
-        </div>
-        {{-- Testing purpose only this division --}}
-        <div class="row col-md-12" style="display:block; float:right;">
-            @if(isset($job->japp_status))
-            @if( $job->japp_status > 0)
-                <button class="btn" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>
-            @else
-                <a href="{{ route('user-apply-job',$job->job_id) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;">Apply</button></a>
-                {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
-                <form id="job-apply-form" action="{{ route('user-apply-job',$job->job_id) }}" method="POST">
-                    @csrf
-                </form>
-            @endif
-            @else
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
-            @endif
         </div>
     </div>
 </div>
-</a>
-@endforeach
-{{ $jsearchall->links() }}
-@endif
-@endif
 @endsection
+@section('displayads')
+
+<div class="col_3 permit my-4" style="box-shadow: 10px 10px 5px grey;">
+    <h3 class="j-b mb-3">Buy SAMS Resume Services</h3>
+    <form role="form" action="{{ url('/service_resume')}}" method="post">
+    @csrf
+        <label style="display:block-inline; width:100%;"> Choose Level:</label>
+        <select class="form-control" id="i-level" name="level" style="display:block-inline; line-height:20px; text-align:center; width:160px; height:40px;" Onchange="display1(this);">
+            <option value="1" selected>Fresher</option>
+            <option value="2">Mid</option>
+            <option value="3">Senior</option>
+            <option value="4">Executive</option>
+        </select>
+        <label id="i-ctext" style="display:block; height: 120px; background-color:lightblue; font-size:x-large; text-align:center;"> <br />30 Credits</label>
+        <label id="i-ctext" style="display:block; height: 120px; background-color:lightgreen; font-size:large; text-align:center;"> <br /><b>Free Cover letter included</b></label>
+        <button type="submit" class="btn btn-primary"  style="display:block;width:160px; height:120px; float:right; line-height: 15px; text-align:center; background-color:LIGHTCORAL; border-color:LIGHTCORAL; font-size:xx-large; box-shadow: 10px 10px 5px grey;">BUY</button>
+    </form>
+</div>
+
+@endsection
+
+<script language="Javascript" type="text/javascript">
+
+//Change display text for levels
+function display1(obj){
+    //alert('inside display1');
+    //alert($("#i-level").val());
+    switch($("#i-level").val()){
+        case "1": 
+            document.getElementById('i-ctext').innerHTML = '<br />30 Credits';
+            $("#i-ctext").val().change();
+            break;
+        case "2": 
+            document.getElementById('i-ctext').innerHTML = '<br />45 Credits';
+            $("#i-ctext").val().change();
+            break;
+        case "3": 
+            document.getElementById('i-ctext').innerHTML = '<br />60 Credits';
+            $("#i-ctext").val().change();
+            break;
+        case "4": 
+            document.getElementById('i-ctext').innerHTML = '<br />80 Credits';
+            $("#i-ctext").val().change();
+            break;
+    }
+}
+
+//Change the label color
+function backgrey(obj){
+    $("#i-fresh").css( "background", "lightblue" );
+}
+//Change the label color back to normal
+function normalcolor(obj){
+    $("#i-fresh").css( "background", "white" );
+}
+//Change the label color
+function backgrey1(obj){
+    $("#i-mid").css( "background", "lightblue" );
+}
+//Change the label color back to normal
+function normalcolor1(obj){
+    $("#i-mid").css( "background", "white" );
+}
+//Change the label color
+function backgrey2(obj){
+    $("#i-senior").css( "background", "lightblue" );
+}
+//Change the label color back to normal
+function normalcolor2(obj){
+    $("#i-senior").css( "background", "white" );
+}
+//Change the label color
+function backgrey3(obj){
+    $("#i-exec").css( "background", "lightblue" );
+}
+//Change the label color back to normal
+function normalcolor3(obj){
+    $("#i-exec").css( "background", "white" );
+}
+</script>
