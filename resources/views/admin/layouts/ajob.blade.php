@@ -159,7 +159,7 @@
                         <p>Dr No: 36-11/140, Opp. RR Chicken Centre, Jammi chettu center, Moghalrajpuram, Vijayawada - 520 010.</p>
                         <div class="phone">
                             <h4>Contact :</h4>
-                            <p>Phone : +91 866 2492350</p>
+                            <p>Phone : +91 96184 43240</p>
                             <p>Email :
                                 <a href="mailto:callforsams@gmail.com">callforsams@gmail.com</a>
                             </p>

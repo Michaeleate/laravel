@@ -1111,7 +1111,7 @@ class PostsController extends Controller
             //get all jobs posted by the recruiter only.
             $jobdet = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at')
                     ->where('rec_id', '=', $authid)
-                    ->orderBy('job_id','desc')
+                    ->orderBy('job_id','asc')
                     ->get();
 
 
@@ -4700,12 +4700,18 @@ class PostsController extends Controller
                 $total_credits=$total_credits->sum('credits');
             }
             else{
-                $recid=Auth::guard('recruiter')->user()->id;
+                if(Auth::guard('recruiter')->check()){
+                    $recid=Auth::guard('recruiter')->user()->id;
+                }
                 
-                $total_credits = DB::table('credits')
-                            ->where('rec_id', '=', $recid)
-                            ->where('status', '=', 1)
-                            ->sum('credits');
+                $total_credits = DB::table('credits');
+                
+                if(Auth::guard('recruiter')->check()){            
+                    $total_credits = $total_credits->where('rec_id', '=', $recid);
+                }
+                
+                $total_credits = $total_credits->where('status', '=', 1)
+                                    ->sum('credits');
             }
 
             if(!(isset($total_credits))){
