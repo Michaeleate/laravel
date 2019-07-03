@@ -266,7 +266,9 @@
                 </form>
             @endif
             @else
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+                <a href="{{ route('viewjobdet', $job->job_id)}}" target="_blank">
+                    <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+                </a>
             @endif
         </div>
     </div>

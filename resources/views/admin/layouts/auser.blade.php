@@ -116,7 +116,7 @@
             <div class="inner-sec py-xl-3 py-lg-5  py-3">
                 @if (\Route::current()->getName() == 'admin.ctoday')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-                    <span>Registered candidates today</span></h3>
+                    <span>Registered candidates</span></h3>
                 @elseif (\Route::current()->getName() == 'admin.rregister')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Recruiter Registration</span></h3>

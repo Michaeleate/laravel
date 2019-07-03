@@ -87,6 +87,13 @@
 
 {{--@if($userrec->total()==0) --}}
 @if((isset($userrec)))
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:80px;">
+    <div class="row emply-info">
+        <div class="col-md-12" style="background-color: green;">
+            <label style="font-size:x-large; color:lightgreen; float:left;">Total Candidates Registered: {{$userrec->total()}} </label>
+        </div>
+    </div>
+</div>
 @if($userrec->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
