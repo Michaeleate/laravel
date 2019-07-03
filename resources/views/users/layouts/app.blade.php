@@ -116,7 +116,7 @@
     </div>
     <!-- banner-text -->
     <!-- banner-bottom -->
-    <section class="banner-bottom py-lg-5 py-md-5 py-3">
+    {{-- <section class="banner-bottom py-lg-5 py-md-5 py-3">
         <div class="container">
             <div class="inner-sec py-lg-5  py-3">
                 <h3 class="tittle text-center mb-lg-4 mb-3">
@@ -751,11 +751,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--//preocess-->
 
     <!--job -->
-    <section class="banner-bottom mid py-lg-5 py-3">
+    {{-- <section class="banner-bottom mid py-lg-5 py-3">
         <div class="container">
             <div class="inner-sec py-lg-5  py-3">
                 <div class="mid-info text-center pt-3">
@@ -1331,7 +1331,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--//clients-->
     <!--footer -->
     <footer class="footer-emp bg-dark dotts py-lg-5 py-3">
@@ -1354,7 +1354,7 @@
                         <p>Dr No: 36-11/140, Opp. RR Chicken Centre, Jammi chettu center, Moghalrajpuram, Vijayawada - 520 010.</p>
                         <div class="phone">
                             <h4>Contact :</h4>
-                            <p>Phone : +91 866 2492350</p>
+                            <p>Phone : +91 96184 43240</p>
                             <p>Email :
                                 <a href="mailto:callforsams@gmail.com">callforsams@gmail.com</a>
                             </p>
