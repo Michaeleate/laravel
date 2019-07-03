@@ -1,6 +1,8 @@
 @extends('users.layouts.prof')
 <?php 
-    use \App\Http\Controllers\PostsController; 
+    use \App\Http\Controllers\PostsController;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Foundation\Auth\AuthenticatesUsers; 
     
     $head_line=$oldresu='';
     $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
@@ -17,6 +19,7 @@
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
+    $userid1=Auth::id();
     /*
     $head=PostsController::get_head();
     foreach($head as $key=>$val){
@@ -186,9 +189,9 @@
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
 @if (\Route::current()->getName() == 'searchjobs')
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:310px;">
 @else
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:280px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:310px;">
 @endif
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
@@ -249,6 +252,8 @@
         </div>
         {{-- Testing purpose only this division --}}
         <div class="row col-md-12" style="display:block; float:right;">
+            <a href="{{ route('viewuserprof', ['userid'=>$userid1, 'jobid'=>$job->job_id])}}" target="_blank">
+            <button class="btn btn-primary" style="width:180px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block;">Profile - Recruiters view</button></a>
             @if(isset($job->japp_status))
             @if( $job->japp_status > 0)
                 <button class="btn" style="width:140px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$job->japp_status_text}}</button>

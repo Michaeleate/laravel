@@ -249,7 +249,9 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:240px !important;">
     <div class="row emply-info">
         <div class="col-md-3">
+            @if(isset($job->picpath))
             <img src="{{url($job->picpath)}}" style="border-radius:80%; width:100px; height:100px;margin-left:10px;">
+            @endif
             <a href="{{ route('viewuserprof', ['userid'=>$job->userid, 'jobid'=>$job->job_id])}}" target="_blank" style="color:black; cursor: pointer;">
                 <button class="btn btn-primary" style="width:130px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Complete Profile</button>
             </a>
@@ -259,6 +261,7 @@
         </div>
         <div class="col-md-9" style="float:left; height:200px; font-size:small;border-left-style: solid; border-width: 1px; border-color: rgba(99, 57, 116, 0.1)">
             <label style="width:100%; color:blue; font-size:medium !important"><b>{{$job->name}}</b></label>
+            @if(isset($job->expyears_text))
             @if(!($job->expyears_text=="Fresher"))
                 <label style="width:100%;">working as {{$job->desg}} in {{$job->emp_name}}</label>
             @endif
@@ -270,12 +273,15 @@
                     <label style="width:100%;">Current Company: {{$job->emp_name}}.</label>
                 @endif
             </div>
+            @endif
+            @if(isset($job->qual))
             <div class="col-md-5" style="float:right;">
                 <label style="width:100%;">Qual: {{$job->qual}}</label>
                 <label style="width:100%;">Col:  {{$job->colname}}</label>
                 <label style="width:100%;">Year: {{$job->pyear}}</label>
                 <label style="width:100%;">Type: {{$job->cortype}}</label>
             </div>
+            @endif
             <label style="width:100%;">Applied for {{$job->jtitle}} in {{$job->comhirefor}}</label>
             {{-- Enable only for premium recruiters
             <div class="col-md-6" style="float:right;">

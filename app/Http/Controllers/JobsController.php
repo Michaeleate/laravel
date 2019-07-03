@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Carbon;
+use App\modresuhead;
+use App\modresuload;
+use App\modresukskil;
+use App\modresupdet;
+use App\modresuedu;
+use App\modresuemp;
+use App\modresuadd;
+use App\modresuref;
 use DateTime;
 use DateInterval;
 
@@ -71,23 +79,62 @@ class JobsController extends Controller
 
     //Get complete user profile for recruiter
     public function viewuserprof($userid,$jobid=null){
-        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+        if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
         //Testing
 
-            $head=PostsController::get_head($userid);
-            $resume=PostsController::get_resume($userid);
-            $keyskills=PostsController::get_kskill($userid);
-            $perdetails=PostsController::get_pdet($userid);
-            $edu=PostsController::get_edu1($userid);
-            $emp=PostsController::get_emp($userid);
-            $adds=PostsController::get_add($userid);
-            $refs=PostsController::get_ref($userid);
+            if(Auth::check()){
+                $userid = Auth::id();
+            }
+            $head=$resume=$keyskills=$perdetails=$edu=$emp=$adds=$refs=null;
+
+            if(modresuhead::where('head_id', '=', $userid)->exists()) {
+                $head=PostsController::get_head($userid);
+            }
+
+            if(modresuload::where('resu_id', '=', $userid)->exists()) {
+                $resume=PostsController::get_resume($userid);
+            }
+
+            if(modresukskil::where('kskil_id', '=', $userid)->exists()) {
+                $keyskills=PostsController::get_kskill($userid);
+            }
+
+            if(modresupdet::where('pdet_id', '=', $userid)->exists()) {
+                $perdetails=PostsController::get_pdet($userid);
+            }
+
+            if(modresuedu::where('edu_id', '=', $userid)->exists()) {
+                $edu=PostsController::get_edu1($userid);
+            }
+
+            if(modresuemp::where('emp_id', '=', $userid)->exists()) {
+                $emp=PostsController::get_emp($userid);
+            }
+
+            if(modresuadd::where('add_id', '=', $userid)->exists()) {
+                $adds=PostsController::get_add($userid);
+            }
+
+            if(modresuref::where('ref_id', '=', $userid)->exists()) {
+                $refs=PostsController::get_ref($userid);
+            }
+
             $appstat=PostsController::get_appstatus($userid,$jobid);
             $jobdet=PostsController::get_viewsjob($jobid);
+            // $head=PostsController::get_head($userid);
+            // $resume=PostsController::get_resume($userid);
+            // $keyskills=PostsController::get_kskill($userid);
+            // $perdetails=PostsController::get_pdet($userid);
+            // $edu=PostsController::get_edu1($userid);
+            // $emp=PostsController::get_emp($userid);
+            // $adds=PostsController::get_add($userid);
+            // $refs=PostsController::get_ref($userid);
+            // $appstat=PostsController::get_appstatus($userid,$jobid);
+            // $jobdet=PostsController::get_viewsjob($jobid);
             $jobid=(int)($jobid);
             $appstat=(int)($appstat);
 
-            $others=array('jobid'=>$jobid,'appstat'=>$appstat);
+            $others=array(['jobid'=>$jobid,'appstat'=>$appstat]);
 
             return view('recruiter.viewuserprof',compact('others','head','resume','keyskills','perdetails','edu','emp','adds','refs','jobdet'));
         }

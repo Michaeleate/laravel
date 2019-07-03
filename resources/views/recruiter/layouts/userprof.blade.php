@@ -307,7 +307,7 @@
     
     <!-- php javascript variables -->
     <script language="Javascript" type="text/javascript">
-        
+        //alert("In jsoncode box");
         var head_line = <?php echo json_encode($head_line) ?>, 
         kskil1 = <?php echo json_encode($kskil1)?>, 
         kskil2 = <?php echo json_encode($kskil2)?>, 

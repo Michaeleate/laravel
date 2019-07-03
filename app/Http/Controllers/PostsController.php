@@ -4184,7 +4184,7 @@ class PostsController extends Controller
             return view('home');
         }
     }
-    //Mike
+    
     //Get all job applications applied by users.
     public static function get_recgetjapp() {
         if (Auth::guard('recruiter')->check() || Auth::guard('admin')->check())
@@ -4197,223 +4197,272 @@ class PostsController extends Controller
             //Testing
             // $message = "User ID is" . $authid;
             // echo "<script type='text/javascript'>alert('$message');</script>";
+            //check personal details in profile is filled or not.
+            $resupdet=false;
+            if(modresupdet::where('pdet_id', '=', $authid)->exists()) {
+                $resupdet=true;
+             }
             
+             //check employment details in profile is filled or not.
+            $resuemp=false;
+            if(modresuemp::where('emp_id', '=', $authid)->exists()) {
+                $resuemp=true;
+             }
+            
+            //check education details in profile is filled or not.
+            $resuedu=false;
+            if(modresuedu::where('edu_id', '=', $authid)->exists()) {
+                $resuedu=true;
+             }
+
             $getuserjapp = DB::table('jobpost')
                 ->join('userjobstat',function($join) use ($authid){
                         $join->on('jobpost.job_id','=','userjobstat.job_id')
                             ->where('jobpost.rec_id','=', $authid);
                 })
                 ->join('users',function($join){
-                        $join->on('userjobstat.rec_id','=','users.id');
-                })
-                ->join('resupdet',function($join){
+                    $join->on('userjobstat.rec_id','=','users.id');
+                });
+            
+            if($resupdet == true){
+                $getuserjapp = $getuserjapp->join('resupdet',function($join){
                         $join->on('users.id','=','resupdet.pdet_id');
-                })
-                ->join('resuemp',function($join){
+                    });
+            }
+
+            if($resuemp == true){
+                $getuserjapp = $getuserjapp->join('resuemp',function($join){
                         $join->on('users.id','=','resuemp.emp_id');
-                })
-                ->join('resuedu',function($join){
+                    });
+            }
+            
+            if($resuedu == true){
+                $getuserjapp = $getuserjapp->join('resuedu',function($join){
                         $join->on('users.id','=','resuedu.edu_id')
                             ->on('resuedu.id','=',DB::raw("(select max(id) from resuedu)"));
-                })
-                ->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.comhirefor as comhirefor', 'userjobstat.app_status as app_status', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id', 'users.id as userid', 'users.name as name', 'users.email as email', 'users.mob_num as mobnum','resupdet.profpic as profpic','resupdet.picpath as picpath','resupdet.picname as picname', 'resuemp.emp_name as emp_name','resuemp.desg as desg', 'resuemp.exp_months as exp_months', 'resuemp.msal as msal', 'resuedu.colname as colname', 'resuedu.pyear as pyear', 'resuedu.cortype as cortype', 'resuedu.qual as qual', 'resuedu.board as board', 'resuedu.course as course', 'resuedu.spec as spec');
+                    });
+            }
 
-            $getuserjapp = $getuserjapp->addselect(DB::raw("'8.2 Yrs' as expyears_text"));
+            // $getuserjapp = $getuserjapp->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.comhirefor as comhirefor', 'userjobstat.app_status as app_status', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id', 'users.id as userid', 'users.name as name', 'users.email as email', 'users.mob_num as mobnum','resupdet.profpic as profpic','resupdet.picpath as picpath','resupdet.picname as picname', 'resuemp.emp_name as emp_name','resuemp.desg as desg', 'resuemp.exp_months as exp_months', 'resuemp.msal as msal', 'resuedu.colname as colname', 'resuedu.pyear as pyear', 'resuedu.cortype as cortype', 'resuedu.qual as qual', 'resuedu.board as board', 'resuedu.course as course', 'resuedu.spec as spec');
+
+            $getuserjapp = $getuserjapp->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.comhirefor as comhirefor', 'userjobstat.app_status as app_status', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id', 'users.id as userid', 'users.name as name', 'users.email as email', 'users.mob_num as mobnum');
+
+            if($resupdet == true){
+                $getuserjapp = $getuserjapp->addselect('resupdet.profpic as profpic','resupdet.picpath as picpath','resupdet.picname as picname');
+            }
+
+            if($resuemp == true){
+                $getuserjapp = $getuserjapp->addselect('resuemp.emp_name as emp_name','resuemp.desg as desg', 'resuemp.exp_months as exp_months', 'resuemp.msal as msal');
+            }
+            
+            if($resuedu == true){
+                $getuserjapp = $getuserjapp->addselect('resuedu.colname as colname', 'resuedu.pyear as pyear', 'resuedu.cortype as cortype', 'resuedu.qual as qual', 'resuedu.board as board', 'resuedu.course as course', 'resuedu.spec as spec');
+            }
+
+            if($resuemp == true){
+                $getuserjapp = $getuserjapp->addselect(DB::raw("'8.2 Yrs' as expyears_text"));
+            }
             //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
             $getuserjapp = $getuserjapp->orderBy('userjobstat.job_id','desc')
                                         ->paginate(10);
 
             // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($getuserjapp as $job){
-                    if($job->profpic == 1){
-                        list($name11, $ext11) = explode('.', $job->picname);
-                        $job->picpath=$job->picpath."/".$job->userid.".".$ext11;
-                    }
+                    if($resupdet == true){
+                        if($job->profpic == 1){
+                            list($name11, $ext11) = explode('.', $job->picname);
+                            $job->picpath=$job->picpath."/".$job->userid.".".$ext11;
+                        }
+                    }      
                     //converting months to years and then to text
-                    if($job->exp_months>12){
-                        $expyears1=(int)floor($job->exp_months/12);
-                        $expmonths1=$job->exp_months % 12;
-                        $job->expyears_text=$expyears1.".".$expmonths1." Yrs";
-                    }
-                    else{
-                        $expyears1=0;
-                        if($job->exp_months>0){
-                            $job->expyears_text=$job->exp_months." Months";
+                    if($resuemp == true){
+                        if($job->exp_months>12){
+                            $expyears1=(int)floor($job->exp_months/12);
+                            $expmonths1=$job->exp_months % 12;
+                            $job->expyears_text=$expyears1.".".$expmonths1." Yrs";
                         }
                         else{
-                            $job->expyears_text="Fresher";
+                            $expyears1=0;
+                            if($job->exp_months>0){
+                                $job->expyears_text=$job->exp_months." Months";
+                            }
+                            else{
+                                $job->expyears_text="Fresher";
+                            }
                         }
                     }
 
-                    if($job->cortype=="full"){
-                        $job->cortype="Full Time";
-                    }
-                    else if($job->cortype=="part"){
-                        $job->cortype="Part Time";
-                    }
-                    else{
-                        $job->cortype="Distance";
-                    }
+                    if($resuedu == true){
+                        if($job->cortype=="full"){
+                            $job->cortype="Full Time";
+                        }
+                        else if($job->cortype=="part"){
+                            $job->cortype="Part Time";
+                        }
+                        else{
+                            $job->cortype="Distance";
+                        }
 
-                    //Course to Text
-                    if ($job->qual=="ssc"){
-                        $qual_text="SSC";
-                    }
-                    else if($job->qual=="inter"){
-                        $qual_text="Intermediate";
-                    }
-                    else if($job->qual=="grad"){
-                        switch ($job->course){
-                            case "0":
-                                $qual_text1="B.A";
-                                break;
-                            case "1":
-                                $qual_text1="B.Arch";
-                                break;
-                            case "2":
-                                $qual_text1="B.B.A/B.M.S";
-                                break;
-                            case "3":
-                                $qual_text1="B.Com";
-                                break;
-                            case "4":
-                                $qual_text1="B.Des.";
-                                break;
-                            case "5":
-                                $qual_text1="B.Ed";
-                                break;
-                            case "6":
-                                $qual_text1="B.EI.Ed";
-                                break;
-                            case "7":
-                                $qual_text1="B.P.Ed";
-                                break;
-                            case "8":
-                                $qual_text1="B.Pharma";
-                                break;
-                            case "9":
-                                $qual_text1="B.Sc";
-                                break;
-                            case "10":
-                                $qual_text1="B.Tech/B.E.";
-                                break;
-                            case "11":
-                                $qual_text1="B.U.M.S";
-                                break;
-                            case "12":
-                                $qual_text1="BAMS";
-                                break;
-                            case "13":
-                                $qual_text1="BCA";
-                                break;
-                            case "14":
-                                $qual_text1="BDS";
-                                break;
-                            case "15":
-                                $qual_text1="BFA";
-                                break;
-                            case "16":
-                                $qual_text1="BHM";
-                                break;
-                            case "17":
-                                $qual_text1="BHMS";
-                                break;
-                            case "18":
-                                $qual_text1="BVSC";
-                                break;
-                            case "19":
-                                $qual_text1="Diploma";
-                                break;
-                            case "20":
-                                $qual_text1="LLB";
-                                break;
-                            case "21":
-                                $qual_text1="MBBS";
-                                break;
-                            case "22":
-                                $qual_text1="Other";
-                                break;
+                        //Course to Text
+                        if ($job->qual=="ssc"){
+                            $qual_text="SSC";
                         }
-                        $qual_text=$qual_text1;
-                    }
-                    else if($job->qual=="pg"){
-                        switch ($job->course){
-                            case "1":
-                                $qual_text1="CA";
-                                break;
-                            case "2":
-                                $qual_text1="CS";
-                                break;
-                            case "3":
-                                $qual_text1="DM";
-                                break;
-                            case "4":
-                                $qual_text1="ICWA (CMA)";
-                                break;
-                            case "5":
-                                $qual_text1="Integrated PG";
-                                break;
-                            case "6":
-                                $qual_text1="LLM";
-                                break;
-                            case "7":
-                                $qual_text1="M.A";
-                                break;
-                            case "8":
-                                $qual_text1="M.Arch";
-                                break;
-                            case "9":
-                                $qual_text1="M.Ch";
-                                break;
-                            case "10":
-                                $qual_text1="M.Com";
-                                break;
-                            case "11":
-                                $qual_text1="M.Des.";
-                                break;
-                            case "12":
-                                $qual_text1="M.Ed";
-                                break;
-                            case "13":
-                                $qual_text1="M.Pharma";
-                                break;
-                            case "14":
-                                $qual_text1="MS/ M.Sc(Science)";
-                                break;
-                            case "15":
-                                $qual_text1="M.Tech";
-                                break;
-                            case "16":
-                                $qual_text1="MBA/PGDM";
-                                break;
-                            case "17":
-                                $qual_text1="MCA";
-                                break;
-                            case "18":
-                                $qual_text1="MCM";
-                                break;
-                            case "19":
-                                $qual_text1="MDS";
-                                break;
-                            case "20":
-                                $qual_text1="MFA";
-                                break;
-                            case "21":
-                                $qual_text1="Medical-MS/MD";
-                                break;
-                            case "22":
-                                $qual_text1="MVSC";
-                                break;
-                            case "23":
-                                $qual_text1="PG Diploma";
-                                break;
-                            case "24":
-                                $qual_text1="Other";
-                                break;
+                        else if($job->qual=="inter"){
+                            $qual_text="Intermediate";
                         }
-                        $qual_text=$qual_text1;
+                        else if($job->qual=="grad"){
+                            switch ($job->course){
+                                case "0":
+                                    $qual_text1="B.A";
+                                    break;
+                                case "1":
+                                    $qual_text1="B.Arch";
+                                    break;
+                                case "2":
+                                    $qual_text1="B.B.A/B.M.S";
+                                    break;
+                                case "3":
+                                    $qual_text1="B.Com";
+                                    break;
+                                case "4":
+                                    $qual_text1="B.Des.";
+                                    break;
+                                case "5":
+                                    $qual_text1="B.Ed";
+                                    break;
+                                case "6":
+                                    $qual_text1="B.EI.Ed";
+                                    break;
+                                case "7":
+                                    $qual_text1="B.P.Ed";
+                                    break;
+                                case "8":
+                                    $qual_text1="B.Pharma";
+                                    break;
+                                case "9":
+                                    $qual_text1="B.Sc";
+                                    break;
+                                case "10":
+                                    $qual_text1="B.Tech/B.E.";
+                                    break;
+                                case "11":
+                                    $qual_text1="B.U.M.S";
+                                    break;
+                                case "12":
+                                    $qual_text1="BAMS";
+                                    break;
+                                case "13":
+                                    $qual_text1="BCA";
+                                    break;
+                                case "14":
+                                    $qual_text1="BDS";
+                                    break;
+                                case "15":
+                                    $qual_text1="BFA";
+                                    break;
+                                case "16":
+                                    $qual_text1="BHM";
+                                    break;
+                                case "17":
+                                    $qual_text1="BHMS";
+                                    break;
+                                case "18":
+                                    $qual_text1="BVSC";
+                                    break;
+                                case "19":
+                                    $qual_text1="Diploma";
+                                    break;
+                                case "20":
+                                    $qual_text1="LLB";
+                                    break;
+                                case "21":
+                                    $qual_text1="MBBS";
+                                    break;
+                                case "22":
+                                    $qual_text1="Other";
+                                    break;
+                            }
+                            $qual_text=$qual_text1;
+                        }
+                        else if($job->qual=="pg"){
+                            switch ($job->course){
+                                case "1":
+                                    $qual_text1="CA";
+                                    break;
+                                case "2":
+                                    $qual_text1="CS";
+                                    break;
+                                case "3":
+                                    $qual_text1="DM";
+                                    break;
+                                case "4":
+                                    $qual_text1="ICWA (CMA)";
+                                    break;
+                                case "5":
+                                    $qual_text1="Integrated PG";
+                                    break;
+                                case "6":
+                                    $qual_text1="LLM";
+                                    break;
+                                case "7":
+                                    $qual_text1="M.A";
+                                    break;
+                                case "8":
+                                    $qual_text1="M.Arch";
+                                    break;
+                                case "9":
+                                    $qual_text1="M.Ch";
+                                    break;
+                                case "10":
+                                    $qual_text1="M.Com";
+                                    break;
+                                case "11":
+                                    $qual_text1="M.Des.";
+                                    break;
+                                case "12":
+                                    $qual_text1="M.Ed";
+                                    break;
+                                case "13":
+                                    $qual_text1="M.Pharma";
+                                    break;
+                                case "14":
+                                    $qual_text1="MS/ M.Sc(Science)";
+                                    break;
+                                case "15":
+                                    $qual_text1="M.Tech";
+                                    break;
+                                case "16":
+                                    $qual_text1="MBA/PGDM";
+                                    break;
+                                case "17":
+                                    $qual_text1="MCA";
+                                    break;
+                                case "18":
+                                    $qual_text1="MCM";
+                                    break;
+                                case "19":
+                                    $qual_text1="MDS";
+                                    break;
+                                case "20":
+                                    $qual_text1="MFA";
+                                    break;
+                                case "21":
+                                    $qual_text1="Medical-MS/MD";
+                                    break;
+                                case "22":
+                                    $qual_text1="MVSC";
+                                    break;
+                                case "23":
+                                    $qual_text1="PG Diploma";
+                                    break;
+                                case "24":
+                                    $qual_text1="Other";
+                                    break;
+                            }
+                            $qual_text=$qual_text1;
+                        }
+                        $job->qual=$qual_text;
                     }
-                    $job->qual=$qual_text;
                 }    
                 // }
             return $getuserjapp;

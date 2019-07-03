@@ -17,188 +17,213 @@
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
     $jtitle=$jd=$qty=$minexp=$maxexp=$comhirefor=$days_text='';
+    $email='';
 
-    $jobid=$others["jobid"];
-    $appstat=$others["appstat"];
-
-    foreach($head as $prof){
-        $head_line=$prof->head_line;
-        $user_id=$prof->head_id;
-        
-    }
-
-    foreach($resume as $prof){
-        $oldresu=$prof->oldresu;
-        $resutime=$prof->updated_at;
-    }
-
-    foreach($keyskills as $prof){
-        $kskil1=$prof->kskil1;
-        $kskil2=$prof->kskil2;
-        $kskil3=$prof->kskil3;
-        $kskil4=$prof->kskil4;
-        $kskil5=$prof->kskil5;
-    }
-
-    foreach($perdetails as $prof){
-        $fname=$prof->fname;
-        $email=$prof->email;
-        $mob_num=$prof->mob_num;
-        $gender=$prof->gender;
-        $dob=$prof->dob;
-        $marstat=$prof->marstat;
-        $eng_lang=$prof->eng_lang;
-        $tel_lang=$prof->tel_lang;
-        $hin_lang=$prof->hin_lang;
-        $oth_lang=$prof->oth_lang;
-        $diff_able=$prof->diff_able;
-        $able1=$prof->able1;
-        $able2=$prof->able2;
-        $able3=$prof->able3;
-        $profpic=$prof->profpic;
-        $picpath=$prof->picpath;
-        $picname=$prof->picname;
-    }
-
-    $i=0;
-    foreach($edu as $prof){
-        if($i==0){
-            $qual1=$prof->qual;
-            $board1=$prof->board;
-            $colname1=$prof->colname;
-            $pyear1=$prof->pyear;
-            $edulang1=$prof->edulang;
-            $percentage1=$prof->percentage;
-            $edutime1=$prof->updated_at;
-        }
-        else if($i==1){
-            $qual2=$prof->qual;
-            $board2=$prof->board;
-            $colname2=$prof->colname;
-            $pyear2=$prof->pyear;
-            $edulang2=$prof->edulang;
-            $percentage2=$prof->percentage;
-            $edutime2=$prof->updated_at;
-        }
-        else if($i==2){
-            $qual3=$prof->qual;
-            $course3=$prof->course;
-            $spec3=$prof->spec;
-            $colname3=$prof->colname;
-            $district3=$prof->district;
-            $cortype3=$prof->cortype;
-            $pyear3=$prof->pyear;
-            $edulang3=$prof->edulang;
-            $percentage3=$prof->percentage;
-            $edutime3=$prof->updated_at;
-        }
-        else if($i==3){
-            $qual4=$prof->qual;
-            $course4=$prof->course;
-            $spec4=$prof->spec;
-            $colname4=$prof->colname;
-            $district4=$prof->district;
-            $cortype4=$prof->cortype;
-            $pyear4=$prof->pyear;
-            $edulang4=$prof->edulang;
-            $percentage4=$prof->percentage;
-            $edutime4=$prof->updated_at;
-        }
-        $i=$i+1;
-    }
-
-    foreach($emp as $prof){
-        $empname=$prof->emp_name;
-        $expmonths=$prof->exp_months;
-        $desg=$prof->desg;
-        $startdt=$prof->startdt;
-        $enddt=$prof->enddt;
-        $msal=$prof->msal;
-        $resp=$prof->resp;
-        $nperiod=$prof->nperiod;
-        $emptime=$prof->updated_at;
-    }
-
-    if($expmonths>12){
-        $expyears1=(int)floor($expmonths/12);
-        $expmonths1=$expmonths % 12;
-        $expyears=$expyears1.".".$expmonths1." Yrs";
-    }
-    else{
-        $expyears1=0;
-        if($expmonths>0){
-            $expyears=$expmonths." Months";
-        }
-        else{
-            $expyears="Fresher";
+    //$jobid=$others["jobid"];
+    //$appstat=$others["appstat"];
+    
+    if(isset($others)){
+        foreach($others as $key=>$val){
+            $jobid=$val["jobid"];
+            $appstat=$val["appstat"];
         }
     }
 
-    $msal_length=strlen($msal);
-    $smsal=(string) $msal;
-    switch($msal_length){
-        case 4:
-            $msalt=substr($smsal, 0, 1);
-            break;
-        case 5:
-            $msalt=substr($smsal, 0, 2);
-            break;
-        case 6:
-            $msalt=substr($smsal, 1, 2);
-            $msall=substr($smsal, 0, 1);
-            break;
-        case 7:
-            $msalt=substr($smsal, 2, 2);
-            $msall=substr($smsal, 0, 2);
-            break;
-    }
-    $msalt=(int) $msalt;
-    $msall=(int) $msall;
 
-    $i=1;
-    foreach($adds as $prof){
-        if($i==1){
-            $addtype1=$prof->addtype;
-            $addline11=$prof->addline1;
-            $addline21=$prof->addline2;
-            $city1=$prof->city;
-            $state1=$prof->state;
-            $zcode1=$prof->zcode;
-            $country1=$prof->country;
-            $addtime1=$prof->updated_at;
+    if(isset($head)){
+        foreach($head as $prof){
+            $head_line=$prof->head_line;
+            $user_id=$prof->head_id;
+            
+        }
+    }
+
+    if(isset($resume)){
+        foreach($resume as $prof){
+            $oldresu=$prof->oldresu;
+            $resutime=$prof->updated_at;
+        }
+    }
+
+    if(isset($keyskills)){
+        foreach($keyskills as $prof){
+            $kskil1=$prof->kskil1;
+            $kskil2=$prof->kskil2;
+            $kskil3=$prof->kskil3;
+            $kskil4=$prof->kskil4;
+            $kskil5=$prof->kskil5;
+        }
+    }
+
+    if(isset($perdetails)){
+        foreach($perdetails as $prof){
+            $fname=$prof->fname;
+            $email=$prof->email;
+            $mob_num=$prof->mob_num;
+            $gender=$prof->gender;
+            $dob=$prof->dob;
+            $marstat=$prof->marstat;
+            $eng_lang=$prof->eng_lang;
+            $tel_lang=$prof->tel_lang;
+            $hin_lang=$prof->hin_lang;
+            $oth_lang=$prof->oth_lang;
+            $diff_able=$prof->diff_able;
+            $able1=$prof->able1;
+            $able2=$prof->able2;
+            $able3=$prof->able3;
+            $profpic=$prof->profpic;
+            $picpath=$prof->picpath;
+            $picname=$prof->picname;
+        }
+    }
+
+    if(isset($edu)){
+        $i=0;
+        foreach($edu as $prof){
+            if($i==0){
+                $qual1=$prof->qual;
+                $board1=$prof->board;
+                $colname1=$prof->colname;
+                $pyear1=$prof->pyear;
+                $edulang1=$prof->edulang;
+                $percentage1=$prof->percentage;
+                $edutime1=$prof->updated_at;
+            }
+            else if($i==1){
+                $qual2=$prof->qual;
+                $board2=$prof->board;
+                $colname2=$prof->colname;
+                $pyear2=$prof->pyear;
+                $edulang2=$prof->edulang;
+                $percentage2=$prof->percentage;
+                $edutime2=$prof->updated_at;
+            }
+            else if($i==2){
+                $qual3=$prof->qual;
+                $course3=$prof->course;
+                $spec3=$prof->spec;
+                $colname3=$prof->colname;
+                $district3=$prof->district;
+                $cortype3=$prof->cortype;
+                $pyear3=$prof->pyear;
+                $edulang3=$prof->edulang;
+                $percentage3=$prof->percentage;
+                $edutime3=$prof->updated_at;
+            }
+            else if($i==3){
+                $qual4=$prof->qual;
+                $course4=$prof->course;
+                $spec4=$prof->spec;
+                $colname4=$prof->colname;
+                $district4=$prof->district;
+                $cortype4=$prof->cortype;
+                $pyear4=$prof->pyear;
+                $edulang4=$prof->edulang;
+                $percentage4=$prof->percentage;
+                $edutime4=$prof->updated_at;
+            }
+            $i=$i+1;
+        }
+    }
+
+    if(isset($emp)){
+        foreach($emp as $prof){
+            $empname=$prof->emp_name;
+            $expmonths=$prof->exp_months;
+            $desg=$prof->desg;
+            $startdt=$prof->startdt;
+            $enddt=$prof->enddt;
+            $msal=$prof->msal;
+            $resp=$prof->resp;
+            $nperiod=$prof->nperiod;
+            $emptime=$prof->updated_at;
+        }
+
+        if($expmonths>12){
+            $expyears1=(int)floor($expmonths/12);
+            $expmonths1=$expmonths % 12;
+            $expyears=$expyears1.".".$expmonths1." Yrs";
         }
         else{
-            $addtype2=$prof->addtype;
-            $addline12=$prof->addline1;
-            $addline22=$prof->addline2;
-            $city2=$prof->city;
-            $state2=$prof->state;
-            $zcode2=$prof->zcode;
-            $country2=$prof->country;
-            $addtime2=$prof->updated_at;
+            $expyears1=0;
+            if($expmonths>0){
+                $expyears=$expmonths." Months";
+            }
+            else{
+                $expyears="Fresher";
+            }
         }
-        $i=$i+1;
+
+        $msal_length=strlen($msal);
+        $smsal=(string) $msal;
+        switch($msal_length){
+            case 4:
+                $msalt=substr($smsal, 0, 1);
+                break;
+            case 5:
+                $msalt=substr($smsal, 0, 2);
+                break;
+            case 6:
+                $msalt=substr($smsal, 1, 2);
+                $msall=substr($smsal, 0, 1);
+                break;
+            case 7:
+                $msalt=substr($smsal, 2, 2);
+                $msall=substr($smsal, 0, 2);
+                break;
+        }
+        $msalt=(int) $msalt;
+        $msall=(int) $msall;
     }
 
-    $i=1;
-    foreach($refs as $prof){
-        if($i==1){
-            $refnum1=$prof->refnum;
-            $fname1=$prof->fname;
-            $location1=$prof->location;
-            $email1=$prof->email;
-            $mobnum1=$prof->mobnum;
-            $reftime1=$prof->updated_at;
+    if(isset($adds)){
+        $i=1;
+        foreach($adds as $prof){
+            if($i==1){
+                $addtype1=$prof->addtype;
+                $addline11=$prof->addline1;
+                $addline21=$prof->addline2;
+                $city1=$prof->city;
+                $state1=$prof->state;
+                $zcode1=$prof->zcode;
+                $country1=$prof->country;
+                $addtime1=$prof->updated_at;
+            }
+            else{
+                $addtype2=$prof->addtype;
+                $addline12=$prof->addline1;
+                $addline22=$prof->addline2;
+                $city2=$prof->city;
+                $state2=$prof->state;
+                $zcode2=$prof->zcode;
+                $country2=$prof->country;
+                $addtime2=$prof->updated_at;
+            }
+            $i=$i+1;
         }
-        else{
-            $refnum2=$prof->refnum;
-            $fname2=$prof->fname;
-            $location2=$prof->location;
-            $email2=$prof->email;
-            $mobnum2=$prof->mobnum;
-            $reftime2=$prof->updated_at;
+    }
+
+    if(isset($refs)){
+        $i=1;
+        foreach($refs as $prof){
+            if($i==1){
+                $refnum1=$prof->refnum;
+                $fname1=$prof->fname;
+                $location1=$prof->location;
+                $email1=$prof->email;
+                $mobnum1=$prof->mobnum;
+                $reftime1=$prof->updated_at;
+            }
+            else{
+                $refnum2=$prof->refnum;
+                $fname2=$prof->fname;
+                $location2=$prof->location;
+                $email2=$prof->email;
+                $mobnum2=$prof->mobnum;
+                $reftime2=$prof->updated_at;
+            }
+            $i=$i+1;
         }
-        $i=$i+1;
     }
 
     foreach($jobdet as $job){
@@ -228,7 +253,7 @@
             <a class="dropdown-item" href="{{ url('/user-profile') }}">Create Profile</a>
             <a class="dropdown-item" href="{{ url('/view-user-profile') }}">View Profile</a>
             <a class="dropdown-item" href="{{ url('/edit-user-profile') }}">Modify Profile</a>
-            <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a>
+            {{-- <a class="dropdown-item" href="{{ url('/edit-user-visible') }}">Profile Visibility</a> --}}
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -248,7 +273,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/viewjobstatus') }}">Application Status</a>
-            <a class="dropdown-item" href="services.html">Interview Schedule</a>
+            <a class="dropdown-item" href="#">Interview Schedule</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -257,13 +282,13 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="employer_list.html">Buy Credits</a>
-            <a class="dropdown-item" href="employer_list.html">Credits Statement</a>
-            <a class="dropdown-item" href="employer_single.html">Invoice</a>
+            <a class="dropdown-item" href="#">Buy Credits</a>
+            <a class="dropdown-item" href="#">Credits Statement</a>
+            <a class="dropdown-item" href="#">Invoice</a>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#">Contact</a>
     </li>
 </ul>
 @endsection
@@ -280,7 +305,9 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:220px !important;">
     <div class="row emply-info">
         <div class="col-md-3">
-        <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
+        @if(isset($picpath))
+            <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
+        @endif
         </div>
         <div class="col-md-6" style="float:left; height:200px;">
             <label style="width:100%;">{{$fname}}</label>
