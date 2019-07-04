@@ -17,8 +17,6 @@
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
-
-
     /*
     $head=PostsController::get_head();
     foreach($head as $key=>$val){
@@ -179,7 +177,7 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">Interviews not scheduled yet. Please complete all the fields in your profile.</label>
+            <label style="width:100%; color:blue;">Interviews not scheduled yet. Please complete all the fields in your profile, to get shortlisted.</label>
         </div>
     </div>
 </div>
@@ -312,6 +310,7 @@
             <div class="modal-body">
                 <div class="login px-4 mx-auto mw-100">
                     <h5 class="text-left mb-4">Re-schedule for Interview</h5>
+                    @if(!isset($jobschd))
                     <form role="form" action="{{ route('creschd', ['userid'=>$job->schedule_byuser, 'sch_id'=>$job->sch_id]) }}" method="post">
                         @csrf
                         {{-- <div class="form-group" style="display:block;">
@@ -423,6 +422,7 @@
                             <button type="submit" class="btn btn-primary"  style="width:100px; height:30px; line-height: 15px; text-align:center;">SAVE</button>
                         </div>
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
