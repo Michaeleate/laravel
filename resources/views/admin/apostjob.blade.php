@@ -1,4 +1,4 @@
-@extends('admin.layouts.aJob')
+@extends('admin.layouts.ajob')
 <?php 
     use \App\Http\Controllers\PostsController;
     use Illuminate\Routing\UrlGenerator;

@@ -48,7 +48,7 @@
             $hireloc3='';
         }
 
-        $tweet_text=$jtitle. " - Job in Vijayawada SAMS";
+        $tweet_text=$jtitle. " - Unique Jobs in portal SAMSJobs";
         $waurl="https%3A%2F%2Fwww.samsjobs.in%2Fviewjob%2F".$job_id;
         //Testing
         //$message = "jappstatus" . $japp_status;

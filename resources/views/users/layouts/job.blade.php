@@ -1,6 +1,8 @@
 <?php
     use \App\Http\Controllers\PostsController;
+    use Illuminate\Routing\UrlGenerator;
     $total_credits=PostsController::get_allcredits();
+    $linkurl = url()->current();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +14,7 @@
     <meta name="keywords" content="Jobs in Vijayawada, Job Consultancy, Telecallers Jobs, Free Jobs, Marketing Jobs, Software Jobs, Admin Jobs, HR Jobs, Vijayawada, Amaravathi, Guntur" />
     <!-- FB tags -->
     <meta property="og:url" content="https://www.samsjobs.in" />
+    {{-- <meta property="og:url" content="{{ $linkurl }}" /> --}}
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Jobs in Vijayawada, Guntur and Amaravathi" />
     <meta property="og:description" content="Recruiters post vacant Jobs in Vijayawada, Guntur and Amaravathi" />
