@@ -25,7 +25,7 @@ class RecprofController extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('recruiter.CR_rprof');
+            return view('recruiter.rpostprof');
         }
         else {
             return view('recruiter.home');
@@ -38,7 +38,7 @@ class RecprofController extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('recruiter.RD_rprof');
+            return view('recruiter.rviewprof');
         }
         else {
             return view('recruiter.home');

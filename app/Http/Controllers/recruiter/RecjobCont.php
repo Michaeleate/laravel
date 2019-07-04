@@ -145,7 +145,7 @@ class RecjobCont extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('recruiter.RDsjob_rprof');
+            return view('recruiter.rsviewjob');
         }
         else {
             return redirect('/recruiter');
@@ -206,7 +206,7 @@ class RecjobCont extends Controller
     
         $recalljobs=PostsController::get_recalljobs();
         
-        return view('recruiter.RDajobs_rprof',compact('recalljobs'));
+        return view('recruiter.raviewjobs',compact('recalljobs'));
     }
 
     //View all Job applications received by recruiter

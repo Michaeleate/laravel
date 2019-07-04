@@ -27,7 +27,7 @@ class JobsController extends Controller
         if ($auth->check()){
             //$message = "Inside crecprofile of RecprofController";
             //echo "<script type='text/javascript'>alert('$message');</script>";
-            return view('recruiter.CRjob_rprof');
+            return view('recruiter.rpostjob');
         }
         else {
             return redirect('/recruiter');
@@ -52,13 +52,13 @@ class JobsController extends Controller
         //$message = "Inside searchjobs of RecprofController - Before If";
         //echo "<script type='text/javascript'>alert('$message');</script>";
         if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
-            //return view('users.RDsearch');
+            //return view('users.rdsearch');
 
             $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd='';
 
             $jsearchall=PostsController::get_jsearchall($request);
 
-            return view('users.RDsearch',compact('jsearchall'));
+            return view('users.rdsearch',compact('jsearchall'));
         }
         else {
             return redirect('/login');
@@ -266,7 +266,7 @@ class JobsController extends Controller
         if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
 
             $jsearchall=PostsController::get_alljobs();
-            return view('users.RDsearch',compact('jsearchall'));
+            return view('users.rdsearch',compact('jsearchall'));
         }
         else{
             return redirect()->route('login');
@@ -279,7 +279,7 @@ class JobsController extends Controller
         if (Auth::check() || Auth::guard('admin')->check()) {
 
             $jsearchall=PostsController::get_alljobs();
-            return view('users.RDsearch',compact('jsearchall'));
+            return view('users.rdsearch',compact('jsearchall'));
         }
         else{
             return redirect()->route('login');
