@@ -1,7 +1,20 @@
 @extends('users.layouts.prof')
 <?php 
-    use \App\Http\Controllers\PostsController; 
-    
+    use \App\Http\Controllers\PostsController;
+    use Illuminate\Support\Facades\Auth;
+    use App\modresuhead;
+    use App\modresuload;
+    use App\modresukskil;
+    use App\modresupdet;
+    use App\modresuedu;
+    use App\modresuemp;
+    use App\modresuadd;
+    use App\modresuref;
+
+    if (Auth::check()){
+        $authid = Auth::id();
+    }    
+
     $head_line=$oldresu='';
     $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
     $resutime=NULL;
@@ -17,192 +30,223 @@
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
-    $head=PostsController::get_head();
-    foreach($head as $key=>$val){
-        $head_line=$val["head_line"];
-    }
-
-    $resume=PostsController::get_resume();
-    foreach($resume as $key=>$val){
-        $oldresu=$val["oldresu"];
-        $resutime=$val["updated_at"];
-    }
-
-    $keyskills=PostsController::get_kskill();
-    foreach($keyskills as $key=>$val){
-        $kskil1=$val["kskil1"];
-        $kskil2=$val["kskil2"];
-        $kskil3=$val["kskil3"];
-        $kskil4=$val["kskil4"];
-        $kskil5=$val["kskil5"];
-    }
-
-    $perdetails=PostsController::get_pdet();
-    foreach($perdetails as $key=>$val){
-        $fname=$val["fname"];
-        $email=$val["email"];
-        $mob_num=$val["mob_num"];
-        $gender=$val["gender"];
-        $dob=$val["dob"];
-        $marstat=$val["marstat"];
-        $eng_lang=$val["eng_lang"];
-        $tel_lang=$val["tel_lang"];
-        $hin_lang=$val["hin_lang"];
-        $oth_lang=$val["oth_lang"];
-        $diff_able=$val["diff_able"];
-        $able1=$val["able1"];
-        $able2=$val["able2"];
-        $able3=$val["able3"];
-        $profpic=$val["profpic"];
-        $picpath=$val["picpath"];
-        $picname=$val["picname"];
-    }
-
-    $edu=PostsController::get_edu1();
-    $i=0;
-    foreach($edu as $key=>$val){
-        if($i==0){
-            $qual1=$val["qual"];
-            $board1=$val["board"];
-            $colname1=$val["colname"];
-            $pyear1=$val["pyear"];
-            $edulang1=$val["edulang"];
-            $percentage1=$val["percentage"];
-            $edutime1=$val["updated_at"];
+    $varhead=false;
+    if(modresuhead::where('head_id', '=', $authid)->exists()) {
+        $head=PostsController::get_head();
+        foreach($head as $key=>$val){
+            $head_line=$val["head_line"];
         }
-        else if($i==1){
-            $qual2=$val["qual"];
-            $board2=$val["board"];
-            $colname2=$val["colname"];
-            $pyear2=$val["pyear"];
-            $edulang2=$val["edulang"];
-            $percentage2=$val["percentage"];
-            $edutime2=$val["updated_at"];
-        }
-        else if($i==2){
-            $qual3=$val["qual"];
-            $course3=$val["course"];
-            $spec3=$val["spec"];
-            $colname3=$val["colname"];
-            $district3=$val["district"];
-            $cortype3=$val["cortype"];
-            $pyear3=$val["pyear"];
-            $edulang3=$val["edulang"];
-            $percentage3=$val["percentage"];
-            $edutime3=$val["updated_at"];
-        }
-        else if($i==3){
-            $qual4=$val["qual"];
-            $course4=$val["course"];
-            $spec4=$val["spec"];
-            $colname4=$val["colname"];
-            $district4=$val["district"];
-            $cortype4=$val["cortype"];
-            $pyear4=$val["pyear"];
-            $edulang4=$val["edulang"];
-            $percentage4=$val["percentage"];
-            $edutime4=$val["updated_at"];
-        }
-        $i=$i+1;
+        $varhead=true;
     }
 
-    $emp=PostsController::get_emp();
-    foreach($emp as $key=>$val){
-        $empname=$val["emp_name"];
-        $expmonths=$val["exp_months"];
-        $desg=$val["desg"];
-        $startdt=$val["startdt"];
-        $enddt=$val["enddt"];
-        $msal=$val["msal"];
-        $resp=$val["resp"];
-        $nperiod=$val["nperiod"];
-        $emptime=$val["updated_at"];
-    }
-
-    if($expmonths>12){
-        $expyears1=(int)floor($expmonths/12);
-        $expmonths1=$expmonths % 12;
-        $expyears=$expyears1.".".$expmonths1." Yrs";
-    }
-    else{
-        $expyears1=0;
-        if($expmonths>0){
-            $expyears=$expmonths." Months";
-        }
-        else{
-            $expyears="Fresher";
+    $varload=false;
+    if(modresuload::where('resu_id', '=', $authid)->exists()) {
+        $varload=true;
+        $resume=PostsController::get_resume();
+        foreach($resume as $key=>$val){
+            $oldresu=$val["oldresu"];
+            $resutime=$val["updated_at"];
         }
     }
 
-    $msal_length=strlen($msal);
-    $smsal=(string) $msal;
-    switch($msal_length){
-        case 4:
-            $msalt=substr($smsal, 0, 1);
-            break;
-        case 5:
-            $msalt=substr($smsal, 0, 2);
-            break;
-        case 6:
-            $msalt=substr($smsal, 1, 2);
-            $msall=substr($smsal, 0, 1);
-            break;
-        case 7:
-            $msalt=substr($smsal, 2, 2);
-            $msall=substr($smsal, 0, 2);
-            break;
+    $varskil=false;
+    if(modresukskil::where('kskil_id', '=', $authid)->exists()) {
+        $varskil=true;
+        $keyskills=PostsController::get_kskill();
+        foreach($keyskills as $key=>$val){
+            $kskil1=$val["kskil1"];
+            $kskil2=$val["kskil2"];
+            $kskil3=$val["kskil3"];
+            $kskil4=$val["kskil4"];
+            $kskil5=$val["kskil5"];
+        }
     }
-    $msalt=(int) $msalt;
-    $msall=(int) $msall;
 
-    $adds=PostsController::get_add();
-    $i=1;
-    foreach($adds as $key=>$val){
-        if($i==1){
-            $addtype1=$val["addtype"];
-            $addline11=$val["addline1"];
-            $addline21=$val["addline2"];
-            $city1=$val["city"];
-            $state1=$val["state"];
-            $zcode1=$val["zcode"];
-            $country1=$val["country"];
-            $addtime1=$val["updated_at"];
+    $varpdet=false;
+    if(modresupdet::where('pdet_id', '=', $authid)->exists()) {
+        $varpdet=true;
+        $perdetails=PostsController::get_pdet();
+        foreach($perdetails as $key=>$val){
+            $fname=$val["fname"];
+            $email=$val["email"];
+            $mob_num=$val["mob_num"];
+            $gender=$val["gender"];
+            $dob=$val["dob"];
+            $marstat=$val["marstat"];
+            $eng_lang=$val["eng_lang"];
+            $tel_lang=$val["tel_lang"];
+            $hin_lang=$val["hin_lang"];
+            $oth_lang=$val["oth_lang"];
+            $diff_able=$val["diff_able"];
+            $able1=$val["able1"];
+            $able2=$val["able2"];
+            $able3=$val["able3"];
+            $profpic=$val["profpic"];
+            $picpath=$val["picpath"];
+            $picname=$val["picname"];
+        }
+    }
+
+    $varedu=false;
+    if(modresuedu::where('edu_id', '=', $authid)->exists()) {
+        $varedu=true;
+        $edu=PostsController::get_edu1();
+        $i=0;
+        foreach($edu as $key=>$val){
+            if($i==0){
+                $qual1=$val["qual"];
+                $board1=$val["board"];
+                $colname1=$val["colname"];
+                $pyear1=$val["pyear"];
+                $edulang1=$val["edulang"];
+                $percentage1=$val["percentage"];
+                $edutime1=$val["updated_at"];
+            }
+            else if($i==1){
+                $qual2=$val["qual"];
+                $board2=$val["board"];
+                $colname2=$val["colname"];
+                $pyear2=$val["pyear"];
+                $edulang2=$val["edulang"];
+                $percentage2=$val["percentage"];
+                $edutime2=$val["updated_at"];
+            }
+            else if($i==2){
+                $qual3=$val["qual"];
+                $course3=$val["course"];
+                $spec3=$val["spec"];
+                $colname3=$val["colname"];
+                $district3=$val["district"];
+                $cortype3=$val["cortype"];
+                $pyear3=$val["pyear"];
+                $edulang3=$val["edulang"];
+                $percentage3=$val["percentage"];
+                $edutime3=$val["updated_at"];
+            }
+            else if($i==3){
+                $qual4=$val["qual"];
+                $course4=$val["course"];
+                $spec4=$val["spec"];
+                $colname4=$val["colname"];
+                $district4=$val["district"];
+                $cortype4=$val["cortype"];
+                $pyear4=$val["pyear"];
+                $edulang4=$val["edulang"];
+                $percentage4=$val["percentage"];
+                $edutime4=$val["updated_at"];
+            }
+            $i=$i+1;
+        }
+    }
+
+    $varemp=false;
+    if(modresuemp::where('emp_id', '=', $authid)->exists()) {
+        $varemp=true;
+        $emp=PostsController::get_emp();
+        foreach($emp as $key=>$val){
+            $empname=$val["emp_name"];
+            $expmonths=$val["exp_months"];
+            $desg=$val["desg"];
+            $startdt=$val["startdt"];
+            $enddt=$val["enddt"];
+            $msal=$val["msal"];
+            $resp=$val["resp"];
+            $nperiod=$val["nperiod"];
+            $emptime=$val["updated_at"];
+        }
+
+        if($expmonths>12){
+            $expyears1=(int)floor($expmonths/12);
+            $expmonths1=$expmonths % 12;
+            $expyears=$expyears1.".".$expmonths1." Yrs";
         }
         else{
-            $addtype2=$val["addtype"];
-            $addline12=$val["addline1"];
-            $addline22=$val["addline2"];
-            $city2=$val["city"];
-            $state2=$val["state"];
-            $zcode2=$val["zcode"];
-            $country2=$val["country"];
-            $addtime2=$val["updated_at"];
+            $expyears1=0;
+            if($expmonths>0){
+                $expyears=$expmonths." Months";
+            }
+            else{
+                $expyears="Fresher";
+            }
         }
-        $i=$i+1;
+
+        $msal_length=strlen($msal);
+        $smsal=(string) $msal;
+        switch($msal_length){
+            case 4:
+                $msalt=substr($smsal, 0, 1);
+                break;
+            case 5:
+                $msalt=substr($smsal, 0, 2);
+                break;
+            case 6:
+                $msalt=substr($smsal, 1, 2);
+                $msall=substr($smsal, 0, 1);
+                break;
+            case 7:
+                $msalt=substr($smsal, 2, 2);
+                $msall=substr($smsal, 0, 2);
+                break;
+        }
+        $msalt=(int) $msalt;
+        $msall=(int) $msall;
     }
 
-    $refs=PostsController::get_ref();
-    $i=1;
-    foreach($refs as $key=>$val){
-        if($i==1){
-            $refnum1=$val["refnum"];
-            $fname1=$val["fname"];
-            $location1=$val["location"];
-            $email1=$val["email"];
-            $mobnum1=$val["mobnum"];
-            $reftime1=$val["updated_at"];
+    $varadd=false;
+    if(modresuadd::where('add_id', '=', $authid)->exists()) {
+        $varadd=true;
+        $adds=PostsController::get_add();
+        $i=1;
+        foreach($adds as $key=>$val){
+            if($i==1){
+                $addtype1=$val["addtype"];
+                $addline11=$val["addline1"];
+                $addline21=$val["addline2"];
+                $city1=$val["city"];
+                $state1=$val["state"];
+                $zcode1=$val["zcode"];
+                $country1=$val["country"];
+                $addtime1=$val["updated_at"];
+            }
+            else{
+                $addtype2=$val["addtype"];
+                $addline12=$val["addline1"];
+                $addline22=$val["addline2"];
+                $city2=$val["city"];
+                $state2=$val["state"];
+                $zcode2=$val["zcode"];
+                $country2=$val["country"];
+                $addtime2=$val["updated_at"];
+            }
+            $i=$i+1;
         }
-        else{
-            $refnum2=$val["refnum"];
-            $fname2=$val["fname"];
-            $location2=$val["location"];
-            $email2=$val["email"];
-            $mobnum2=$val["mobnum"];
-            $reftime2=$val["updated_at"];
-        }
-        $i=$i+1;
     }
 
+    $varref=false;
+    if(modresuref::where('ref_id', '=', $authid)->exists()) {
+        $varref=true;
+        $refs=PostsController::get_ref();
+        $i=1;
+        foreach($refs as $key=>$val){
+            if($i==1){
+                $refnum1=$val["refnum"];
+                $fname1=$val["fname"];
+                $location1=$val["location"];
+                $email1=$val["email"];
+                $mobnum1=$val["mobnum"];
+                $reftime1=$val["updated_at"];
+            }
+            else{
+                $refnum2=$val["refnum"];
+                $fname2=$val["fname"];
+                $location2=$val["location"];
+                $email2=$val["email"];
+                $mobnum2=$val["mobnum"];
+                $reftime2=$val["updated_at"];
+            }
+            $i=$i+1;
+        }
+    }
 ?>
 {{-- Build Main Menu for Registered Candidates --}}
 @section('buildMenu')
@@ -274,9 +318,12 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important;">
     <div class="row emply-info">
         <div class="col-md-3">
-        <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
+        @if($varload==true)
+            <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
+        @endif
         </div>
         <div class="col-md-6" style="float:left; height:200px;">
+            @if($varpdet==true)
             <label style="width:100%;">{{$fname}}</label>
             <label style="width:100%;">{{$desg}} in {{$empname}}</label>
             <div class="col-md-6" style="float:left;">
@@ -287,6 +334,7 @@
                 <label style="width:100%;">+91 {{$mob_num}} </label>
                 <label style="width:100%;">{{$email}} </label>
             </div>
+            @endif
         </div>
         <div class="col-md-3" style="float:right; height:115px !important;">
             <label style="width:100%;">Recruiters Search: 100</label>
