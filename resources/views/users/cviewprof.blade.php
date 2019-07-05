@@ -326,6 +326,7 @@
 , not enough score to apply jobs.
 @else
 , enough score to apply jobs.
+@endif
 </span></h3>
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important;">
     <div class="row emply-info">
