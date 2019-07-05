@@ -1937,9 +1937,11 @@ class PostsController extends Controller
             //get all jobs posted by recruiter pagination purpose.
             $recalljobs = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $recalljobs = $recalljobs->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
-            $recalljobs = $recalljobs->where('rec_id', '=', $authid)
-                    ->orderBy('job_id','desc')
-                    ->paginate(10);
+            if(Auth::guard('recruiter')->check()){
+                $recalljobs = $recalljobs->where('rec_id', '=', $authid);
+            }
+            $recalljobs = $recalljobs->orderBy('job_id','desc')
+                                    ->paginate(20);
             
             // if (\Request::is('recruiter/valljobs' || 'admin/valljobs')) {
                 foreach($recalljobs as $key=>$val){

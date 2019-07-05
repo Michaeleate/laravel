@@ -115,8 +115,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('admin.postjob') }}" title="Post Requirements">Post Jobs</a>
             <a class="dropdown-item" href="{{ route('admin.valljobs') }}" title="View all posted Jobs">View Jobs</a>
-            <a class="dropdown-item" href="services.html" title="Update posted jobs">Update Jobs</a>
-            <a class="dropdown-item" href="candidates_list.html" title="Archieve Jobs">Archive Jobs</a>
+            <a class="dropdown-item" href="#" title="Update posted jobs">Update Jobs</a>
+            <a class="dropdown-item" href="#" title="Archieve Jobs">Archive Jobs</a>
         </div>
     </li>
  
@@ -126,9 +126,9 @@
             <i class="fas fa-angle-down"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="employer_list.html">Received</a>
-            <a class="dropdown-item" href="employer_list.html">Processed</a>
-            <a class="dropdown-item" href="employer_list.html">Status</a>
+            <a class="dropdown-item" href="#">Received</a>
+            <a class="dropdown-item" href="#">Processed</a>
+            <a class="dropdown-item" href="#">Status</a>
         </div>
     </li>
  
@@ -145,7 +145,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#">Contact</a>
     </li>
 </ul>
 @endsection
@@ -235,6 +235,8 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
+<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+<span>Total Jobs: {{ $recalljobs->total() }} </span></h3>
 @if($recalljobs->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
