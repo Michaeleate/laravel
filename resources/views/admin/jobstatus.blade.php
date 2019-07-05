@@ -179,6 +179,8 @@
 
 {{--@if($jsearchall->total()==0) --}}
 @if((isset($jsearchall)))
+<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+<span>Total Candidates Applied: {{ $jsearchall->total() }}</span></h3>
 @if($jsearchall->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
@@ -190,8 +192,8 @@
 @else
 {{ $jsearchall->links() }}
 @foreach($jsearchall as $job)
-<a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:260px;">
+{{-- <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details"> --}}
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:300px;">
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
             <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
@@ -249,6 +251,7 @@
             </label>
             <label style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
+
         <div class="row col-md-12" style="display:block; float:left;">
             @if(isset($job->app_status))
             {{-- <span class="appstat applied">Applied</span> --}}
@@ -309,14 +312,21 @@
                 @if( $job->app_status == 9)
                      <span class="appstat closed">Closed</span>
                 @endif
-            @else
-                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+            {{-- @else
+                <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button> --}}
             @endif
             @endif
         </div>
+        <div class="row col-md-12" style="display:block; float:right;">
+            <a href="{{ route('viewjobdet', $job->job_id)}}" target="_blank">
+                <button class="btn btn-primary" style="float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">View Job</button>
+            </a>
+            <a href="{{ route('viewuserprof', ['userid'=>$job->appuserid, 'jobid'=>$job->job_id])}}" target="_blank">
+                <button class="btn btn-primary" style="float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">User Profile</button>
+            </a>
+        </div>
     </div>
 </div>
-</a>
 @endforeach
 {{ $jsearchall->links() }}
 @endif

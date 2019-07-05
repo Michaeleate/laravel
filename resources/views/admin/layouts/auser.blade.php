@@ -106,6 +106,8 @@
                 <a href="{{ url('/admin/lastjob')}}">Registered Candidates</a>
             @elseif (\Route::current()->getName() == 'admin.rregister')
                 <a href="{{ url('/admin/valljobs')}}">Register Recruiter</a>
+            @elseif (\Route::current()->getName() == 'admin.capplied')
+                <a href="{{ url('/admin/valljobs')}}">Candidates Applied List</a>
             @endif
         </li>
     </ol>
@@ -120,6 +122,9 @@
                 @elseif (\Route::current()->getName() == 'admin.rregister')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Recruiter Registration</span></h3>
+                @elseif (\Route::current()->getName() == 'admin.capplied')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Candidates Applied For Jobs List</span></h3>
                 @endif
                 <div class="row choose-main mt-5">
                     <div class="col-lg-2 job_info_right" style="background-color:white; border: none !important;">

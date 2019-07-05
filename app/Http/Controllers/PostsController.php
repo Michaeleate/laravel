@@ -3784,8 +3784,18 @@ class PostsController extends Controller
                             //->where('jobpost.rec_id','=', 'userjobstat.rec_id');
                     });
             }
-            $ujallapplied=$ujallapplied
-                    ->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.jd as jd',  'jobpost.qty as qty', 'jobpost.keywords as keywords', 'jobpost.minexp as minexp', 'jobpost.maxexp as maxexp', 'jobpost.minsal as minsal', 'jobpost.maxsal as maxsal', 'jobpost.hireloc1 as hireloc1', 'jobpost.hireloc2 as hireloc2', 'jobpost.hireloc3 as hireloc3', 'jobpost.comhirefor as comhirefor', 'jobpost.jstatus as jstatus', 'jobpost.valid_till as valid_till', 'jobpost.auto_aprove as auto_aprove', 'jobpost.auto_upd as auto_upd', 'jobpost.created_at as created_at', 'jobpost.updated_at as updated_at','userjobstat.app_status as app_status', 'userjobstat.viewed_at as viewed_at', 'userjobstat.applied_at as applied_at', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id');
+
+            if(Auth::check()){
+                $ujallapplied=$ujallapplied
+                        ->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.jd as jd',  'jobpost.qty as qty', 'jobpost.keywords as keywords', 'jobpost.minexp as minexp', 'jobpost.maxexp as maxexp', 'jobpost.minsal as minsal', 'jobpost.maxsal as maxsal', 'jobpost.hireloc1 as hireloc1', 'jobpost.hireloc2 as hireloc2', 'jobpost.hireloc3 as hireloc3', 'jobpost.comhirefor as comhirefor', 'jobpost.jstatus as jstatus', 'jobpost.valid_till as valid_till', 'jobpost.auto_aprove as auto_aprove', 'jobpost.auto_upd as auto_upd', 'jobpost.created_at as created_at', 'jobpost.updated_at as updated_at','userjobstat.app_status as app_status', 'userjobstat.viewed_at as viewed_at', 'userjobstat.applied_at as applied_at', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id');
+            }
+            else{
+                $ujallapplied=$ujallapplied
+                        ->select('jobpost.job_id as job_id', 'jobpost.jtitle as jtitle', 'jobpost.jd as jd',  'jobpost.qty as qty', 'jobpost.keywords as keywords', 'jobpost.minexp as minexp', 'jobpost.maxexp as maxexp', 'jobpost.minsal as minsal', 'jobpost.maxsal as maxsal', 'jobpost.hireloc1 as hireloc1', 'jobpost.hireloc2 as hireloc2', 'jobpost.hireloc3 as hireloc3', 'jobpost.comhirefor as comhirefor', 'jobpost.jstatus as jstatus', 'jobpost.valid_till as valid_till', 'jobpost.auto_aprove as auto_aprove', 'jobpost.auto_upd as auto_upd', 'jobpost.created_at as created_at', 'jobpost.updated_at as updated_at',
+                        'userjobstat.rec_id as appuserid', 
+                        'userjobstat.app_status as app_status', 'userjobstat.viewed_at as viewed_at', 'userjobstat.applied_at as applied_at', 'userjobstat.schedule_id as schedule_id', 'userjobstat.interview_id as interview_id');
+            }
+
             $ujallapplied = $ujallapplied->addselect(DB::raw("'sampletext' as jstatus_text, 'daystext' as days_text"));
             //$ujallapplied = $ujallapplied->where('jstatus', '=', 1);
             $ujallapplied = $ujallapplied->orderBy('userjobstat.job_id','desc')
