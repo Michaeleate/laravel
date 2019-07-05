@@ -176,6 +176,8 @@
 
 {{--@if($jsearchall->total()==0) --}}
 @if((isset($jsearchall)))
+<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+<span>Total Jobs Posted: {{ $jsearchall->total() }}</span></h3>
 @if($jsearchall->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">

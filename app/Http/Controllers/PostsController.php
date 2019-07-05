@@ -2341,6 +2341,7 @@ class PostsController extends Controller
     //Get all jobs based on search criteria.
     public static function get_jsearchall($request) {
         if (Auth::check() || Auth::guard('recruiter')->check() || Auth::guard('admin')->check()) {
+            $sloc=$skey=$sminexp=null;
             $authid = Auth::id();
             $skey=$request->input('skey');
             $sloc=$request->input('sloc');
@@ -2359,12 +2360,23 @@ class PostsController extends Controller
                     ->orwhere('jtitle', 'like', '%' . $skey . '%')
                     ->orwhere('jd', 'like', '%' . $skey . '%');
             }
-            if(!($sloc==null)){
-            $jsearchall = $jsearchall
-                    ->orwhere('hireloc1', 'like', '%' . $sloc . '%')
-                    ->orwhere('hireloc2', 'like', '%' . $sloc . '%')
-                    ->orwhere('hireloc3', 'like', '%' . $sloc . '%');
+            
+            // $message = "Location number is " . $sloc;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+
+            if(!($sloc == null)){
+                // $message = "Inside Null Location number is " . $sloc;
+                // echo "<script type='text/javascript'>alert('$message');</script>";
+                if(!($sloc == 9999)){
+                    // $message = "Inside Sloc Location number is " . $sloc;
+                    // echo "<script type='text/javascript'>alert('$message');</script>";
+                    $jsearchall = $jsearchall
+                            ->orwhere('hireloc1', '=', $sloc)
+                            ->orwhere('hireloc2', '=', $sloc)
+                            ->orwhere('hireloc3', '=', $sloc);
+                }
             }
+
             if(!($sminexp==null)){
             $jsearchall = $jsearchall
                     ->orwhere(function ($query) use ($sminexp) {

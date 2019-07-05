@@ -105,7 +105,7 @@ class AdmController extends Controller
     public static function registerrec(Request $request){
         if(Auth::guard('admin')->check()){
             $authid = Auth::guard('admin')->user()->id;
-            
+            session()->forget(array('adm-recreg'));
             //$current_date_time = Carbon::now()->toDateTimeString();
             $user_type=2;   //Recruiter
             $password="Sams!234";   //Default Password
@@ -119,7 +119,8 @@ class AdmController extends Controller
                 'password' => Hash::make($password),
             ]);
 
-            return view('admin.ctoday',compact('userrec'));
+            // return back()->with()
+            return redirect()->back()->with('adm-recreg', ['Successfully Registered']);
         }
     }
 
