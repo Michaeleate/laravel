@@ -8,9 +8,12 @@
     $currenturl = url()->current();
     //$previousurl = url()->previous();
     $seslink = Session::get('link');
+    $userid1 = Auth::id();
     //if (\Request::is('recruiter/urecprofile') && ($seslink==null)) {
     //    $seslink='init';
     //}
+
+    $resume_score=PostsController::profile_score();
 
     $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd=$daystext=$jstatus_text=$japp_status=$japp_status_text='';
     
@@ -157,6 +160,26 @@
                     <button class="btn" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; background-color: #4CAF50; cursor: not-allowed;">{{$japp_status_text}}</button>
                 @else
                     @if(Auth::check())
+                    @if($resume_score>70)
+                        <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
+                        <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;" onMouseOver="this.innerHTML='-4 credits'"
+                        onMouseOut="this.innerHTML='Apply'" >Apply</button></a>
+                        {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
+                        <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
+                            @csrf
+                        </form>
+                    @else
+                        <a href="{{ route('viewuserprof', ['userid'=>$userid1, 'jobid'=>$jobid])}}" target="_blank">
+                            <button class="btn btn-primary" style="width:180px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block; background-color:lightgreen; border-color:lightgreen;color:black;">Profile - Recruiters view</button>
+                        </a>
+                        <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; cursor: not-allowed;" onMouseOver="this.innerHTML='Profile is empty'"
+                        onMouseOut="this.innerHTML='Cant Apply'" >Cant Apply</button>
+                    @endif
+                    @endif
+                @endif
+            @else
+                @if(Auth::check())
+                @if($resume_score>70)
                     <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
                     <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;" onMouseOver="this.innerHTML='-4 credits'"
                     onMouseOut="this.innerHTML='Apply'" >Apply</button></a>
@@ -164,17 +187,13 @@
                     <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
                         @csrf
                     </form>
-                    @endif
+                @else
+                    <a href="{{ route('viewuserprof', ['userid'=>$userid1, 'jobid'=>$jobid])}}" target="_blank">
+                        <button class="btn btn-primary" style="width:180px; height:30px; float:left; line-height: 15px; text-align:center; display:inline-block; background-color:lightgreen; border-color:lightgreen;color:black;">Profile - Recruiters view</button>
+                    </a>
+                    <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; cursor: not-allowed;" onMouseOver="this.innerHTML='Please fill profile'"
+                    onMouseOut="this.innerHTML='Cant Apply'" >Cant Apply</button>
                 @endif
-            @else
-                @if(Auth::check())
-                <a href="{{ route('user-apply-job',$jobid) }}" onclick="event.preventDefault();                             document.getElementById('job-apply-form').submit();">
-                <button class="btn btn-primary" style="width:150px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block;" onMouseOver="this.innerHTML='-4 credits'"
-                onMouseOut="this.innerHTML='Apply'" >Apply</button></a>
-                {{--<label style="display:inline-block; float:right; width:100px;">&nbsp;&emsp;&emsp;&emsp;&emsp;</label> --}}
-                <form id="job-apply-form" action="{{ route('user-apply-job',$job_id) }}" method="POST">
-                    @csrf
-                </form>
                 @endif
             @endauth
         </div>
@@ -209,7 +228,8 @@
             </div>
             <div style="display:inline; margin:10px;">
                 <script type="IN/Share" 
-                data-url="{{$currenturl}}"
+                {{-- data-url="{{$currenturl}}" --}}
+                data-url="{{ $waurl }}"
                 data-counter="right"
                 data-size="large">
                 </script>

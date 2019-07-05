@@ -26,6 +26,7 @@
         foreach($others as $key=>$val){
             $jobid=$val["jobid"];
             $appstat=$val["appstat"];
+            $resume_score=$val["resume_score"];
         }
     }
 
@@ -301,7 +302,8 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-
+<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+<span>Resume Score: {{ $resume_score }}</span></h3>
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:220px !important;">
     <div class="row emply-info">
         <div class="col-md-3">
@@ -380,7 +382,11 @@
     <div class="row emply-info">
         <div class="col-md-12">
             <label style="width:100%;"><h5>Experience Summary:</h5></label>
-            <textarea id="ta1" name="headline" style="height:120px; width:100%; resize:none; border:0px; cursor:not-allowed;" readonly></textarea>
+            @if(isset($head))
+                <textarea id="ta1" name="headline" style="height:120px; width:100%; resize:none; border:0px; cursor:not-allowed;" readonly></textarea>
+            @else
+                <textarea id="ta2" name="headline1" style="height:120px; width:100%; resize:none; border:0px; cursor:not-allowed; color:black;" readonly>Not Shared with us.</textarea>
+            @endif
         </div>
     </div>
 </div>
@@ -429,9 +435,15 @@
         <div class="col-md-12">
             <label style="width:100%;"><h5>Key Skills:</h5></label>
             <ul>
-                <li>{{$kskil1}}</li>
-                <li>{{$kskil2}}</li>
-                <li>{{$kskil3}}</li>
+                @if(isset($keyskills))
+                    <li>Keyskill 1 - {{$kskil1}}</li>
+                    <li>Keyskill 2 - {{$kskil2}}</li>
+                    <li>Keyskill 3 - {{$kskil3}}</li>
+                @else
+                    <li>Keyskill 1 - Not shared with us.</li>
+                    <li>Keyskill 2 - Not shared with us.</li>
+                    <li>Keyskill 3 - Not shared with us.</li>
+                @endif
             </ul>
         </div>
     </div>
@@ -441,29 +453,43 @@
     <div class="row emply-info">
         <div class="col-md-12">
             <label style="width:100%;"><h5>Professional Experience:</h5></label>
-            <table style="width:30%">
-            <tr>
-                <td><b>Company:</b></td>
-                <td>&emsp;{{ $empname }}</td> 
-            </tr>
-            <tr>
-                <td><b>Start date:</b></td>
-                <td>&emsp;{{ $startdt }}</td> 
-            </tr>
-            <tr>
-                <td><b>End date:</b></td>
-                <td>&emsp;{{ $enddt }}</td> 
-            </tr>
-            <tr>
-                <td><b>Notice Period:</b></td>
-                <td>&emsp;{{ $nperiod }}</td> 
-            </tr>
-            <tr>
-                <td><b>Role:</b></td>
-                <td>&emsp;{{ $desg }}</td> 
-            </tr>
-            </table>
-            <label style="width:100%;"><b>Responsibilities:</b>&emsp;{{ $resp }}</label>
+            @if(isset($emp))
+                {{-- <table style="width:30%">
+                <tr>
+                    <td><b>Company:</b></td>
+                    <td>&emsp;{{ $empname }}</td> 
+                </tr>
+                <tr>
+                    <td><b>Start date:</b></td>
+                    <td>&emsp;{{ $startdt }}</td> 
+                </tr>
+                <tr>
+                    <td><b>End date:</b></td>
+                    <td>&emsp;{{ $enddt }}</td> 
+                </tr>
+                <tr>
+                    <td><b>Notice Period:</b></td>
+                    <td>&emsp;{{ $nperiod }}</td> 
+                </tr>
+                <tr>
+                    <td><b>Role:</b></td>
+                    <td>&emsp;{{ $desg }}</td> 
+                </tr>
+                </table> --}}
+                <label style="width:100%;"><b>Company:</b>&emsp;{{ $empname }}</label>
+                <label style="width:100%;"><b>Start date:</b>&emsp;{{ $startdt }}</label>
+                <label style="width:100%;"><b>End date:</b>&emsp;{{ $enddt }}</label>
+                <label style="width:100%;"><b>Notice Period:</b>&emsp;{{ $nperiod }}</label>
+                <label style="width:100%;"><b>Role:</b>&emsp;{{ $desg }}</label>
+                <label style="width:100%;"><b>Responsibilities:</b>&emsp;{{ $resp }}</label>
+            @else
+                <label style="width:100%;"><b>Company:</b>&emsp;&emsp;&emsp;&ensp;Not shared with us.</label>
+                <label style="width:100%;"><b>Start date:</b>&emsp;&emsp;&emsp;&nbsp;Not shared with us.</label>
+                <label style="width:100%;"><b>End date:</b>&emsp;&emsp;&emsp;&emsp;Not shared with us.</label>
+                <label style="width:100%;"><b>Notice Period:</b>&emsp;&emsp;Not shared with us.</label>
+                <label style="width:100%;"><b>Role:</b>&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;Not shared with us.</label>
+                <label style="width:100%;"><b>Responsibilities:</b>&emsp;Not shared with us.</label>
+            @endif
         </div>
     </div>
 </div>
@@ -476,21 +502,29 @@
                 <tr>
                     <td>
                         <label style="width:100%;"><u>Current Address:</u></label>
-                        <label style="width:100%;">{{ $addline11 }}</label>
-                        <label style="width:100%;">{{ $addline21 }}</label>
-                        <label style="width:100%;">{{ $city1 }}</label>
-                        <label style="width:100%;">{{ $state1 }}</label>
-                        <label style="width:100%;">{{ $zcode1 }}</label>
-                        <label style="width:100%;">{{ $country1 }}</label>
+                        @if(isset($adds))
+                            <label style="width:100%;">{{ $addline11 }}</label>
+                            <label style="width:100%;">{{ $addline21 }}</label>
+                            <label style="width:100%;">{{ $city1 }}</label>
+                            <label style="width:100%;">{{ $state1 }}</label>
+                            <label style="width:100%;">{{ $zcode1 }}</label>
+                            <label style="width:100%;">{{ $country1 }}</label>
+                        @else
+                            <label style="width:100%;">Not Shared with us.</label>
+                        @endif
                     </td>
                     <td>
                         <label style="width:100%;"><u>Permanent Address:</u></label>
-                        <label style="width:100%;">{{ $addline12 }}</label>
-                        <label style="width:100%;">{{ $addline22 }}</label>
-                        <label style="width:100%;">{{ $city2 }}</label>
-                        <label style="width:100%;">{{ $state2 }}</label>
-                        <label style="width:100%;">{{ $zcode2 }}</label>
-                        <label style="width:100%;">{{ $country2 }}</label>
+                        @if(isset($adds))
+                            <label style="width:100%;">{{ $addline12 }}</label>
+                            <label style="width:100%;">{{ $addline22 }}</label>
+                            <label style="width:100%;">{{ $city2 }}</label>
+                            <label style="width:100%;">{{ $state2 }}</label>
+                            <label style="width:100%;">{{ $zcode2 }}</label>
+                            <label style="width:100%;">{{ $country2 }}</label>
+                        @else
+                            <label style="width:100%;">Not Shared with us.</label>
+                        @endif
                     </td>
                 </tr>
             </table>
@@ -506,21 +540,29 @@
                 <tr>
                     <td>
                         <label style="width:100%;"><u>Reference 1:</u></label>
-                        <label style="width:100%;">{{ $fname1 }}</label>
-                        {{-- <label style="width:100%;">+91{{ $mobnum1 }}</label>
-                        <label style="width:100%;">{{ $email1 }}</label> --}}
-                        <label style="width:100%;">Shared after interview</label>
-                        <label style="width:100%;">Shared after interview</label>
-                        <label style="width:100%;">{{ $location1 }}</label>
+                        @if(isset($refs))
+                            <label style="width:100%;">{{ $fname1 }}</label>
+                            {{-- <label style="width:100%;">+91{{ $mobnum1 }}</label>
+                            <label style="width:100%;">{{ $email1 }}</label> --}}
+                            <label style="width:100%;">Shared after interview</label>
+                            <label style="width:100%;">Shared after interview</label>
+                            <label style="width:100%;">{{ $location1 }}</label>
+                        @else
+                            <label style="width:100%;">Not shared with us.</label>
+                        @endif
                     </td>
                     <td>
                         <label style="width:100%;"><u>Reference 2:</u></label>
-                        <label style="width:100%;">{{ $fname2 }}</label>
-                        {{-- <label style="width:100%;">+91{{ $mobnum2 }}</label>
-                        <label style="width:100%;">{{ $email2 }}</label> --}}
-                        <label style="width:100%;">Shared after interview</label>
-                        <label style="width:100%;">Shared after interview</label>
-                        <label style="width:100%;">{{ $location2 }}</label>
+                        @if(!(empty($fname2)))
+                            <label style="width:100%;">{{ $fname2 }}</label>
+                            {{-- <label style="width:100%;">+91{{ $mobnum2 }}</label>
+                            <label style="width:100%;">{{ $email2 }}</label> --}}
+                            <label style="width:100%;">Shared after interview</label>
+                            <label style="width:100%;">Shared after interview</label>
+                            <label style="width:100%;">{{ $location2 }}</label>
+                        @else
+                            <label style="width:100%;">Not shared with us.</label>
+                        @endif
                     </td>
                 </tr>
             </table>

@@ -4927,4 +4927,61 @@ class PostsController extends Controller
             return $dbstatus;
         }
     }
+
+    //Get Candidate Profile Score.
+    public static function profile_score() {
+        if (Auth::check() || Auth::guard('admin')->check()){
+            
+            if (Auth::check()){
+                $authid = Auth::id();
+            }
+            
+            $resume_score=0;
+            // $resuhead=false;
+            if(modresuhead::where('head_id', '=', $authid)->exists()) {
+                // $resuhead = true;
+                $resume_score = $resume_score + 10;
+            }
+            // $resuload=false;
+            if(modresuload::where('resu_id', '=', $authid)->exists()) {
+                // $resuload = true;
+                $resume_score = $resume_score + 10;
+            }
+            // $resukskil=false;
+            if(modresukskil::where('kskil_id', '=', $authid)->exists()) {
+                // $resukskil = true;
+                $resume_score = $resume_score + 10;
+            }
+            // $resupdet=false;
+            if(modresupdet::where('pdet_id', '=', $authid)->exists()) {
+                // $resupdet = true;
+                $resume_score = $resume_score + 10;
+            }
+            // $resuedu=false;
+            if(modresuedu::where('edu_id', '=', $authid)->exists()) {
+                // $resuedu = true;
+                $resume_score = $resume_score + 20;
+            }
+            // $resuemp=false;
+            if(modresuemp::where('emp_id', '=', $authid)->exists()) {
+                // $resuemp = true;
+                $resume_score = $resume_score + 20;
+            }
+            // $resuadd=false;
+            if(modresuadd::where('add_id', '=', $authid)->exists()) {
+                // $resuadd = true;
+                $resume_score = $resume_score + 10;
+            }
+            // $resuref=false;
+            if(modresuref::where('ref_id', '=', $authid)->exists()) {
+                // $resuref = true;
+                $resume_score = $resume_score + 10;
+            }
+
+            return $resume_score;
+        }
+        else {
+            return back();
+        }
+    }
 }

@@ -121,6 +121,8 @@ class JobsController extends Controller
 
             $appstat=PostsController::get_appstatus($userid,$jobid);
             $jobdet=PostsController::get_viewsjob($jobid);
+            $resume_score=PostsController::profile_score();
+
             // $head=PostsController::get_head($userid);
             // $resume=PostsController::get_resume($userid);
             // $keyskills=PostsController::get_kskill($userid);
@@ -133,8 +135,9 @@ class JobsController extends Controller
             // $jobdet=PostsController::get_viewsjob($jobid);
             $jobid=(int)($jobid);
             $appstat=(int)($appstat);
+            $resume_score=(int)($resume_score);
 
-            $others=array(['jobid'=>$jobid,'appstat'=>$appstat]);
+            $others=array(['jobid'=>$jobid,'appstat'=>$appstat,'resume_score'=>$resume_score]);
 
             return view('recruiter.viewuserprof',compact('others','head','resume','keyskills','perdetails','edu','emp','adds','refs','jobdet'));
         }

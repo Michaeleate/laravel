@@ -13,7 +13,7 @@
 
     if (Auth::check()){
         $authid = Auth::id();
-    }    
+    }
 
     $head_line=$oldresu='';
     $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
@@ -29,6 +29,8 @@
     $addtype2=$addline12=$addline22=$city2=$state2=$zcode2=$country2=$addtime2='';
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
+
+    $resume_score=PostsController::profile_score();
 
     $varhead=false;
     if(modresuhead::where('head_id', '=', $authid)->exists()) {
@@ -315,6 +317,8 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
+<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+<span>Resume Score: {{ $resume_score }} </span></h3>
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important;">
     <div class="row emply-info">
         <div class="col-md-3">

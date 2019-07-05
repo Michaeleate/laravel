@@ -41,8 +41,10 @@
     //{
         $authid = Auth::guard('recruiter')->user()->id;
     //}    
-    list($name11, $ext11) = explode('.', $picname);
-    $fullpath=$picpath."/".$authid.".".$ext11;
+    if(!empty($picname)){
+        list($name11, $ext11) = explode('.', $picname);
+        $fullpath=$picpath."/".$authid.".".$ext11;
+    }
 
     //get recruiter business details
     $recprof=PostsController::get_bdetails();
