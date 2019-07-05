@@ -342,9 +342,10 @@ class PostsController extends Controller
                     $val["diff_able"]='1';
                 }
 
-                list($name11, $ext11) = explode('.', $val["picname"]);
-                $val["picpath"]=$val["picpath"]."/".$authid.".".$ext11;
-
+                if(isset($val["picname"])){
+                    list($name11, $ext11) = explode('.', $val["picname"]);
+                    $val["picpath"]=$val["picpath"]."/".$authid.".".$ext11;
+                }
             }
             
             return $resume;
