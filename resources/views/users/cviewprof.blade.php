@@ -325,7 +325,7 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important;">
     <div class="row emply-info">
         <div class="col-md-3">
-        @if($varload==true)
+        @if($varpdet==true)
             <img src="{{url($picpath)}}" style="border-radius:80%; width:100%; height:120px;">
         @endif
         </div>
