@@ -13,7 +13,10 @@
     //    $seslink='init';
     //}
 
-    $resume_score=PostsController::profile_score();
+    $resume_score=0;
+    if(Auth::check()){
+        $resume_score=PostsController::profile_score();
+    }
 
     $job_id=$jtitle=$jd=$qty=$keywords=$minexp=$maxexp=$minsal=$maxsal=$hireoc=$hireloc1=$hireloc2=$hireloc3=$comhirefor=$jstatus=$valid_till=$auto_aprove=$auto_upd=$daystext=$jstatus_text=$japp_status=$japp_status_text='';
     
