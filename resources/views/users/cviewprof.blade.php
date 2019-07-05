@@ -30,7 +30,10 @@
     $refnum1=$fname1=$location1=$email1=$mobnum1=$reftime1='';
     $refnum2=$fname2=$location2=$email2=$mobnum2=$reftime2='';
 
-    $resume_score=PostsController::profile_score();
+    $resume_score=0;
+    if(Auth::check()){
+        $resume_score=PostsController::profile_score();
+    }
 
     $varhead=false;
     if(modresuhead::where('head_id', '=', $authid)->exists()) {

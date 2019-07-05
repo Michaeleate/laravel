@@ -121,7 +121,11 @@ class JobsController extends Controller
 
             $appstat=PostsController::get_appstatus($userid,$jobid);
             $jobdet=PostsController::get_viewsjob($jobid);
-            $resume_score=PostsController::profile_score();
+
+            $resume_score=0;
+            if(Auth::check()){
+                $resume_score=PostsController::profile_score();
+            }
 
             // $head=PostsController::get_head($userid);
             // $resume=PostsController::get_resume($userid);
