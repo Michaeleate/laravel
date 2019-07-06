@@ -323,9 +323,9 @@
 <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
 <span>Resume Score: {{ $resume_score }}
 @if($resume_score > 70)
-, not enough score to apply jobs.
-@else
 , enough score to apply jobs.
+@else
+, not enough score to apply jobs.
 @endif
 </span></h3>
 <div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:180px !important;">

@@ -41,6 +41,14 @@
     <link href="{{asset('/css/fontawesome-all.css')}}" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6036064392762682",
+        enable_page_level_ads: true
+    });
+    </script>
 </head>
 
 <body>
