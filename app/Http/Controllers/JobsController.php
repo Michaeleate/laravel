@@ -254,7 +254,9 @@ class JobsController extends Controller
             // echo "<script type='text/javascript'>alert('$message');</script>";
             
             if(($total_credits - 4) < 0){
-                return view('users.buycredits_prof');
+                // return view('users.buycredits_prof');
+                $error_msg="No enough credits, please recharge.";
+                return redirect('buyview')->with('ecredit_msg', $error_msg);
             }
             
             $apply_job=PostsController::user_apply_job($jobid);

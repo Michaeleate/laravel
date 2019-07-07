@@ -388,7 +388,7 @@
         <div class="emply-resume-info-sams">
             <form role="form" action="{{url('/resumehead')}}" method="post">
                 @csrf
-                <h4>Resume Headline {{ session('hl') }}</h4>
+                <h4>Resume Headline <label style="color:lightgreen">{{ session('hl') }}</label></h4>
                 <label>Resume Headline is the first point of contact with Recruiters, so make it striking to get noticed.</label>
                 <textarea id="ta1" class="form-control" name="headline" style="height:120px; width:100%; resize:none;" onkeyup="countChars(this,'lab1',250);"></textarea>
                 <label id="lab1" style="float:left">250 Character(s) Left</label>
@@ -403,7 +403,7 @@
 <div class="emply-resume-list row mb-3" id="attach1" style="display:inline-block; width:100%">
     <div class="col-md-12 emply-info">
         <div class="emply-resume-info-sams">
-            <h4>Attach Resume {{ session('ares') }}</h4>
+            <h4>Attach Resume <label style="color:lightgreen">{{ session('ares') }}</label></h4>
             <span>Resume shows your capabilities and skills, so keep upto date.</span>
             <form role="form" action="{{url('/uploadresume')}}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -426,7 +426,7 @@
         <div class="emply-resume-list row mb-3" id="key1" style="display:inline-block; width:100%">
             <div class="col-md-12 emply-info">
                 <div class="emply-resume-info-sams">
-                    <h4>Update Keyskills {{ session('uk') }}</h4>
+                    <h4>Update Keyskills <label style="color:lightgreen">{{ session('uk') }}</label></h4>
                     <span>Based on this, your profile will appear in Recruiters search list.</span>
                     <form role="form" action="{{url('/updatekskills')}}" method="post">
                         @csrf
@@ -469,7 +469,7 @@
         <div class="emply-resume-list row mb-3" id="person1" style="display:inline-block; width:100%">
             <div class="col-md-12 emply-info">
                 <div class="emply-resume-info-sams">
-                    <h4>Update Personal Details  {{ session('up') }}</h4>
+                    <h4>Update Personal Details  <label style="color:lightgreen">{{ session('up') }}</label> <label style="color:red"> {{ session('stat') }}</label></h4>
                     <span>Basic details.</span>
                     <form role="form" action="{{url('/updatepdet')}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -491,7 +491,7 @@
                         </div>
                         <div class="form-group" id="dob-link">
                             <label style="float:left;">Date Of Birth:</label>
-                            <input style="width:25%; height:25px;" type="date" class="form-control" id="dob" name="dob">
+                            <input style="width:25%; height:25px; " type="date" class="form-control" id="dob" name="dob">
                         </div>
                         <div class="form-group" id="marstat-link">
                             <label style="float:left">Marital Status:  </label>
@@ -558,7 +558,7 @@
                             <label style="float:left; width:30%;">Profile Picture:</label>
                             <input class="form-control" type="file" id="fprofpic" name="fprofpic">
                         </div>
-                        @if (!($profpic == ''))
+                        @if ($picpath !== null)
                             <label id="seepic1" style="visibility:visible; float:left;" > {{$picload}} {{$picname}}</label>
                         @endif
                         @if (Request::is('user-profile')) 
@@ -581,16 +581,16 @@
                     {{--<form role="form" action="{{url('/updateedu')}}" method="post">
                         @csrf --}}
                         <div class="form-control">
-                            <a href="#" data-toggle="modal" data-target="#add10modal">Add 10th{{ session('aed10') }}</a>
+                            <a href="#" data-toggle="modal" data-target="#add10modal">Add 10th<label style="color:lightgreen">{{ session('aed10') }}</label></a>
                         </div>
                         <div class="form-control">
-                            <a href="#" data-toggle="modal" data-target="#add12modal">Add 12th{{ session('aed12') }}</a>
+                            <a href="#" data-toggle="modal" data-target="#add12modal">Add 12th<label style="color:lightgreen">{{ session('aed12') }}</label></a>
                         </div>
                         <div class="form-control">
-                            <a href="#" data-toggle="modal" data-target="#addgradmodal">Add Degree/Graduation {{ session('aedgrad') }}</a>
+                            <a href="#" data-toggle="modal" data-target="#addgradmodal">Add Degree/Graduation <label style="color:lightgreen">{{ session('aedgrad') }}</label></a>
                         </div>
                         <div class="form-control">
-                            <a href="#" data-toggle="modal" data-target="#addpgmodal">Add Masters/Post-Graduation {{ session('aedpg') }}</a>
+                            <a href="#" data-toggle="modal" data-target="#addpgmodal">Add Masters/Post-Graduation <label style="color:lightgreen">{{ session('aedpg') }}</label></a>
                         </div>
                         <div class="form-control" style="display:none;">
                             <a href="#" data-toggle="modal" data-target="#addphdmodal">Add Doctorate/PhD</a>
@@ -615,7 +615,7 @@
                 @csrf
                 --}}
                 <div class="form-control">
-                    <a href="#" data-toggle="modal" data-target="#addempmodal">Add Employment (Last Organization) {{ session('aem') }}</a>
+                    <a href="#" data-toggle="modal" data-target="#addempmodal">Add Employment (Last Organization) <label style="color:lightgreen">{{ session('aem') }}</label></a>
                 </div>
                 {{--
                 <button type="submit" class="btn btn-primary" style="float:right;">Next</button>
@@ -631,10 +631,10 @@
         <div class="emply-resume-info-sams">
             <h4>Add Address Details</h4>
             <div class="form-control" style="outline:none;">
-                <a href="#" data-toggle="modal" data-target="#addcaddmodal">Add Current Address {{ session('aca') }}</a>
+                <a href="#" data-toggle="modal" data-target="#addcaddmodal">Add Current Address <label style="color:lightgreen">{{ session('aca') }}</label></a>
             </div>
             <div class="form-control">
-                <a href="#" data-toggle="modal" data-target="#addpaddmodal">Add Permanent Address {{ session('apa') }}</a>
+                <a href="#" data-toggle="modal" data-target="#addpaddmodal">Add Permanent Address <label style="color:lightgreen">{{ session('apa') }}</label></a>
             </div>
         </div>
     </div>
@@ -645,10 +645,10 @@
         <div class="emply-resume-info-sams">
             <h4>Add Reference:</h4>
             <div class="form-control" style="outline:none;">
-                <a href="#" data-toggle="modal" data-target="#addref1modal">Add Reference 1 {{ session('ar1') }}</a>
+                <a href="#" data-toggle="modal" data-target="#addref1modal">Add Reference 1 <label style="color:lightgreen">{{ session('ar1') }}</label></a>
             </div>
             <div class="form-control">
-                <a href="#" data-toggle="modal" data-target="#addref2modal">Add Reference 2 {{ session('ar2') }}</a>
+                <a href="#" data-toggle="modal" data-target="#addref2modal">Add Reference 2 <label style="color:lightgreen">{{ session('ar2') }}</label></a>
             </div>
         </div>
     </div>

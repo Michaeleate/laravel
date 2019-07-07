@@ -106,7 +106,7 @@ class PdetailsController extends Controller
                     $stat1 = 'ext';
                     $msg1 = 'fail';
                 }
-                else if ($oldsize > 1000000){
+                else if ($oldsize > 2000000){
                     $stat1 = 'size';
                     $msg1 = 'fail';
                 }
@@ -115,20 +115,30 @@ class PdetailsController extends Controller
                 if ($msg1 == 'fail'){
                     $profpic_flag="no";
                     if($stat1 == 'mime'){
-                        $stat3 = '- Not valid file MIME Type';
+                        $stat3 = '- Not valid file MIME Type.';
                     }
                     else if($stat1 == 'ext'){
                         $stat3 = '- Not valid file extension'.'_'.$oldext;
                     }
                     else if($stat1 == 'size'){
-                        $stat3 = '- Not valid file Size'.'_'.$oldsize;
+                        $stat3 = '- Not valid file Size'.'_'.$oldsize.' bytes';
                     }
                                                 
-                    return redirect('user-profile')
-                            ->with(array('stat'=>$stat3));
+                    // return redirect('user-profile')
+                            // ->with(array('stat'=>$stat3));
+                    
+                    $profpic = '0';
+                    $picpath = null;
+                    $picname = null;
+                    
+                    //Update the database without prof pic data.
+                    $this->updatedb($authid,$fname,$email,$mobnum,$gender,$dob,$marstat,$lang_eng,$lang_tel,$lang_hin,$lang_oth,$abled,$able1,$able2,$able3,$profpic,$picname,$picpath);
+
+                    return redirect()->back()->withInput()
+                                    ->with(array('stat'=>$stat3));
                 }
 
-                if($profpic_flag=="yes"){
+                if($profpic_flag == "yes"){
                     $file_exist='no';
                     $file1='uploads/profpics'.$authid.'.jpeg';
                     if(is_file($file1))
@@ -169,7 +179,7 @@ class PdetailsController extends Controller
             if ($profpic_flag=="no"){
                 
                 $resume = \App\modresupdet::select('profpic','picpath','picname')
-                    ->where('pdet_id', '=', $authid)
+                    ->where('pdet1_id', '=', $authid)
                     ->get();
 
                 foreach($resume as $key=>$val){
