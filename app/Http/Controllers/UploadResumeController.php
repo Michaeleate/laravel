@@ -47,7 +47,7 @@ class UploadResumeController extends Controller
                          $stat1 = '';
                          $msg1 = '';
 
-                         if (!($oldmime == 'text/plain' || $oldmime == 'application/msword' || $oldmime == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')){
+                         if (!($oldmime == 'text/plain' || $oldmime == 'application/msword' || $oldmime == 'application/pdf' || $oldmime == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')){
                               $stat1 = 'mime';
                               $msg1 = 'fail';
                          }
