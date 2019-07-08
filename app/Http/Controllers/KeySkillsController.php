@@ -25,8 +25,21 @@ class KeySkillsController extends Controller
             $authid = Auth::id();
             $kskill=$request->input('keyskill');
 
+            $kskill1=$kskill2=$kskill3=null;
+            
+            if(isset($kskill[0])){
+                $kskill1=$kskill[0];
+            }
+
+            if(isset($kskill[1])){
+                $kskill2=$kskill[1];
+            }
+
+            if(isset($kskill[2])){
+                $kskill3=$kskill[2];
+            }
             //echo $kskill[3];
-            $this->updatedb($authid,$kskill);
+            $this->updatedb($authid,$kskill1,$kskill2,$kskill3);
 
             $stat3 = '- Saved';
             return redirect('user-profile')
@@ -37,7 +50,7 @@ class KeySkillsController extends Controller
         }
     }
 
-    private function updatedb($authid,$kskill)
+    private function updatedb($authid,$kskill1,$kskill2,$kskill3)
     {
         try{
             DB::beginTransaction();
@@ -50,9 +63,9 @@ class KeySkillsController extends Controller
                 'kskil_id'  => $authid
                ],
                [ 
-                'kskil1'  => $kskill[0],
-                'kskil2'  => $kskill[1],
-                'kskil3'  => $kskill[2],
+                'kskil1'  => $kskill1,
+                'kskil2'  => $kskill2,
+                'kskil3'  => $kskill3,
                 'kskil4'  => "",
                 'kskil5'  => ""
                ]
