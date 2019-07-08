@@ -76,7 +76,9 @@
                                 </label>
                             </div>
                             <div class="col-md-4">
-                                <label style="color: #ffff;">Credits: {{$total_credits}}</label>
+                                @auth
+                                    <label style="color: #ffff;">Credits: {{$total_credits}}</label>
+                                @endauth
                             </div>
                             <div class="col-md-4 sign-btn">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();

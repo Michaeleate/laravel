@@ -51,7 +51,7 @@ class UploadResumeController extends Controller
                               $stat1 = 'mime';
                               $msg1 = 'fail';
                          }
-                         else if (!($oldext == 'txt' || $oldext == 'doc' ||$oldext == 'docx')) {
+                         else if (!($oldext == 'txt' || $oldext == 'doc' ||$oldext == 'docx' || $oldext == 'pdf')) {
                               $stat1 = 'ext';
                               $msg1 = 'fail';
                          }

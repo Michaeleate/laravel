@@ -205,4 +205,25 @@ class payController extends Controller
             return back();
         }
     }   
+
+    //If response from PayU Payment gateway is cancelled.
+    public function cpayment(){
+        if(!empty($_POST)) {
+            // $status=$_POST["status"];
+            // $firstname=$_POST["firstname"];
+            // $amount=$_POST["amount"];
+            // $txnid=$_POST["txnid"];
+            // $posted_hash=$_POST["hash"];
+            // $key=$_POST["key"];
+            // $productinfo=$_POST["productinfo"];
+            // $email=$_POST["email"];
+            $salt="VBQQ0cwAj1";
+            // Salt should be same Post Request 
+
+            return view('users.fpayment',compact('$_POST','salt'));
+        }
+        else{
+            return back();
+        }
+    }   
 }
