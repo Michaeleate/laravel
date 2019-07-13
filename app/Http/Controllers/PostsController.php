@@ -2346,44 +2346,43 @@ class PostsController extends Controller
             $skey=$request->input('skey');
             $sloc=$request->input('sloc');
             $sminexp=$request->input('sminexp');
-            
-            if($sminexp==null){
-                $sminexp=0;
+            // $message = "Inside skey is " . $skey;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            // $message = "Inside Location number is " . $sloc;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            // $message = "Inside Min experience is " . $sminexp;
+            // echo "<script type='text/javascript'>alert('$message');</script>";
+            if($sminexp == null){
+                $sminexp = 0;
             }
 
             //Get all Jobs based on search
             $jsearchall = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $jsearchall = $jsearchall->addselect(DB::raw("'sampletext' as jstatus_text, '0' as japp_status, 'no' as japp_status_text"));
-            if(!($skey==null)){
-            $jsearchall = $jsearchall
-                    ->where('keywords', 'like', '%' . $skey . '%')
-                    ->orwhere('jtitle', 'like', '%' . $skey . '%')
-                    ->orwhere('jd', 'like', '%' . $skey . '%');
-            }
             
-            // $message = "Location number is " . $sloc;
-            // echo "<script type='text/javascript'>alert('$message');</script>";
+            $jsearchall = $jsearchall
+                    ->where('hireloc1', '=', $sloc)
+                    ->where('keywords', 'like', '%' . $skey . '%');
 
-            if(!($sloc == null)){
-                // $message = "Inside Null Location number is " . $sloc;
-                // echo "<script type='text/javascript'>alert('$message');</script>";
-                if(!($sloc == 9999)){
-                    // $message = "Inside Sloc Location number is " . $sloc;
-                    // echo "<script type='text/javascript'>alert('$message');</script>";
-                    $jsearchall = $jsearchall
-                            ->orwhere('hireloc1', '=', $sloc)
-                            ->orwhere('hireloc2', '=', $sloc)
-                            ->orwhere('hireloc3', '=', $sloc);
-                }
-            }
+            $jsearchall = $jsearchall        
+                    ->where(function ($query) use ($skey) {
+                        $query->orwhere('jtitle', 'like', '%' . $skey . '%');
+                    });
+            
+            $jsearchall = $jsearchall        
+                    ->where(function ($query) use ($skey) {
+                        $query->orwhere('jd', 'like', '%' . $skey . '%');
+                    });
 
+            
             if(!($sminexp==null)){
             $jsearchall = $jsearchall
-                    ->orwhere(function ($query) use ($sminexp) {
+                    ->where(function ($query) use ($sminexp) {
                         $query->where('minexp', '<=', $sminexp)
-                              ->where('maxexp', '>', $sminexp);
+                              ->where('maxexp', '>=', $sminexp);
                     });
             }
+
             $jsearchall = $jsearchall
                     ->orderBy('job_id','desc')
                     ->paginate(10);
