@@ -145,6 +145,9 @@
         @if (\Route::current()->getName() == 'reswrite')
             <li class="breadcrumb-item active">Resume Services</li>
         @endif
+        @if (\Route::current()->getName() == 'searchjobs')
+            <li class="breadcrumb-item active">Search jobs</li>
+        @endif
     </ol>
     <!-- banner-text -->
     <!--/process-->
@@ -186,6 +189,10 @@
                 @if (\Route::current()->getName() == 'reswrite')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Resume Services</span></h3>
+                @endif
+                @if (\Route::current()->getName() == 'searchjobs')
+                    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+                    <span>Job Search Results</span></h3>
                 @endif
                 
                 @if (\Route::current()->getName() == 'applyjobs')
