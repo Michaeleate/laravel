@@ -4820,6 +4820,50 @@ class PostsController extends Controller
         }
     }
     
+    //Check and get if unlimited transaction is available or not.
+    public static function get_validpack() {
+        if (Auth::check() || Auth::guard('admin')->check()){
+            $userid=null;
+
+            if(Auth::check()){
+                $userid=Auth::id();    
+                
+                $validpack = \App\mod_transact::select('intrans_id', 'prod_id', 'prod_info', 'trans_byuser', 'trans_byrec', 'trans_stat', 'trans_validto')
+                            ->where('trans_byuser', '=', $userid)
+                            ->orderBy('intrans_id','desc')
+                            ->get();
+
+                foreach($validpack as $key=>$val){
+                    $prod_id=$val["prod_id"];
+                    $prod_info=$val["prod_info"];
+                    $trans_stat=$val["trans_stat"];
+                    $trans_validto=$val["trans_validto"];
+                }
+
+                if(isset($prod_id)){
+                    if($prod_id == '8'){
+                        if($prod_info == 'unlimited'){
+                            if($trans_stat == 'success'){
+                                $curr_timestamp=Carbon::now()->toDateTimeString();
+                                if($curr_timestamp < $trans_validto){
+                                    $validpack = true;
+                                    return $validpack;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            $validpack = false;
+            return $validpack;
+        }
+        else {
+            return back();
+        }
+    }
+    
     //Get Recruiter name, by recruiter id.
     public static function get_recname($recid) {
         if (Auth::check() || Auth::guard('admin')->check()){

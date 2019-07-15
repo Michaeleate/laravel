@@ -59,6 +59,10 @@ class payController extends Controller
                     $trans_amnt=2000;
                     $prod_id=7;
                     break;
+                case "unlimited":
+                    $trans_amnt=199;
+                    $prod_id=8;
+                    break;
             }
             // $message = "Inside buycredits of payController trans_amnt is " . $packname;
             // echo "<script type='text/javascript'>alert('$message');</script>";
@@ -74,7 +78,13 @@ class payController extends Controller
             $amount=$trans_amnt;
             $prod_info=$packname;
             $trans_with=1;          //PayUmoney
-            $trans_validto=null;    //No validity for credits who buy.
+            if($prod_info == 'unlimited'){
+                $trans_validto=Carbon::now()->addDays(30)->toDateTimeString();
+            }
+            else{
+                $trans_validto=null;    //No validity for credits who buy.
+            }
+            
             $trans_stat=1;          //Initiated
             $trans_msg="Init";      //Initiated
             $firstname=Auth::user()->name;
@@ -88,6 +98,7 @@ class payController extends Controller
             $curl = 'https://www.samsjobs.in/payment_cancel';
             $service_provider = 'payu_paisa';
             $merchant_key = "R886JwQS";
+            $salt = "VBQQ0cwAj1";
             
             //Update Transaction Table before going to payment gateway
             $dbtransact=PostsController::upd_itransact($intrans_id, $extrans_id, $trans_type, $trans_amnt, $prod_id, $prod_info, $trans_with, $trans_validto, $trans_stat, $trans_msg);
@@ -95,6 +106,7 @@ class payController extends Controller
             if($dbtransact==true){
                 $posted = array(
                     'key' => $merchant_key,
+                    'salt' => $salt,
                     'txnid' => $extrans_id,
                     'amount' => $trans_amnt,
                     'firstname' => $firstname,
@@ -166,6 +178,9 @@ class payController extends Controller
                         break;
                     case "platinum":
                         $credits=100;
+                        break;
+                    case "unlimited":
+                        $credits=0;
                         break;
                 }
 

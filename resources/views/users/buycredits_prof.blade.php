@@ -90,7 +90,7 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:400px !important;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:430px !important;">
     <div class="row emply-info">
         <div class="col-md-12" style="margin-left:12%;">
         {{-- <span style="width:100%;">Credits Pack Details</span> --}}
@@ -135,7 +135,7 @@
                         <label>8</label>
                     </td>
                     <td>
-                        <label><i class="fas fa-rupee-sign"></i>&nbsp;200</label>
+                        <label style="float:left;"><i class="fas fa-rupee-sign"></i>&nbsp;200</label>
                     </td>
                     <td>
                         <label>Low</label>
@@ -152,7 +152,7 @@
                         <label>24</label>
                     </td>
                     <td>
-                        <label><i class="fas fa-rupee-sign"></i>&nbsp;500</label>
+                        <label style="float:left;"><i class="fas fa-rupee-sign"></i>&nbsp;500</label>
                     </td>
                     <td>
                         <label>Most Popular</label>
@@ -169,7 +169,7 @@
                         <label>48</label>
                     </td>
                     <td>
-                        <label><i class="fas fa-rupee-sign"></i>&nbsp;1000</label>
+                        <label style="float:left;"><i class="fas fa-rupee-sign"></i>&nbsp;1000</label>
                     </td>
                     <td>
                         <label>High</label>
@@ -186,7 +186,7 @@
                         <label>72</label>
                     </td>
                     <td>
-                        <label><i class="fas fa-rupee-sign"></i>&nbsp;1500</label>
+                        <label style="float:left;"><i class="fas fa-rupee-sign"></i>&nbsp;1500</label>
                     </td>
                     <td>
                         <label>High</label>
@@ -203,10 +203,27 @@
                         <label>100</label>
                     </td>
                     <td>
-                        <label><i class="fas fa-rupee-sign"></i>&nbsp;2000</label>
+                        <label style="float:left;"><i class="fas fa-rupee-sign"></i>&nbsp;2000</label>
                     </td>
                     <td>
                         <label>Low</label>
+                    </td>
+                </tr>
+                <tr style="background-color:#E8DAEF;">
+                    <td>
+                        <input type="radio" name="packname" value="unlimited">
+                    </td>
+                    <td>
+                        <label>Unlimited*</label>
+                    </td>
+                    <td>
+                        <label>-</label>
+                    </td>
+                    <td>
+                        <label style="float:left;"><i class="fas fa-rupee-sign"></i>&nbsp;199</label>
+                    </td>
+                    <td>
+                        <label>Popular</label>
                     </td>
                 </tr>
                 <tr style="background-color:#FAE5D3;">
@@ -214,13 +231,13 @@
                         <input type="radio" name="packname" value="free" disabled>
                     </td>
                     <td>
-                        <label>Free</label>
+                        <label>Free Bonus</label>
                     </td>
                     <td>
                         <label>8</label>
                     </td>
                     <td>
-                        <label>Free</label>
+                        <label style="float:left;">Bonus</label>
                     </td>
                     <td>
                         <label>Already Added</label>
@@ -237,7 +254,7 @@
                         <label>32</label>
                     </td>
                     <td>
-                        <label>Paid</label>
+                        <label style="float:left;">Paid</label>
                     </td>
                     <td>
                         <label>Already Registered</label>

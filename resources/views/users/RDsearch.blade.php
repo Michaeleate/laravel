@@ -174,7 +174,7 @@
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
 <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-<span>Total Jobs Posted: {{ $jsearchall->total() }}</span></h3>
+<span>Total Jobs Listed: <b>{{ $jsearchall->total() }}</b></span></h3>
 {{--@if($jsearchall->total()==0) --}}
 @if((isset($jsearchall)))
 @if($jsearchall->total()==0)
@@ -186,14 +186,10 @@
     </div>
 </div>
 @else
-{{ $jsearchall->links() }}
+{{ $jsearchall->links() }}  
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-@if (\Route::current()->getName() == 'searchjobs')
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:310px;">
-@else
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:310px;">
-@endif
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
             <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>

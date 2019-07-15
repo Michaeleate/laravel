@@ -246,17 +246,23 @@ class JobsController extends Controller
         //echo "<script type='text/javascript'>alert('$message');</script>";
             $authid = Auth::id();
             //$jobid=$jobid;
+
+            //If no valid unlimited package, then check credits.
+            $valid_pack = PostsController::get_validpack();
             
-            $total_credits = 0;   //Initializing variable
-            $total_credits = PostsController::get_allcredits();
-            
-            // $message = "Total Credits are" . $total_credits;
-            // echo "<script type='text/javascript'>alert('$message');</script>";
-            
-            if(($total_credits - 4) < 0){
-                // return view('users.buycredits_prof');
-                $error_msg="No enough credits, please recharge.";
-                return redirect('buyview')->with('ecredit_msg', $error_msg);
+            if($valid_pack == false){
+                //if there is no valid package, then check if he has enough credits.
+                $total_credits = 0;   //Initializing variable
+                $total_credits = PostsController::get_allcredits();
+                
+                // $message = "Total Credits are" . $total_credits;
+                // echo "<script type='text/javascript'>alert('$message');</script>";
+                
+                if(($total_credits - 4) < 0){
+                    // return view('users.buycredits_prof');
+                    $error_msg="No valid pack or enough credits, please recharge.";
+                    return redirect('buyview')->with('ecredit_msg', $error_msg);
+                }
             }
             
             $apply_job=PostsController::user_apply_job($jobid);

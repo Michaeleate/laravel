@@ -1,8 +1,5 @@
 @extends('users.layouts.pay')
 <?php 
-$merchant_key = "R886JwQS";
-$salt = "VBQQ0cwAj1";
-// Merchant Key and Salt as provided by Payu.
 
 //$payu_base_url = "https://sandboxsecure.payu.in";		// For Sandbox Mode
 $payu_base_url = "https://secure.payu.in";			// For Production Mode
@@ -44,7 +41,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
       $hash_string .= '|';
     }
-    $hash_string .= $salt;
+    $hash_string .= $posted['salt'];
     $hash = strtolower(hash('sha512', $hash_string));
     $action = $payu_base_url . '/_payment';
   }
@@ -151,6 +148,13 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
                 <td>Product Info: </td>
                 <td><input name="productinfo" value="{{$posted['productinfo']}}"  readonly/></td>
                 </tr>
+                @if($posted['productinfo']=='unlimited')
+                    <tr>
+                    <td colspan="2">
+                        <label style="background-color:lightgreen; border-style:dotted;color:green;">Unlimited Job Applies for 1 Month (30 Days). No strings attached, just apply to unlimited jobs if you are eligible. No credits added to your account.</label>
+                    </td>
+                    </tr>
+                @endif
                 <tr>
                 <td><input type="hidden" name="surl" value="{{$posted['surl']}}" size="64" /></td>
                 </tr>

@@ -125,8 +125,8 @@
                     <div class="col-md-3 category_grid">
                         <div class="view view4 view-tenth">
                             <div class="category_text_box">
-                                <i class="fas fa-desktop"></i>
-                                <h3>Software </h3>
+                                <i class="fas fa-briefcase"></i>
+                                <h3>Marketing</h3>
                                 <p>(8 open flow-positions)</p>
                             </div>
                             <div class="mask">
