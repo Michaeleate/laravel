@@ -179,7 +179,7 @@ class PdetailsController extends Controller
             if ($profpic_flag=="no"){
                 
                 $resume = \App\modresupdet::select('profpic','picpath','picname')
-                    ->where('pdet1_id', '=', $authid)
+                    ->where('pdet_id', '=', $authid)
                     ->get();
 
                 foreach($resume as $key=>$val){
