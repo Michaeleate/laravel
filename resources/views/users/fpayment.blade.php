@@ -92,13 +92,13 @@ $hash = hash("sha512", $retHashSeq);
     <div class="row emply-info">
         <div class="col-md-12" style="margin-left:20%;">
             @if ($hash != $posted_hash)
-                <label>"Transaction Cancelled. Please try again";</label><br />
+                <label style="width:100%;">"Transaction Cancelled. Please try again";</label><br />
                 <a href="{{ url('/buycredits') }}"><button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Try Again</button></a>
             @else
-                <label>Thank You. Your order status is {{ $status }}.</label><br />
-                <label>Error: {{$errormsg}}</label><br />
-                <label>Your Transaction ID: {{ $txnid }}.</label><br />
-                <label>You may try making the payment by clicking the link below.</label><br />
+                <label style="width:100%;">Thank You. Your order status is {{ $status }}.</label><br />
+                <label style="width:100%;">Error: {{$errormsg}}</label><br />
+                <label style="width:100%;">Your Transaction ID: {{ $txnid }}.</label><br />
+                <label style="width:100%;">You may try making the payment by clicking the link below.</label><br />
                 <a href="{{ url('/buycredits') }}">
                 <button class="btn btn-primary" style="width:100px; height:30px; float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Try Again</button></a>
             @endif

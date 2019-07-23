@@ -10,11 +10,13 @@
 <form action="{{ url('/searchjobs')}}" method="get" class="ban-form row">
     @csrf
     <div class="col-md-3 banf">
-        <input class="form-control" type="text" name="skey" placeholder="Search Job" required="">
+        {{-- <input class="form-control" type="text" name="skey" placeholder="Search Job" required=""> --}}
+        <input class="form-control" type="text" name="skey" placeholder="Search Job">
     </div>
     <div class="col-md-3 banf">
         <select class="form-control" id="i-sloc" name="sloc" style="line-height:10px;height:50px; text-align:center;">
-            <option value="30" selected>Vijayawada</option>
+            <option value="9999" selected>Every where</option>
+            <option value="30">Vijayawada</option>
             <option value="11">Guntur</option>
             <option value="24">Rajahmundry</option>
             <option value="1">Adoni</option>

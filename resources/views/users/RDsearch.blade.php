@@ -24,6 +24,7 @@
     $head=PostsController::get_head();
     foreach($head as $key=>$val){
         $head_line=$val["head_line"];
+        
     }
     */
 ?>

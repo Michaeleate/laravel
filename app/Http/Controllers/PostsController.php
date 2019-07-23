@@ -2360,8 +2360,16 @@ class PostsController extends Controller
             $jsearchall = \App\modjobpost::select('job_id', 'jtitle', 'jd',  'qty', 'keywords', 'minexp', 'maxexp', 'minsal', 'maxsal', 'hireloc1', 'hireloc2', 'hireloc3', 'comhirefor', 'jstatus', 'valid_till', 'auto_aprove', 'auto_upd', 'created_at', 'updated_at');
             $jsearchall = $jsearchall->addselect(DB::raw("'sampletext' as jstatus_text, '0' as japp_status, 'no' as japp_status_text"));
             
+            // $jsearchall = $jsearchall
+            //         ->where('hireloc1', '=', $sloc)
+            //         ->where('keywords', 'like', '%' . $skey . '%');
+            
+            if($sloc != '9999'){
+                $jsearchall = $jsearchall
+                        ->where('hireloc1', '=', $sloc);
+            }
+            
             $jsearchall = $jsearchall
-                    ->where('hireloc1', '=', $sloc)
                     ->where('keywords', 'like', '%' . $skey . '%');
 
             $jsearchall = $jsearchall        
