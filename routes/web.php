@@ -28,10 +28,10 @@ Route::get('/mike-cache-clear', function() {
 });
 
 //Clear configuration cache:
-Route::get('/mike-config-cache', function() {
-	Artisan::call('config:Cache');
-    return '<h1>Configurations cache cleared</h1>';
-});
+// Route::get('/mike-config-cache', function() {
+// 	Artisan::call('config:Cache');
+//     return '<h1>Configurations cache cleared</h1>';
+// });
 
 //Migrate Tables:
 Route::get('/mike-migrate', function() {

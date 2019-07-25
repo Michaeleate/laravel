@@ -3,7 +3,8 @@
     use \App\Http\Controllers\PostsController;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Foundation\Auth\AuthenticatesUsers; 
-    
+    use Illuminate\Http\Request;
+
     $head_line=$oldresu='';
     $kskil1=$kskil2=$kskil3=$kskil4=$kskil5='';
     $resutime=NULL;
@@ -175,7 +176,7 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-{{-- @if((isset($jsearchall))) --}}
+@if((isset($jsearchall)))
     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
     <span>Total Jobs Listed: <b>{{ $jsearchall->total() }}</b></span></h3>
 @if($jsearchall->total()==0)
@@ -189,6 +190,7 @@
 @else
 {{-- {{ $jsearchall->links() }}   --}}
 {{ $jsearchall->appends(request()->except('page'))->links() }}
+{{-- {{ $jsearchall->appends(Request::except('page'))->links() }} --}}
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:310px;">
@@ -276,6 +278,6 @@
 @endforeach
 {{-- {{ $jsearchall->links() }} --}}
 {{ $jsearchall->appends(request()->except('page'))->links() }}
-{{-- @endif --}}
+@endif
 @endif
 @endsection
