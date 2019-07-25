@@ -187,6 +187,7 @@ Route::get('/recruiter/recgetjapp', 'recruiter\RecjobCont@recgetjapp')->name('re
 
 //Search jobs by keywords View
 Route::get('/searchjobs', 'JobsController@searchjobs')->name('searchjobs');
+
 //View full job details with parameter job_id;
 Route::get('/viewjob/{jobid}', 'JobsController@viewjobdet')->name('viewjobdet');
 //View User profile by recruiter
@@ -243,8 +244,8 @@ Route::get('/admin/rtoday', 'admin\AdmController@rtoday')->name('admin.rtoday');
 Route::get('/admin/mob_rverified/{userid}', 'admin\AdmController@mob_rverified')->name('admin.mob_rverified');
 //Job Posting by Admin - View
 Route::get('/admin/rpostjob/{recid}', 'JobsController@pjbyadm')->name('admin.rpostjob');
-//Job Posting by Admin
-//Route::post('/admin/admpostjob', 'admin\AdmjobCont@admpostjob')->name('admin.recpostjob');
+//Update Apply Status by Recruiter and Admin
+Route::get('/updappstat/{userid}/{jobid}', 'JobsController@updappstat')->name('updappstat');
 
 //Apply Job by Candidate - View
 Route::post('/user-apply-job/{jobid}', 'JobsController@userappjob')->name('user-apply-job');

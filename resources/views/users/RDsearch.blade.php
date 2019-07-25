@@ -21,10 +21,11 @@
 
     $userid1=Auth::id();
     /*
+
     $head=PostsController::get_head();
     foreach($head as $key=>$val){
         $head_line=$val["head_line"];
-        
+
     }
     */
 ?>
@@ -174,10 +175,9 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
-<span>Total Jobs Listed: <b>{{ $jsearchall->total() }}</b></span></h3>
-{{--@if($jsearchall->total()==0) --}}
-@if((isset($jsearchall)))
+{{-- @if((isset($jsearchall))) --}}
+    <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+    <span>Total Jobs Listed: <b>{{ $jsearchall->total() }}</b></span></h3>
 @if($jsearchall->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
@@ -187,7 +187,8 @@
     </div>
 </div>
 @else
-{{ $jsearchall->links() }}  
+{{-- {{ $jsearchall->links() }}   --}}
+{{ $jsearchall->appends(request()->except('page'))->links() }}
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:310px;">
@@ -273,7 +274,8 @@
 </div>
 </a>
 @endforeach
-{{ $jsearchall->links() }}
-@endif
+{{-- {{ $jsearchall->links() }} --}}
+{{ $jsearchall->appends(request()->except('page'))->links() }}
+{{-- @endif --}}
 @endif
 @endsection
