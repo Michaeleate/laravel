@@ -20,6 +20,7 @@
     foreach($recalljobs as $key=>$val){
         $job_id=$val["job_id"];
         $jtitle=$val["jtitle"];
+        
         $jd=$val["jd"];
         $qty=$val["qty"];
         $keywords=$val["keywords"];
@@ -180,6 +181,7 @@
         </div>
         <div class="form-check-inline">
             <label class="form-check-label" style="display:block; width:100%;">
+
                 <input type="checkbox" class="form-check-input" id="i-loc3" name="n-hireloc[]" value="24">Rajahmundry
             </label>
         </div>

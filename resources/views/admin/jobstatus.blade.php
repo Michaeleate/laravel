@@ -181,7 +181,7 @@
 @if((isset($jsearchall)))
 <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
 <span>Total Candidates Applied: {{ $jsearchall->total() }}</span></h3>
-@if($jsearchall->total()==0)
+@if($jsearchall->total() == 0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
@@ -323,6 +323,9 @@
             </a>
             <a href="{{ route('viewuserprof', ['userid'=>$job->appuserid, 'jobid'=>$job->job_id])}}" target="_blank">
                 <button class="btn btn-primary" style="float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">User Profile</button>
+            </a>
+            <a href="{{ route('updappstat', ['userid'=>$job->appuserid, 'jobid'=>$job->job_id])}}" target="_blank">
+                <button class="btn btn-primary" style="float:right; line-height: 15px; text-align:center; display:inline-block; margin:5px;">Update Status</button>
             </a>
         </div>
     </div>

@@ -150,6 +150,17 @@ class JobsController extends Controller
         }
     }
 
+    //Update Apply Status by Recruiter and Admin
+    public function updappstat($userid,$jobid=null){
+        if (Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {
+        //Testing
+            return view('recruiter.updappstat',compact('others','head','resume','keyskills','perdetails','edu','emp','adds','refs','jobdet'));
+        }
+        else{
+            return redirect()->route('recruiter');
+        }
+    }
+
     //Schedule interview for recruiter or admin
     public function schinterview(Request $request, $userid,$jobid=null){
         if (Auth::check() || Auth::guard('admin')->check() || Auth::guard('recruiter')->check()) {

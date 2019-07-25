@@ -189,7 +189,7 @@
 </div>
 @else
 {{-- {{ $jsearchall->links() }}   --}}
-{{ $jsearchall->appends(request()->except('page'))->links() }}
+{{ $jsearchall->appends(request()->except('page'))->links() }} 
 {{-- {{ $jsearchall->appends(Request::except('page'))->links() }} --}}
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">

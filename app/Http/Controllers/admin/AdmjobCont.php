@@ -201,6 +201,7 @@ class AdmjobCont extends Controller
             return view('recruiter');    
         }
     }
+    
     */
 
     public function valljobs(){
