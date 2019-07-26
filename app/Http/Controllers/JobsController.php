@@ -343,17 +343,18 @@ class JobsController extends Controller
 
     //Resume Writing Services.
     public function reswrite(){
-        if (Auth::check()|| Auth::guard('recruiter')->check() || Auth::guard('admin')->check()) {
-            //Testing
-            // $message = "In ujallapplied of JobsController";
-            // echo "<script type='text/javascript'>alert('$message');</script>";
-            // $jobschd=PostsController::get_jobschedule();
+        return view('users.resservice');
+        // if (Auth::check()|| Auth::guard('recruiter')->check() || Auth::guard('admin')->check()) {
+        //     //Testing
+        //     // $message = "In ujallapplied of JobsController";
+        //     // echo "<script type='text/javascript'>alert('$message');</script>";
+        //     // $jobschd=PostsController::get_jobschedule();
 
-            return view('users.resservice');
-        }
-        else{
-            return redirect()->route('login');
-        }
+        //     return view('users.resservice');
+        // }
+        // else{
+        //     return redirect()->route('login');
+        // }
     }
 
     //mike

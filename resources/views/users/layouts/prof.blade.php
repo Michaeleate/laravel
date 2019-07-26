@@ -3,11 +3,13 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-    if(!(Auth::guard('admin')->check())){
+    //if(!(Auth::guard('admin')->check())){
+    if(!(Auth::guest())){
         $total_credits=PostsController::get_allcredits();
     }
     else{
-        $total_credits=5000;
+        //$total_credits=5000;
+        $total_credits="Free";
     }
 ?>
 <!DOCTYPE html>
@@ -61,15 +63,15 @@
                             <div class="col-md-4">
                                 <label style="color: #ffff; float:right; width: 200px;">
                                 @auth
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->name }} !
                                 @endauth
                                 @auth('recruiter')
-                                    {{ Auth::guard('recruiter')->user()->name }}
+                                    {{ Auth::guard('recruiter')->user()->name }} !
                                 @endauth
                                 @auth('admin')
-                                    {{Auth::guard('admin')->user()->name}}
+                                    {{Auth::guard('admin')->user()->name}} !
                                 @endif
-                                !
+                                {{-- ! --}}
                                 </label>
                             </div>
                             <div class="col-md-4">

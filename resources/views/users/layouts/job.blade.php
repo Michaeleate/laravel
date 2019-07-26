@@ -1,7 +1,13 @@
 <?php
     use \App\Http\Controllers\PostsController;
     use Illuminate\Routing\UrlGenerator;
-    $total_credits=PostsController::get_allcredits();
+    //$total_credits=PostsController::get_allcredits();
+    if(!(Auth::guest())){
+        $total_credits=PostsController::get_allcredits();
+    }
+    else{
+        $total_credits="Free";
+    }
     $linkurl = url()->current();
 ?>
 <!DOCTYPE html>

@@ -1,6 +1,13 @@
 <?php
     use \App\Http\Controllers\PostsController;
-    $total_credits=PostsController::get_allcredits();
+    //$total_credits=PostsController::get_allcredits();
+    if(!(Auth::guest())){
+        $total_credits=PostsController::get_allcredits();
+    }
+    else{
+        //$total_credits=5000;
+        $total_credits="Free";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
