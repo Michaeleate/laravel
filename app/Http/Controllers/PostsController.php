@@ -98,7 +98,7 @@ class PostsController extends Controller
                     ->where('kskil_id', '=', $authid)
                     ->get();
 
-            //if (\Request::is('view-user-profile')) {
+            if (!(\Request::is('user-profile'))) {
                 foreach($resume as $key=>$val){
                     
                     $skill=$val["kskil1"];
@@ -297,7 +297,7 @@ class PostsController extends Controller
                     $val["kskil3"]=$skill;
 
                 }
-            //}
+            }
 
             return $resume;
         }
@@ -617,7 +617,7 @@ class PostsController extends Controller
                     ->where('emp_id', '=', $authid)
                     ->get();
 
-            //if (\Request::is('view-user-profile')) {
+            if (!(\Request::is('user-profile'))) {
                 foreach($resume as $key=>$val){
                     switch($val["nperiod"]){
                         case "now":
@@ -640,7 +640,7 @@ class PostsController extends Controller
                             break;
                     }
                 }
-            //}
+            }
 
             return $resume;
         }
