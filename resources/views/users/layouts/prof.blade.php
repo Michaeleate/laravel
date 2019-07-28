@@ -582,9 +582,9 @@
         ;
 
         window.onload = function() {
-            alert(kskil1);
-            alert(kskil2);
-            alert(kskil3);
+            //alert(kskil1);
+            //alert(kskil2);
+            //alert(kskil3);
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
             document.getElementById("ta1").value = head_line;
