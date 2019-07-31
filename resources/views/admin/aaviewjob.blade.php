@@ -253,10 +253,10 @@
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;">
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
     <div class="row emply-info">
-        <div class="col-xs-9 col-md-9 mb-1" style="float:left;">
-            <label style="width:100%; color:blue;">{{ $job->jtitle}}</label>
-            <label style="width:100%;">{{$job->comhirefor}}</label>
-            <div class="mb-1" style="display:inline-block;">
+        <div class="col-xs-9 col-md-9" style="float:left;">
+            <label class="label1" style="width:100%; color:blue;">{{ $job->jtitle}}</label>
+            <label class="label1" style="width:100%;">{{$job->comhirefor}}</label>
+            <div style="display:inline-block;">
                 <i class="fas fa-briefcase" style="display:inline;"></i>
                 {{-- <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
                 <span style="width:10px; display:inline;"> - </span>
@@ -269,7 +269,7 @@
                     <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
                 @endif
             </div>
-            <div class="mb-1" style="display:inline-block;">
+            <div style="display:inline-block;">
                 <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
                 <i class="fas fa-map-marker-alt" style="display:inline;"></i>
                 <label style="width:160px; display:inline;">
@@ -290,16 +290,16 @@
             --}}
             <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
         </div>
-        <div class="row col-xs-12 col-md-12 mb-1" style="display:block; float:right;">    
+        <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
             <label style="display:block; width:100%;"> </label>
             <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
             {{--   <label style="display:block; width:100%;"> </label> --}}
         </div>
-        <div class="row col-xs-12 col-md-12 mb-1" style="display:block; float:right;">    
+        <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
             <label style="display:block; width:100%;"> </label>
             <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
         </div>
-        <div class="row col-xs-12 col-md-12 mb-1" style="display:block; float:right;">
+        <div class="row col-xs-12 col-md-12" style="display:block; float:right;">
             <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
             @if($job->minsal>0)
                 {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
