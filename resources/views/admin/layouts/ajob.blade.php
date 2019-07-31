@@ -111,9 +111,9 @@
     </ol>
     <!-- banner-text -->
     <!--/process-->
-    <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-3">
+    <section class="banner-bottom py-xl-3 py-lg-5 py-md-5 py-xs-5 py-3">
         <div class="container">
-            <div class="inner-sec py-xl-3 py-lg-5  py-3">
+            <div class="inner-sec py-xl-3 py-lg-5  py-xs-5 py-3">
                 @if (\Route::current()->getName() == 'admin.lastjob')
                     <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
                     <span>Job Successfully Posted</span></h3>
@@ -122,13 +122,13 @@
                     <span>View all active jobs</span></h3>
                 @endif
                 <div class="row choose-main mt-5">
-                    <div class="col-lg-2 job_info_right" style="background-color:white; border: none !important;">
+                    <div class="col-xs-2 col-lg-2 job_info_right" style="background-color:white; border: none !important;">
                         @yield('CreateProfileMenu')
                     </div>
-                    <div class="col-lg-8 job_info_left" style="background-color:white; border: none !important;">
+                    <div class="col-xs-8 col-lg-8 job_info_left" style="background-color:white; border: none !important;">
                         @yield('CreateResumeForm')
                     </div>
-                    <div class="col-lg-2 job_info_last">
+                    <div class="col-xs-2 col-lg-2 job_info_last">
                         @yield('displayads')
                     </div>
                 </div>

@@ -237,12 +237,12 @@
 
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
-<h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
+<h3 class="tittle text-center mb-xs-4 mb-xl-4 mb-lg-4 mb-3">
 <span>Total Jobs: {{ $recalljobs->total() }} </span></h3>
 @if($recalljobs->total()==0)
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
-        <div class="col-md-12" style="float:left;">
+        <div class="col-xs-12 col-md-12" style="float:left;">
             <label style="width:100%; color:blue;">You haven't posted any jobs yet.</label>
         </div>
     </div>
@@ -253,7 +253,7 @@
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;">
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
     <div class="row emply-info">
-        <div class="col-md-9" style="float:left;">
+        <div class="col-xs-9 col-md-9" style="float:left;">
             <label style="width:100%; color:blue;">{{ $job->jtitle}}</label>
             <label style="width:100%;">{{$job->comhirefor}}</label>
             <div style="display:inline-block;">
@@ -284,22 +284,22 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-3" style="float:right;">
+        <div class="col-xs-3 col-md-3" style="float:right;">
             {{--
             <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
             --}}
             <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
         </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
+        <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
             <label style="display:block; width:100%;"> </label>
             <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
             {{--   <label style="display:block; width:100%;"> </label> --}}
         </div>
-        <div class="row col-md-12" style="display:block; float:right;">    
+        <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
             <label style="display:block; width:100%;"> </label>
             <label style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
         </div>
-        <div class="row col-md-12" style="display:block; float:right;">
+        <div class="row col-xs-12 col-md-12" style="display:block; float:right;">
             <label style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
             @if($job->minsal>0)
                 {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
