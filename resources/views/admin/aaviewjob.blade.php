@@ -240,7 +240,7 @@
 <h3 class="tittle text-center mb-xs-4 mb-xl-4 mb-lg-4 mb-3">
 <span>Total Jobs: {{ $recalljobs->total() }} </span></h3>
 @if($recalljobs->total()==0)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important;">
     <div class="row emply-info">
         <div class="col-xs-12 col-md-12" style="float:left;">
             <label style="width:100% !important; color:blue;">You haven't posted any jobs yet.</label>
