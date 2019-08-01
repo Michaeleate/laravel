@@ -243,7 +243,7 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
     <div class="row emply-info">
         <div class="col-xs-12 col-md-12" style="float:left;">
-            <label style="width:100%; color:blue;">You haven't posted any jobs yet.</label>
+            <label style="width:100% !important; color:blue;">You haven't posted any jobs yet.</label>
         </div>
     </div>
 </div>
@@ -254,25 +254,25 @@
 <div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
     <div class="row emply-info">
         <div class="col-xs-9 col-md-9" style="float:left;">
-            <label class="label1" style="width:100%; color:blue;">{{ $job->jtitle}}</label>
-            <label class="label1" style="width:100%;">{{$job->comhirefor}}</label>
+            <label class="label1" style="width:100% !important; color:blue;">{{ $job->jtitle}}</label>
+            <label class="label1" style="width:100% !important;">{{$job->comhirefor}}</label>
             <div style="display:inline-block;">
                 <i class="fas fa-briefcase" style="display:inline;"></i>
                 {{-- <label style="width:20px; display:inline;">&emsp;{{$job->minexp}}</label>
                 <span style="width:10px; display:inline;"> - </span>
                 <label style="width:20px; display:inline;">{{$job->maxexp}} yrs</label> --}}
                 @if($job->maxexp==0)
-                    <label class="label1" style="width:50px; display:inline;">Fresher</label>
+                    <label class="label1" style="width:50px !important; display:inline;">Fresher</label>
                 @else
-                    <label class="label1" style="width:20px; display:inline;">{{$job->minexp}}</label>
-                    <span style="width:10px; display:inline;"> - </span>
-                    <label class="label1" style="width:20px; display:inline;">{{$job->maxexp}} yrs</label>
+                    <label class="label1" style="width:20px !important; display:inline;">{{$job->minexp}}</label>
+                    <span style="width:10px !important; display:inline;"> - </span>
+                    <label class="label1" style="width:20px !important; display:inline;">{{$job->maxexp}} yrs</label>
                 @endif
             </div>
             <div style="display:inline-block;">
-                <span style="width:10px; display:inline;">&emsp;&emsp;&emsp;</span>
+                <span style="width:10px !important; display:inline;">&emsp;&emsp;&emsp;</span>
                 <i class="fas fa-map-marker-alt" style="display:inline;"></i>
-                <label class="label1" style="width:160px; display:inline;">
+                <label class="label1" style="width:160px !important; display:inline;">
                 {{$job->hireloc1}}
                 @if(!($job->hireloc2)=='')
                 ,  {{$job->hireloc2}}
@@ -288,26 +288,26 @@
             {{--
             <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
             --}}
-            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
+            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80% !important; height:30% !important;">
         </div>
         <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
-            <label class="label1" style="display:block; width:100%;"> </label>
-            <label class="label1" style="display:block; width:100%; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
+            <label class="label1" style="display:block; width:100% !important;"> </label>
+            <label class="label1" style="display:block; width:100% !important; font-size:15px;">&emsp;<i class="fas fa-key" aria-hidden="true"></i>&emsp;{{$job->keywords}}</label>
             {{--   <label style="display:block; width:100%;"> </label> --}}
         </div>
         <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
-            <label class="label1" style="display:block; width:100%;"> </label>
-            <label class="label1" style="display:block; width:100%; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
+            <label class="label1" style="display:block; width:100% !important;"> </label>
+            <label class="label1" style="display:block; width:100% !important; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
         </div>
         <div class="row col-xs-12 col-md-12" style="display:block; float:right;">
-            <label class="label1" style="display:inline-block; width:60%;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
+            <label class="label1" style="display:inline-block; width:60% !important;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
             @if($job->minsal>0)
                 {{$job->minsal}} - {{$job->maxsal}}&nbsp;P.M.&emsp;&emsp;
             @else
                 Not Disclosed&emsp;&emsp;
             @endif
             </label>
-            <label class="label1" style="display:inline-block; width:40%; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
+            <label class="label1" style="display:inline-block; width:40% !important; float:right; font-size:15px;">Job Views: 99999&emsp;&emsp;Job Applied: 99999</label>
         </div>
         {{--
         <div class="row col-md-12" style="display:block; float:right;">
