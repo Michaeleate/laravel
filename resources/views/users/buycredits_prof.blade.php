@@ -90,7 +90,7 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:430px !important;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:inline-block; width:100%; height:auto !important;"> {{-- 430 --}}
     <div class="row emply-info">
         <div class="col-md-12" style="margin-left:12%;">
         {{-- <span style="width:100%;">Credits Pack Details</span> --}}

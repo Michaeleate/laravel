@@ -171,7 +171,7 @@
 <h3 class="tittle text-center mb-xl-4 mb-lg-4 mb-3">
 <span>Total Jobs Posted: {{ $jsearchall->total() }}</span></h3>
 @if($jsearchall->total()==0)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important;"> {{-- 100px--}}
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
             <label style="width:100%; color:blue;">No Search results. Refine your search.</label>
@@ -182,7 +182,7 @@
 {{ $jsearchall->links() }}
 @foreach($jsearchall as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;" alt="Click for complete job details">
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:270px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important;"> {{-- 270px --}}
     <div class="row emply-info">
         <div class="col-md-9" style="float:left;">
             <label style="width:100%; color:blue !important;">{{ $job->jtitle}}</label>
@@ -219,7 +219,7 @@
             {{--
             <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
             --}}
-            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80%; height:30%">
+            <img src="{{ URL::asset('/images/favicon-sams.png')}}" class="responsive1" style="width:80px !important; height:20px !important;">
         </div>
         <div class="row col-md-12" style="display:block; float:right;">    
             <label style="display:block; width:100%;"> </label>

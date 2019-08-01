@@ -172,7 +172,7 @@
 {{-- Create Resume Format Layout --}}
 @section('CreateResumeForm')
 {{-- Resume Precisely--}}
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:520px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important;"> {{--520px--}}
     <div class="row emply-info">
         <div class="row col-md-12" style="display:block-inline;">
             <div class="col-md-3" id="i-fresh" onMouseOver="backgrey(this);" onMouseOut="normalcolor(this);" style="display:block-inline; float:left;">

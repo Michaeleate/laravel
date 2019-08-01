@@ -174,7 +174,7 @@
 {{--@if($jobschd->total()==0) --}}
 @if((isset($jobschd)))
 @if($jobschd->total()==0)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:100px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important;"> {{-- 100px --}}
     <div class="row emply-info">
         <div class="col-md-12" style="float:left;">
             <label style="width:100%; color:blue;">Interviews not scheduled yet. Please complete all the fields in your profile, to get shortlisted.</label>
@@ -184,7 +184,7 @@
 @else
 {{ $jobschd->links() }}
 @foreach($jobschd as $job)
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:210px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important"> {{-- 210px --}}
     <div class="row emply-info">
         <div class="row col-md-12" style="display:block-inline;">
             <div class="col-md-6" style="display:block-inline; float:left;">    
