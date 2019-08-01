@@ -240,6 +240,13 @@ label1 {
   display: inline-block;
   margin-bottom: .2 rem;
 }
+
+.responsive1 {
+  width: 40%;
+  max-width: 20px;
+  height: 10%;
+  max-height: 8px;
+}
 /*Mike*/
 
 button {

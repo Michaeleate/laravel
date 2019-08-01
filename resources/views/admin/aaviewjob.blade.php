@@ -251,7 +251,7 @@
 {{ $recalljobs->links() }}
 @foreach($recalljobs as $job)
 <a class="nav-link" href="{{ route('viewjobdet', $job->job_id)}}" target="_blank" style="color:black; cursor: pointer;">
-<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:230px;">
+<div class="emply-resume-list row mb-1" id="resmain" style="display:block; width:100%; height:auto !important;"> {{-- 230px --}}
     <div class="row emply-info">
         <div class="col-xs-9 col-md-9" style="float:left;">
             <label class="label1" style="width:100% !important; color:blue;">{{ $job->jtitle}}</label>
@@ -288,7 +288,7 @@
             {{--
             <img src="{{url($fullpath)}}" style="border-radius:80%; width:100%; height:80%">
             --}}
-            <img src="{{ URL::asset('/images/favicon-sams.png')}}" style="width:80% !important; height:30% !important;">
+            <img src="{{ URL::asset('/images/favicon-sams.png')}}" class="responsive1" style="width:80px !important; height:20px !important;">
         </div>
         <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
             <label class="label1" style="display:block; width:100% !important;"> </label>
@@ -297,7 +297,7 @@
         </div>
         <div class="row col-xs-12 col-md-12" style="display:block; float:right;">    
             <label class="label1" style="display:block; width:100% !important;"> </label>
-            <label class="label1" style="display:block; width:100% !important; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,105)}}...</label>
+            <label class="label1" style="display:block; width:100% !important; font-size:15px;">&emsp;<i class="far fa-sticky-note"></i>&emsp;{{substr($job->jd,0,85)}}...</label>
         </div>
         <div class="row col-xs-12 col-md-12" style="display:block; float:right;">
             <label class="label1" style="display:inline-block; width:60% !important;">&emsp;<i class="fas fa-rupee-sign"></i>&emsp;
